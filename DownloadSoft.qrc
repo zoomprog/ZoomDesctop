@@ -1,0 +1,95 @@
+<RCC>
+  <qresource prefix="icon">
+    <file>image/icon/logo_nod32.png</file>
+    <file>image/icon/icons8-malwarebytes-48.png</file>
+    <file>image/icon/5365-xbox_102593.png</file>
+    <file>image/icon/icons8-погода-48.png</file>
+    <file>image/icon/icons8-диктофон-48.png</file>
+    <file>image/icon/icons8-microsoft-store-48.png</file>
+    <file>image/icon/icons8-photos-48.png</file>
+    <file>image/icon/microsoft_office_onenote_logo_icon_145725.png</file>
+    <file>image/icon/icons8-новости-48.png</file>
+    <file>image/icon/png-clipart-linkedin-social-media-computer-icons-social-networking-service-microsoft-coin-blue-angle-transformed.png</file>
+    <file>image/icon/icons8-видео-48.png</file>
+    <file>image/icon/groove-music.png</file>
+    <file>image/icon/icons8-microsoft-solitaire-collection-48.png</file>
+    <file>image/icon/free-icon-location-pin-2776067.png</file>
+    <file>image/icon/icons8-музыка-groove-48.png</file>
+    <file>image/icon/1486565573-microsoft-office_81557.png</file>
+    <file>image/icon/Skype_icon-icons.com_66795.png</file>
+    <file>image/icon/pictures (1).png</file>
+    <file>image/icon/free-icon-alarm-clock-4059279.png</file>
+    <file>image/icon/icons8-windows-calendar-48.png</file>
+    <file>image/icon/icons8-калькулятор-48.png</file>
+    <file>image/icon/icons8-3d-builder-48.png</file>
+    <file>image/icon/icons8-opera-gx-48.png</file>
+    <file>image/icon/intel_104586.png</file>
+    <file>image/icon/amd.png</file>
+    <file>image/icon/epic-games-final.png</file>
+    <file>image/icon/battlenet_104070.png</file>
+    <file>image/icon/ryzen master.png</file>
+    <file>image/icon/epic-games-50.png</file>
+    <file>image/icon/origin_14172.png</file>
+    <file>image/icon/icons8-приложение-uplay-48.png</file>
+    <file>image/icon/icons8-teamspeak-64.png</file>
+    <file>image/icon/viber.png</file>
+    <file>image/icon/yandex_browser_logo_icon_152939.png</file>
+    <file>image/icon/icons8-новый-логотип-discord-new-logo-48.png</file>
+    <file>image/icon/Whatsapp_37229.png</file>
+    <file>image/icon/icons8-телеграмма-app-48.png</file>
+    <file>image/icon/nvidia_23133.png</file>
+    <file>image/icon/nvidia_settings_22459.png</file>
+    <file>image/icon/geforce-experience.png</file>
+    <file>image/icon/icons8-галочка-64.png</file>
+    <file>image/icon/icons8-прямоугольник-30.png</file>
+    <file>image/icon/steam_alt_macos_bigsur_icon_189698.png</file>
+    <file>image/icon/icons8-steam-50 (1).png</file>
+    <file>image/icon/steam.png</file>
+    <file>image/icon/icons8-steam-94.png</file>
+    <file>image/icon/icons8-steam-50.png</file>
+    <file>image/icon/free-icon-delete-5396993.png</file>
+    <file>image/icon/free-icon-download-545759.png</file>
+    <file>image/icon/icons8-google-chrome-48.png</file>
+    <file>image/icon/icons8-информация-64.png</file>
+    <file>image/icon/icons8-информация-50.png</file>
+    <file>image/icon/icons8-информация.gif</file>
+    <file>image/icon/free-icon-down-chevron-1622084.png</file>
+    <file>image/icon/exit.png</file>
+    <file>image/icon/free-icon-letter-z-8061473 (1).png</file>
+    <file>image/icon/free-icon-letter-z-8061473.png</file>
+    <file>image/icon/free-icon-menu-bar-7782670.png</file>
+    <file>image/icon/free-icon-box-5843060.png</file>
+    <file>image/icon/free-icon-searching-3795241.png</file>
+    <file>image/icon/free-icon-minimize-4889317.png</file>
+    <file>image/icon/free-icon-home-automation-9059917.png</file>
+    <file>image/icon/free-icon-notification-2452034.png</file>
+    <file>image/icon/free-icon-collapse-9248296.png</file>
+    <file>image/icon/free-icon-expand-510829.png</file>
+    <file>image/icon/icons8-умножение-48.png</file>
+    <file>image/icon/close.png</file>
+    <file>image/icon/menu.png</file>
+    <file>image/icon/menu-4-512.png</file>
+    <file>image/icon/menubuttonofthreelinesoutline_112563.svg</file>
+    <file>image/icon/free-icon-searching-3795241.png</file>
+    <file>image/icon/free-icon-box-5843060.png</file>
+    <file>image/icon/icons8-новый-логотип-discord-new-logo-48.png</file>
+    <file>image/icon/free-icon-delete-5396993.png</file>
+    <file>image/icon/free-icon-download-545759.png</file>
+    <file>image/icon/close.png</file>
+    <file>image/icon/Whatsapp_37229.png</file>
+    <file>image/icon/icons8-телеграмма-app-48.png</file>
+    <file>image/icon/nvidia_23133.png</file>
+    <file>image/icon/nvidia_settings_22459.png</file>
+    <file>image/icon/geforce-experience.png</file>
+    <file>image/icon/icons8-галочка-64.png</file>
+    <file>image/icon/icons8-прямоугольник-30.png</file>
+    <file>image/icon/steam_alt_macos_bigsur_icon_189698.png</file>
+    <file>image/icon/icons8-steam-50 (1).png</file>
+    <file>image/icon/steam.png</file>
+    <file>image/icon/icons8-steam-94.png</file>
+    <file>image/icon/icons8-steam-50.png</file>
+    <file>image/icon/free-icon-delete-5396993.png</file>
+    <file>image/icon/free-icon-download-545759.png</file>
+    <file>image/icon/icons8-google-chrome-48.png</file>
+  </qresource>
+</RCC>
