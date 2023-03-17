@@ -40,7 +40,7 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.MainMenu = Ui_ImageDialog
         self.setupUi(self)
         self.setWindowTitle('ZoomApp')
-        self.setWindowIcon(QtGui.QIcon('image/icon/free-icon-letter-z-8061473 (1).png'))
+        self.setWindowIcon(QtGui.QIcon('image/icon/logo.png'))
 
         # Кнопки
         self.pushClose.clicked.connect(self.CloseWindow)  # При нажатии на кнопку login перейти на новую страницу
@@ -54,6 +54,8 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.status.setStyleSheet('font-size:10px; color: red;text-align: center;')
         self.pushReg.clicked.connect(self.WindowReg)
         self.RemoveWindowsMenu()
+
+
 
     def login(self):
         # создание бд и проверка ввода логина и пароля
@@ -86,9 +88,10 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.oldPos = event.globalPosition()
 
     def TransitionAboutTheProgram(self):
+        self.hide()
         self.abouttheprogram = AboutTheProgram()
         self.abouttheprogram.show()
-        self.hide()
+
 
 
     def WindowReg(self):
@@ -104,6 +107,7 @@ class MainWindows(QDialog, Ui_ImageDialog):
 class AboutTheProgram(QDialog, Ui_AboutTheProgram):
     def __init__(self):
         super().__init__()
+        self.nameUsers = None
         self.oldPos = None
         self.ui = None
         self.logo_text = None
@@ -121,20 +125,15 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
 
 
     def download(self):
+        self.hide()
         self.ui = Download()
         self.ui.show()
-        self.hide()
+        #Удаление фала с приложениями на windows
+        self.nameUsers = os.getlogin()
+        w.DeleteFile(f'/Users/{self.nameUsers}/Downloads/soft.txt')
 
 
 
-
-    def mousePressEvent(self, event):
-        self.oldPos = event.globalPosition()
-
-    def mouseMoveEvent(self, event):
-        delta = event.globalPosition() - self.oldPos
-        self.move(int(self.x() + delta.x()), int(self.y() + delta.y()))
-        self.oldPos = event.globalPosition()
 
     def PushBack(self):
         self.ui = MainWindows()

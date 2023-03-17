@@ -3,6 +3,7 @@ import os
 import pathlib
 
 import winapps
+from PyQt6.QtWidgets import QHBoxLayout, QLabel, QWidget
 from guidata.utils import is_program_installed
 from main import *
 from main import MainWindows
@@ -20,11 +21,13 @@ import glob as gb
 class Download(QDialog, Ui_Download):
     def __init__(self):
         super().__init__()
+        self.abouttheprogram = None
         self.nameUsers = None
         self.oldPos = None
         self.ui = Ui_Download
         self.setupUi(self)
         self.importmainclass = MainWindows
+
 
         # админка
 
@@ -43,6 +46,18 @@ class Download(QDialog, Ui_Download):
         self.pushDelNvidea.clicked.connect(self.buttonNVIDIADel)
         self.pushDelWatsApp.clicked.connect(self.buttonWhatsAppDel)
 
+        #Кнопки menu
+        self.pushClose.clicked.connect(self.importmainclass.CloseWindow)
+        self.pushBackMenu.clicked.connect(self.TransitionAboutTheProgram)
+
+
+
+
+
+    def TransitionAboutTheProgram(self):
+        self.hide()
+        self.abouttheprogram = AboutTheProgram()
+        self.abouttheprogram.show()
 
 
     def SearchSoftWindows(self):
@@ -58,6 +73,11 @@ class Download(QDialog, Ui_Download):
             icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
                             QtGui.QIcon.State.Off)
             self.pushDownloadNvidea.setIcon(icon1)
+        for _ in winapps.search_installed('Калькулятор'):
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
+                            QtGui.QIcon.State.Off)
+            self.pushDownloadCalc.setIcon(icon1)
 
         self.nameUsers = os.getlogin()
         genVar = gb.glob(f"C:/Users/{self.nameUsers}/AppData/Roaming/Telegram Desktop/*.exe")
@@ -209,16 +229,4 @@ class Download(QDialog, Ui_Download):
 
 
 
-        
 
-
-
-
-#Не трогать
-    def mousePressEvent(self, event):
-        self.oldPos = event.globalPosition()
-
-    def mouseMoveEvent(self, event):
-        delta = event.globalPosition() - self.oldPos
-        self.move(int(self.x() + delta.x()), int(self.y() + delta.y()))
-        self.oldPos = event.globalPosition()
