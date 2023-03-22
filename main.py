@@ -42,6 +42,10 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.setWindowTitle('ZoomApp')
         self.setWindowIcon(QtGui.QIcon('image/icon/logo.png'))
 
+
+
+
+
         # Кнопки
         self.pushClose.clicked.connect(self.CloseWindow)  # При нажатии на кнопку login перейти на новую страницу
         self.pushUrlYouTube.clicked.connect(lambda: webbrowser.open('https://www.youtube.com/'))
@@ -116,6 +120,13 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.importmainclass = MainWindows
         self.importregclass = Refistration
 
+        self.nameUsers = os.getlogin()
+        if os.path.isfile(f'/Users/{self.nameUsers}\Downloads/soft.txt'):
+            os.remove(f'/Users/{self.nameUsers}\Downloads/soft.txt')
+            print("success")
+        else:
+            print("File doesn't exists!")
+
         #Импорт основных методов передвижение окна windows и убарать windows элементы из виджета.
         self.importmainclass.RemoveWindowsMenu(self)
         self.pushClose.clicked.connect(self.importmainclass.CloseWindow)#кнопка завершение программы
@@ -125,12 +136,14 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
 
 
     def download(self):
-        self.hide()
         self.ui = Download()
         self.ui.show()
-        #Удаление фала с приложениями на windows
-        self.nameUsers = os.getlogin()
-        w.DeleteFile(f'/Users/{self.nameUsers}/Downloads/soft.txt')
+        self.hide()
+
+
+
+
+
 
 
 

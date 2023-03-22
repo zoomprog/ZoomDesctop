@@ -50,9 +50,7 @@ class Download(QDialog, Ui_Download):
         self.pushClose.clicked.connect(self.importmainclass.CloseWindow)
         self.pushBackMenu.clicked.connect(self.TransitionAboutTheProgram)
 
-
-
-
+        subprocess.call([r'C:\Users\rrarr\OneDrive\Рабочий стол\ZoomDesctop\Class\SoftPC\SearchSoft.bat'])
 
     def TransitionAboutTheProgram(self):
         self.hide()
@@ -104,6 +102,9 @@ class Download(QDialog, Ui_Download):
             icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
                             QtGui.QIcon.State.Off)
             self.pushDownloadGoogle.setIcon(icon1)
+
+        SoftTxtFile = gb.glob(f"C:/Users/rrarr/Downloads/soft.txt")
+
 
 
 
