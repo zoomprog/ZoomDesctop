@@ -8,22 +8,25 @@ import os
 import requests
 import wget
 import subprocess
+
+from PyQt6.QtGui import QMouseEvent
+
 import login
 import menu
 import DownloadSoft
 from Class.download import *
-from PyQt6.QtWidgets import QDialog, QGraphicsColorizeEffect
+from PyQt6.QtWidgets import QDialog, QGraphicsColorizeEffect, QPushButton
 from PyQt6 import QtWidgets, QtCore, QtGui
 from ui_login import Ui_ImageDialog
 from ui_AboutTheProgram import Ui_AboutTheProgram
 from ui_Download import Ui_Download
 from ui_reg import Ui_Reg
+from PyQt6.QtCore import Qt
 
 
 
 from PyQt6.QtCore import Qt, QPoint
 from Class.download import *
-
 
 
 
@@ -35,13 +38,13 @@ class MainWindows(QDialog, Ui_ImageDialog):
 
     def __init__(self):
         super().__init__()
+        self.dragPos = None
         self.reg = None
         self.abouttheprogram = None
         self.MainMenu = Ui_ImageDialog
         self.setupUi(self)
         self.setWindowTitle('ZoomApp')
         self.setWindowIcon(QtGui.QIcon('image/icon/logo.png'))
-
 
 
 
@@ -59,7 +62,19 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.pushReg.clicked.connect(self.WindowReg)
         self.RemoveWindowsMenu()
 
+    def center(self):
+        qr = self.UpBar()
+        cp = self.screen().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
 
+    def mousePressEvent(self, event):
+        self.dragPos = event.globalPosition().toPoint()
+
+    def mouseMoveEvent(self, event):
+        self.move(self.pos() + event.globalPosition().toPoint() - self.dragPos)
+        self.dragPos = event.globalPosition().toPoint()
+        event.accept()
 
     def login(self):
         # создание бд и проверка ввода логина и пароля
@@ -83,13 +98,7 @@ class MainWindows(QDialog, Ui_ImageDialog):
     def CloseWindow():
         sys.exit()
 
-    def mousePressEvent(self, event):
-        self.oldPos = event.globalPosition()
 
-    def mouseMoveEvent(self, event):
-        delta = event.globalPosition() - self.oldPos
-        self.move(int(self.x() + delta.x()), int(self.y() + delta.y()))
-        self.oldPos = event.globalPosition()
 
     def TransitionAboutTheProgram(self):
         self.hide()
@@ -105,6 +114,7 @@ class MainWindows(QDialog, Ui_ImageDialog):
     def RemoveWindowsMenu(self):
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_TranslucentBackground, True)
+
 
 
 

@@ -402,6 +402,16 @@ pading-bottom:7px;</string>
      <string>Registation</string>
     </property>
    </widget>
+   <widget class="QWidget" name="UpBar" native="true">
+    <property name="geometry">
+     <rect>
+      <x>39</x>
+      <y>30</y>
+      <width>261</width>
+      <height>41</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources>

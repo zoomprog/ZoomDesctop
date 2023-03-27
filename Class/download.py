@@ -16,7 +16,7 @@ import subprocess
 from elevate import elevate
 from pyuac import main_requires_admin
 import glob as gb
-
+import winreg
 
 class Download(QDialog, Ui_Download):
     def __init__(self):
@@ -59,51 +59,50 @@ class Download(QDialog, Ui_Download):
 
 
     def SearchSoftWindows(self):
-
-        for _ in winapps.search_installed('Steam'):
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadSteam.setIcon(icon1)
-
-        for _ in winapps.search_installed('NVIDIA'):
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadNvidea.setIcon(icon1)
-        for _ in winapps.search_installed('Калькулятор'):
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadCalc.setIcon(icon1)
-
+        #Определение имени windows
         self.nameUsers = os.getlogin()
-        genVar = gb.glob(f"C:/Users/{self.nameUsers}/AppData/Roaming/Telegram Desktop/*.exe")
-        for py in genVar:
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadTG.setIcon(icon1)
-        genVar = gb.glob(f"C:/Users/{self.nameUsers}/AppData/Local/Discord/*.exe")
-        for py in genVar:#Discord проверка установки файла
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadDS.setIcon(icon1)
-        genVar = gb.glob(f"C:/Program Files/WindowsApps/5319275A.WhatsAppDesktop_2.2308.6.0_x64__cv1g1gvanyjgm/*exe")
-        for py in genVar:#WhatsApp проверка установки файла
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadWatsApp.setIcon(icon1)
-        genVar = gb.glob(f"C:/Program Files/Google/Chrome/Application/*exe")
-        for py in genVar:#Google проверка установки файла
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadGoogle.setIcon(icon1)
+        softs = [
+            {"name": "GoogleChrome", "path": f"C:/Program Files/Google/Chrome/Application/*exe",
+             "button": self.pushDownloadGoogle},
+            {"name": "YandexBrowser",
+             "path": f"C:/Users/{self.nameUsers}/AppData/Local/Yandex/YandexBrowser/Application/*exe",
+             "button": self.pushDownloadYandex},
+            {"name": "Opera GX", "path": f"C:/Users/{self.nameUsers}/AppData/Local/Programs/Opera GX/launcher.exe",
+             "button": self.pushDownloadOpera},
+            {"name": "Whats App", "path": f"C:/Program Files/WindowsApps/5319275A.WhatsAppDesktop*",
+             "button": self.pushDownloadWatsApp},
+            {"name": "Telegram", "path": f"C:/Users/{self.nameUsers}/AppData/Roaming/Telegram Desktop/*.exe",
+             "button": self.pushDownloadTG},
+            {"name": "Discord", "path": f"C:/Users/{self.nameUsers}/AppData/Local/Discord/*.exe",
+             "button": self.pushDownloadDS},
+            {"name": "Viber", "path": f"C:/Users/{self.nameUsers}/AppData/Roaming/ViberPC",
+             "button": self.pushDownloadViber},
+            {"name": "TeamSpeak3", "path": "C:\Program Files\TeamSpeak 3 Client\*exe", "button": self.pushDownloadTS},
+            {"name": "Steam", "path": "C:\Program Files (x86)\Steam\*exe", "button": self.pushDownloadSteam},
+            {"name": "EpicGames", "path": "C:\Program Files (x86)\Epic Games", "button": self.pushDownloadEpicGames},
+            {"name": "Origin", "path": "C:/Program Files/Electronic Arts/EA Desktop/EA Desktop/*exe",
+             "button": self.pushDownloadOrigin},
+            {"name": "Battle.net", "path": "C:/Program Files (x86)/Battle.net/*exe",
+             "button": self.pushDownloadBattleNet},
+            {"name": "NVIDIA", "path": "C:/Program Files/NVIDIA Corporation", "button": self.pushDownloadNvidea},
+            {"name": "Ryzen", "path": "C:/AMD/RyzenMasterExtract/MSIFiles/Packages/*exe",
+             "button": self.pushDownloadRyzen},
+            {"name": "Malwarebytes", "path": "C:/Program Files/Malwarebytes/Anti-Malware/*exe", "button": self.pushDownloadMalwarebytes},
+            {"name": "NORD32", "path": "C:/Program Files/ESET/ESET Security/*exe", "button": self.pushDownloadEset}
+        ]
 
-        SoftTxtFile = gb.glob(f"C:/Users/rrarr/Downloads/soft.txt")
+        for soft in softs:
+            if gb.glob(soft["path"]):
+                icon1 = QtGui.QIcon()
+                icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
+                                QtGui.QIcon.State.Off)
+                soft["button"].setIcon(icon1)
+
+
+
+
+
+
 
 
 
