@@ -1,6 +1,7 @@
 import ctypes,sys
 import os
 import pathlib
+import shutil
 
 import winapps
 from PyQt6.QtWidgets import QHBoxLayout, QLabel, QWidget
@@ -21,6 +22,7 @@ import winreg
 class Download(QDialog, Ui_Download):
     def __init__(self):
         super().__init__()
+        self.softs = None
         self.abouttheprogram = None
         self.nameUsers = None
         self.oldPos = None
@@ -41,14 +43,17 @@ class Download(QDialog, Ui_Download):
         self.pushDownloadNvidea.clicked.connect(self.buttonNVIDIADownload)
         self.pushDownloadTG.clicked.connect(self.buttonTGDownload)
         #кнопки удалить софт
-        self.pushDelSteam.clicked.connect(self.buttonSteamDel)
+        #self.pushDelSteam.clicked.connect(self.buttonSteamDel)
         self.pushDelGoogle.clicked.connect(self.buttonGoogleDel)
-        self.pushDelNvidea.clicked.connect(self.buttonNVIDIADel)
+        #self.pushDelNvidea.clicked.connect(self.buttonNVIDIADel)
         self.pushDelWatsApp.clicked.connect(self.buttonWhatsAppDel)
 
         #Кнопки menu
         self.pushClose.clicked.connect(self.importmainclass.CloseWindow)
         self.pushBackMenu.clicked.connect(self.TransitionAboutTheProgram)
+
+
+
 
         subprocess.call([r'C:\Users\rrarr\OneDrive\Рабочий стол\ZoomDesctop\Class\SoftPC\SearchSoft.bat'])
 
@@ -61,7 +66,7 @@ class Download(QDialog, Ui_Download):
     def SearchSoftWindows(self):
         #Определение имени windows
         self.nameUsers = os.getlogin()
-        softs = [
+        self.softs = [
             {"name": "GoogleChrome", "path": f"C:/Program Files/Google/Chrome/Application/*exe",
              "button": self.pushDownloadGoogle},
             {"name": "YandexBrowser",
@@ -119,25 +124,12 @@ class Download(QDialog, Ui_Download):
              "button": self.pushDownloadCalendarAndMail}
         ]
 
-        for soft in softs:
+        for soft in self.softs:
             if gb.glob(soft["path"]):
                 icon1 = QtGui.QIcon()
                 icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
                                 QtGui.QIcon.State.Off)
                 soft["button"].setIcon(icon1)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #функции установки
@@ -191,69 +183,58 @@ class Download(QDialog, Ui_Download):
                             QtGui.QIcon.State.Off)
             self.pushDownloadWatsApp.setIcon(icon1)
 
+    def delete_file(self, folder, file_name ):
+        file_path = os.path.join(self, file_name)
+        try:
+            os.remove(file_path)
+            print(f"{file_name} has been deleted from {folder}")
+        except OSError as e:
+            print(f"Error deleting {file_name} from {folder}: {e}")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#функции удаления
-    def buttonSteamDel(self):
-
-        for _ in winapps.search_installed('Steam'):
-            if ctypes.windll.shell32.IsUserAnAdmin():
-                os.system(f"Class/DelSoft/GoogleDel.bat")
-            else:
-                ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
-
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadSteam.setIcon(icon1)
+    def buttonWhatsAppDel(self):
+        os.system("Class\DelSoft\WhatsAppDel.bat")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
+                     QtGui.QIcon.State.Off)
+        self.pushDownloadWatsApp.setIcon(icon1)
 
     def buttonGoogleDel(self):
-        if ctypes.windll.shell32.IsUserAnAdmin():
-            os.system("Class\DelSoft\GoogleDel.bat")
-        else:
-            ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+        os.system("Class\DelSoft\GoogleDel.bat")
+        self.delete_file("C:\ProgramData\Microsoft\Windows\Start Menu\Programs", "Google")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.pushDownloadGoogle.setIcon(icon1)
+
+
+    def buttonSteamDel(self):
+        steam_folder = r'C:\Program Files (x86)\Steam'
+        common_folder = r'C:\Program Files (x86)\Common Files\Steam'
+        try:
+            shutil.rmtree(steam_folder)
+            shutil.rmtree(common_folder)
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
+                            QtGui.QIcon.State.Off)
+            self.pushDownloadSteam.setIcon(icon1)
+        except FileNotFoundError:
+            print("Steam was not found.")
+        except Exception as e:
+            print(f"Error uninstalling Steam: {e}")
+
     def buttonNVIDIADel(self):
-        if ctypes.windll.shell32.IsUserAnAdmin():
-            os.system("Class\DelSoft\VideoCard1De.bat")
-        else:
-            ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+        os.system("Class\DelSoft\VideoCard1De.bat")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.pushDownloadGoogle.setIcon(icon1)
     def buttonTGDel(self):
-        if ctypes.windll.shell32.IsUserAnAdmin():
-            os.system("Class\DelSoft\TelegramDel.bat")
-        else:
-            ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+        os.system("Class\DelSoft\TelegramDel.bat")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.pushDownloadTG.setIcon(icon1)
-    def buttonWhatsAppDel(self):
-        os.system("Class\DelSoft\WhatsAppDel.bat")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                        QtGui.QIcon.State.Off)
-        self.pushDownloadWatsApp.setIcon(icon1)
+    #
 
 
 
