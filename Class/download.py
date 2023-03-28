@@ -54,6 +54,11 @@ class Download(QDialog, Ui_Download):
         self.pushDelOpera.clicked.connect(self.buttonOperaDel)
         self.pushDelViber.clicked.connect(self.buttonViberDel)
         self.pushDelDS.clicked.connect(self.buttonDSDel)
+        self.pushDelTS.clicked.connect(self.buttonTSDEL)
+        self.pushDelEpicGames.clicked.connect(self.buttonEpicGamesDel)
+        self.pushDelOrigin.clicked.connect(self.buttonOriginDel)
+        self.pushDelUplay.clicked.connect(self.buttonUplayDel)
+        self.pushDelBattleNet.clicked.connect(self.buttonBattleNet)
 
         #Кнопки menu
         self.pushClose.clicked.connect(self.importmainclass.CloseWindow)
@@ -62,7 +67,8 @@ class Download(QDialog, Ui_Download):
 
 
 
-        subprocess.call([r'C:\Users\rrarr\OneDrive\Рабочий стол\ZoomDesctop\Class\SoftPC\SearchSoft.bat'])
+
+
 
     def TransitionAboutTheProgram(self):
         self.hide()
@@ -301,3 +307,52 @@ class Download(QDialog, Ui_Download):
             icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
                             QtGui.QIcon.State.Off)
             self.pushDownloadDS.setIcon(icon1)
+
+    def buttonTSDEL(self):
+        try:
+            shutil.rmtree('C:/Program Files/TeamSpeak 3 Client')
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
+                           QtGui.QIcon.State.Off)
+            self.pushDownloadTS.setIcon(icon1)
+        except FileNotFoundError:
+            print("TeamSpeak was not found.")
+    def buttonEpicGamesDel(self):
+        try:
+            os.system('wmic product where "name like \'%Epic Games%\'" call uninstall /nointeractive')
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
+                        QtGui.QIcon.State.Off)
+            self.pushDownloadEpicGames.setIcon(icon1)
+        except FileNotFoundError:
+            print("EpicGames was not found")
+
+    def buttonOriginDel(self):
+        try:
+            os.system('wmic product where "name like \'%EA%\'" call uninstall /nointeractive')
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
+                        QtGui.QIcon.State.Off)
+            self.pushDownloadOrigin.setIcon(icon1)
+        except FileNotFoundError:
+            print("Origin in nor found")
+    def buttonUplayDel(self):
+        try:
+            os.system('wmic product where "name like \'%Uplay%\'" call uninstall /nointeractive')
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
+                            QtGui.QIcon.State.Off)
+            self.pushDownloadUplay.setIcon(icon1)
+        except FileNotFoundError:
+            print("Uplay is not found")
+    def buttonBattleNet(self):
+        try:
+            shutil.rmtree('C:/Program Files (x86)/Battle.net')
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
+                            QtGui.QIcon.State.Off)
+            self.pushDownloadBattleNet.setIcon(icon1)
+        except FileNotFoundError:
+            print("Battle net is not found")
+
+
