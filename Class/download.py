@@ -1,7 +1,9 @@
 import ctypes,sys
 import os
+import time
 import pathlib
 import shutil
+
 
 import winapps
 from PyQt6.QtWidgets import QHBoxLayout, QLabel, QWidget
@@ -18,6 +20,7 @@ from elevate import elevate
 from pyuac import main_requires_admin
 import glob as gb
 import winreg
+import win32com.client
 
 class Download(QDialog, Ui_Download):
     def __init__(self):
@@ -43,10 +46,14 @@ class Download(QDialog, Ui_Download):
         self.pushDownloadNvidea.clicked.connect(self.buttonNVIDIADownload)
         self.pushDownloadTG.clicked.connect(self.buttonTGDownload)
         #кнопки удалить софт
-        #self.pushDelSteam.clicked.connect(self.buttonSteamDel)
+        self.pushDelSteam.clicked.connect(self.buttonSteamDel)
         self.pushDelGoogle.clicked.connect(self.buttonGoogleDel)
-        #self.pushDelNvidea.clicked.connect(self.buttonNVIDIADel)
+        self.pushDelNvidea.clicked.connect(self.buttonNVIDIADel)
         self.pushDelWatsApp.clicked.connect(self.buttonWhatsAppDel)
+        self.pushDelYandex.clicked.connect(self.buttonYandexDel)
+        self.pushDelOpera.clicked.connect(self.buttonOperaDel)
+        self.pushDelViber.clicked.connect(self.buttonViberDel)
+        self.pushDelDS.clicked.connect(self.buttonDSDel)
 
         #Кнопки menu
         self.pushClose.clicked.connect(self.importmainclass.CloseWindow)
@@ -132,7 +139,7 @@ class Download(QDialog, Ui_Download):
                 soft["button"].setIcon(icon1)
 
 
-#функции установки
+#Установка приложений
     def buttonSteamDownload(self):
         url = 'https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe'
         path = f'/Users/{self.nameUsers}/Downloads/SteamSetup.exe'
@@ -182,7 +189,7 @@ class Download(QDialog, Ui_Download):
             icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
                             QtGui.QIcon.State.Off)
             self.pushDownloadWatsApp.setIcon(icon1)
-
+#Удаление приложений
     def delete_file(self, folder, file_name ):
         file_path = os.path.join(self, file_name)
         try:
@@ -234,8 +241,63 @@ class Download(QDialog, Ui_Download):
         icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.pushDownloadTG.setIcon(icon1)
-    #
+    def buttonYandexDel(self):
+        path_to_yandex_browser = f"C:/Users/{self.nameUsers}/AppData/Local/Yandex/YandexBrowser/Application/browser.exe"
+        try:
+            shutil.rmtree(os.path.dirname(path_to_yandex_browser), ignore_errors=True)
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
+                            QtGui.QIcon.State.Off)
+            self.pushDownloadYandex.setIcon(icon1)
+        except FileNotFoundError:
+            print("YandexBrowser was not found.")
+    def buttonOperaDel(self):
+        path_to_operagx_browser=f"C:/Users/{self.nameUsers}/AppData/Local/Programs/Opera GX/opera.exe"
+        try:
+            shutil.rmtree(os.path.dirname(path_to_operagx_browser), ignore_errors=True)
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
+                            QtGui.QIcon.State.Off)
+            self.pushDownloadOpera.setIcon(icon1)
+        except FileNotFoundError:
+            print("OperaGX was not found.")
+    def buttonViberDel(self):
+        os.system('wmic product where "name like \'%Viber%\'" call uninstall /nointeractive')
+        time.sleep(5)  # нужно подождать чтоб удалилась нужно добавить экран ожидания выполнения
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
+                        QtGui.QIcon.State.Off)
+        self.pushDownloadViber.setIcon(icon1)
 
+    def get_appdata_path(self):#находим дискорд в папке roaming
+        command = '$env:APPDATA'
+        result = subprocess.run(['powershell', '-Command', command], capture_output=True, text=True)
+        path = result.stdout.strip() + "\discord"
+        return path
 
+    def get_localappdata_path(self):#находим дискорд в папке local
+        command = '$env:LOCALAPPDATA'
+        result = subprocess.run(['powershell', '-Command', command], capture_output=True, text=True)
+        path = result.stdout.strip() + "\Discord"
+        return path
 
+    def delete_folder(self,path):#удаляем папки
+        if os.path.exists(path):
+            shutil.rmtree(path)
+            print(f"Папка {path} удалена")
+            return True
+        else:
+            print(f"Папка {path} не найдена")
+            return False
 
+    def buttonDSDel(self):#Удаление дискорд
+        path1 = self.get_localappdata_path()
+        path2 = self.get_appdata_path()
+        print(f"Path to LocalAppData: {path1}")
+        print(f"Path to AppData: {path2}")
+
+        if self.delete_folder(path1) and self.delete_folder(path2):
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
+                            QtGui.QIcon.State.Off)
+            self.pushDownloadDS.setIcon(icon1)
