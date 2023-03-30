@@ -25,6 +25,7 @@ import win32com.client
 class Download(QDialog, Ui_Download):
     def __init__(self):
         super().__init__()
+        self.soft_main_windows = None
         self.softs = None
         self.abouttheprogram = None
         self.nameUsers = None
@@ -58,7 +59,9 @@ class Download(QDialog, Ui_Download):
         self.pushDelEpicGames.clicked.connect(self.buttonEpicGamesDel)
         self.pushDelOrigin.clicked.connect(self.buttonOriginDel)
         self.pushDelUplay.clicked.connect(self.buttonUplayDel)
-        self.pushDelBattleNet.clicked.connect(self.buttonBattleNet)
+        self.pushDelBattleNet.clicked.connect(self.buttonBattleNetDel)
+        self.pushDelXbox.clicked.connect(self.buttonXboxDel)
+        self.pushDelWeather.clicked.connect(self.buttonWeatherDel)
 
         #Кнопки menu
         self.pushClose.clicked.connect(self.importmainclass.CloseWindow)
@@ -80,62 +83,161 @@ class Download(QDialog, Ui_Download):
         #Определение имени windows
         self.nameUsers = os.getlogin()
         self.softs = [
-            {"name": "GoogleChrome", "path": f"C:/Program Files/Google/Chrome/Application/*exe",
+            {"name": "GoogleChrome",
+             "path": f"C:/Program Files/Google/Chrome/Application/*exe",
              "button": self.pushDownloadGoogle},
             {"name": "YandexBrowser",
              "path": f"C:/Users/{self.nameUsers}/AppData/Local/Yandex/YandexBrowser/Application/*exe",
              "button": self.pushDownloadYandex},
-            {"name": "Opera GX", "path": f"C:/Users/{self.nameUsers}/AppData/Local/Programs/Opera GX/launcher.exe",
+            {"name": "Opera GX",
+             "path": f"C:/Users/{self.nameUsers}/AppData/Local/Programs/Opera GX/launcher.exe",
              "button": self.pushDownloadOpera},
-            {"name": "Whats App", "path": f"C:/Program Files/WindowsApps/5319275A.WhatsAppDesktop*",
+            {"name": "Whats App",
+             "path": f"C:/Program Files/WindowsApps/5319275A.WhatsAppDesktop*",
              "button": self.pushDownloadWatsApp},
-            {"name": "Telegram", "path": f"C:/Users/{self.nameUsers}/AppData/Roaming/Telegram Desktop/*.exe",
+            {"name": "Telegram",
+             "path": f"C:/Users/{self.nameUsers}/AppData/Roaming/Telegram Desktop/*.exe",
              "button": self.pushDownloadTG},
-            {"name": "Discord", "path": f"C:/Users/{self.nameUsers}/AppData/Local/Discord/*.exe",
+            {"name": "Discord",
+             "path": f"C:/Users/{self.nameUsers}/AppData/Local/Discord/*.exe",
              "button": self.pushDownloadDS},
-            {"name": "Viber", "path": f"C:/Users/{self.nameUsers}/AppData/Roaming/ViberPC",
+            {"name": "Viber",
+             "path": f"C:/Users/{self.nameUsers}/AppData/Roaming/ViberPC",
              "button": self.pushDownloadViber},
-            {"name": "TeamSpeak3", "path": "C:\Program Files\TeamSpeak 3 Client\*exe", "button": self.pushDownloadTS},
-            {"name": "Steam", "path": "C:\Program Files (x86)\Steam\*exe", "button": self.pushDownloadSteam},
-            {"name": "EpicGames", "path": "C:\Program Files (x86)\Epic Games", "button": self.pushDownloadEpicGames},
-            {"name": "Origin", "path": "C:/Program Files/Electronic Arts/EA Desktop/EA Desktop/*exe",
+            {"name": "TeamSpeak3",
+             "path": "C:\Program Files\TeamSpeak 3 Client\*exe",
+             "button": self.pushDownloadTS},
+            {"name": "Steam",
+             "path": "C:\Program Files (x86)\Steam\*exe",
+             "button": self.pushDownloadSteam},
+            {"name": "EpicGames",
+             "path": "C:\Program Files (x86)\Epic Games",
+             "button": self.pushDownloadEpicGames},
+            {"name": "Origin",
+             "path": "C:/Program Files/Electronic Arts/EA Desktop/EA Desktop/*exe",
              "button": self.pushDownloadOrigin},
-            {"name": "Battle.net", "path": "C:/Program Files (x86)/Battle.net/*exe",
+            {"name": "Battle.net",
+             "path": "C:/Program Files (x86)/Battle.net/*exe",
              "button": self.pushDownloadBattleNet},
-            {"name": "NVIDIA", "path": "C:/Program Files/NVIDIA Corporation", "button": self.pushDownloadNvidea},
-            {"name": "Ryzen", "path": "C:/AMD/RyzenMasterExtract/MSIFiles/Packages/*exe",
+            {"name": "NVIDIA",
+             "path": "C:/Program Files/NVIDIA Corporation",
+             "button": self.pushDownloadNvidea},
+            {"name": "Ryzen",
+             "path": "C:/AMD/RyzenMasterExtract/MSIFiles/Packages/*exe",
              "button": self.pushDownloadRyzen},
-            {"name": "Malwarebytes", "path": "C:/Program Files/Malwarebytes/Anti-Malware/*exe", "button": self.pushDownloadMalwarebytes},
-            {"name": "NORD32", "path": "C:/Program Files/ESET/ESET Security/*exe", "button": self.pushDownloadEset},
-            {"name": "Calc", "path": "C:/Windows/System32/calc.exe", "button": self.pushDownloadCalc},
-            {"name": "XBOX", "path": "C:/Program Files/WindowsApps/Microsoft.XboxGame*", "button": self.pushDownloadXbox},
-            {"name": "Weather", "path": "C:/Program Files/WindowsApps/Microsoft.BingWeather*","button": self.pushDownloadWeather},
-            {"name": "Rec", "path": "C:/Program Files/WindowsApps/Microsoft.WindowsSoundRecorder*", "button": self.pushDownloadVoiceRec},
-            {"name": "Store", "path": "C:/Program Files/WindowsApps/Microsoft.StorePurchaseApp*", "button": self.pushDownloadStore},
-            {"name": "Photo", "path": "C:/Program Files/WindowsApps\Microsoft.Windows.Photos*", "button": self.pushDownloadPhoto},
-            {"name": "People", "path": "C:\Program Files\WindowsApps\Microsoft.People*",
-             "button": self.pushDownloadPeople},
-            {"name": "OneNote", "path": "C:/Program Files/Microsoft Office/root/Office16/ONENOTE.EXE",
-             "button": self.pushDownloadOneNote},
-            {"name": "News", "path": "C:/Program Files/WindowsApps/Microsoft.BingNews*",
-             "button": self.pushDownloadNews},
-            {"name": "FilmAndTv", "path": "C:/Program Files/WindowsApps/Microsoft.ZuneVideo*",
-             "button": self.pushDownloadFilm},
-            {"name": "Maps", "path": "C:/Program Files/WindowsApps/Microsoft.WindowsMaps*",
-             "button": self.pushDownloadMap},
-            {"name": "GrooveMusic", "path": "C:/Program Files/WindowsApps/Microsoft.ZuneMusic*",
-             "button": self.pushDownloadGMusic},
-            {"name": "Skype", "path": "C:/Program Files (x86)/Microsoft/Skype*",
-             "button": self.pushDownloadSkype},
-            {"name": "Office", "path": "C:/Program Files/Microsoft Office/root/Office*",
-             "button": self.pushDownloadOffice},
-            {"name": "Came", "path": "C:/Program Files/WindowsApps/Microsoft.WindowsCamera*",
-             "button": self.pushDownloadCamera},
-            {"name": "AlarmClock", "path": "C:/Windows/System32/AlarmClock.exe",
-             "button": self.pushDownloadAlarmClock},
-            {"name": "CalendarAndMail", "path": "C:/Program Files/WindowsApps/microsoft.windowscommunicationsapps*",
-             "button": self.pushDownloadCalendarAndMail}
+            {"name": "Malwarebytes",
+             "path": "C:/Program Files/Malwarebytes/Anti-Malware/*exe",
+             "button": self.pushDownloadMalwarebytes},
+            {"name": "NORD32",
+             "path": "C:/Program Files/ESET/ESET Security/*exe",
+             "button": self.pushDownloadEset},
         ]
+        self.soft_main_windows = [
+            {
+                "name": 'Name              : Microsoft.BingWeather',
+                "command": "Get-AppxPackage Microsoft.BingWeather",
+                "button": self.pushDownloadWeather
+            },
+            {
+                "name": "Name              : Microsoft.XboxGamingOverlay",
+                "command": "Get-AppxPackage Microsoft.XboxGamingOverlay",
+                "button": self.pushDownloadXbox
+            },
+            {
+                "name": "Name              : Microsoft.WindowsSoundRecorder",
+                "command": "Get-AppxPackage Microsoft.WindowsSoundRecorder",
+                "button": self.pushDownloadVoiceRec
+            },
+            {
+                "name": "Name              : Microsoft.WindowsStore",
+                "command": "Get-AppxPackage Microsoft.WindowsStore",
+                "button": self.pushDownloadStore
+            },
+            {
+                "name": "Name              : Microsoft.Windows.Photos",
+                "command": "Get-AppxPackage Microsoft.Windows.Photos",
+                "button": self.pushDownloadPhoto
+            },
+            {
+                "name": "Name              : Microsoft.People",
+                "command": "Get-AppxPackage Microsoft.People",
+                "button": self.pushDownloadPeople
+            },
+            {
+                "name": "Name              : Microsoft.Office.OneNote",
+                "command": "Get-AppxPackage Microsoft.Office.OneNote",
+                "button": self.pushDownloadOneNote
+            },
+            {
+                "name": "Name              : Microsoft.BingNews",
+                "command": "Get-AppxPackage Microsoft.BingNews",
+                "button": self.pushDownloadNews
+            },
+            {
+                "name": "Name              : Microsoft.ZuneVideo",
+                "command": "Get-AppxPackage Microsoft.ZuneVideo",
+                "button": self.pushDownloadFilm
+            },
+            {
+                "name": "Name              : Microsoft.MicrosoftSolitaireCollection",
+                "command": "Get-AppxPackage Microsoft.MicrosoftSolitaireCollection",
+                "button": self.pushDownloadMSC
+            },
+            {
+                "name": "Name              : Microsoft.WindowsMaps",
+                "command": "Get-AppxPackage Microsoft.WindowsMaps",
+                "button": self.pushDownloadMap
+            },
+            {
+                "name": "Name              : Microsoft.ZuneMusic",
+                "command": "Get-AppxPackage Microsoft.ZuneMusic",
+                "button": self.pushDownloadGMusic
+            },
+            {
+                "name": "Name              : Microsoft.SkypeApp",
+                "command": "Get-AppxPackage Microsoft.SkypeApp",
+                "button": self.pushDownloadSkype
+            },
+            {
+                "name": "Name              : Microsoft.MicrosoftOfficeHub",
+                "command": "Get-AppxPackage Microsoft.MicrosoftOfficeHub",
+                "button": self.pushDownloadOffice
+            },
+            {
+                "name": "Name              : Microsoft.WindowsAlarms",
+                "command": "Get-AppxPackage Microsoft.WindowsAlarms",
+                "button": self.pushDownloadAlarmClock
+            },
+            {
+                "name": "Name              : Microsoft.WindowsAlarms",
+                "command": "Get-AppxPackage Microsoft.WindowsAlarms",
+                "button": self.pushDownloadAlarmClock
+            },
+            {
+                "name": "Name              : Microsoft.windowscommunicationsapps",
+                "command": "Get-AppxPackage Microsoft.windowscommunicationsapps",
+                "button": self.pushDownloadCalendarAndMail
+            },
+            {
+                "name": "Name              : Microsoft.WindowsCalculator",
+                "command": "Get-AppxPackage Microsoft.WindowsCalculator",
+                "button": self.pushDownloadCalc
+            },
+            {
+                "name": "Name              : Microsoft.3DBuilder",
+                "command": "Get-AppxPackage Microsoft.3DBuilder",
+                "button": self.pushDownload3dBuilder
+            }
+        ]
+
+        for soft in self.soft_main_windows:
+            output = subprocess.run(["powershell", soft["command"]], capture_output=True, text=True)
+            if soft["name"] in output.stdout:
+                icon = QtGui.QIcon()
+                icon.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
+                               QtGui.QIcon.State.Off)
+                soft["button"].setIcon(icon)
+
 
         for soft in self.softs:
             if gb.glob(soft["path"]):
@@ -345,7 +447,7 @@ class Download(QDialog, Ui_Download):
             self.pushDownloadUplay.setIcon(icon1)
         except FileNotFoundError:
             print("Uplay is not found")
-    def buttonBattleNet(self):
+    def buttonBattleNetDel(self):
         try:
             shutil.rmtree('C:/Program Files (x86)/Battle.net')
             icon1 = QtGui.QIcon()
@@ -354,5 +456,12 @@ class Download(QDialog, Ui_Download):
             self.pushDownloadBattleNet.setIcon(icon1)
         except FileNotFoundError:
             print("Battle net is not found")
+
+    def buttonXboxDel(self):
+        pass
+
+
+    def buttonWeatherDel(self):
+        pass
 
 
