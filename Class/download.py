@@ -3,7 +3,8 @@ import os
 import time
 import pathlib
 import shutil
-
+import webbrowser
+import pywinauto
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
@@ -25,7 +26,8 @@ from pyuac import main_requires_admin
 import glob as gb
 import winreg
 import win32com.client
-
+from pywinauto import application
+import win32gui
 class Download(QDialog, Ui_Download):
     def __init__(self):
         super().__init__()
@@ -48,9 +50,9 @@ class Download(QDialog, Ui_Download):
         # self.pushDownloadSteam.clicked.connect(self.buttonSteamDownload)
         self.pushDownloadGoogle.clicked.connect(self.buttonGoogleDownload)
         # self.pushDownloadNvidea.clicked.connect(self.buttonNVIDIADownload)
-        # self.pushDownloadWatsApp.clicked.connect(self.buttonWhatsAppDownload)
-        # self.pushDownloadYandex.clicked.connect(self.buttonYandexDownload)
-        # self.pushDownloadOpera.clicked.connect(self.buttonOperaDownload)
+        self.pushDownloadYandex.clicked.connect(self.buttonYandexDownload)
+        self.pushDownloadOpera.clicked.connect(self.buttonOperaDownload)
+        self.pushDownloadWatsApp.clicked.connect(self.buttonWhatsAppDownload)
         # self.pushDownloadViber.clicked.connect(self.buttonViberDownload)
         # self.pushDownloadDS.clicked.connect(self.buttonDSDownload)
         # self.pushDownloadTS.clicked.connect(self.buttonTSDownload)
@@ -301,27 +303,56 @@ class Download(QDialog, Ui_Download):
             icon1 = QtGui.QIcon()
             icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
                             QtGui.QIcon.State.Off)
-            self.pushDownloadWatsApp.setIcon(icon1)
+            self.pushDownloadGoogle.setIcon(icon1)
 
         except FileNotFoundError:
             pass
 
+    def buttonYandexDownload(self):
+        #Скачивание файла по url в path
+         url = "https://browser.yandex.ru/download?banerid=6400000000&statpromo=true&partner_id=exp_inst_1"
+         path = f'/Users/{self.nameUsers}/Downloads/Yandex.exe'
+         wget.download(url, path)
+         # Проверка на наличие файла в папке
+         if os.path.isfile(path):
+             # установка скаченного приложения
+            subprocess.run(f'C:/Users/{self.nameUsers}/Downloads/Yandex.exe')
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,QtGui.QIcon.State.Off)
+            self.pushDownloadYandex.setIcon(icon1)
 
 
 
+    def buttonOperaDownload(self):
+        # Скачивание файла по url в path
+        url = "https://www.opera.com/ru/computer/thanks?ni=stable&os=windows"
+        path = f'/Users/{self.nameUsers}/Downloads/OperaSetup.exe'
+        wget.download(url, path)
+        #Проверка на наличие файла в папке
+        if os.path.isfile(path):
+            #установка скаченного приложения
+            process = subprocess.Popen(f'C:/Users/{self.nameUsers}/Downloads/OperaSetup.exe',shell=True)
+            process.wait()
+            if os.path.isfile(f"C:/Users/{self.nameUsers}/AppData/Local/Programs/Opera GX/launcher.exe"):
+                icon1 = QtGui.QIcon()
+                icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+                self.pushDownloadOpera.setIcon(icon1)
+    def buttonWhatsAppDownload(self):
 
-
-
-
-
-
-
-
-
-
-
-
-
+        webbrowser.open_new(r"ms-windows-store://pdp/?productid=9NKSQGP7F2NH&mode=mini")
+        time.sleep(5)
+        #До закрытия окна Microsoft Store следует ожидать, чтобы убедиться,
+        # что приложение было успешно установлено, прежде чем запускать проверку установленного софта на Windows
+        hwnd = win32gui.FindWindow(None, "Microsoft Store")
+        while hwnd != 0:
+            time.sleep(1)
+            hwnd = win32gui.FindWindow(None, "Microsoft Store")
+        #"Необходимо выполнить проверку установки приложения WhatsApp в
+        # Microsoft Store, чтобы убедиться, что оно успешно установлено на компьютер
+        if gb.glob("C:/Program Files/WindowsApps/5319275A.WhatsAppDesktop*"):
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+            self.pushDownloadWatsApp.setIcon(icon1)
 
 
 
