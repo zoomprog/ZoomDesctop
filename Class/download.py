@@ -4,7 +4,11 @@ import time
 import pathlib
 import shutil
 
-
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+import chromedriver_autoinstaller
+from bs4 import BeautifulSoup
 import winapps
 from PyQt6.QtWidgets import QHBoxLayout, QLabel, QWidget
 from guidata.utils import is_program_installed
@@ -41,11 +45,38 @@ class Download(QDialog, Ui_Download):
         self.importmainclass.RemoveWindowsMenu(self)
         self.SearchSoftWindows()#поиск софта
         #кнопка установить софт
-        self.pushDownloadSteam.clicked.connect(self.buttonSteamDownload)
+        # self.pushDownloadSteam.clicked.connect(self.buttonSteamDownload)
         self.pushDownloadGoogle.clicked.connect(self.buttonGoogleDownload)
-        self.pushDownloadWatsApp.clicked.connect(self.buttonWhatsAppDownload)
-        self.pushDownloadNvidea.clicked.connect(self.buttonNVIDIADownload)
-        self.pushDownloadTG.clicked.connect(self.buttonTGDownload)
+        # self.pushDownloadNvidea.clicked.connect(self.buttonNVIDIADownload)
+        # self.pushDownloadWatsApp.clicked.connect(self.buttonWhatsAppDownload)
+        # self.pushDownloadYandex.clicked.connect(self.buttonYandexDownload)
+        # self.pushDownloadOpera.clicked.connect(self.buttonOperaDownload)
+        # self.pushDownloadViber.clicked.connect(self.buttonViberDownload)
+        # self.pushDownloadDS.clicked.connect(self.buttonDSDownload)
+        # self.pushDownloadTS.clicked.connect(self.buttonTSDownload)
+        # self.pushDownloadEpicGames.clicked.connect(self.buttonEpicGamesDownload)
+        # self.pushDownloadOrigin.clicked.connect(self.buttonOriginDownload)
+        # self.pushDownloadUplay.clicked.connect(self.buttonUplayDownload)
+        # self.pushDownloadBattleNet.clicked.connect(self.buttonBattleNetDownload)
+        # self.pushDownloadXbox.clicked.connect(self.buttonXboxDownload)
+        # self.pushDownloadWeather.clicked.connect(self.buttonWeatherDownload)
+        # self.pushDownloadVoiceRec.clicked.connect(self.buttonVoiceRecDownload)
+        # self.pushDownloadStore.clicked.connect(self.buttonStoreDownload)
+        # self.pushDownloadPhoto.clicked.connect(self.buttonPhotoDownload)
+        # self.pushDownloadPeople.clicked.connect(self.buttonPeopleDownload)
+        # self.pushDownloadOneNote.clicked.connect(self.buttonOneNoteDownload)
+        # self.pushDownloadNews.clicked.connect(self.buttonNewsDownload)
+        # self.pushDownloadFilm.clicked.connect(self.buttonFilmDownload)
+        # self.pushDownloadMSC.clicked.connect(self.buttonMSCDownload)
+        # self.pushDownloadMap.clicked.connect(self.buttonMapDownload)
+        # self.pushDownloadGMusic.clicked.connect(self.buttonGMusicDownload)
+        # self.pushDownloadSkype.clicked.connect(self.buttonSkypeDownload)
+        # self.pushDownloadOffice.clicked.connect(self.buttonOfficeDownload)
+        # self.pushDownloadCamera.clicked.connect(self.buttonCameraDownload)
+        # self.pushDownloadAlarmClock.clicked.connect(self.buttonAlarmClockDownload)
+        # self.pushDownloadCalendarAndMail.clicked.connect(self.buttonCalendarAndMailDownload)
+        # self.pushDownloadCalc.clicked.connect(self.buttonCalcDownload)
+        # self.pushDownload3dBuilder.clicked.connect(self.button3dBuilderDownload)
         #кнопки удалить софт
         self.pushDelSteam.clicked.connect(self.buttonSteamDel)
         self.pushDelGoogle.clicked.connect(self.buttonGoogleDel)
@@ -251,70 +282,79 @@ class Download(QDialog, Ui_Download):
             output = subprocess.run(["powershell", soft["command"]], capture_output=True, text=True)
             if soft["name"] in output.stdout:
                 icon = QtGui.QIcon()
-                icon.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
-                               QtGui.QIcon.State.Off)
+                icon.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,QtGui.QIcon.State.Off)
                 soft["button"].setIcon(icon)
 
 
         for soft in self.softs:
             if gb.glob(soft["path"]):
                 icon1 = QtGui.QIcon()
-                icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
-                                QtGui.QIcon.State.Off)
+                icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,QtGui.QIcon.State.Off)
                 soft["button"].setIcon(icon1)
 
-
 #Установка приложений
-    def buttonSteamDownload(self):
-        url = 'https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe'
-        path = f'/Users/{self.nameUsers}/Downloads/SteamSetup.exe'
-        wget.download(url, path)
-        for _ in winapps.search_installed('Steam'):
-            os.system(path)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadSteam.setIcon(icon1)
-        w.DeleteFile(path)
-
-
     def buttonGoogleDownload(self):
-        os.system('soft\ChromeSetup.exe')
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
-                        QtGui.QIcon.State.Off)
-        self.pushDownloadGoogle.setIcon(icon1)
-    def buttonNVIDIADownload(self):
-        url = "https://ru.download.nvidia.com/GFE/GFEClient/3.27.0.112/GeForce_Experience_v3.27.0.112.exe"
-        path = f'/Users/{self.nameUsers}/Downloads/GeForce_Experience_v3.27.0.112.exe'
-        wget.download(url, path)
-        for _ in winapps.search_installed('NVIDIA'):
-            os.system(path)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadNvidea.setIcon(icon1)
-    def buttonTGDownload(self):
-        url = "https://telegram.org/dl/desktop/win64"
-        path = f'/Users/{self.nameUsers}/Downloads/tsetup-x64.4.6.5.exe'
-        wget.download(url, path)
-        for _ in winapps.search_installed('NVIDIA'):
-            genVar = gb.glob(f"C:/Users/{self.nameUsers}/AppData/Roaming/Telegram Desktop/*.exe")
-            for py in genVar:
-                os.system(path)
-                icon1 = QtGui.QIcon()
-                icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
-                                QtGui.QIcon.State.Off)
-                self.pushDownloadTG.setIcon(icon1)
-    def buttonWhatsAppDownload(self):
-        webbrowser.open_new(r"ms-windows-store://pdp/?productid=9NKSQGP7F2NH&mode=mini")
-        genVar = gb.glob(f"C:/Program Files/Google/Chrome/Application/*exe")
-        for py in genVar:  # Google проверка установки файла
+        try:
+            chromedriver_autoinstaller.install()
+            driver = webdriver.Chrome()
+            driver.get('https://www.google.com/')
             icon1 = QtGui.QIcon()
             icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
                             QtGui.QIcon.State.Off)
             self.pushDownloadWatsApp.setIcon(icon1)
-#Удаление приложений
+
+        except FileNotFoundError:
+            pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #Удаление приложений
     def delete_file(self, folder, file_name ):
         file_path = os.path.join(self, file_name)
         try:
@@ -423,16 +463,14 @@ class Download(QDialog, Ui_Download):
 
         if self.delete_folder(path1) and self.delete_folder(path2):
             icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
             self.pushDownloadDS.setIcon(icon1)
 
     def buttonTSDEL(self):
         try:
             shutil.rmtree('C:/Program Files/TeamSpeak 3 Client')
             icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                           QtGui.QIcon.State.Off)
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
             self.pushDownloadTS.setIcon(icon1)
         except FileNotFoundError:
             print("TeamSpeak was not found.")
