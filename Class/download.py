@@ -716,6 +716,7 @@ class Download(QDialog, Ui_Download):
         except FileNotFoundError:
             pass
 
+
     def buttonNewsDel(self):
         try:
             subprocess.run(["powershell", "Get-AppxPackage *bingnews* | Remove-AppxPackage"], capture_output=True, text=True)
