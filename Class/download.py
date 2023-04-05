@@ -69,7 +69,9 @@ class Download(QDialog, Ui_Download):
         self.pushDownloadNvidea.clicked.connect(self.buttonNVIDIADownload)
         self.pushDownloadIntel.clicked.connect(self.buttonIntelDowmload)
         self.pushDownloadRyzen.clicked.connect(self.buttonRyzenDownload)
-        self.pushDownloadRadion.clicked.connect(self.RadionDownload)
+        self.pushDownloadRadion.clicked.connect(self.buttonRadionDownload)
+        self.pushDownloadMalwarebytes.clicked.connect(self.buttonMalwarebytesDownload)
+        self.pushDownloadEset.clicked.connect(self.buttonEsetDownload)
         # self.pushDownloadXbox.clicked.connect(self.buttonXboxDownload)
         # self.pushDownloadWeather.clicked.connect(self.buttonWeatherDownload)
         # self.pushDownloadVoiceRec.clicked.connect(self.buttonVoiceRecDownload)
@@ -312,22 +314,7 @@ class Download(QDialog, Ui_Download):
 
 #Установка приложений
 
-    def buttonWhatsAppDownload(self):
 
-        webbrowser.open_new(r"ms-windows-store://pdp/?productid=9NKSQGP7F2NH&mode=mini")
-        time.sleep(5)
-        #До закрытия окна Microsoft Store следует ожидать, чтобы убедиться,
-        # что приложение было успешно установлено, прежде чем запускать проверку установленного софта на Windows
-        hwnd = win32gui.FindWindow(None, "Microsoft Store")
-        while hwnd != 0:
-            time.sleep(1)
-            hwnd = win32gui.FindWindow(None, "Microsoft Store")
-        #"Необходимо выполнить проверку установки приложения WhatsApp в
-        # Microsoft Store, чтобы убедиться, что оно успешно установлено на компьютер
-        if gb.glob("C:/Program Files/WindowsApps/5319275A.WhatsAppDesktop*"):
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-            self.pushDownloadWatsApp.setIcon(icon1)
 
 
     def DownloadAndLoadingSoft(self, url, xpath_site, file,  search, button, xpath_coocki):
@@ -483,7 +470,7 @@ class Download(QDialog, Ui_Download):
         button = self.pushDownloadRyzen
         xpath_coocki = '/html/body/div[9]/div[2]/div/div[1]/div/div[2]/div/button[3]'
         self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
-    def RadionDownload(self):
+    def buttonRadionDownload(self):
         url = "https://www.amd.com/en/support"
         xpath_site = "/html/body/div[1]/main/div/div/div/article/div/div/div[1]/div/div/div/div[1]/div/div[2]/div[2]/div[1]/div/a"
         file = f"C:/Users/{self.nameUsers}/Downloads/amd-software-adrenalin-edition-23.4.1-minimalsetup-230331_web.exe"
@@ -491,7 +478,40 @@ class Download(QDialog, Ui_Download):
         button = self.pushDownloadRadion
         xpath_coocki = '/html/body/div[9]/div[2]/div/div[1]/div/div[2]/div/button[3]'
         self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+    def buttonEsetDownload(self):
+        url = "https://www.eset.com/lv-ru/home/antivirus/download/#download-manually"
+        xpath_site = "/html/body/div[2]/div/div/div[1]/div[2]/div/div/div[3]/div/form/div[1]/div[4]/div[1]/div[1]/div/div/a"
+        file = f"C:/Users/{self.nameUsers}/Downloads/eset_nod32_antivirus_live_installer.exe"
+        search = "C:/Program Files/ESET"
+        button = self.pushDownloadRadion
+        xpath_coocki = '/html/body/div[5]/div[1]/div/div[2]/div[1]/button'
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
 
+    def buttonMalwarebytesDownload(self):
+        url = "https://disk.yandex.ru/d/gIzb4GP6nr4OrA"
+        xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
+        file = f"C:/Users/{self.nameUsers}/Downloads/MBSetup-9B312069.exe"
+        search = "C:/Program Files/Malwarebytes"
+        button = self.pushDownloadRadion
+        xpath_coocki = '/html/body/div[2]/div/div[1]/table/tbody/tr/td[2]/table/tbody/tr/td[1]/button'
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+
+    def buttonWhatsAppDownload(self):
+
+        webbrowser.open_new(r"ms-windows-store://pdp/?productid=9NKSQGP7F2NH&mode=mini")
+        time.sleep(5)
+        #До закрытия окна Microsoft Store следует ожидать, чтобы убедиться,
+        # что приложение было успешно установлено, прежде чем запускать проверку установленного софта на Windows
+        hwnd = win32gui.FindWindow(None, "Microsoft Store")
+        while hwnd != 0:
+            time.sleep(1)
+            hwnd = win32gui.FindWindow(None, "Microsoft Store")
+        #"Необходимо выполнить проверку установки приложения WhatsApp в
+        # Microsoft Store, чтобы убедиться, что оно успешно установлено на компьютер
+        if gb.glob("C:/Program Files/WindowsApps/5319275A.WhatsAppDesktop*"):
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+            self.pushDownloadWatsApp.setIcon(icon1)
 
 
 
