@@ -53,7 +53,7 @@ class Download(QDialog, Ui_Download):
         self.importmainclass.RemoveWindowsMenu(self)
         self.SearchSoftWindows()#поиск софта
         #кнопка установить софт
-        # self.pushDownloadSteam.clicked.connect(self.buttonSteamDownload)
+        self.pushDownloadSteam.clicked.connect(self.buttonSteamDownload)
         self.pushDownloadGoogle.clicked.connect(self.buttonGoogleDownload)
         # self.pushDownloadNvidea.clicked.connect(self.buttonNVIDIADownload)
         self.pushDownloadYandex.clicked.connect(self.buttonYandexDownload)
@@ -63,10 +63,10 @@ class Download(QDialog, Ui_Download):
         self.pushDownloadViber.clicked.connect(self.buttonViberDownload)
         self.pushDownloadDS.clicked.connect(self.buttonDSDownload)
         self.pushDownloadTS.clicked.connect(self.buttonTSDownload)
-        # self.pushDownloadEpicGames.clicked.connect(self.buttonEpicGamesDownload)
-        # self.pushDownloadOrigin.clicked.connect(self.buttonOriginDownload)
-        # self.pushDownloadUplay.clicked.connect(self.buttonUplayDownload)
-        # self.pushDownloadBattleNet.clicked.connect(self.buttonBattleNetDownload)
+        self.pushDownloadEpicGames.clicked.connect(self.buttonEpicGamesDownload)
+        self.pushDownloadOrigin.clicked.connect(self.buttonOriginDownload)
+        self.pushDownloadUplay.clicked.connect(self.buttonUplayDownload)
+        self.pushDownloadBattleNet.clicked.connect(self.buttonBattleNetDownload)
         # self.pushDownloadXbox.clicked.connect(self.buttonXboxDownload)
         # self.pushDownloadWeather.clicked.connect(self.buttonWeatherDownload)
         # self.pushDownloadVoiceRec.clicked.connect(self.buttonVoiceRecDownload)
@@ -188,6 +188,9 @@ class Download(QDialog, Ui_Download):
             {"name": "NORD32",
              "path": "C:/Program Files/ESET/ESET Security/*exe",
              "button": self.pushDownloadEset},
+            {"name": "Uplay",
+             "path": "C:/Program Files (x86)/Ubisoft/Ubisoft Game Launcher",
+             "button": self.pushDownloadUplay},
         ]
         self.soft_main_windows = [
             {
@@ -328,9 +331,11 @@ class Download(QDialog, Ui_Download):
 
         browser = webdriver.Chrome(options=options)
         browser.get(url)
+        time.sleep(2)
         # full xpath для нахождения кнопки Download
         xpath = xpath_coocki
         browser.find_element(By.XPATH, xpath).click()
+        time.sleep(2)
         xpath = xpath_site
         browser.find_element(By.XPATH, xpath).click()
 
@@ -407,6 +412,46 @@ class Download(QDialog, Ui_Download):
         search = f"C:/Users/{self.nameUsers}/AppData/Local/Yandex/YandexBrowser"
         button = self.pushDownloadYandex
         xpath_coocki = '/html/body/div[2]/div/div[1]/table/tbody/tr/td[2]/table/tbody/tr/td[1]/button'
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+    def buttonSteamDownload(self):
+        url = "https://store.steampowered.com/about/"
+        xpath_site = "/html/body/div[1]/div[7]/div[6]/div[1]/div[1]/div[2]/div/div[4]/div[1]/a"
+        file = f"C:/Users/{self.nameUsers}/Downloads/SteamSetup.exe"
+        search = "C:/Program Files (x86)/Steam"
+        button = self.pushDownloadSteam
+        xpath_coocki = '/html/body/div[1]/div[7]/div[6]/div[1]/div[1]/div[2]/div/div[3]/div[2]/div'
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+    def buttonEpicGamesDownload(self):
+        url = "https://store.epicgames.com/en-US/"
+        xpath_site = "/html/body/div[1]/div/div[4]/div[1]/div/header/nav/div/div[2]/div/div[4]/a"
+        file = f"C:/Users/{self.nameUsers}/Downloads/EpicInstaller-14.6.2.msi"
+        search = "C:/Program Files (x86)/Epic Games"
+        button = self.pushDownloadEpicGames
+        xpath_coocki = '/html/body/div[1]/div/div[4]/div[1]/div/header/nav/div/div[1]/div[1]/a'
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+    def buttonOriginDownload(self):
+        url = "https://www.ea.com/ru-ru/games/library/pc-download"
+        xpath_site = "/html/body/main/ea-section[1]/ea-section-column/ea-headline-title/ea-cta[1]//a/div/span"
+        file = f"C:/Users/{self.nameUsers}/Downloads/EAappInstaller.exe"
+        search = "C:/Program Files/Electronic Arts/EA Desktop"
+        button = self.pushDownloadOrigin
+        xpath_coocki = '/html/body/div[2]/div/div/div[2]/button[1]'
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+    def buttonUplayDownload(self):
+        url = "https://ubisoftconnect.com/ru-RU/"
+        xpath_site = "/html/body/div[1]/div/header/div[2]/div[2]/div[2]/div/div[2]/div/a"
+        file = f"C:/Users/{self.nameUsers}/Downloads/UbisoftConnectInstaller.exe"
+        search = "C:/Program Files (x86)/Ubisoft/Ubisoft Game Launcher"
+        button = self.pushDownloadUplay
+        xpath_coocki = '/html/body/div[2]/div[2]/div/div[3]/button[3]'
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+    def buttonBattleNetDownload(self):
+        url = "https://www.blizzard.com/ru-ru/apps/battle.net/desktop"
+        xpath_site = "/html/body/main/div/div/div/section[1]/div/div/a"
+        file = f"C:/Users/{self.nameUsers}/Downloads/Battle.net-Setup.exe"
+        search = "C:/Program Files (x86)/Battle.net"
+        button = self.pushDownloadBattleNet
+        xpath_coocki = '/html/body/div[1]/div[2]/div[4]/div[2]/div/button'
         self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
 
 
