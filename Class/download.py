@@ -194,6 +194,9 @@ class Download(QDialog, Ui_Download):
             {"name": "Uplay",
              "path": "C:/Program Files (x86)/Ubisoft/Ubisoft Game Launcher",
              "button": self.pushDownloadUplay},
+            {"name": "Radeon",
+             "path": "директория Radeon драйверов",
+             "button": self.pushDownloadRadion}
         ]
         self.soft_main_windows = [
             {
@@ -480,6 +483,15 @@ class Download(QDialog, Ui_Download):
         button = self.pushDownloadRyzen
         xpath_coocki = '/html/body/div[9]/div[2]/div/div[1]/div/div[2]/div/button[3]'
         self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+    def RadionDownload(self):
+        url = "https://www.amd.com/en/support"
+        xpath_site = "/html/body/div[1]/main/div/div/div/article/div/div/div[1]/div/div/div/div[1]/div/div[2]/div[2]/div[1]/div/a"
+        file = f"C:/Users/{self.nameUsers}/Downloads/amd-software-adrenalin-edition-23.4.1-minimalsetup-230331_web.exe"
+        search = "директория Radeon драйверов"
+        button = self.pushDownloadRadion
+        xpath_coocki = '/html/body/div[9]/div[2]/div/div[1]/div/div[2]/div/button[3]'
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+
 
 
 
