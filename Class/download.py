@@ -375,81 +375,57 @@ class Download(QDialog, Ui_Download):
                 icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
                 self.pushDownloadTG.setIcon(icon1)
 
-    def buttonViberDownload(self):
-        # Скачивание файла по url в path
-        url = "https://download.cdn.viber.com/desktop/windows/ViberSetup.exe"
-        path = f'/Users/{self.nameUsers}/Downloads/ViberSetup.exe'
-        wget.download(url, path)
-        # Проверка на наличие файла в папке
-        if os.path.isfile(path):
-            # установка скаченного приложения
-            process = subprocess.Popen(f'/Users/{self.nameUsers}/Downloads/ViberSetup.exe', shell=True)
-            process.wait()
-            if os.path.isfile(f"C:/Users/{self.nameUsers}/AppData/Roaming/ViberPC"):
-                icon1 = QtGui.QIcon()
-                icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-                self.pushDownloadViber.setIcon(icon1)
-    def buttonDSDownload(self):
-        # Скачивание файла по url в path
-        url = "https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x86"
-        path = f'/Users/{self.nameUsers}/Downloads/DiscordSetup*.exe'
-        wget.download(url, path)
-        # Проверка на наличие файла в папке
-        if os.path.isfile(path):
-            # установка скаченного приложения
-            process = subprocess.Popen(f'/Users/{self.nameUsers}/Downloads/DiscordSetup*.exe', shell=True)
-            process.wait()
-            if os.path.isfile(f"C:/Users/{self.nameUsers}/AppData/Local/Discord/*.exe"):
-                icon1 = QtGui.QIcon()
-                icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-                self.pushDownloadDS.setIcon(icon1)
-    def buttonTSDownload(self):
+
+    def DownloadAndLoadingSoft(self, url, xpath_site, file, process, search, button):
         options = webdriver.ChromeOptions()
         prefs = {'safebrowsing.enabled': 'false'}
         options.add_experimental_option("prefs", prefs)
 
-
         browser = webdriver.Chrome(options=options)
-        browser.get('https://www.teamspeak.com/en/downloads/')
+        browser.get(url)
         # full xpath для нахождения кнопки Download
-        xpath = '/html/body/div[1]/div/div/div/div/div/div[1]/div/div[1]/div[1]/div[2]/div[2]/div/a'
+        xpath = xpath_site
         browser.find_element(By.XPATH, xpath).click()
 
-        file_path = f"C:/Users/{self.nameUsers}/Downloads/TeamSpeak3-Client-win64-3.5.6.exe"
+        file_path = file
         # Не закрывайте браузер, пока файл в папке "Загрузки" не будет полностью загружен.
         while not os.path.isfile(file_path):
             time.sleep(1)
         print("Файл загружен!")
         browser.quit()
-        process = subprocess.Popen(f'/Users/{self.nameUsers}/Downloads/TeamSpeak3-Client-win64-3.5.6.exe', shell=True)
-        process.wait()
-        if os.path.isfile("C:/Program Files/TeamSpeak 3 Client/Uninstall.exe"):
+        proces = subprocess.Popen(process, shell=True)
+        proces.wait()
+        if os.path.isdir(search):
             icon1 = QtGui.QIcon()
             icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-            self.pushDownloadTS.setIcon(icon1)
+            button.setIcon(icon1)
 
+    def buttonViberDownload(self):
+        url = 'https://www.viber.com/ru/download/'
+        xpath_site = '/html/body/div[1]/div/main/div/div[2]/div/div[2]/span[1]/a'
+        file = f"C:/Users/{self.nameUsers}/Downloads/ViberSetup.exe"
+        process = f'/Users/{self.nameUsers}/Downloads/ViberSetup.exe'
+        search = f"C:/Users/{self.nameUsers}/AppData/Roaming/ViberPC"
+        button = self.pushDownloadViber
+        self.DownloadAndLoadingSoft(url, xpath_site, file, process, search, button)
 
+    def buttonDSDownload(self):
+        url = 'https://discord.com/'
+        xpath_site = '/html/body/div[1]/div/div/div[1]/div[2]/div/div[2]/a'
+        file = f"C:/Users/{self.nameUsers}/Downloads/DiscordSetup.exe"
+        process = f'/Users/{self.nameUsers}/Downloads/DiscordSetup.exe'
+        search = f"C:/Users/{self.nameUsers}/AppData/Local/Discord"
+        button = self.pushDownloadDS
+        self.DownloadAndLoadingSoft(url, xpath_site, file, process, search, button)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def buttonTSDownload(self):
+        url = 'https://www.teamspeak.com/en/downloads/'
+        xpath_site = '/html/body/div[1]/div/div/div/div/div/div[1]/div/div[1]/div[1]/div[2]/div[2]/div/a'
+        file = f"C:/Users/{self.nameUsers}/Downloads/TeamSpeak3-Client-win64-3.5.6.exe"
+        process = f'/Users/{self.nameUsers}/Downloads/TeamSpeak3-Client-win64-3.5.6.exe'
+        search = "C:/Program Files/TeamSpeak 3 Client/Uninstall.exe"
+        button = self.pushDownloadTS
+        self.DownloadAndLoadingSoft(url, xpath_site, file, process, search, button)
 
 
 
