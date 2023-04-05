@@ -6,6 +6,7 @@ import shutil
 import webbrowser
 import pywinauto
 from selenium import webdriver
+from selenium.common import NoSuchElementException
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 import chromedriver_autoinstaller
@@ -28,6 +29,11 @@ import winreg
 import win32com.client
 from pywinauto import application
 import win32gui
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 class Download(QDialog, Ui_Download):
     def __init__(self):
         super().__init__()
@@ -53,9 +59,10 @@ class Download(QDialog, Ui_Download):
         self.pushDownloadYandex.clicked.connect(self.buttonYandexDownload)
         self.pushDownloadOpera.clicked.connect(self.buttonOperaDownload)
         self.pushDownloadWatsApp.clicked.connect(self.buttonWhatsAppDownload)
-        # self.pushDownloadViber.clicked.connect(self.buttonViberDownload)
-        # self.pushDownloadDS.clicked.connect(self.buttonDSDownload)
-        # self.pushDownloadTS.clicked.connect(self.buttonTSDownload)
+        self.pushDownloadTG.clicked.connect(self.buttonTgDownload)
+        self.pushDownloadViber.clicked.connect(self.buttonViberDownload)
+        self.pushDownloadDS.clicked.connect(self.buttonDSDownload)
+        self.pushDownloadTS.clicked.connect(self.buttonTSDownload)
         # self.pushDownloadEpicGames.clicked.connect(self.buttonEpicGamesDownload)
         # self.pushDownloadOrigin.clicked.connect(self.buttonOriginDownload)
         # self.pushDownloadUplay.clicked.connect(self.buttonUplayDownload)
@@ -353,6 +360,74 @@ class Download(QDialog, Ui_Download):
             icon1 = QtGui.QIcon()
             icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
             self.pushDownloadWatsApp.setIcon(icon1)
+    def buttonTgDownload(self):
+        # Скачивание файла по url в path
+        url = "https://telegram.org/dl/desktop/win64"
+        path = f'/Users/{self.nameUsers}/Downloads/tsetup*.exe'
+        wget.download(url, path)
+        # Проверка на наличие файла в папке
+        if os.path.isfile(path):
+            # установка скаченного приложения
+            process = subprocess.Popen(f'C:/Users/{self.nameUsers}/Downloads/tsetup*.exe', shell=True)
+            process.wait()
+            if os.path.isfile(f"C:/Users/{self.nameUsers}/AppData/Roaming/Telegram Desktop/*.exe"):
+                icon1 = QtGui.QIcon()
+                icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+                self.pushDownloadTG.setIcon(icon1)
+
+    def buttonViberDownload(self):
+        # Скачивание файла по url в path
+        url = "https://download.cdn.viber.com/desktop/windows/ViberSetup.exe"
+        path = f'/Users/{self.nameUsers}/Downloads/ViberSetup.exe'
+        wget.download(url, path)
+        # Проверка на наличие файла в папке
+        if os.path.isfile(path):
+            # установка скаченного приложения
+            process = subprocess.Popen(f'/Users/{self.nameUsers}/Downloads/ViberSetup.exe', shell=True)
+            process.wait()
+            if os.path.isfile(f"C:/Users/{self.nameUsers}/AppData/Roaming/ViberPC"):
+                icon1 = QtGui.QIcon()
+                icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+                self.pushDownloadViber.setIcon(icon1)
+    def buttonDSDownload(self):
+        # Скачивание файла по url в path
+        url = "https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x86"
+        path = f'/Users/{self.nameUsers}/Downloads/DiscordSetup*.exe'
+        wget.download(url, path)
+        # Проверка на наличие файла в папке
+        if os.path.isfile(path):
+            # установка скаченного приложения
+            process = subprocess.Popen(f'/Users/{self.nameUsers}/Downloads/DiscordSetup*.exe', shell=True)
+            process.wait()
+            if os.path.isfile(f"C:/Users/{self.nameUsers}/AppData/Local/Discord/*.exe"):
+                icon1 = QtGui.QIcon()
+                icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+                self.pushDownloadDS.setIcon(icon1)
+    def buttonTSDownload(self):
+        options = webdriver.ChromeOptions()
+        prefs = {'safebrowsing.enabled': 'false'}
+        options.add_experimental_option("prefs", prefs)
+
+
+        browser = webdriver.Chrome(options=options)
+        browser.get('https://www.teamspeak.com/en/downloads/')
+        # full xpath для нахождения кнопки Download
+        xpath = '/html/body/div[1]/div/div/div/div/div/div[1]/div/div[1]/div[1]/div[2]/div[2]/div/a'
+        browser.find_element(By.XPATH, xpath).click()
+
+        file_path = f"C:/Users/{self.nameUsers}/Downloads/TeamSpeak3-Client-win64-3.5.6.exe"
+        # Не закрывайте браузер, пока файл в папке "Загрузки" не будет полностью загружен.
+        while not os.path.isfile(file_path):
+            time.sleep(1)
+        print("Файл загружен!")
+        browser.quit()
+        process = subprocess.Popen(f'/Users/{self.nameUsers}/Downloads/TeamSpeak3-Client-win64-3.5.6.exe', shell=True)
+        process.wait()
+        if os.path.isfile("C:/Program Files/TeamSpeak 3 Client/Uninstall.exe"):
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+            self.pushDownloadTS.setIcon(icon1)
+
 
 
 
