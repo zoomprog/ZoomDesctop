@@ -55,7 +55,6 @@ class Download(QDialog, Ui_Download):
         #кнопка установить софт
         self.pushDownloadSteam.clicked.connect(self.buttonSteamDownload)
         self.pushDownloadGoogle.clicked.connect(self.buttonGoogleDownload)
-        # self.pushDownloadNvidea.clicked.connect(self.buttonNVIDIADownload)
         self.pushDownloadYandex.clicked.connect(self.buttonYandexDownload)
         self.pushDownloadOpera.clicked.connect(self.buttonOperaDownload)
         self.pushDownloadWatsApp.clicked.connect(self.buttonWhatsAppDownload)
@@ -67,6 +66,10 @@ class Download(QDialog, Ui_Download):
         self.pushDownloadOrigin.clicked.connect(self.buttonOriginDownload)
         self.pushDownloadUplay.clicked.connect(self.buttonUplayDownload)
         self.pushDownloadBattleNet.clicked.connect(self.buttonBattleNetDownload)
+        self.pushDownloadNvidea.clicked.connect(self.buttonNVIDIADownload)
+        self.pushDownloadIntel.clicked.connect(self.buttonIntelDowmload)
+        self.pushDownloadRyzen.clicked.connect(self.buttonRyzenDownload)
+        self.pushDownloadRadion.clicked.connect(self.RadionDownload)
         # self.pushDownloadXbox.clicked.connect(self.buttonXboxDownload)
         # self.pushDownloadWeather.clicked.connect(self.buttonWeatherDownload)
         # self.pushDownloadVoiceRec.clicked.connect(self.buttonVoiceRecDownload)
@@ -453,12 +456,30 @@ class Download(QDialog, Ui_Download):
         button = self.pushDownloadBattleNet
         xpath_coocki = '/html/body/div[1]/div[2]/div[4]/div[2]/div/button'
         self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
-
-
-
-
-
-
+    def buttonNVIDIADownload(self):
+        url = "https://www.nvidia.com/ru-ru/geforce/geforce-experience/"
+        xpath_site = "/html/body/div[1]/div/div[1]/section/div/div/div/div/div/div/div/div/div/article/div[1]/div[1]/div/div/div/div[2]/div/div/div[2]/div/div/div/div/div/div/a[1]/div"
+        file = f"C:/Users/{self.nameUsers}/Downloads/GeForce_Experience_v3.27.0.112.exe"
+        search = "C:/Program Files/NVIDIA Corporation"
+        button = self.pushDownloadNvidea
+        xpath_coocki = '/html/body/div[5]/div[3]/div/div/div[2]/div/div/button[2]'
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+    def buttonIntelDowmload(self):
+        url = "https://www.intel.com/content/www/us/en/support/detect.html"
+        xpath_site = "/html/body/main/div[1]/div[3]/div/div[2]/div/div[1]/div/div/div/div[2]/a[1]"
+        file = f"C:/Users/{self.nameUsers}/Downloads/Intel-Driver-and-Support-Assistant-Installer.exe"
+        search = "C:\Program Files (x86)\Intel\Driver and Support Assistant"
+        button = self.pushDownloadIntel
+        xpath_coocki = '/html/body/div[4]/div[2]/div/div[1]/div/div[2]/div/button[3]'
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+    def buttonRyzenDownload(self):
+        url = "https://www.amd.com/en/technologies/ryzen-master"
+        xpath_site = "/html/body/div[1]/main/div/div/div/article/div/div[1]/div[8]/div/div/div/div/div/div[2]/div[1]/p[1]/a"
+        file = f"C:/Users/{self.nameUsers}/Downloads/amd-ryzen-master.exe"
+        search = "C:/AMD/RyzenMasterExtract"
+        button = self.pushDownloadRyzen
+        xpath_coocki = '/html/body/div[9]/div[2]/div/div[1]/div/div[2]/div/button[3]'
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
 
 
 
