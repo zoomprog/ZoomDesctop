@@ -302,48 +302,7 @@ class Download(QDialog, Ui_Download):
                 soft["button"].setIcon(icon1)
 
 #Установка приложений
-    def buttonGoogleDownload(self):
-        try:
-            chromedriver_autoinstaller.install()
-            driver = webdriver.Chrome()
-            driver.get('https://www.google.com/')
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadGoogle.setIcon(icon1)
 
-        except FileNotFoundError:
-            pass
-
-    def buttonYandexDownload(self):
-        #Скачивание файла по url в path
-         url = "https://browser.yandex.ru/download?banerid=6400000000&statpromo=true&partner_id=exp_inst_1"
-         path = f'/Users/{self.nameUsers}/Downloads/Yandex.exe'
-         wget.download(url, path)
-         # Проверка на наличие файла в папке
-         if os.path.isfile(path):
-             # установка скаченного приложения
-            subprocess.run(f'C:/Users/{self.nameUsers}/Downloads/Yandex.exe')
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,QtGui.QIcon.State.Off)
-            self.pushDownloadYandex.setIcon(icon1)
-
-
-
-    def buttonOperaDownload(self):
-        # Скачивание файла по url в path
-        url = "https://www.opera.com/ru/computer/thanks?ni=stable&os=windows"
-        path = f'/Users/{self.nameUsers}/Downloads/OperaSetup.exe'
-        wget.download(url, path)
-        #Проверка на наличие файла в папке
-        if os.path.isfile(path):
-            #установка скаченного приложения
-            process = subprocess.Popen(f'C:/Users/{self.nameUsers}/Downloads/OperaSetup.exe',shell=True)
-            process.wait()
-            if os.path.isfile(f"C:/Users/{self.nameUsers}/AppData/Local/Programs/Opera GX/launcher.exe"):
-                icon1 = QtGui.QIcon()
-                icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-                self.pushDownloadOpera.setIcon(icon1)
     def buttonWhatsAppDownload(self):
 
         webbrowser.open_new(r"ms-windows-store://pdp/?productid=9NKSQGP7F2NH&mode=mini")
@@ -360,23 +319,9 @@ class Download(QDialog, Ui_Download):
             icon1 = QtGui.QIcon()
             icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
             self.pushDownloadWatsApp.setIcon(icon1)
-    def buttonTgDownload(self):
-        # Скачивание файла по url в path
-        url = "https://telegram.org/dl/desktop/win64"
-        path = f'/Users/{self.nameUsers}/Downloads/tsetup*.exe'
-        wget.download(url, path)
-        # Проверка на наличие файла в папке
-        if os.path.isfile(path):
-            # установка скаченного приложения
-            process = subprocess.Popen(f'C:/Users/{self.nameUsers}/Downloads/tsetup*.exe', shell=True)
-            process.wait()
-            if os.path.isfile(f"C:/Users/{self.nameUsers}/AppData/Roaming/Telegram Desktop/*.exe"):
-                icon1 = QtGui.QIcon()
-                icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-                self.pushDownloadTG.setIcon(icon1)
 
 
-    def DownloadAndLoadingSoft(self, url, xpath_site, file, process, search, button):
+    def DownloadAndLoadingSoft(self, url, xpath_site, file,  search, button, xpath_coocki):
         options = webdriver.ChromeOptions()
         prefs = {'safebrowsing.enabled': 'false'}
         options.add_experimental_option("prefs", prefs)
@@ -384,6 +329,8 @@ class Download(QDialog, Ui_Download):
         browser = webdriver.Chrome(options=options)
         browser.get(url)
         # full xpath для нахождения кнопки Download
+        xpath = xpath_coocki
+        browser.find_element(By.XPATH, xpath).click()
         xpath = xpath_site
         browser.find_element(By.XPATH, xpath).click()
 
@@ -393,7 +340,7 @@ class Download(QDialog, Ui_Download):
             time.sleep(1)
         print("Файл загружен!")
         browser.quit()
-        proces = subprocess.Popen(process, shell=True)
+        proces = subprocess.Popen(file, shell=True)
         proces.wait()
         if os.path.isdir(search):
             icon1 = QtGui.QIcon()
@@ -404,28 +351,66 @@ class Download(QDialog, Ui_Download):
         url = 'https://www.viber.com/ru/download/'
         xpath_site = '/html/body/div[1]/div/main/div/div[2]/div/div[2]/span[1]/a'
         file = f"C:/Users/{self.nameUsers}/Downloads/ViberSetup.exe"
-        process = f'/Users/{self.nameUsers}/Downloads/ViberSetup.exe'
         search = f"C:/Users/{self.nameUsers}/AppData/Roaming/ViberPC"
         button = self.pushDownloadViber
-        self.DownloadAndLoadingSoft(url, xpath_site, file, process, search, button)
+        xpath_coocki = '/html/body/div[2]/div[3]/div/div[1]/div/div[2]/div/button[3]'
+        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button,xpath_coocki)
 
     def buttonDSDownload(self):
         url = 'https://discord.com/'
         xpath_site = '/html/body/div[1]/div/div/div[1]/div[2]/div/div[2]/a'
         file = f"C:/Users/{self.nameUsers}/Downloads/DiscordSetup.exe"
-        process = f'/Users/{self.nameUsers}/Downloads/DiscordSetup.exe'
         search = f"C:/Users/{self.nameUsers}/AppData/Local/Discord"
         button = self.pushDownloadDS
-        self.DownloadAndLoadingSoft(url, xpath_site, file, process, search, button)
+        xpath_coocki = '/html/body/div[2]/div[2]/div/div[1]/div/div[2]/div/button[3]'
+        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button,xpath_coocki)
 
     def buttonTSDownload(self):
         url = 'https://www.teamspeak.com/en/downloads/'
         xpath_site = '/html/body/div[1]/div/div/div/div/div/div[1]/div/div[1]/div[1]/div[2]/div[2]/div/a'
         file = f"C:/Users/{self.nameUsers}/Downloads/TeamSpeak3-Client-win64-3.5.6.exe"
-        process = f'/Users/{self.nameUsers}/Downloads/TeamSpeak3-Client-win64-3.5.6.exe'
         search = "C:/Program Files/TeamSpeak 3 Client/Uninstall.exe"
         button = self.pushDownloadTS
-        self.DownloadAndLoadingSoft(url, xpath_site, file, process, search, button)
+        xpath_coocki = '/html/body'
+        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button,xpath_coocki)
+
+    def buttonTgDownload(self):
+        url = 'https://desktop.telegram.org/'
+        xpath_site = '/html/body/div[2]/div[2]/div/div/div[3]/span[1]/a[1]'
+        file = f"C:/Users/{self.nameUsers}/Downloads/tsetup-x64.4.7.1.exe"
+        search = f"C:/Users/{self.nameUsers}/AppData/Roaming/Telegram Desktop"
+        button = self.pushDownloadTG
+        xpath_coocki = '/html/body/div[2]/div[2]/div/div/a/h1'
+        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button,xpath_coocki)
+
+    def buttonGoogleDownload(self):
+        url = 'https://www.google.com/intl/ru_ru/chrome/'
+        xpath_site ='/html/body/div[3]/section[1]/div/div[4]/div/div[1]/div[2]/button'
+        file = f"C:/Users/{self.nameUsers}/Downloads/ChromeSetup.exe"
+        search = f"C:/Program Files/Google/Chrome"
+        button = self.pushDownloadGoogle
+        xpath_coocki = "/html/body/div[1]/div/div/button"
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button,xpath_coocki)
+
+    def buttonOperaDownload(self):
+        url = "https://www.opera.com/ru/gx"
+        xpath_site ="/html/body/main/section[1]/div[2]/div[2]/div[1]/span/a"
+        file = f"C:/Users/{self.nameUsers}/Downloads/OperaGXSetup.exe"
+        search = f"C:/Users/{self.nameUsers}/AppData/Local/Programs/Opera GX"
+        button = self.pushDownloadOpera
+        xpath_coocki = '/html/body/div[1]/div[1]/div/div/span[1]'
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+    def buttonYandexDownload(self):
+        url = "https://browser.yandex.ru/"
+        xpath_site = "/html/body/div[1]/main/div/div[2]/section[1]/div/div[1]/div/div[2]/div/div[1]/span[1]/a"
+        file = f"C:/Users/{self.nameUsers}/Downloads/Yandex.exe"
+        search = f"C:/Users/{self.nameUsers}/AppData/Local/Yandex/YandexBrowser"
+        button = self.pushDownloadYandex
+        xpath_coocki = '/html/body/div[2]/div/div[1]/table/tbody/tr/td[2]/table/tbody/tr/td[1]/button'
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+
+
+
 
 
 
