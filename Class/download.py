@@ -519,6 +519,7 @@ class Download(QDialog, Ui_Download):
 
 
 
+
     #Удаление приложений
     def delete_file(self, folder, file_name ):
         file_path = os.path.join(self, file_name)
