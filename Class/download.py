@@ -56,7 +56,7 @@ class Download(QDialog, Ui_Download):
         self.pushDownloadGoogle.clicked.connect(self.buttonGoogleDownload)
         self.pushDownloadYandex.clicked.connect(self.buttonYandexDownload)
         self.pushDownloadOpera.clicked.connect(self.buttonOperaDownload)
-        self.pushDownloadWatsApp.clicked.connect(self.buttonWhatsAppDownload)
+        #self.pushDownloadWatsApp.clicked.connect(self.buttonWhatsAppDownload)
         self.pushDownloadTG.clicked.connect(self.buttonTgDownload)
         self.pushDownloadViber.clicked.connect(self.buttonViberDownload)
         self.pushDownloadDS.clicked.connect(self.buttonDSDownload)
@@ -75,7 +75,7 @@ class Download(QDialog, Ui_Download):
         self.pushDownloadXbox.clicked.connect(self.buttonXboxDownload)
         self.pushDownloadWeather.clicked.connect(self.buttonWeatherDownload)
         self.pushDownloadVoiceRec.clicked.connect(self.buttonVoiceRecDownload)
-        # self.pushDownloadStore.clicked.connect(self.buttonStoreDownload)
+        self.pushDownloadStore.clicked.connect(self.buttonStoreDownload)
         self.pushDownloadPhoto.clicked.connect(self.buttonPhotoDownload)
         self.pushDownloadPeople.clicked.connect(self.buttonPeopleDownload)
         self.pushDownloadOneNote.clicked.connect(self.buttonOneNoteDownload)
@@ -295,6 +295,16 @@ class Download(QDialog, Ui_Download):
                 "name": "Name              : Microsoft.3DBuilder",
                 "command": "Get-AppxPackage Microsoft.3DBuilder",
                 "button": self.pushDownload3dBuilder
+            },
+            {
+                "name": "Name              : Microsoft.WindowsCamera",
+                "command": "Get-AppxPackage *Microsoft.WindowsCamera*",
+                "button": self.pushDownloadCamera
+            },
+            {
+                "name": "Name              : Microsoft.WindowsAlarms",
+                "command": "Get-AppxPackage *Microsoft.WindowsAlarms*",
+                "button": self.pushDownloadAlarmClock
             }
         ]
 
@@ -477,7 +487,7 @@ class Download(QDialog, Ui_Download):
         button = self.pushDownloadRadion
         self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
 
-    def DownloadAndLoading_WindowsSoft(self, productid, search, button):
+    def DownloadAndLoading_WindowsSoft(self, productid, softs):
         webbrowser.open_new(productid)
         # До закрытия окна Microsoft Store следует ожидать, чтобы убедиться,
         # что приложение было успешно установлено, прежде чем запускать проверку установленного софта на Windows
@@ -487,110 +497,209 @@ class Download(QDialog, Ui_Download):
             hwnd = win32gui.FindWindow(None, "Microsoft Store")
         # "Необходимо выполнить проверку установки приложения WhatsApp в
         # Microsoft Store, чтобы убедиться, что оно успешно установлено на компьютер
-        if gb.glob(search):
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-            button.setIcon(icon1)
+        for soft in softs:
+            output = subprocess.run(["powershell", soft["command"]], capture_output=True, text=True)
+            if soft["name"] in output.stdout:
+                icon = QtGui.QIcon()
+                icon.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,QtGui.QIcon.State.Off)
+                soft["button"].setIcon(icon)
     def buttonWhatsAppDownload(self):
         productid = r"ms-windows-store://pdp/?productid=9NKSQGP7F2NH&mode=mini"
-        search = "C:/Program Files/WindowsApps/5319275A.WhatsAppDesktop*"
-        button = self.pushDownloadWatsApp
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name                   : 5319275A.WhatsAppDesktop",
+                "command": "Get-AppxPackage *WhatsApp*",
+                "button": self.pushDownloadWatsApp
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
 
     def buttonXboxDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9NZKPSTSNW4P"
-        search = ""
-        button = self.pushDownloadXbox
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.XboxGamingOverlay",
+                "command": "Get-AppxPackage Microsoft.XboxGamingOverlay",
+                "button": self.pushDownloadXbox
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonWeatherDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFJ3Q2"
-        search = f""
-        button = self.pushDownloadWeather
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": 'Name              : Microsoft.BingWeather',
+                "command": "Get-AppxPackage Microsoft.BingWeather",
+                "button": self.pushDownloadWeather
+            }]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonVoiceRecDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFHWKN"
-        search = f""
-        button = self.pushDownloadVoiceRec
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.WindowsSoundRecorder",
+                "command": "Get-AppxPackage Microsoft.WindowsSoundRecorder",
+                "button": self.pushDownloadVoiceRec
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonPhotoDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFHWKN"
-        search = f""
-        button = self.pushDownloadPhoto
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.Windows.Photos",
+                "command": "Get-AppxPackage Microsoft.Windows.Photos",
+                "button": self.pushDownloadPhoto
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonPeopleDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9NBLGGH10PG8"
-        search = f""
-        button = self.pushDownloadPeople
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.People",
+                "command": "Get-AppxPackage Microsoft.People",
+                "button": self.pushDownloadPeople
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonOneNoteDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=XPFFZHVGQWWLHB"
-        search = f""
-        button = self.pushDownloadOneNote
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.Office.OneNote",
+                "command": "Get-AppxPackage Microsoft.Office.OneNote",
+                "button": self.pushDownloadOneNote
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonNewsDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFHVFW"
-        search = f""
-        button = self.pushDownloadNews
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.BingNews",
+                "command": "Get-AppxPackage Microsoft.BingNews",
+                "button": self.pushDownloadNews
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonFilmDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFJ3P2"
-        search = f""
-        button = self.pushDownloadFilm
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.ZuneVideo",
+                "command": "Get-AppxPackage Microsoft.ZuneVideo",
+                "button": self.pushDownloadFilm
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonMSCDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9wzdncrfhwd2"
-        search = f""
-        button = self.pushDownloadMSC
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.MicrosoftSolitaireCollection",
+                "command": "Get-AppxPackage Microsoft.MicrosoftSolitaireCollection",
+                "button": self.pushDownloadMSC
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonMapDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRDTBVB"
-        search = f""
-        button = self.pushDownloadMap
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.WindowsMaps",
+                "command": "Get-AppxPackage Microsoft.WindowsMaps",
+                "button": self.pushDownloadMap
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonGMusicDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFJ3PT"
-        search = f""
-        button = self.pushDownloadGMusic
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.ZuneMusic",
+                "command": "Get-AppxPackage Microsoft.ZuneMusic",
+                "button": self.pushDownloadGMusic
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonSkypeDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFJ364"
-        search = f""
-        button = self.pushDownloadSkype
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.SkypeApp",
+                "command": "Get-AppxPackage Microsoft.SkypeApp",
+                "button": self.pushDownloadSkype
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonOfficeDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRD29V9"
-        search = f""
-        button = self.pushDownloadOffice
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.MicrosoftOfficeHub",
+                "command": "Get-AppxPackage Microsoft.MicrosoftOfficeHub",
+                "button": self.pushDownloadOffice
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonCameraDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFJBBG"
-        search = f""
-        button = self.pushDownloadCamera
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.WindowsCamera",
+                "command": "Get-AppxPackage *Microsoft.WindowsCamera*",
+                "button": self.pushDownloadCamera
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonAlarmClockDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFJ3PR"
-        search = f""
-        button = self.pushDownloadAlarmClock
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.WindowsAlarms",
+                "command": "Get-AppxPackage *Microsoft.WindowsAlarms*",
+                "button": self.pushDownloadAlarmClock
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonCalendarAndMailDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFHVQM"
-        search = f""
-        button = self.pushDownloadCalendarAndMail
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.windowscommunicationsapps",
+                "command": "Get-AppxPackage Microsoft.windowscommunicationsapps",
+                "button": self.pushDownloadCalendarAndMail
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def buttonCalcDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFHVN5"
-        search = f""
-        button = self.pushDownloadCalc
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.WindowsCalculator",
+                "command": "Get-AppxPackage Microsoft.WindowsCalculator",
+                "button": self.pushDownloadCalc
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
     def button3dBuilderDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFJ3T6"
-        search = f""
-        button = self.pushDownload3dBuilder
-        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+        softs = [
+            {
+                "name": "Name              : Microsoft.3DBuilder",
+                "command": "Get-AppxPackage Microsoft.3DBuilder",
+                "button": self.pushDownload3dBuilder
+            }
+        ]
+        self.DownloadAndLoading_WindowsSoft(productid, softs)
 
-
-
-
+    def buttonStoreDownload(self):
+        command = 'powershell -Command "Get-AppxPackage -allusers Microsoft.WindowsStore | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\\AppXManifest.xml"}"'
+        subprocess.check_call(command)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushDownloadStore.setIcon(icon1)
     #Удаление приложений
     def delete_file(self, folder, file_name ):
         file_path = os.path.join(self, file_name)
