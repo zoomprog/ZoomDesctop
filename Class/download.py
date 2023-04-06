@@ -72,6 +72,7 @@ class Download(QDialog, Ui_Download):
         self.pushDownloadRadion.clicked.connect(self.buttonRadionDownload)
         self.pushDownloadMalwarebytes.clicked.connect(self.buttonMalwarebytesDownload)
         self.pushDownloadEset.clicked.connect(self.buttonEsetDownload)
+
         # self.pushDownloadXbox.clicked.connect(self.buttonXboxDownload)
         # self.pushDownloadWeather.clicked.connect(self.buttonWeatherDownload)
         # self.pushDownloadVoiceRec.clicked.connect(self.buttonVoiceRecDownload)
@@ -317,18 +318,14 @@ class Download(QDialog, Ui_Download):
 
 
 
-    def DownloadAndLoadingSoft(self, url, xpath_site, file,  search, button, xpath_coocki):
+    def DownloadAndLoadingSoft(self, url, xpath_site, file,  search, button):
         options = webdriver.ChromeOptions()
         prefs = {'safebrowsing.enabled': 'false'}
         options.add_experimental_option("prefs", prefs)
 
         browser = webdriver.Chrome(options=options)
         browser.get(url)
-        time.sleep(2)
-        # full xpath для нахождения кнопки Download
-        xpath = xpath_coocki
-        browser.find_element(By.XPATH, xpath).click()
-        time.sleep(2)
+
         xpath = xpath_site
         browser.find_element(By.XPATH, xpath).click()
 
@@ -345,147 +342,133 @@ class Download(QDialog, Ui_Download):
             icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
             button.setIcon(icon1)
 
-    def buttonViberDownload(self):
-        url = 'https://www.viber.com/ru/download/'
-        xpath_site = '/html/body/div[1]/div/main/div/div[2]/div/div[2]/span[1]/a'
-        file = f"C:/Users/{self.nameUsers}/Downloads/ViberSetup.exe"
-        search = f"C:/Users/{self.nameUsers}/AppData/Roaming/ViberPC"
-        button = self.pushDownloadViber
-        xpath_coocki = '/html/body/div[2]/div[3]/div/div[1]/div/div[2]/div/button[3]'
-        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button,xpath_coocki)
-
-    def buttonDSDownload(self):
-        url = 'https://discord.com/'
-        xpath_site = '/html/body/div[1]/div/div/div[1]/div[2]/div/div[2]/a'
-        file = f"C:/Users/{self.nameUsers}/Downloads/DiscordSetup.exe"
-        search = f"C:/Users/{self.nameUsers}/AppData/Local/Discord"
-        button = self.pushDownloadDS
-        xpath_coocki = '/html/body/div[2]/div[2]/div/div[1]/div/div[2]/div/button[3]'
-        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button,xpath_coocki)
-
-    def buttonTSDownload(self):
-        url = 'https://www.teamspeak.com/en/downloads/'
-        xpath_site = '/html/body/div[1]/div/div/div/div/div/div[1]/div/div[1]/div[1]/div[2]/div[2]/div/a'
-        file = f"C:/Users/{self.nameUsers}/Downloads/TeamSpeak3-Client-win64-3.5.6.exe"
-        search = "C:/Program Files/TeamSpeak 3 Client/Uninstall.exe"
-        button = self.pushDownloadTS
-        xpath_coocki = '/html/body'
-        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button,xpath_coocki)
-
-    def buttonTgDownload(self):
-        url = 'https://desktop.telegram.org/'
-        xpath_site = '/html/body/div[2]/div[2]/div/div/div[3]/span[1]/a[1]'
-        file = f"C:/Users/{self.nameUsers}/Downloads/tsetup-x64.4.7.1.exe"
-        search = f"C:/Users/{self.nameUsers}/AppData/Roaming/Telegram Desktop"
-        button = self.pushDownloadTG
-        xpath_coocki = '/html/body/div[2]/div[2]/div/div/a/h1'
-        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button,xpath_coocki)
 
     def buttonGoogleDownload(self):
-        url = 'https://www.google.com/intl/ru_ru/chrome/'
-        xpath_site ='/html/body/div[3]/section[1]/div/div[4]/div/div[1]/div[2]/button'
+        url = 'https://disk.yandex.ru/d/0i6-aA45JOFCuQ'
+        xpath_site ='/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]'
         file = f"C:/Users/{self.nameUsers}/Downloads/ChromeSetup.exe"
         search = f"C:/Program Files/Google/Chrome"
         button = self.pushDownloadGoogle
         xpath_coocki = "/html/body/div[1]/div/div/button"
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button,xpath_coocki)
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
 
     def buttonOperaDownload(self):
-        url = "https://www.opera.com/ru/gx"
-        xpath_site ="/html/body/main/section[1]/div[2]/div[2]/div[1]/span/a"
+        url = "https://disk.yandex.ru/d/tVuYVDzpaDcSbg"
+        xpath_site ="/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/OperaGXSetup.exe"
         search = f"C:/Users/{self.nameUsers}/AppData/Local/Programs/Opera GX"
         button = self.pushDownloadOpera
-        xpath_coocki = '/html/body/div[1]/div[1]/div/div/span[1]'
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
     def buttonYandexDownload(self):
-        url = "https://browser.yandex.ru/"
-        xpath_site = "/html/body/div[1]/main/div/div[2]/section[1]/div/div[1]/div/div[2]/div/div[1]/span[1]/a"
+        url = "https://disk.yandex.ru/d/XMr-W6g3C2ZOJQ"
+        xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/Yandex.exe"
         search = f"C:/Users/{self.nameUsers}/AppData/Local/Yandex/YandexBrowser"
         button = self.pushDownloadYandex
-        xpath_coocki = '/html/body/div[2]/div/div[1]/table/tbody/tr/td[2]/table/tbody/tr/td[1]/button'
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+
+    def buttonViberDownload(self):
+        url = 'https://disk.yandex.ru/d/GanXehpAmS2AeA'
+        xpath_site = '/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]'
+        file = f"C:/Users/{self.nameUsers}/Downloads/ViberSetup.exe"
+        search = f"C:/Users/{self.nameUsers}/AppData/Roaming/ViberPC"
+        button = self.pushDownloadViber
+        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button)
+
+    def buttonDSDownload(self):
+        url = 'https://disk.yandex.ru/d/jc0ugd_7swQjRQ'
+        xpath_site = '/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]'
+        file = f"C:/Users/{self.nameUsers}/Downloads/DiscordSetup.exe"
+        search = f"C:/Users/{self.nameUsers}/AppData/Local/Discord"
+        button = self.pushDownloadDS
+        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button)
+
+    def buttonTSDownload(self):
+        url = 'https://disk.yandex.ru/d/_jvL082R196Jfw'
+        xpath_site = '/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]'
+        file = f"C:/Users/{self.nameUsers}/Downloads/TeamSpeak3-Client-win64-3.5.6.exe"
+        search = "C:/Program Files/TeamSpeak 3 Client"
+        button = self.pushDownloadTS
+        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button)
+
+    def buttonTgDownload(self):
+        url = 'https://disk.yandex.ru/d/rghCP0xnXDshxw'
+        xpath_site = '/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]'
+        file = f"C:/Users/{self.nameUsers}/Downloads/tsetup-x64.4.7.1.exe"
+        search = f"C:/Users/{self.nameUsers}/AppData/Roaming/Telegram Desktop"
+        button = self.pushDownloadTG
+        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button)
+
     def buttonSteamDownload(self):
-        url = "https://store.steampowered.com/about/"
-        xpath_site = "/html/body/div[1]/div[7]/div[6]/div[1]/div[1]/div[2]/div/div[4]/div[1]/a"
+        url = "https://disk.yandex.ru/d/uXZYf4SDu7vHGw"
+        xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/SteamSetup.exe"
         search = "C:/Program Files (x86)/Steam"
         button = self.pushDownloadSteam
-        xpath_coocki = '/html/body/div[1]/div[7]/div[6]/div[1]/div[1]/div[2]/div/div[3]/div[2]/div'
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
     def buttonEpicGamesDownload(self):
-        url = "https://store.epicgames.com/en-US/"
-        xpath_site = "/html/body/div[1]/div/div[4]/div[1]/div/header/nav/div/div[2]/div/div[4]/a"
+        url = "https://disk.yandex.ru/d/ixbNw_jU7bbyEg"
+        xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/EpicInstaller-14.6.2.msi"
         search = "C:/Program Files (x86)/Epic Games"
         button = self.pushDownloadEpicGames
-        xpath_coocki = '/html/body/div[1]/div/div[4]/div[1]/div/header/nav/div/div[1]/div[1]/a'
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
     def buttonOriginDownload(self):
-        url = "https://www.ea.com/ru-ru/games/library/pc-download"
-        xpath_site = "/html/body/main/ea-section[1]/ea-section-column/ea-headline-title/ea-cta[1]//a/div/span"
+        url = "https://disk.yandex.ru/d/mPDsJnYtL-bPHw"
+        xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/EAappInstaller.exe"
         search = "C:/Program Files/Electronic Arts/EA Desktop"
         button = self.pushDownloadOrigin
-        xpath_coocki = '/html/body/div[2]/div/div/div[2]/button[1]'
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
     def buttonUplayDownload(self):
-        url = "https://ubisoftconnect.com/ru-RU/"
-        xpath_site = "/html/body/div[1]/div/header/div[2]/div[2]/div[2]/div/div[2]/div/a"
+        url = "https://disk.yandex.ru/d/-pPkBQdgz6aQpg"
+        xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/UbisoftConnectInstaller.exe"
         search = "C:/Program Files (x86)/Ubisoft/Ubisoft Game Launcher"
         button = self.pushDownloadUplay
-        xpath_coocki = '/html/body/div[2]/div[2]/div/div[3]/button[3]'
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
     def buttonBattleNetDownload(self):
-        url = "https://www.blizzard.com/ru-ru/apps/battle.net/desktop"
-        xpath_site = "/html/body/main/div/div/div/section[1]/div/div/a"
+        url = "https://disk.yandex.ru/d/CIHyveUWjtaC2g"
+        xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/Battle.net-Setup.exe"
         search = "C:/Program Files (x86)/Battle.net"
         button = self.pushDownloadBattleNet
-        xpath_coocki = '/html/body/div[1]/div[2]/div[4]/div[2]/div/button'
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
     def buttonNVIDIADownload(self):
-        url = "https://www.nvidia.com/ru-ru/geforce/geforce-experience/"
-        xpath_site = "/html/body/div[1]/div/div[1]/section/div/div/div/div/div/div/div/div/div/article/div[1]/div[1]/div/div/div/div[2]/div/div/div[2]/div/div/div/div/div/div/a[1]/div"
+        url = "https://disk.yandex.ru/d/0HeyDs-WxlLMPA"
+        xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/GeForce_Experience_v3.27.0.112.exe"
         search = "C:/Program Files/NVIDIA Corporation"
         button = self.pushDownloadNvidea
-        xpath_coocki = '/html/body/div[5]/div[3]/div/div/div[2]/div/div/button[2]'
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
     def buttonIntelDowmload(self):
-        url = "https://www.intel.com/content/www/us/en/support/detect.html"
-        xpath_site = "/html/body/main/div[1]/div[3]/div/div[2]/div/div[1]/div/div/div/div[2]/a[1]"
+        url = "https://disk.yandex.ru/d/s1fBwbJhW-SvNg"
+        xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/Intel-Driver-and-Support-Assistant-Installer.exe"
         search = "C:\Program Files (x86)\Intel\Driver and Support Assistant"
         button = self.pushDownloadIntel
-        xpath_coocki = '/html/body/div[4]/div[2]/div/div[1]/div/div[2]/div/button[3]'
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
     def buttonRyzenDownload(self):
-        url = "https://www.amd.com/en/technologies/ryzen-master"
-        xpath_site = "/html/body/div[1]/main/div/div/div/article/div/div[1]/div[8]/div/div/div/div/div/div[2]/div[1]/p[1]/a"
+        url = "https://disk.yandex.ru/d/UutTGYWf7eOpwA"
+        xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/amd-ryzen-master.exe"
         search = "C:/AMD/RyzenMasterExtract"
         button = self.pushDownloadRyzen
-        xpath_coocki = '/html/body/div[9]/div[2]/div/div[1]/div/div[2]/div/button[3]'
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
     def buttonRadionDownload(self):
-        url = "https://www.amd.com/en/support"
-        xpath_site = "/html/body/div[1]/main/div/div/div/article/div/div/div[1]/div/div/div/div[1]/div/div[2]/div[2]/div[1]/div/a"
-        file = f"C:/Users/{self.nameUsers}/Downloads/amd-software-adrenalin-edition-23.4.1-minimalsetup-230331_web.exe"
+        url = "https://disk.yandex.ru/d/-1cXaKEtADNQbg"
+        xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
+        file = f"C:/Users/{self.nameUsers}/Downloads/amd-software-adrenalin-edition-23.4.1-minimalsetup-230405_web.exe"
         search = "директория Radeon драйверов"
         button = self.pushDownloadRadion
-        xpath_coocki = '/html/body/div[9]/div[2]/div/div[1]/div/div[2]/div/button[3]'
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
     def buttonEsetDownload(self):
-        url = "https://www.eset.com/lv-ru/home/antivirus/download/#download-manually"
-        xpath_site = "/html/body/div[2]/div/div/div[1]/div[2]/div/div/div[3]/div/form/div[1]/div[4]/div[1]/div[1]/div/div/a"
+        url = "https://disk.yandex.ru/d/Y1GKxluOyZ6jmQ"
+        xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/eset_nod32_antivirus_live_installer.exe"
         search = "C:/Program Files/ESET"
         button = self.pushDownloadRadion
-        xpath_coocki = '/html/body/div[5]/div[1]/div/div[2]/div[1]/button'
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
 
     def buttonMalwarebytesDownload(self):
         url = "https://disk.yandex.ru/d/gIzb4GP6nr4OrA"
@@ -493,8 +476,8 @@ class Download(QDialog, Ui_Download):
         file = f"C:/Users/{self.nameUsers}/Downloads/MBSetup-9B312069.exe"
         search = "C:/Program Files/Malwarebytes"
         button = self.pushDownloadRadion
-        xpath_coocki = '/html/body/div[2]/div/div[1]/table/tbody/tr/td[2]/table/tbody/tr/td[1]/button'
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button, xpath_coocki)
+        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+
 
     def buttonWhatsAppDownload(self):
 
