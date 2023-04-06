@@ -857,199 +857,96 @@ class Download(QDialog, Ui_Download):
             self.pushDownloadBattleNet.setIcon(icon1)
         except FileNotFoundError:
             print("Battle net is not found")
+##############################################################################################################################
+    def DelMainWindowsSoft(self, command, button):
+        try:
+            subprocess.run(["powershell", f"{command}"], capture_output=True, text=True)
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
+                            QtGui.QIcon.State.Off)
+            button.setIcon(icon1)
+        except FileNotFoundError:
+            pass
 
     def buttonXboxDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *xboxapp* | Remove-AppxPackage"], capture_output=True, text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadXbox.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
-
+        command = "Get-AppxPackage *xboxapp* | Remove-AppxPackage"
+        button = self.pushDownloadXbox
+        self.DelMainWindowsSoft(command, button)
     def buttonWeatherDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *bingweather* | Remove-AppxPackage"], capture_output=True, text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadWeather.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
+        command = "Get-AppxPackage *bingweather* | Remove-AppxPackage"
+        button = self.pushDownloadWeather
+        self.DelMainWindowsSoft(command, button)
     def buttonVoiceRecDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *soundrecorder* | Remove-AppxPackage"], capture_output=True, text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadVoiceRec.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
+        command = "Get-AppxPackage *soundrecorder* | Remove-AppxPackage"
+        button = self.pushDownloadVoiceRec
+        self.DelMainWindowsSoft(command, button)
     def buttonStoreDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *windowsstore* | Remove-AppxPackage"], capture_output=True, text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadStore.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
+        command = "Get-AppxPackage *windowsstore* | Remove-AppxPackage"
+        button = self.pushDownloadStore
+        self.DelMainWindowsSoft(command, button)
     def buttonPhotoDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage Microsoft.Windows.Photos | Remove-AppxPackage"], capture_output=True, text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadPhoto.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
+        command = "Get-AppxPackage Microsoft.Windows.Photos | Remove-AppxPackage"
+        button = self.pushDownloadPhoto
+        self.DelMainWindowsSoft(command, button)
     def buttonPeopleDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *люди* | Remove-AppxPackage | Remove-AppxPackage"], capture_output=True, text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadPeople.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
+        command = "Get-AppxPackage *люди* | Remove-AppxPackage | Remove-AppxPackage"
+        button = self.pushDownloadPeople
+        self.DelMainWindowsSoft(command, button)
     def buttonOneNote(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *onenote* | Remove-AppxPackage"], capture_output=True, text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadOneNote.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
-
+        command = "Get-AppxPackage *onenote* | Remove-AppxPackage"
+        button = self.pushDownloadOneNote
+        self.DelMainWindowsSoft(command, button)
     def buttonNewsDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *bingnews* | Remove-AppxPackage"], capture_output=True, text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadNews.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
+        command = "Get-AppxPackage *bingnews* | Remove-AppxPackage"
+        button = self.pushDownloadNews
+        self.DelMainWindowsSoft(command, button)
     def buttonFilmDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *zunevideo* | Remove-AppxPackage"], capture_output=True, text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadFilm.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
+        command = "Get-AppxPackage *zunevideo* | Remove-AppxPackage"
+        button = self.pushDownloadFilm
+        self.DelMainWindowsSoft(command, button)
     def buttonMSCDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *solitairecollection* | Remove-AppxPackage"], capture_output=True, text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadMSC.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
+        command = "Get-AppxPackage *solitairecollection* | Remove-AppxPackage"
+        button = self.pushDownloadMSC
+        self.DelMainWindowsSoft(command, button)
     def buttonMapDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *windowsmaps* | Remove-AppxPackage"], capture_output=True, text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadMap.setIcon(icon1)
-        except FileNotFoundError:
-            pass
+        command = "Get-AppxPackage *windowsmaps* | Remove-AppxPackage"
+        button = self.pushDownloadMap
+        self.DelMainWindowsSoft(command, button)
     def buttonGMusicDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *zunemusic* | Remove-AppxPackage"], capture_output=True, text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadGMusic.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
+        command = "Get-AppxPackage *zunemusic* | Remove-AppxPackage"
+        button = self.pushDownloadGMusic
+        self.DelMainWindowsSoft(command, button)
     def buttonSkypeDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *skypeapp* | Remove-AppxPackage"], capture_output=True, text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadSkype.setIcon(icon1)
-        except FileNotFoundError:
-            pass
+        command = "Get-AppxPackage *skypeapp* | Remove-AppxPackage"
+        button = self.pushDownloadSkype
+        self.DelMainWindowsSoft(command, button)
     def buttonOfficeDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *officehub* | Remove-AppxPackage"], capture_output=True, text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadOffice.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
+        command = "Get-AppxPackage *officehub* | Remove-AppxPackage"
+        button = self.pushDownloadOffice
+        self.DelMainWindowsSoft(command, button)
     def buttonCameraDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *windowscamera* | Remove-AppxPackage"], capture_output=True,
-                           text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadCamera.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
+        command = "Get-AppxPackage *windowscamera* | Remove-AppxPackage"
+        button = self.pushDownloadCamera
+        self.DelMainWindowsSoft(command, button)
     def buttonAlarmClockDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *windowsalarms* | Remove-AppxPackage"], capture_output=True,
-                           text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadAlarmClock.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
+        command = "Get-AppxPackage *windowsalarms* | Remove-AppxPackage"
+        button = self.pushDownloadAlarmClock
+        self.DelMainWindowsSoft(command, button)
     def buttonCalendarAndMailDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *windowscommunicationsapps* | Remove-AppxPackage"], capture_output=True,
-                           text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadCalendarAndMail.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
+        command = "Get-AppxPackage *windowscommunicationsapps* | Remove-AppxPackage"
+        button = self.pushDownloadCalendarAndMail
+        self.DelMainWindowsSoft(command, button)
     def buttonCalcDel(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage *windowscalculator* | Remove-AppxPackage"], capture_output=True,
-                           text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadCalc.setIcon(icon1)
-        except FileNotFoundError:
-            pass
-
+        command = "Get-AppxPackage *windowscalculator* | Remove-AppxPackage"
+        button = self.pushDownloadCalc
+        self.DelMainWindowsSoft(command, button)
     def button3dBuilder(self):
-        try:
-            subprocess.run(["powershell", "Get-AppxPackage * 3dbuilder * | Remove-AppxPackage"], capture_output=True,
-                           text=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownload3dBuilder.setIcon(icon1)
-        except FileNotFoundError:
-            pass
+        command = "Get-AppxPackage * 3dbuilder * | Remove-AppxPackage"
+        button = self.pushDownload3dBuilder
+        self.DelMainWindowsSoft(command, button)
+
+
+
+
+
 
