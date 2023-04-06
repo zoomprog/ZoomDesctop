@@ -944,9 +944,3 @@ class Download(QDialog, Ui_Download):
         command = "Get-AppxPackage * 3dbuilder * | Remove-AppxPackage"
         button = self.pushDownload3dBuilder
         self.DelMainWindowsSoft(command, button)
-
-
-
-
-
-
