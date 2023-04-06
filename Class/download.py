@@ -47,7 +47,6 @@ class Download(QDialog, Ui_Download):
         self.importmainclass = MainWindows
 
 
-        # админка
 
 
         self.importmainclass.RemoveWindowsMenu(self)
@@ -73,25 +72,25 @@ class Download(QDialog, Ui_Download):
         self.pushDownloadMalwarebytes.clicked.connect(self.buttonMalwarebytesDownload)
         self.pushDownloadEset.clicked.connect(self.buttonEsetDownload)
 
-        # self.pushDownloadXbox.clicked.connect(self.buttonXboxDownload)
-        # self.pushDownloadWeather.clicked.connect(self.buttonWeatherDownload)
-        # self.pushDownloadVoiceRec.clicked.connect(self.buttonVoiceRecDownload)
+        self.pushDownloadXbox.clicked.connect(self.buttonXboxDownload)
+        self.pushDownloadWeather.clicked.connect(self.buttonWeatherDownload)
+        self.pushDownloadVoiceRec.clicked.connect(self.buttonVoiceRecDownload)
         # self.pushDownloadStore.clicked.connect(self.buttonStoreDownload)
-        # self.pushDownloadPhoto.clicked.connect(self.buttonPhotoDownload)
-        # self.pushDownloadPeople.clicked.connect(self.buttonPeopleDownload)
-        # self.pushDownloadOneNote.clicked.connect(self.buttonOneNoteDownload)
-        # self.pushDownloadNews.clicked.connect(self.buttonNewsDownload)
-        # self.pushDownloadFilm.clicked.connect(self.buttonFilmDownload)
-        # self.pushDownloadMSC.clicked.connect(self.buttonMSCDownload)
-        # self.pushDownloadMap.clicked.connect(self.buttonMapDownload)
-        # self.pushDownloadGMusic.clicked.connect(self.buttonGMusicDownload)
-        # self.pushDownloadSkype.clicked.connect(self.buttonSkypeDownload)
-        # self.pushDownloadOffice.clicked.connect(self.buttonOfficeDownload)
-        # self.pushDownloadCamera.clicked.connect(self.buttonCameraDownload)
-        # self.pushDownloadAlarmClock.clicked.connect(self.buttonAlarmClockDownload)
-        # self.pushDownloadCalendarAndMail.clicked.connect(self.buttonCalendarAndMailDownload)
-        # self.pushDownloadCalc.clicked.connect(self.buttonCalcDownload)
-        # self.pushDownload3dBuilder.clicked.connect(self.button3dBuilderDownload)
+        self.pushDownloadPhoto.clicked.connect(self.buttonPhotoDownload)
+        self.pushDownloadPeople.clicked.connect(self.buttonPeopleDownload)
+        self.pushDownloadOneNote.clicked.connect(self.buttonOneNoteDownload)
+        self.pushDownloadNews.clicked.connect(self.buttonNewsDownload)
+        self.pushDownloadFilm.clicked.connect(self.buttonFilmDownload)
+        self.pushDownloadMSC.clicked.connect(self.buttonMSCDownload)
+        self.pushDownloadMap.clicked.connect(self.buttonMapDownload)
+        self.pushDownloadGMusic.clicked.connect(self.buttonGMusicDownload)
+        self.pushDownloadSkype.clicked.connect(self.buttonSkypeDownload)
+        self.pushDownloadOffice.clicked.connect(self.buttonOfficeDownload)
+        self.pushDownloadCamera.clicked.connect(self.buttonCameraDownload)
+        self.pushDownloadAlarmClock.clicked.connect(self.buttonAlarmClockDownload)
+        self.pushDownloadCalendarAndMail.clicked.connect(self.buttonCalendarAndMailDownload)
+        self.pushDownloadCalc.clicked.connect(self.buttonCalcDownload)
+        self.pushDownload3dBuilder.clicked.connect(self.button3dBuilderDownload)
         #кнопки удалить софт
         self.pushDelSteam.clicked.connect(self.buttonSteamDel)
         self.pushDelGoogle.clicked.connect(self.buttonGoogleDel)
@@ -478,27 +477,116 @@ class Download(QDialog, Ui_Download):
         button = self.pushDownloadRadion
         self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
 
-
-    def buttonWhatsAppDownload(self):
-
-        webbrowser.open_new(r"ms-windows-store://pdp/?productid=9NKSQGP7F2NH&mode=mini")
-        time.sleep(5)
-        #До закрытия окна Microsoft Store следует ожидать, чтобы убедиться,
+    def DownloadAndLoading_WindowsSoft(self, productid, search, button):
+        webbrowser.open_new(productid)
+        # До закрытия окна Microsoft Store следует ожидать, чтобы убедиться,
         # что приложение было успешно установлено, прежде чем запускать проверку установленного софта на Windows
         hwnd = win32gui.FindWindow(None, "Microsoft Store")
         while hwnd != 0:
             time.sleep(1)
             hwnd = win32gui.FindWindow(None, "Microsoft Store")
-        #"Необходимо выполнить проверку установки приложения WhatsApp в
+        # "Необходимо выполнить проверку установки приложения WhatsApp в
         # Microsoft Store, чтобы убедиться, что оно успешно установлено на компьютер
-        if gb.glob("C:/Program Files/WindowsApps/5319275A.WhatsAppDesktop*"):
+        if gb.glob(search):
             icon1 = QtGui.QIcon()
             icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-            self.pushDownloadWatsApp.setIcon(icon1)
+            button.setIcon(icon1)
+    def buttonWhatsAppDownload(self):
+        productid = r"ms-windows-store://pdp/?productid=9NKSQGP7F2NH&mode=mini"
+        search = "C:/Program Files/WindowsApps/5319275A.WhatsAppDesktop*"
+        button = self.pushDownloadWatsApp
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
 
-
-
-
+    def buttonXboxDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9NZKPSTSNW4P"
+        search = ""
+        button = self.pushDownloadXbox
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonWeatherDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFJ3Q2"
+        search = f""
+        button = self.pushDownloadWeather
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonVoiceRecDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFHWKN"
+        search = f""
+        button = self.pushDownloadVoiceRec
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonPhotoDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFHWKN"
+        search = f""
+        button = self.pushDownloadPhoto
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonPeopleDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9NBLGGH10PG8"
+        search = f""
+        button = self.pushDownloadPeople
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonOneNoteDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=XPFFZHVGQWWLHB"
+        search = f""
+        button = self.pushDownloadOneNote
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonNewsDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFHVFW"
+        search = f""
+        button = self.pushDownloadNews
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonFilmDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFJ3P2"
+        search = f""
+        button = self.pushDownloadFilm
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonMSCDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9wzdncrfhwd2"
+        search = f""
+        button = self.pushDownloadMSC
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonMapDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRDTBVB"
+        search = f""
+        button = self.pushDownloadMap
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonGMusicDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFJ3PT"
+        search = f""
+        button = self.pushDownloadGMusic
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonSkypeDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFJ364"
+        search = f""
+        button = self.pushDownloadSkype
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonOfficeDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRD29V9"
+        search = f""
+        button = self.pushDownloadOffice
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonCameraDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFJBBG"
+        search = f""
+        button = self.pushDownloadCamera
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonAlarmClockDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFJ3PR"
+        search = f""
+        button = self.pushDownloadAlarmClock
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonCalendarAndMailDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFHVQM"
+        search = f""
+        button = self.pushDownloadCalendarAndMail
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def buttonCalcDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFHVN5"
+        search = f""
+        button = self.pushDownloadCalc
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
+    def button3dBuilderDownload(self):
+        productid = r"ms-windows-store://pdp/?ProductId=9WZDNCRFJ3T6"
+        search = f""
+        button = self.pushDownload3dBuilder
+        self.DownloadAndLoading_WindowsSoft(productid, search, button)
 
 
 
