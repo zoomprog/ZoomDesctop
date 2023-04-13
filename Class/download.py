@@ -56,7 +56,7 @@ class Download(QDialog, Ui_Download):
         self.pushDownloadGoogle.clicked.connect(self.buttonGoogleDownload)
         self.pushDownloadYandex.clicked.connect(self.buttonYandexDownload)
         self.pushDownloadOpera.clicked.connect(self.buttonOperaDownload)
-        #self.pushDownloadWatsApp.clicked.connect(self.buttonWhatsAppDownload)
+        self.pushDownloadWatsApp.clicked.connect(self.buttonWhatsAppDownload)
         self.pushDownloadTG.clicked.connect(self.buttonTgDownload)
         self.pushDownloadViber.clicked.connect(self.buttonViberDownload)
         self.pushDownloadDS.clicked.connect(self.buttonDSDownload)
@@ -95,10 +95,11 @@ class Download(QDialog, Ui_Download):
         self.pushDelSteam.clicked.connect(self.buttonSteamDel)
         self.pushDelGoogle.clicked.connect(self.buttonGoogleDel)
         self.pushDelNvidea.clicked.connect(self.buttonNVIDIADel)
-        self.pushDelWatsApp.clicked.connect(self.buttonWhatsAppDel)
         self.pushDelYandex.clicked.connect(self.buttonYandexDel)
         self.pushDelOpera.clicked.connect(self.buttonOperaDel)
+        self.pushDelWatsApp.clicked.connect(self.buttonWhatsAppDel)
         self.pushDelViber.clicked.connect(self.buttonViberDel)
+        self.pushDelTG_2.clicked.connect(self.buttonTGDel)
         self.pushDelDS.clicked.connect(self.buttonDSDel)
         self.pushDelTS.clicked.connect(self.buttonTSDEL)
         self.pushDelEpicGames.clicked.connect(self.buttonEpicGamesDel)
@@ -354,7 +355,7 @@ class Download(QDialog, Ui_Download):
 
     def buttonGoogleDownload(self):
         url = 'https://disk.yandex.ru/d/0i6-aA45JOFCuQ'
-        xpath_site ='/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]'
+        xpath_site = '/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]'
         file = f"C:/Users/{self.nameUsers}/Downloads/ChromeSetup.exe"
         search = f"C:/Program Files/Google/Chrome"
         button = self.pushDownloadGoogle
@@ -504,16 +505,15 @@ class Download(QDialog, Ui_Download):
                 icon.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,QtGui.QIcon.State.Off)
                 soft["button"].setIcon(icon)
     def buttonWhatsAppDownload(self):
-        productid = r"ms-windows-store://pdp/?productid=9NKSQGP7F2NH&mode=mini"
+        productid = r"ms-windows-store://pdp/?ProductId=9NKSQGP7F2NH"
         softs = [
             {
-                "name": "Name                   : 5319275A.WhatsAppDesktop",
+                "name": "Name              : 5319275A.WhatsAppDesktop",
                 "command": "Get-AppxPackage *WhatsApp*",
                 "button": self.pushDownloadWatsApp
             }
         ]
         self.DownloadAndLoading_WindowsSoft(productid, softs)
-
     def buttonXboxDownload(self):
         productid = r"ms-windows-store://pdp/?ProductId=9NZKPSTSNW4P"
         softs = [
@@ -701,28 +701,37 @@ class Download(QDialog, Ui_Download):
         icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushDownloadStore.setIcon(icon1)
     #Удаление приложений
-    def delete_file(self, folder, file_name ):
-        file_path = os.path.join(self, file_name)
-        try:
-            os.remove(file_path)
-            print(f"{file_name} has been deleted from {folder}")
-        except OSError as e:
-            print(f"Error deleting {file_name} from {folder}: {e}")
 
+    #Не оптимизировано
     def buttonWhatsAppDel(self):
-        os.system("Class\DelSoft\WhatsAppDel.bat")
+        powershell_command = f"Get-AppxPackage *WhatsAppDesktop* | Remove-AppxPackage"
+        subprocess.run(["powershell.exe", "-Command", powershell_command], capture_output=True, text=True)
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
                      QtGui.QIcon.State.Off)
         self.pushDownloadWatsApp.setIcon(icon1)
 
     def buttonGoogleDel(self):
-        os.system("Class\DelSoft\GoogleDel.bat")
-        self.delete_file("C:\ProgramData\Microsoft\Windows\Start Menu\Programs", "Google")
+        path = r'C:\Program Files\Google\Chrome\Application\chrome.exe'
+        subprocess.call([path, '--uninstall', '--multi-install', '--chrome'])
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,QtGui.QIcon.State.Off)
+        self.pushDownloadGoogle.setIcon(icon1)
+
+    def buttonYandexDel(self):
+        path = f'C:/Users/{self.nameUsers}/AppData/Local/Yandex/YandexBrowser/Application/browser.exe'
+        subprocess.call([path, '--uninstall', '--system-level'])
+
+    def buttonOperaDel(self):
+        path = f'C:/Users/{self.nameUsers}/AppData/Local/Programs/Opera GX/opera.exe'
+        subprocess.run([path, '--uninstall', '--system-level'], stdout=subprocess.PIPE)
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
-        self.pushDownloadGoogle.setIcon(icon1)
+        self.pushDownloadOpera.setIcon(icon1)
+
+
+
 
 
     def buttonSteamDel(self):
@@ -747,31 +756,14 @@ class Download(QDialog, Ui_Download):
                         QtGui.QIcon.State.Off)
         self.pushDownloadGoogle.setIcon(icon1)
     def buttonTGDel(self):
-        os.system("Class\DelSoft\TelegramDel.bat")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                        QtGui.QIcon.State.Off)
-        self.pushDownloadTG.setIcon(icon1)
-    def buttonYandexDel(self):
-        path_to_yandex_browser = f"C:/Users/{self.nameUsers}/AppData/Local/Yandex/YandexBrowser/Application/browser.exe"
-        try:
-            shutil.rmtree(os.path.dirname(path_to_yandex_browser), ignore_errors=True)
+        uninstall_path = f"C:/Users/{self.nameUsers}/AppData/Roaming/Telegram Desktop/unins000.exe"
+        subprocess.call([uninstall_path, "/S"])
+        if os.path.exists(f"C:/Users/{self.nameUsers}/AppData/Roaming/Telegram Desktop"):
             icon1 = QtGui.QIcon()
             icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
                             QtGui.QIcon.State.Off)
-            self.pushDownloadYandex.setIcon(icon1)
-        except FileNotFoundError:
-            print("YandexBrowser was not found.")
-    def buttonOperaDel(self):
-        path_to_operagx_browser=f"C:/Users/{self.nameUsers}/AppData/Local/Programs/Opera GX/opera.exe"
-        try:
-            shutil.rmtree(os.path.dirname(path_to_operagx_browser), ignore_errors=True)
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/free-icon-download-545759.png"), QtGui.QIcon.Mode.Normal,
-                            QtGui.QIcon.State.Off)
-            self.pushDownloadOpera.setIcon(icon1)
-        except FileNotFoundError:
-            print("OperaGX was not found.")
+            self.pushDownloadTG.setIcon(icon1)
+
     def buttonViberDel(self):
         os.system('wmic product where "name like \'%Viber%\'" call uninstall /nointeractive')
         time.sleep(5)  # нужно подождать чтоб удалилась нужно добавить экран ожидания выполнения
@@ -858,6 +850,7 @@ class Download(QDialog, Ui_Download):
         except FileNotFoundError:
             print("Battle net is not found")
 ##############################################################################################################################
+    #Оптимизировано
     def DelMainWindowsSoft(self, command, button):
         try:
             subprocess.run(["powershell", f"{command}"], capture_output=True, text=True)

@@ -15,15 +15,13 @@ import login
 import menu
 import DownloadSoft
 from Class.download import *
-from PyQt6.QtWidgets import QDialog, QGraphicsColorizeEffect, QPushButton
+from PyQt6.QtWidgets import QDialog, QGraphicsColorizeEffect, QPushButton,QApplication,QLabel,QVBoxLayout
 from PyQt6 import QtWidgets, QtCore, QtGui
 from ui_login import Ui_ImageDialog
 from ui_AboutTheProgram import Ui_AboutTheProgram
 from ui_Download import Ui_Download
 from ui_reg import Ui_Reg
-from PyQt6.QtCore import Qt
-
-
+from PyQt6.QtCore import Qt, QPropertyAnimation, QSize, QAbstractAnimation
 
 from PyQt6.QtCore import Qt, QPoint
 from Class.download import *
@@ -144,6 +142,32 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.pushExit.clicked.connect(self.PushBack)#кнопка для выхода с аккаунта
         self.pushDownload.clicked.connect(self.download)
 
+
+        #Работа с кнопкой профиль
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.pushButtonProfile)
+        self.setLayout(self.layout)
+        self.pushButtonProfile.clicked.connect(self.on_button_clicked)
+        self.animation = None
+        self.is_expanded = False
+
+    def on_button_clicked(self):
+        if not self.animation or self.animation.state() == QAbstractAnimation.State.Stopped:
+            if not self.is_expanded:
+                self.animation = QPropertyAnimation(self.pushButtonProfile, b"minimumSize")
+                self.animation.setDuration(300)
+                self.animation.setStartValue(QSize(self.pushButtonProfile.width(), 31))
+                self.animation.setEndValue(QSize(self.pushButtonProfile.width(), 111))
+                self.animation.start()
+                self.is_expanded = True
+            else:
+                self.animation = QPropertyAnimation(self.pushButtonProfile, b"minimumSize")
+                self.animation.setDuration(600)
+                self.animation.setStartValue(QSize(self.pushButtonProfile.width(), 111))
+                self.animation.setEndValue(QSize(self.pushButtonProfile.width(), 31))
+                self.animation.start()
+                self.is_expanded = False
+                self.pushButtonProfile.setMinimumSize(QSize(self.pushButtonProfile.width(), 31))
 
     def download(self):
         self.ui = Download()
