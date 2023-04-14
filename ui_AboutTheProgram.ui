@@ -1289,7 +1289,7 @@ QPushButton#pushInf:hover{
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
-                  <height>1310</height>
+                  <height>111</height>
                  </size>
                 </property>
                 <property name="styleSheet">
@@ -1297,7 +1297,150 @@ QPushButton#pushInf:hover{
 border-radius:25px;</string>
                 </property>
                 <property name="text">
-                 <string>Профиль</string>
+                 <string>Profile</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_ProfileLogo">
+                <property name="geometry">
+                 <rect>
+                  <x>110</x>
+                  <y>20</y>
+                  <width>47</width>
+                  <height>13</height>
+                 </rect>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: transparent;
+color:transparent;</string>
+                </property>
+                <property name="text">
+                 <string>Profile</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_ProfileName">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>40</y>
+                  <width>47</width>
+                  <height>13</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Arial Black</family>
+                  <pointsize>10</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: transparent;
+color:transparent;</string>
+                </property>
+                <property name="text">
+                 <string>Name:</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_ProfileEmail">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>60</y>
+                  <width>47</width>
+                  <height>13</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Arial Black</family>
+                  <pointsize>10</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: transparent;
+color:transparent;</string>
+                </property>
+                <property name="text">
+                 <string>Email:</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_ProfileSub">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>80</y>
+                  <width>47</width>
+                  <height>13</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Arial Black</family>
+                  <pointsize>10</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: transparent;
+color:transparent;</string>
+                </property>
+                <property name="text">
+                 <string>Sub:</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_EnterProfileName">
+                <property name="geometry">
+                 <rect>
+                  <x>80</x>
+                  <y>40</y>
+                  <width>101</width>
+                  <height>16</height>
+                 </rect>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: transparent;
+color:transparent;</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_EnterProfileEmail">
+                <property name="geometry">
+                 <rect>
+                  <x>80</x>
+                  <y>60</y>
+                  <width>101</width>
+                  <height>16</height>
+                 </rect>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: transparent;
+color:transparent;</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_EnterProfileSub">
+                <property name="geometry">
+                 <rect>
+                  <x>80</x>
+                  <y>80</y>
+                  <width>101</width>
+                  <height>16</height>
+                 </rect>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: transparent;
+color:transparent;</string>
+                </property>
+                <property name="text">
+                 <string/>
                 </property>
                </widget>
               </widget>

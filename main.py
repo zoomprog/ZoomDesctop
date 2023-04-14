@@ -9,7 +9,7 @@ import requests
 import wget
 import subprocess
 
-from PyQt6.QtGui import QMouseEvent
+from PyQt6.QtGui import QMouseEvent, QColor
 
 import login
 import menu
@@ -145,6 +145,7 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
 
         #Работа с кнопкой профиль
         self.layout = QVBoxLayout()
+        self.layout = QVBoxLayout()
         self.layout.addWidget(self.pushButtonProfile)
         self.setLayout(self.layout)
         self.pushButtonProfile.clicked.connect(self.on_button_clicked)
@@ -154,20 +155,34 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
     def on_button_clicked(self):
         if not self.animation or self.animation.state() == QAbstractAnimation.State.Stopped:
             if not self.is_expanded:
-                self.animation = QPropertyAnimation(self.pushButtonProfile, b"minimumSize")
-                self.animation.setDuration(300)
-                self.animation.setStartValue(QSize(self.pushButtonProfile.width(), 31))
-                self.animation.setEndValue(QSize(self.pushButtonProfile.width(), 111))
-                self.animation.start()
-                self.is_expanded = True
-            else:
+                #Увеличение кнопки при нажатии
                 self.animation = QPropertyAnimation(self.pushButtonProfile, b"minimumSize")
                 self.animation.setDuration(600)
-                self.animation.setStartValue(QSize(self.pushButtonProfile.width(), 111))
-                self.animation.setEndValue(QSize(self.pushButtonProfile.width(), 31))
+                self.animation.setStartValue(QSize(self.pushButtonProfile.width(), 115))
                 self.animation.start()
+                #Добавление контента внутри кнопки
+                self.pushButtonProfile.setText("")
+                self.label_ProfileLogo.setStyleSheet('background-color:transparent;color:white;')
+                self.label_ProfileName.setStyleSheet('background-color:transparent;color:white;')
+                self.label_ProfileEmail.setStyleSheet('background-color:transparent;color:white;')
+                self.label_ProfileSub.setStyleSheet('background-color:transparent;color:white;')
+                print('Увеличилась')
+                self.is_expanded = True
+            else:
+                #Уменьшение кнопки при нажатии
+                self.animation = QPropertyAnimation(self.pushButtonProfile, b"maximumSize")
+                self.animation.setDuration(600)
+                self.animation.setStartValue(QSize(self.pushButtonProfile.width(), 51))
+                self.animation.start()
+                #Добавление контента внутри кнопки
+                self.pushButtonProfile.setText("Profile")
+                self.label_ProfileLogo.setStyleSheet('background-color:transparent;color:transparent;')
+                self.label_ProfileName.setStyleSheet('background-color:transparent;color:transparent;')
+                self.label_ProfileEmail.setStyleSheet('background-color:transparent;color:transparent;')
+                self.label_ProfileSub.setStyleSheet('background-color:transparent;color:transparent;')
+                print('Уменьшилась')
                 self.is_expanded = False
-                self.pushButtonProfile.setMinimumSize(QSize(self.pushButtonProfile.width(), 31))
+
 
     def download(self):
         self.ui = Download()
