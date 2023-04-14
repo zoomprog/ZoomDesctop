@@ -1100,6 +1100,7 @@ QPushButton#pushUrlYouTubek:pressed{
 }
 QPushButton#pushButtonProfile:hover {
     height: 131px;
+	color:rgba(115,128,142,255)
 }</string>
                </property>
                <property name="frameShape">

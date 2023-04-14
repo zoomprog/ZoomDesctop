@@ -36,6 +36,7 @@ class MainWindows(QDialog, Ui_ImageDialog):
 
     def __init__(self):
         super().__init__()
+        self.username = None
         self.dragPos = None
         self.reg = None
         self.abouttheprogram = None
@@ -43,6 +44,7 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.setupUi(self)
         self.setWindowTitle('ZoomApp')
         self.setWindowIcon(QtGui.QIcon('image/icon/logo.png'))
+
 
 
 
@@ -78,19 +80,23 @@ class MainWindows(QDialog, Ui_ImageDialog):
         # создание бд и проверка ввода логина и пароля
         db = sqlite3.connect('database\contacts.db')
         coursor = db.cursor()
-        username = self.lineEdit.text()
-        password = self.lineEdit_2.text()
-        coursor.execute(f'SELECT * FROM users WHERE firstname like \"{username}\" and password like \"{password}\";')
+        self.username = self.lineEdit.text()
+        self.password = self.lineEdit_2.text()
+        coursor.execute(f'SELECT * FROM users WHERE firstname like \"{self.username}\" and password like \"{self.password}\";')
         result_pass = coursor.fetchone()
         db.close()
         # проверка ввода
-        if len(username) == 0 or len(password) == 0:
+        if len(self.username) == 0 or len(self.password) == 0:
             self.status.setText('Данные не введены')
         else:
             if not result_pass:
                 self.status.setText('Логин или пароль указаны не верно')
             else:
-                self.TransitionAboutTheProgram()
+                db = sqlite3.connect('database\contacts.db')
+                coursor = db.cursor()
+                coursor.execute(f"SELECT id FROM users WHERE firstname = '{self.username}' AND password = '{self.password}'")
+                result = coursor.fetchone()
+
 
     @staticmethod
     def CloseWindow():
@@ -116,10 +122,10 @@ class MainWindows(QDialog, Ui_ImageDialog):
 
 
 
-class AboutTheProgram(QDialog, Ui_AboutTheProgram):
+class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
     def __init__(self):
         super().__init__()
-        self.nameUsers = None
+
         self.oldPos = None
         self.ui = None
         self.logo_text = None
@@ -127,7 +133,6 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.setupUi(self)
         self.importmainclass = MainWindows
         self.importregclass = Refistration
-
         self.nameUsers = os.getlogin()
         if os.path.isfile(f'/Users/{self.nameUsers}\Downloads/soft.txt'):
             os.remove(f'/Users/{self.nameUsers}\Downloads/soft.txt')
@@ -141,6 +146,8 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.pushCollapse.clicked.connect(self.showMinimized)#Сворачивание окна
         self.pushExit.clicked.connect(self.PushBack)#кнопка для выхода с аккаунта
         self.pushDownload.clicked.connect(self.download)
+
+
 
 
         #Работа с кнопкой профиль
@@ -166,6 +173,8 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
                 self.label_ProfileName.setStyleSheet('background-color:transparent;color:white;')
                 self.label_ProfileEmail.setStyleSheet('background-color:transparent;color:white;')
                 self.label_ProfileSub.setStyleSheet('background-color:transparent;color:white;')
+
+                self.label_EnterProfileName.setStyleSheet('background-color:transparent;color:white;')
                 print('Увеличилась')
                 self.is_expanded = True
             else:
@@ -180,8 +189,12 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
                 self.label_ProfileName.setStyleSheet('background-color:transparent;color:transparent;')
                 self.label_ProfileEmail.setStyleSheet('background-color:transparent;color:transparent;')
                 self.label_ProfileSub.setStyleSheet('background-color:transparent;color:transparent;')
+
+
+                self.label_EnterProfileName.setStyleSheet('background-color:transparent;color:transparent;')
                 print('Уменьшилась')
                 self.is_expanded = False
+
 
 
     def download(self):
@@ -220,6 +233,7 @@ class Refistration(QDialog, Ui_Reg):
         self.status = self.label_2
         self.status.setStyleSheet('font-size:10px; color: red;text-align: center;')
         self.pushBack.clicked.connect(self.PushBack)
+
 
 
     def PushBack(self):
