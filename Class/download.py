@@ -1,38 +1,15 @@
-import ctypes,sys
-import os
-import time
-import pathlib
 import shutil
-import webbrowser
-import pywinauto
-from selenium import webdriver
-from selenium.common import NoSuchElementException
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-import chromedriver_autoinstaller
-from bs4 import BeautifulSoup
-import winapps
-from PyQt6.QtWidgets import QHBoxLayout, QLabel, QWidget
-from guidata.utils import is_program_installed
 from main import *
 from main import MainWindows
 from ui_Download import Ui_Download
-from main import *
-import win32api as w
-from pathlib import Path
-from subprocess import Popen
 import subprocess
-from elevate import elevate
-from pyuac import main_requires_admin
 import glob as gb
-import winreg
-import win32com.client
-from pywinauto import application
 import win32gui
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from Functions.RemoveWindowsMenu import RemoveWindowsMenu
+import Class.AboutTheProgram
+
 
 class Download(QDialog, Ui_Download):
     def __init__(self):
@@ -45,11 +22,11 @@ class Download(QDialog, Ui_Download):
         self.ui = Ui_Download
         self.setupUi(self)
         self.importmainclass = MainWindows
+        RemoveWindowsMenu(self)
 
 
 
 
-        self.importmainclass.RemoveWindowsMenu(self)
         self.SearchSoftWindows()#поиск софта
         #кнопка установить софт
         self.pushDownloadSteam.clicked.connect(self.buttonSteamDownload)
