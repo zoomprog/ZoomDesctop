@@ -97,9 +97,38 @@ class MainWindows(QDialog, Ui_ImageDialog):
                 coursor.execute(f"SELECT id FROM users WHERE firstname = '{self.username}' AND password = '{self.password}'")
                 result = coursor.fetchone()
 
+                if result is not None:
+                    user_id = result[0]
+
+                    # Get the user's details
+                    coursor.execute(f"SELECT firstname, password, email FROM users WHERE id = {user_id}")
+                    result = coursor.fetchone()
+
+                    if result is not None:
+                        firstname, password, email = result
+
+                        # Insert the user's details into the LoggedIn table
+                        coursor.execute(f"INSERT INTO LoggedIn (firstname, password, email) VALUES (?, ?, ?)", (firstname, password, email))
+                        db.commit()
+
+                        print("User logged in successfully!")
+                    else:
+                        print("User details not found!")
+                else:
+                    print("User not found!")
+
+                db.close()
+                self.TransitionAboutTheProgram()
+
 
     @staticmethod
     def CloseWindow():
+        db = sqlite3.connect('database\contacts.db')
+        coursor = db.cursor()
+        coursor.execute(f"DELETE FROM LoggedIn;")
+        db.commit()
+        db.close()
+        print('Данные очищены')
         sys.exit()
 
 
@@ -148,7 +177,18 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         self.pushDownload.clicked.connect(self.download)
 
 
-
+        #Достаем логин и email из бд
+        db = sqlite3.connect('database\contacts.db')
+        coursor = db.cursor()
+        coursor.execute(f"SELECT firstname, email FROM LoggedIn")
+        results = coursor.fetchone()
+        if results is not None:
+            self.ProfileLogin = results[0]
+            self.ProfileEmail = results[1]
+            print('Loggn:'+self.ProfileLogin,'\nPassword:'+ self.ProfileEmail)
+        else:
+            print('No logged in user found.')
+        db.close()
 
         #Работа с кнопкой профиль
         self.layout = QVBoxLayout()
@@ -174,7 +214,10 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
                 self.label_ProfileEmail.setStyleSheet('background-color:transparent;color:white;')
                 self.label_ProfileSub.setStyleSheet('background-color:transparent;color:white;')
 
+                self.label_EnterProfileName.setText(self.ProfileLogin)
+                self.label_EnterProfileEmail.setText(self.ProfileEmail)
                 self.label_EnterProfileName.setStyleSheet('background-color:transparent;color:white;')
+                self.label_EnterProfileEmail.setStyleSheet('background-color:transparent;color:white;')
                 print('Увеличилась')
                 self.is_expanded = True
             else:
@@ -192,6 +235,7 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
 
 
                 self.label_EnterProfileName.setStyleSheet('background-color:transparent;color:transparent;')
+                self.label_EnterProfileEmail.setStyleSheet('background-color:transparent;color:transparent;')
                 print('Уменьшилась')
                 self.is_expanded = False
 
