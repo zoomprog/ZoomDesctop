@@ -1,6 +1,7 @@
 import cgi
 import sqlite3
 import sys
+import time
 import webbrowser
 import re
 import os
@@ -21,7 +22,7 @@ from ui_login import Ui_ImageDialog
 from ui_AboutTheProgram import Ui_AboutTheProgram
 from ui_Download import Ui_Download
 from ui_reg import Ui_Reg
-from PyQt6.QtCore import Qt, QPropertyAnimation, QSize, QAbstractAnimation
+from PyQt6.QtCore import Qt, QPropertyAnimation, QSize, QAbstractAnimation, QTimer
 
 from PyQt6.QtCore import Qt, QPoint
 from Class.download import *
@@ -191,55 +192,66 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         db.close()
 
         #Работа с кнопкой профиль
-        self.layout = QVBoxLayout()
+
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.pushButtonProfile)
         self.setLayout(self.layout)
         self.pushButtonProfile.clicked.connect(self.on_button_clicked)
-        self.animation = None
+
+        self.animation = QPropertyAnimation(self.pushButtonProfile, b"size")
+        self.animation.setDuration(600)
+
         self.is_expanded = False
 
     def on_button_clicked(self):
-        if not self.animation or self.animation.state() == QAbstractAnimation.State.Stopped:
-            if not self.is_expanded:
-                #Увеличение кнопки при нажатии
-                self.animation = QPropertyAnimation(self.pushButtonProfile, b"minimumSize")
-                self.animation.setDuration(600)
-                self.animation.setStartValue(QSize(self.pushButtonProfile.width(), 115))
-                self.animation.start()
-                #Добавление контента внутри кнопки
-                self.pushButtonProfile.setText("")
-                self.label_ProfileLogo.setStyleSheet('background-color:transparent;color:white;')
-                self.label_ProfileName.setStyleSheet('background-color:transparent;color:white;')
-                self.label_ProfileEmail.setStyleSheet('background-color:transparent;color:white;')
-                self.label_ProfileSub.setStyleSheet('background-color:transparent;color:white;')
+            if self.animation.state() == QAbstractAnimation.State.Stopped:
+                if not self.is_expanded:
+                    # Увеличение кнопки при нажатии
+                    self.animation.setStartValue(QSize(self.pushButtonProfile.width(), 51))
+                    self.animation.setEndValue(QSize(self.pushButtonProfile.width(), 115))
+                    self.animation.start()
 
-                self.label_EnterProfileName.setText(self.ProfileLogin)
-                self.label_EnterProfileEmail.setText(self.ProfileEmail)
-                self.label_EnterProfileName.setStyleSheet('background-color:transparent;color:white;')
-                self.label_EnterProfileEmail.setStyleSheet('background-color:transparent;color:white;')
-                print('Увеличилась')
-                self.is_expanded = True
-            else:
-                #Уменьшение кнопки при нажатии
-                self.animation = QPropertyAnimation(self.pushButtonProfile, b"maximumSize")
-                self.animation.setDuration(600)
-                self.animation.setStartValue(QSize(self.pushButtonProfile.width(), 51))
-                self.animation.start()
-                #Добавление контента внутри кнопки
-                self.pushButtonProfile.setText("Profile")
-                self.label_ProfileLogo.setStyleSheet('background-color:transparent;color:transparent;')
-                self.label_ProfileName.setStyleSheet('background-color:transparent;color:transparent;')
-                self.label_ProfileEmail.setStyleSheet('background-color:transparent;color:transparent;')
-                self.label_ProfileSub.setStyleSheet('background-color:transparent;color:transparent;')
+                    self.pushButtonProfile.setText("")
+                    timer = QTimer()
+                    timer.singleShot(500, self.AppealProfileLabelVisibility)
+                    print('Увеличилась')
+                    self.is_expanded = True
+                else:
+                    # Уменьшение кнопки при нажатии
+                    self.animation.setStartValue(QSize(self.pushButtonProfile.width(), 115))
+                    self.animation.setEndValue(QSize(self.pushButtonProfile.width(), 51))
+                    self.animation.start()
 
+                    # Добавление контента внутри кнопки
+                    timer = QTimer()
+                    timer.singleShot(0, self.AppealProfileLabelHide)
 
-                self.label_EnterProfileName.setStyleSheet('background-color:transparent;color:transparent;')
-                self.label_EnterProfileEmail.setStyleSheet('background-color:transparent;color:transparent;')
-                print('Уменьшилась')
-                self.is_expanded = False
+                    print('Уменьшилась')
+                    self.is_expanded = False
 
+    def AppealProfileLabelVisibility(self):
+        self.label_ProfileLogo.setStyleSheet('background-color:transparent;color:white;')
+        self.label_ProfileName.setStyleSheet('background-color:transparent;color:white;')
+        self.label_ProfileEmail.setStyleSheet('background-color:transparent;color:white;')
+        self.label_ProfileSub.setStyleSheet('background-color:transparent;color:white;')
 
+        self.label_EnterProfileName.setText(self.ProfileLogin)
+        self.label_EnterProfileEmail.setText(self.ProfileEmail)
+        self.label_EnterProfileName.setStyleSheet('background-color:transparent;color:white;')
+        self.label_EnterProfileEmail.setStyleSheet('background-color:transparent;color:white;')
+
+    def AppealProfileLabelHide(self):
+        self.pushButtonProfile.setText("Profile")
+
+        self.label_ProfileLogo.setStyleSheet('background-color:transparent;color:transparent;')
+        self.label_ProfileName.setStyleSheet('background-color:transparent;color:transparent;')
+        self.label_ProfileEmail.setStyleSheet('background-color:transparent;color:transparent;')
+        self.label_ProfileSub.setStyleSheet('background-color:transparent;color:transparent;')
+
+        self.label_EnterProfileName.setText("")
+        self.label_EnterProfileEmail.setText("")
+        self.label_EnterProfileName.setStyleSheet('background-color:transparent;color:transparent;')
+        self.label_EnterProfileEmail.setStyleSheet('background-color:transparent;color:transparent;')
 
     def download(self):
         self.ui = Download()

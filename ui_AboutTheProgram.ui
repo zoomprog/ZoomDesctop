@@ -167,35 +167,28 @@
                  <height>0</height>
                 </size>
                </property>
+               <property name="font">
+                <font>
+                 <family>Montserrat</family>
+                 <pointsize>12</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="styleSheet">
-                <string notr="true">QPushButton#pushDownload{
-	background-color:rgba(0,0,0,0);
-	color:white;
-	border: 3px solid white;
-	padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-	border-radius: 60%;
-	  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1.3px;
-  font-weight: 700;
-  color: white;
-  background: #4FD1C5;
-background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
-
+                <string notr="true">
+QPushButton {
+background-color: #161A1E;
+color:white;
+border-radius:65;
+border: 4px solid #363538;
 }
-QPushButton#pushDownload:hover{
-	color:rgb(85, 255, 255);
-	border: 3px solid rgb(85, 255, 255);
-}
-</string>
+QPushButton:hover {
+color:rgba(115,128,142,255);
+}</string>
                </property>
                <property name="text">
-                <string>Установка</string>
+                <string>SOFT</string>
                </property>
               </widget>
               <widget class="QPushButton" name="pushSetting">
@@ -241,7 +234,7 @@ QPushButton#pushSetting:hover{
 </string>
                </property>
                <property name="text">
-                <string>Настройка</string>
+                <string>SETTINGS</string>
                </property>
               </widget>
               <widget class="QPushButton" name="pushActivate">
@@ -286,80 +279,7 @@ QPushButton#pushActivate:hover{
 </string>
                </property>
                <property name="text">
-                <string>Активация</string>
-               </property>
-              </widget>
-             </widget>
-            </item>
-            <item>
-             <widget class="QFrame" name="frame_10">
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>80</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">*{
- color:white;
-}</string>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <widget class="QPushButton" name="pushExit">
-               <property name="geometry">
-                <rect>
-                 <x>10</x>
-                 <y>10</y>
-                 <width>141</width>
-                 <height>61</height>
-                </rect>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>100</width>
-                 <height>50</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>200</width>
-                 <height>80</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                 <weight>87</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">*{
-  font-size: 18px;
-  text-transform: uppercase;
-  letter-spacing: 1.3px;
-  font-weight: 700;
-  color: white;
-  background: #4FD1C5;
-background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
-
-}
-QPushButton#pushExit:hover{
-	color:rgb(85, 255, 255);
-}
-</string>
-               </property>
-               <property name="text">
-                <string>Exit</string>
-               </property>
-               <property name="icon">
-                <iconset resource="menu.qrc">
-                 <normaloff>:/icon/image/icon/exit.png</normaloff>:/icon/image/icon/exit.png</iconset>
+                <string>ACTIVATE</string>
                </property>
               </widget>
              </widget>
@@ -751,6 +671,9 @@ span {
            <layout class="QHBoxLayout" name="horizontalLayout_12">
             <item>
              <widget class="QFrame" name="frame_13">
+              <property name="contextMenuPolicy">
+               <enum>Qt::DefaultContextMenu</enum>
+              </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
@@ -1045,7 +968,7 @@ p, li { white-space: pre-wrap; }
                 <rect>
                  <x>520</x>
                  <y>470</y>
-                 <width>461</width>
+                 <width>451</width>
                  <height>131</height>
                 </rect>
                </property>
@@ -1100,7 +1023,10 @@ QPushButton#pushUrlYouTubek:pressed{
 }
 QPushButton#pushButtonProfile:hover {
     height: 131px;
-	color:rgba(115,128,142,255)
+	color:rgba(115,128,142,255);
+}
+QPushButton#pushButtonSubPrmium:hover {
+color:rgba(115,128,142,255);
 }</string>
                </property>
                <property name="frameShape">
@@ -1109,61 +1035,10 @@ QPushButton#pushButtonProfile:hover {
                <property name="frameShadow">
                 <enum>QFrame::Raised</enum>
                </property>
-               <widget class="QPushButton" name="pushInf">
-                <property name="geometry">
-                 <rect>
-                  <x>310</x>
-                  <y>0</y>
-                  <width>131</width>
-                  <height>131</height>
-                 </rect>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">QPushButton#pushInf{
-	background-color:rgba(0,0,0,0);
-	color:white;
-	border: 3px solid white;
-	padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-	border-radius: 60%;
-	  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1.3px;
-  font-weight: 700;
-  color: white;
-  background: #4FD1C5;
-background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
-}
-QPushButton#pushInf:hover{
-	color:rgb(85, 255, 255);
-	border: 3px solid rgb(85, 255, 255);
-}
-</string>
-                </property>
-                <property name="text">
-                 <string>inf</string>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>40</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </widget>
                <widget class="QPushButton" name="pushUrlDiscord">
                 <property name="geometry">
                  <rect>
-                  <x>10</x>
+                  <x>20</x>
                   <y>70</y>
                   <width>51</width>
                   <height>51</height>
@@ -1191,7 +1066,7 @@ QPushButton#pushInf:hover{
                <widget class="QPushButton" name="pushUrlGitHub">
                 <property name="geometry">
                  <rect>
-                  <x>70</x>
+                  <x>80</x>
                   <y>70</y>
                   <width>51</width>
                   <height>51</height>
@@ -1247,7 +1122,7 @@ QPushButton#pushInf:hover{
                <widget class="QPushButton" name="pushUrlYouTube">
                 <property name="geometry">
                  <rect>
-                  <x>210</x>
+                  <x>200</x>
                   <y>70</y>
                   <width>51</width>
                   <height>51</height>
@@ -1292,6 +1167,14 @@ QPushButton#pushInf:hover{
                   <width>16777215</width>
                   <height>111</height>
                  </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Montserrat</family>
+                  <pointsize>14</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
                 </property>
                 <property name="styleSheet">
                  <string notr="true">background-color: #161A1E;
@@ -1444,6 +1327,155 @@ color:transparent;</string>
                  <string/>
                 </property>
                </widget>
+               <widget class="QPushButton" name="pushInf">
+                <property name="geometry">
+                 <rect>
+                  <x>280</x>
+                  <y>10</y>
+                  <width>50</width>
+                  <height>50</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Montserrat</family>
+                  <pointsize>12</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">
+QPushButton {
+background-color: #161A1E;
+color:white;
+border-radius:25;
+}
+QPushButton:hover {
+background-color:rgba(115,128,142,255);
+}</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="menu.qrc">
+                  <normaloff>:/icon/image/icon/information.png</normaloff>:/icon/image/icon/information.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>50</width>
+                  <height>50</height>
+                 </size>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="pushButtonSubPrmium">
+                <property name="geometry">
+                 <rect>
+                  <x>280</x>
+                  <y>70</y>
+                  <width>50</width>
+                  <height>50</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Montserrat</family>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">
+QPushButton {
+background-color: #161A1E;
+color:white;
+border-radius:25;
+}
+QPushButton:hover {
+color:rgba(115,128,142,255);
+}</string>
+                </property>
+                <property name="text">
+                 <string>SUB</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="pushExit">
+                <property name="geometry">
+                 <rect>
+                  <x>350</x>
+                  <y>60</y>
+                  <width>100</width>
+                  <height>61</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>80</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+background-color: #161A1E;
+color:white;
+border-radius:25;
+}
+QPushButton:hover {
+color:rgba(115,128,142,255);
+}</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="menu.qrc">
+                  <normaloff>:/icon/image/icon/exit.png</normaloff>:/icon/image/icon/exit.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>30</width>
+                  <height>30</height>
+                 </size>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label">
+                <property name="geometry">
+                 <rect>
+                  <x>350</x>
+                  <y>10</y>
+                  <width>91</width>
+                  <height>41</height>
+                 </rect>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: #161A1E;
+color:white;
+border-radius: 20px;
+</string>
+                </property>
+                <property name="text">
+                 <string>      alpfa 0.33</string>
+                </property>
+               </widget>
               </widget>
              </widget>
             </item>
@@ -1503,16 +1535,6 @@ color:transparent;</string>
                <property name="bottomMargin">
                 <number>0</number>
                </property>
-               <item alignment="Qt::AlignLeft">
-                <widget class="QLabel" name="label">
-                 <property name="styleSheet">
-                  <string notr="true">color:rgb(85, 255, 255);</string>
-                 </property>
-                 <property name="text">
-                  <string>Modern UI VERSIA продакшен</string>
-                 </property>
-                </widget>
-               </item>
               </layout>
              </widget>
             </item>

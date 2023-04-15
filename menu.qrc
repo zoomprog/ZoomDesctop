@@ -3,6 +3,7 @@
     <file>image/photo/menu.png</file>
   </qresource>
   <qresource prefix="icon">
+    <file>image/icon/information.png</file>
     <file>image/icon/icons8-информация-64.png</file>
     <file>image/icon/icons8-информация-50.png</file>
     <file>image/icon/icons8-информация.gif</file>
