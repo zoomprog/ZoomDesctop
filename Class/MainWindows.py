@@ -1,13 +1,11 @@
-from PyQt6.QtWidgets import QDialog
-
 import Class.Registration
-from ui_login import Ui_ImageDialog
-import main
 from main import *
 from Functions.RemoveWindowsMenu import RemoveWindowsMenu
 from Class.AboutTheProgram import *
 from Class.download import *
 from Class.Registration import *
+from Functions.BD.ClearDBLoggedIn.ClearDBLoggedIn import ClearDBLoggedIn
+from Functions.BD.TransferringData.FromUsersToLogedIn import FromUsersToLoggedIn
 
 
 class MainWindows(QDialog, Ui_ImageDialog):
@@ -41,19 +39,7 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.pushReg.clicked.connect(self.WindowReg)
 
 
-    def center(self):
-        qr = self.UpBar()
-        cp = self.screen().availableGeometry().center()
-        qr.moveCenter(cp)
-        self.move(qr.topLeft())
 
-    def mousePressEvent(self, event):
-        self.dragPos = event.globalPosition().toPoint()
-
-    def mouseMoveEvent(self, event):
-        self.move(self.pos() + event.globalPosition().toPoint() - self.dragPos)
-        self.dragPos = event.globalPosition().toPoint()
-        event.accept()
 
     def login(self):
         # создание бд и проверка ввода логина и пароля
@@ -71,43 +57,13 @@ class MainWindows(QDialog, Ui_ImageDialog):
             if not result_pass:
                 self.status.setText('Логин или пароль указаны не верно')
             else:
-                db = sqlite3.connect('database\contacts.db')
-                coursor = db.cursor()
-                coursor.execute(f"SELECT id FROM users WHERE firstname = '{self.username}' AND password = '{self.password}'")
-                result = coursor.fetchone()
-
-                if result is not None:
-                    user_id = result[0]
-
-                    # Get the user's details
-                    coursor.execute(f"SELECT firstname, password, email FROM users WHERE id = {user_id}")
-                    result = coursor.fetchone()
-
-                    if result is not None:
-                        firstname, password, email = result
-
-                        # Insert the user's details into the LoggedIn table
-                        coursor.execute(f"INSERT INTO LoggedIn (firstname, password, email) VALUES (?, ?, ?)", (firstname, password, email))
-                        db.commit()
-
-                        print("User logged in successfully!")
-                    else:
-                        print("User details not found!")
-                else:
-                    print("User not found!")
-
-                db.close()
+                FromUsersToLoggedIn(self.username, self.password)#модуль добавляет зарегистрированного пользователя в бд LoggedIn
                 self.TransitionAboutTheProgram()
 
 
     @staticmethod
     def CloseWindow():
-        db = sqlite3.connect('database\contacts.db')
-        coursor = db.cursor()
-        coursor.execute(f"DELETE FROM LoggedIn;")
-        db.commit()
-        db.close()
-        print('Данные очищены')
+        ClearDBLoggedIn()
         sys.exit()
 
 
