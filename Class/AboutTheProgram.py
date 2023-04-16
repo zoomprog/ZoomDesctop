@@ -1,4 +1,5 @@
 import main
+import Class.MainWindows
 from main import *
 from ui_AboutTheProgram import Ui_AboutTheProgram
 from Functions.RemoveWindowsMenu import RemoveWindowsMenu

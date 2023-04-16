@@ -1,6 +1,9 @@
 import shutil
+import time
+
 from main import *
-from main import MainWindows
+#from main import MainWindows
+import Class.MainWindows
 from ui_Download import Ui_Download
 import subprocess
 import glob as gb

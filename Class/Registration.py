@@ -4,6 +4,7 @@ import sqlite3
 from PyQt6.QtWidgets import QDialog
 from main import *
 import main
+import Class.MainWindows
 from ui_reg import Ui_Reg
 from Functions.RemoveWindowsMenu import RemoveWindowsMenu
 
