@@ -9,7 +9,7 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Reg(object):
+class Ui_Ui_Reg(object):
     def setupUi(self, Ui_Reg):
         Ui_Reg.setObjectName("Ui_Reg")
         Ui_Reg.resize(372, 481)
@@ -252,6 +252,9 @@ class Ui_Reg(object):
         font.setPointSize(22)
         self.pushBack.setFont(font)
         self.pushBack.setObjectName("pushBack")
+        self.UpBar = QtWidgets.QWidget(parent=self.widget)
+        self.UpBar.setGeometry(QtCore.QRect(79, 40, 221, 41))
+        self.UpBar.setObjectName("UpBar")
 
         self.retranslateUi(Ui_Reg)
         QtCore.QMetaObject.connectSlotsByName(Ui_Reg)

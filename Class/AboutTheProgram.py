@@ -5,12 +5,14 @@ from ui_AboutTheProgram import Ui_AboutTheProgram
 from Functions.RemoveWindowsMenu import RemoveWindowsMenu
 import Class.download
 from PyQt6.QtWidgets import QWidget
+from PyQt6.QtGui import QMouseEvent
 
 
 class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
     def __init__(self):
         super().__init__()
 
+        self.offset = None
         self.oldPos = None
         self.ui = None
         self.logo_text = None
@@ -45,7 +47,9 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         else:
             print('No logged in user found.')
         db.close()
-
+        #Перенос окна по используя frame в методах mouse press and event
+        self.header_frame.move(0, 0)
+        self.header_frame.show()
         #Работа с кнопкой профиль
 
         self.layout = QVBoxLayout()
@@ -57,6 +61,10 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         self.animation.setDuration(600)
 
         self.is_expanded = False
+
+
+
+
 
     def on_button_clicked(self):
             if self.animation.state() == QAbstractAnimation.State.Stopped:
@@ -83,6 +91,9 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
 
                     print('Уменьшилась')
                     self.is_expanded = False
+
+
+
 
     def AppealProfileLabelVisibility(self):
         self.label_ProfileLogo.setStyleSheet('background-color:transparent;color:white;')
@@ -117,4 +128,16 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         self.ui = main.MainWindows()
         self.ui.show()
         self.hide()
+
+    def mousePressEvent(self, event: QMouseEvent) -> None:
+        if event.button() == Qt.MouseButton.LeftButton and self.header_frame.underMouse():
+            self.offset = event.pos()
+        else:
+            self.offset = None
+
+    def mouseMoveEvent(self, event: QMouseEvent) -> None:
+        if self.offset is not None and event.buttons() == Qt.MouseButton.LeftButton and self.header_frame.underMouse():
+            self.move(self.mapToGlobal(event.pos() - self.offset))
+        else:
+            self.offset = None
 from pyuac import main_requires_admin

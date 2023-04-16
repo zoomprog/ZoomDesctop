@@ -1,6 +1,9 @@
 import shutil
 import time
 
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QMouseEvent
+
 from main import *
 #from main import MainWindows
 import Class.MainWindows
@@ -17,6 +20,7 @@ import Class.AboutTheProgram
 class Download(QDialog, Ui_Download):
     def __init__(self):
         super().__init__()
+        self.offset = None
         self.soft_main_windows = None
         self.softs = None
         self.abouttheprogram = None
@@ -27,7 +31,9 @@ class Download(QDialog, Ui_Download):
         self.importmainclass = MainWindows
         RemoveWindowsMenu(self)
 
-
+        # Перенос окна по используя frame в методах mouse press and event
+        self.frame_4.move(0, 0)
+        self.frame_4.show()
 
 
         self.SearchSoftWindows()#поиск софта
@@ -112,14 +118,26 @@ class Download(QDialog, Ui_Download):
 
 
 
+    def mousePressEvent(self, event: QMouseEvent) -> None:
+        if event.button() == Qt.MouseButton.LeftButton and self.frame_4.underMouse():
+            self.offset = event.pos()
+        else:
+            self.offset = None
 
+    def mouseMoveEvent(self, event: QMouseEvent) -> None:
+        if self.offset is not None and event.buttons() == Qt.MouseButton.LeftButton and self.frame_4.underMouse():
+            self.move(self.mapToGlobal(event.pos() - self.offset))
+        else:
+            self.offset = None
 
 
 
     def TransitionAboutTheProgram(self):
+        self.ui = Class.AboutTheProgram.AboutTheProgram()
+        self.ui.show()
         self.hide()
-        self.abouttheprogram = AboutTheProgram()
-        self.abouttheprogram.show()
+
+
 
 
     def SearchSoftWindows(self):

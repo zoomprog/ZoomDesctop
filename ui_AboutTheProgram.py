@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_AboutTheProgram(object):
     def setupUi(self, AboutTheProgram):
         AboutTheProgram.setObjectName("AboutTheProgram")
-        AboutTheProgram.resize(1281, 720)
+        AboutTheProgram.resize(1448, 963)
         AboutTheProgram.setMinimumSize(QtCore.QSize(1280, 720))
         AboutTheProgram.setStyleSheet("*{\n"
 "    color:white;\n"
@@ -70,31 +70,22 @@ class Ui_AboutTheProgram(object):
         self.pushDownload = QtWidgets.QPushButton(parent=self.frame_9)
         self.pushDownload.setGeometry(QtCore.QRect(20, 10, 131, 131))
         self.pushDownload.setMinimumSize(QtCore.QSize(0, 0))
-        self.pushDownload.setStyleSheet("QPushButton#pushDownload{\n"
-"    background-color:rgba(0,0,0,0);\n"
-"    color:white;\n"
-"    border: 3px solid white;\n"
-"    padding: 20px;\n"
-"    text-align: center;\n"
-"    text-decoration: none;\n"
-"    display: inline-block;\n"
-"    font-size: 16px;\n"
-"    margin: 4px 2px;\n"
-"    border-radius: 60%;\n"
-"      font-size: 11px;\n"
-"  text-transform: uppercase;\n"
-"  letter-spacing: 1.3px;\n"
-"  font-weight: 700;\n"
-"  color: white;\n"
-"  background: #4FD1C5;\n"
-"background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);\n"
-"\n"
+        font = QtGui.QFont()
+        font.setFamily("Montserrat")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushDownload.setFont(font)
+        self.pushDownload.setStyleSheet("\n"
+"QPushButton {\n"
+"background-color: #161A1E;\n"
+"color:white;\n"
+"border-radius:65;\n"
+"border: 4px solid #363538;\n"
 "}\n"
-"QPushButton#pushDownload:hover{\n"
-"    color:rgb(85, 255, 255);\n"
-"    border: 3px solid rgb(85, 255, 255);\n"
-"}\n"
-"")
+"QPushButton:hover {\n"
+"color:rgba(115,128,142,255);\n"
+"}")
         self.pushDownload.setObjectName("pushDownload")
         self.pushSetting = QtWidgets.QPushButton(parent=self.frame_9)
         self.pushSetting.setGeometry(QtCore.QRect(20, 170, 131, 131))
@@ -744,6 +735,9 @@ class Ui_AboutTheProgram(object):
 "border-radius: 20px;\n"
 "")
         self.label.setObjectName("label")
+        self.UpBar = QtWidgets.QWidget(parent=self.frame_13)
+        self.UpBar.setGeometry(QtCore.QRect(-271, -81, 1141, 91))
+        self.UpBar.setObjectName("UpBar")
         self.horizontalLayout_12.addWidget(self.frame_13)
         self.verticalLayout.addWidget(self.main_body_contents)
         self.footer = QtWidgets.QFrame(parent=self.main_body)
@@ -792,9 +786,9 @@ class Ui_AboutTheProgram(object):
     def retranslateUi(self, AboutTheProgram):
         _translate = QtCore.QCoreApplication.translate
         AboutTheProgram.setWindowTitle(_translate("AboutTheProgram", "Form"))
-        self.pushDownload.setText(_translate("AboutTheProgram", "Установка"))
-        self.pushSetting.setText(_translate("AboutTheProgram", "Настройка"))
-        self.pushActivate.setText(_translate("AboutTheProgram", "Активация"))
+        self.pushDownload.setText(_translate("AboutTheProgram", "SOFT"))
+        self.pushSetting.setText(_translate("AboutTheProgram", "SETTINGS"))
+        self.pushActivate.setText(_translate("AboutTheProgram", "ACTIVATE"))
         self.infProgram.setHtml(_translate("AboutTheProgram", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"

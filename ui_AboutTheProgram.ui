@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1281</width>
-    <height>720</height>
+    <width>1448</width>
+    <height>963</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -1476,6 +1476,16 @@ border-radius: 20px;
                  <string>      alpfa 0.33</string>
                 </property>
                </widget>
+              </widget>
+              <widget class="QWidget" name="UpBar" native="true">
+               <property name="geometry">
+                <rect>
+                 <x>-271</x>
+                 <y>-81</y>
+                 <width>1141</width>
+                 <height>91</height>
+                </rect>
+               </property>
               </widget>
              </widget>
             </item>

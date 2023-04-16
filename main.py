@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import QDialog, QVBoxLayout
 from PyQt6 import QtWidgets, QtCore, QtGui
 from ui_login import Ui_ImageDialog
 from ui_AboutTheProgram import Ui_AboutTheProgram
-from ui_reg import Ui_Reg
+from ui_reg import Ui_Ui_Reg
 from PyQt6.QtCore import QPropertyAnimation, QSize, QAbstractAnimation, QTimer
 from PyQt6.QtCore import Qt, QPoint
 

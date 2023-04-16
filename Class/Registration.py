@@ -5,42 +5,54 @@ from PyQt6.QtWidgets import QDialog
 from main import *
 import main
 import Class.MainWindows
-from ui_reg import Ui_Reg
+from ui_reg import Ui_Ui_Reg
 from Functions.RemoveWindowsMenu import RemoveWindowsMenu
+from PyQt6.QtGui import QMouseEvent
 
-class Refistration(QDialog, Ui_Reg):
+class Refistration(QDialog, Ui_Ui_Reg):
     def __init__(self):
         super().__init__()
+        self.offset = None
         self.abouttheprogram = None
         self.oldPos = None
-        self.ui = Ui_Reg
+        self.ui = Ui_Ui_Reg
         self.setupUi(self)
         RemoveWindowsMenu(self)
 
+        self.MainClass = Class.MainWindows.MainWindows()  # Методы из MainWindows
 
-
-        # self.importmainclass = MainWindows()
-        # self.pushClose.clicked.connect(self.importmainclass.CloseWindow)
+        self.pushClose.clicked.connect(self.MainClass.CloseWindow)
         self.pushReg.clicked.connect(self.register)
         # self.RemoveWindowsMenu()
         self.status = self.label_2
         self.status.setStyleSheet('font-size:10px; color: red;text-align: center;')
         self.pushBack.clicked.connect(self.PushBack)
 
+        # Перемещение окна UpBar
+        self.UpBar.move(80, 35)
+        self.UpBar.setFixedHeight(50)
+        self.UpBar.show()
+
+    def mousePressEvent(self, event: QMouseEvent) -> None:
+        if event.button() == Qt.MouseButton.LeftButton and self.UpBar.underMouse():
+            self.offset = event.pos()
+        else:
+            self.offset = None
+
+    def mouseMoveEvent(self, event: QMouseEvent) -> None:
+        if self.offset is not None and event.buttons() == Qt.MouseButton.LeftButton and self.UpBar.underMouse():
+            self.move(self.mapToGlobal(event.pos() - self.offset))
+        else:
+            self.offset = None
+
+
+
     def PushBack(self):
         self.ui = main.MainWindows()
         self.ui.show()
         self.hide()
-    # def RemoveWindowsMenu(self):
-    #     self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
-    #     self.setAttribute(QtCore.Qt.WidgetAttribute.WA_TranslucentBackground, True)
-    def mousePressEvent(self, event):
-        self.oldPos = event.globalPosition()
 
-    def mouseMoveEvent(self, event):
-        delta = event.globalPosition() - self.oldPos
-        self.move(int(self.x() + delta.x()), int(self.y() + delta.y()))
-        self.oldPos = event.globalPosition()
+    #
 
     def register(self):
         db = sqlite3.connect('database\contacts.db')

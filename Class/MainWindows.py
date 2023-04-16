@@ -1,3 +1,5 @@
+from PyQt6.QtGui import QMouseEvent
+
 import Class.Registration
 from main import *
 from Functions.RemoveWindowsMenu import RemoveWindowsMenu
@@ -8,6 +10,7 @@ from Functions.BD.ClearDBLoggedIn.ClearDBLoggedIn import ClearDBLoggedIn
 from Functions.BD.TransferringData.FromUsersToLogedIn import FromUsersToLoggedIn
 
 
+
 class MainWindows(QDialog, Ui_ImageDialog):
     homeAction = None
 
@@ -15,6 +18,7 @@ class MainWindows(QDialog, Ui_ImageDialog):
 
     def __init__(self):
         super().__init__()
+        self.offset = None
         self.username = None
         self.dragPos = None
         self.reg = None
@@ -39,6 +43,22 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.pushReg.clicked.connect(self.WindowReg)
 
 
+        #Перемещение окна UpBar
+        self.UpBar.setStyleSheet("border-top-left-radius: 1px; ")
+        self.UpBar.move(45, 35)
+        self.UpBar.show()
+
+    def mousePressEvent(self, event: QMouseEvent) -> None:
+        if event.button() == Qt.MouseButton.LeftButton and self.UpBar.underMouse():
+            self.offset = event.pos()
+        else:
+            self.offset = None
+
+    def mouseMoveEvent(self, event: QMouseEvent) -> None:
+        if self.offset is not None and event.buttons() == Qt.MouseButton.LeftButton and self.UpBar.underMouse():
+            self.move(self.mapToGlobal(event.pos() - self.offset))
+        else:
+            self.offset = None
 
 
     def login(self):

@@ -478,6 +478,16 @@ pading-bottom:7px;</string>
      <string>〱</string>
     </property>
    </widget>
+   <widget class="QWidget" name="UpBar" native="true">
+    <property name="geometry">
+     <rect>
+      <x>79</x>
+      <y>40</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources>
