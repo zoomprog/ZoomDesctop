@@ -8,6 +8,8 @@ import Class.MainWindows
 from ui_reg import Ui_Ui_Reg
 from Functions.RemoveWindowsMenu import RemoveWindowsMenu
 from PyQt6.QtGui import QMouseEvent
+from database.DB import db, coll, collLoggedIn
+
 
 class Refistration(QDialog, Ui_Ui_Reg):
     def __init__(self):
@@ -55,8 +57,7 @@ class Refistration(QDialog, Ui_Ui_Reg):
     #
 
     def register(self):
-        db = sqlite3.connect('database\contacts.db')
-        coursor = db.cursor()
+
         firstname = self.FirstName.text()
         lastname = self.LastName.text()
         email = self.Email.text()
@@ -64,7 +65,7 @@ class Refistration(QDialog, Ui_Ui_Reg):
         confirmpassword = self.ConfirmPassword.text()
 
         # Проверка пароля
-        regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')  # проверка email
+        regex = re.compile(r'[A-Za-z0-9]+([._-][A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z]{2,})+')
         count_digit = 0
         count_upper = 0
         count_spec = 0
@@ -76,44 +77,39 @@ class Refistration(QDialog, Ui_Ui_Reg):
                 count_upper += 1
             if s in spec_simvol:
                 count_spec += 1
+        result_count = coll.users.count_documents({"firstname": firstname, "email": email})
 
-        coursor.execute(f'SELECT * FROM users WHERE firstname like \"{firstname}\" and email like \"{email}\";')
-        result_pass = coursor.fetchone()
+        if result_count == 0 and count_digit >= 3 and count_upper > 0 and count_spec > 0 and 6 <= len(password) <= 20 and len(firstname) > 0 and re.fullmatch(regex, email):
+            coll.insert_one({
+                "firstname": firstname,
+                "lastname": lastname,
+                "email": email,
+                "password": password,
+                "confirmpassword": confirmpassword
+            })
+            xxx = db.users.find_one({'firstname': firstname, 'password': password})
+            self.id_Profile = xxx['_id']  # запомнить id пользователя после логина
+            self.abouttheprogram = main.AboutTheProgram(self.id_Profile)
+            self.abouttheprogram.show()
+            self.hide()
 
-        if not result_pass:
-            if count_digit >= 3 and count_upper > 0 and count_spec > 0 and 6 <= len(password) <= 20 and len(
-                    firstname) > 0 and re.fullmatch(regex, email):
-                coursor.execute('INSERT INTO  users VALUES(?,?,?,?,?,?);',
-                                (firstname, lastname, email, password, confirmpassword, None))
-                self.abouttheprogram = main.AboutTheProgram()
-                self.abouttheprogram.show()
-                self.hide()
-                db.commit()
-                db.close()
-
+        else:
+            if password != confirmpassword:
+                self.status.setText('Пароли не совпадают')
+            elif len(password) < 6:
+                self.status.setText('Пароль слишком короткий')
+            elif len(password) > 20:
+                self.status.setText('Пароль слишком длинный')
+            elif count_spec == 0:
+                self.status.setText('Пароль должен содержать хотя бы один специальный символ (!@#$%&)')
+            elif count_upper == 0:
+                self.status.setText('Пароль должен содержать хотя бы одну заглавную букву')
+            elif count_digit < 3:
+                self.status.setText('Пароль должен содержать хотя бы три цифры')
+            elif len(firstname) < 5:
+                self.status.setText('Имя пользователя должно быть не менее 5 символов')
+            elif not re.fullmatch(regex, email):
+                self.status.setText('Email указан неверно')
             else:
-                if password != confirmpassword:
-                    self.status.setText('Пароли не верны')
-                else:
-                    if len(password) < 4:
-                        self.status.setText('Пароль слишком короткий')
-                    else:
-                        if len(password) > 20:
-                            self.status.setText('Пароль слишком длинный')
-                        else:
-                            if count_spec == 0:
-                                self.status.setText('Нет специальных символов')
-                            else:
-                                if count_upper == 0:
-                                    self.status.setText('Нет заглавных букв')
-                                else:
-                                    if count_digit < 3:
-                                        self.status.setText('Нет строчных букв')
-                                    else:
-                                        if len(firstname) < 5:
-                                            self.status.setText('Ник нейм короткий')
-                                        else:
-                                            if not re.fullmatch(regex, email):
-                                                self.status.setText('Email указан не верно')
-                                            else:
-                                                self.status.setText('Аккаунт с данными уже был зарегистрирован')
+                self.status.setText('Аккаунт с данными уже был зарегистрирован')
+

@@ -1,3 +1,4 @@
+
 import main
 import Class.MainWindows
 from main import *
@@ -6,10 +7,11 @@ from Functions.RemoveWindowsMenu import RemoveWindowsMenu
 import Class.download
 from PyQt6.QtWidgets import QWidget
 from PyQt6.QtGui import QMouseEvent
-
+from database.DB import db, coll,collLoggedIn
+from database import *
 
 class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
-    def __init__(self):
+    def __init__(self,id_Profile):
         super().__init__()
 
         self.offset = None
@@ -19,6 +21,9 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         self.abouttheprogram = Ui_AboutTheProgram
         self.setupUi(self)
         RemoveWindowsMenu(self)  # Убирает windows форму
+        self.id_Profile = id_Profile
+        print(self.id_Profile)
+
         self.importmainclass = main.MainWindows
         self.importregclass = main.Refistration
         self.nameUsers = os.getlogin()
@@ -35,18 +40,16 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         self.pushDownload.clicked.connect(self.download)
 
 
-        #Достаем логин и email из бд
-        db = sqlite3.connect('database\contacts.db')
-        coursor = db.cursor()
-        coursor.execute(f"SELECT firstname, email FROM LoggedIn")
-        results = coursor.fetchone()
-        if results is not None:
-            self.ProfileLogin = results[0]
-            self.ProfileEmail = results[1]
-            print('Loggn:'+self.ProfileLogin,'\nPassword:'+ self.ProfileEmail)
+        #Достаем логин и email из бд для Profile
+        Profile = coll.find_one({"_id": self.id_Profile})
+        self.ProfileLogin = Profile.get("firstname")
+        self.ProfileEmail = Profile.get("email")
+        if Profile:
+            print("login", self.ProfileLogin)
+            print("Email", self.ProfileEmail)
         else:
-            print('No logged in user found.')
-        db.close()
+            print("User not dound")
+
         #Перенос окна по используя frame в методах mouse press and event
         self.header_frame.move(0, 0)
         self.header_frame.show()
@@ -140,4 +143,6 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
             self.move(self.mapToGlobal(event.pos() - self.offset))
         else:
             self.offset = None
-from pyuac import main_requires_admin
+
+
+

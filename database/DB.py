@@ -11,10 +11,10 @@ client = MongoClient(uri)
 
 try:
     client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
+    print("BD connect Good")
 except Exception as e:
     print(e)
 
 db = client.AppWise
-coll = db.LoggedIn
-
+coll = db.users
+collLoggedIn = db.LoggedIn

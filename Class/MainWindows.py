@@ -8,7 +8,7 @@ from Class.download import *
 from Class.Registration import *
 from Functions.BD.ClearDBLoggedIn.ClearDBLoggedIn import ClearDBLoggedIn
 from Functions.BD.TransferringData.FromUsersToLogedIn import FromUsersToLoggedIn
-
+from database.DB import client, db, coll, collLoggedIn
 
 
 class MainWindows(QDialog, Ui_ImageDialog):
@@ -18,17 +18,25 @@ class MainWindows(QDialog, Ui_ImageDialog):
 
     def __init__(self):
         super().__init__()
+        self.password = None
         self.offset = None
         self.username = None
         self.dragPos = None
         self.reg = None
         self.abouttheprogram = None
+        MainWindows.id_Profile = 6
         self.MainMenu = Ui_ImageDialog
         self.setupUi(self)
         self.setWindowTitle('ZoomApp')
         self.setWindowIcon(QtGui.QIcon('image/icon/logo.png'))
 
         RemoveWindowsMenu(self)#Убирает windows форму
+        #БД
+        self.client = client
+        self.db = db
+        self.coll = coll
+        self.collLoggedIn = collLoggedIn
+
 
 
         # Кнопки
@@ -62,35 +70,29 @@ class MainWindows(QDialog, Ui_ImageDialog):
 
 
     def login(self):
-        # создание бд и проверка ввода логина и пароля
-        db = sqlite3.connect('database\contacts.db')
-        coursor = db.cursor()
         self.username = self.lineEdit.text()
         self.password = self.lineEdit_2.text()
-        coursor.execute(f'SELECT * FROM users WHERE firstname like \"{self.username}\" and password like \"{self.password}\";')
-        result_pass = coursor.fetchone()
-        db.close()
-        # проверка ввода
+        result_pass = db.users.find_one({'firstname': self.username, 'password': self.password})
+        self.id_Profile = result_pass['_id']#запомнить id пользователя после логина
+
+
         if len(self.username) == 0 or len(self.password) == 0:
             self.status.setText('Данные не введены')
         else:
             if not result_pass:
                 self.status.setText('Логин или пароль указаны не верно')
             else:
-                FromUsersToLoggedIn(self.username, self.password)#модуль добавляет зарегистрированного пользователя в бд LoggedIn
                 self.TransitionAboutTheProgram()
-
 
     @staticmethod
     def CloseWindow():
-        ClearDBLoggedIn()
         sys.exit()
 
 
 
     def TransitionAboutTheProgram(self):
         self.hide()
-        self.abouttheprogram = AboutTheProgram()
+        self.abouttheprogram = AboutTheProgram(self.id_Profile)
         self.abouttheprogram.show()
 
 
@@ -99,3 +101,4 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.reg = Class.Registration.Refistration()
         self.reg.show()
         self.hide()
+

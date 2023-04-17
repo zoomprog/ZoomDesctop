@@ -1,10 +1,12 @@
 from main import *
+from database.DB import collLoggedIn
 
 
 def ClearDBLoggedIn():
-    db = sqlite3.connect('database\contacts.db')
-    coursor = db.cursor()
-    coursor.execute(f"DELETE FROM LoggedIn;")
-    db.commit()
-    db.close()
-    print('Данные очищены')
+    pass
+    # result = collLoggedIn.delete_many({})
+    #
+    # if result.deleted_count > 0:
+    #     print("Данные очищены")
+    # else:
+    #     print("Нет данных для удаления")
