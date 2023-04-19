@@ -1,3 +1,4 @@
+from PyQt6.QtCore import QSettings
 from PyQt6.QtGui import QMouseEvent
 
 import Class.Registration
@@ -30,12 +31,26 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.setWindowTitle('ZoomApp')
         self.setWindowIcon(QtGui.QIcon('image/icon/logo.png'))
 
+
+
+
+
         RemoveWindowsMenu(self)#Убирает windows форму
         #БД
         self.client = client
         self.db = db
         self.coll = coll
         self.collLoggedIn = collLoggedIn
+        #Запомнить пользователя
+        self.settings = QSettings("ZoomIndistinct", 'AppWise')
+        self.lineEdit.setText(self.settings.value("login", ""))
+        self.lineEdit_2.setText(self.settings.value("password", ""))
+        self.checkBox.setChecked(bool(self.settings.value("remember", "")))
+        if self.settings.contains("login") and self.settings.contains("password"):
+            print('s')
+            self.LoginAutoLog()
+        else:
+            self.pushLogin.clicked.connect(self.login)
 
 
 
@@ -45,10 +60,10 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.pushUrlDiscord.clicked.connect(lambda: webbrowser.open('https://discord.gg/JWTcSq3Y'))
         self.pushUrlFacebook.clicked.connect(lambda: webbrowser.open('https://www.facebook.com/rrarrkfacit'))
         self.pushUrlGitHub.clicked.connect(lambda: webbrowser.open('https://github.com/'))
-        self.pushLogin.clicked.connect(self.login)
         self.status = self.label_4
         self.status.setStyleSheet('font-size:10px; color: red;text-align: center;')
         self.pushReg.clicked.connect(self.WindowReg)
+
 
 
         #Перемещение окна UpBar
@@ -68,12 +83,16 @@ class MainWindows(QDialog, Ui_ImageDialog):
         else:
             self.offset = None
 
-
     def login(self):
         self.username = self.lineEdit.text()
         self.password = self.lineEdit_2.text()
+        if self.checkBox.isChecked():
+            self.settings = QSettings("ZoomIndistinct", 'AppWise')
+            self.settings.setValue("login", self.username)
+            self.settings.setValue("password", self.password)
+            self.settings.setValue("remember", self.checkBox.isChecked())
         result_pass = db.users.find_one({'firstname': self.username, 'password': self.password})
-        self.id_Profile = result_pass['_id']#запомнить id пользователя после логина
+        self.id_Profile = result_pass['_id']  # запомнить id пользователя после логина
 
 
         if len(self.username) == 0 or len(self.password) == 0:
@@ -83,6 +102,12 @@ class MainWindows(QDialog, Ui_ImageDialog):
                 self.status.setText('Логин или пароль указаны не верно')
             else:
                 self.TransitionAboutTheProgram()
+    def LoginAutoLog(self):
+        self.username = self.lineEdit.text()
+        self.password = self.lineEdit_2.text()
+        result_pass = db.users.find_one({'firstname': self.username, 'password': self.password})
+        self.id_Profile = result_pass['_id']  # запомнить id пользователя после логина
+        self.TransitionAboutTheProgram()
 
     @staticmethod
     def CloseWindow():
@@ -91,9 +116,10 @@ class MainWindows(QDialog, Ui_ImageDialog):
 
 
     def TransitionAboutTheProgram(self):
-        self.hide()
-        self.abouttheprogram = AboutTheProgram(self.id_Profile)
+        self.widget.close()
+        self.abouttheprogram = AboutTheProgram(self.id_Profile, self.settings)
         self.abouttheprogram.show()
+
 
 
 

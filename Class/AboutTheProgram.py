@@ -9,9 +9,11 @@ from PyQt6.QtWidgets import QWidget
 from PyQt6.QtGui import QMouseEvent
 from database.DB import db, coll,collLoggedIn
 from database import *
+from PyQt6.QtCore import QSettings
+
 
 class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
-    def __init__(self,id_Profile):
+    def __init__(self,id_Profile,settings):
         super().__init__()
 
         self.offset = None
@@ -23,6 +25,7 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         RemoveWindowsMenu(self)  # Убирает windows форму
         self.id_Profile = id_Profile
         print(self.id_Profile)
+        self.settings = settings
 
         self.importmainclass = main.MainWindows
         self.importregclass = main.Refistration
@@ -128,9 +131,11 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         self.hide()
 
     def PushBack(self):
+        self.settings.clear()
+        self.frame_12.close()
         self.ui = main.MainWindows()
         self.ui.show()
-        self.hide()
+
 
     def mousePressEvent(self, event: QMouseEvent) -> None:
         if event.button() == Qt.MouseButton.LeftButton and self.header_frame.underMouse():
