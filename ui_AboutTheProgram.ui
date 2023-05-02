@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1448</width>
-    <height>963</height>
+    <height>961</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -1378,10 +1378,10 @@ background-color:rgba(115,128,142,255);
                <widget class="QPushButton" name="pushButtonSubPrmium">
                 <property name="geometry">
                  <rect>
-                  <x>280</x>
+                  <x>40</x>
                   <y>70</y>
-                  <width>50</width>
-                  <height>50</height>
+                  <width>71</width>
+                  <height>31</height>
                  </rect>
                 </property>
                 <property name="font">
@@ -1392,18 +1392,11 @@ background-color:rgba(115,128,142,255);
                  </font>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">
-QPushButton {
-background-color: #161A1E;
-color:white;
-border-radius:25;
-}
-QPushButton:hover {
-color:rgba(115,128,142,255);
-}</string>
+                 <string notr="true">background-color: transparent;
+color:transparent;</string>
                 </property>
                 <property name="text">
-                 <string>SUB</string>
+                 <string>Free</string>
                 </property>
                </widget>
                <widget class="QPushButton" name="pushExit">

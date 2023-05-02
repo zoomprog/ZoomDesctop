@@ -5,6 +5,7 @@ from main import *
 from ui_AboutTheProgram import Ui_AboutTheProgram
 from Functions.RemoveWindowsMenu import RemoveWindowsMenu
 import Class.download
+import Class.Settings
 from PyQt6.QtWidgets import QWidget
 from PyQt6.QtGui import QMouseEvent
 from database.DB import db, coll,collLoggedIn
@@ -12,10 +13,11 @@ from database import *
 from PyQt6.QtCore import QSettings
 
 
-class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
-    def __init__(self,id_Profile,settings):
+class AboutTheProgram(QDialog, Ui_AboutTheProgram):
+    def __init__(self, id_Profile, settings):
         super().__init__()
 
+        self.dialog = None
         self.offset = None
         self.oldPos = None
         self.ui = None
@@ -23,8 +25,8 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         self.abouttheprogram = Ui_AboutTheProgram
         self.setupUi(self)
         RemoveWindowsMenu(self)  # Убирает windows форму
+
         self.id_Profile = id_Profile
-        print(self.id_Profile)
         self.settings = settings
 
         self.importmainclass = main.MainWindows
@@ -41,6 +43,8 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         self.pushCollapse.clicked.connect(self.showMinimized)#Сворачивание окна
         self.pushExit.clicked.connect(self.PushBack)#кнопка для выхода с аккаунта
         self.pushDownload.clicked.connect(self.download)
+        self.pushSetting.clicked.connect(self.ButtonSettings)
+
 
 
         #Достаем логин и email из бд для Profile
@@ -56,8 +60,8 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         #Перенос окна по используя frame в методах mouse press and event
         self.header_frame.move(0, 0)
         self.header_frame.show()
-        #Работа с кнопкой профиль
 
+        #Работа с кнопкой профиль
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.pushButtonProfile)
         self.setLayout(self.layout)
@@ -111,6 +115,7 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         self.label_EnterProfileEmail.setText(self.ProfileEmail)
         self.label_EnterProfileName.setStyleSheet('background-color:transparent;color:white;')
         self.label_EnterProfileEmail.setStyleSheet('background-color:transparent;color:white;')
+        self.pushButtonSubPrmium.setStyleSheet('background-color:transparent;color:white;')
 
     def AppealProfileLabelHide(self):
         self.pushButtonProfile.setText("Profile")
@@ -124,9 +129,11 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         self.label_EnterProfileEmail.setText("")
         self.label_EnterProfileName.setStyleSheet('background-color:transparent;color:transparent;')
         self.label_EnterProfileEmail.setStyleSheet('background-color:transparent;color:transparent;')
+        self.pushButtonSubPrmium.setStyleSheet('background-color:transparent;color:transparent;')
+
 
     def download(self):
-        self.ui = Class.download.Download()
+        self.ui = Class.download.Download(self.id_Profile, self.settings)
         self.ui.show()
         self.hide()
 
@@ -135,6 +142,8 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         self.frame_12.close()
         self.ui = main.MainWindows()
         self.ui.show()
+        self.close()
+        self.deleteLater()
 
 
     def mousePressEvent(self, event: QMouseEvent) -> None:
@@ -149,5 +158,7 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram,Ui_ImageDialog):
         else:
             self.offset = None
 
-
-
+    def ButtonSettings(self):
+        self.ui = Class.Settings.Setings()
+        self.ui.show()
+        self.hide()

@@ -16,9 +16,8 @@ from selenium.webdriver.common.by import By
 from Functions.RemoveWindowsMenu import RemoveWindowsMenu
 import Class.AboutTheProgram
 
-
 class Download(QDialog, Ui_Download):
-    def __init__(self):
+    def __init__(self,id_Profile, settings):
         super().__init__()
         self.offset = None
         self.soft_main_windows = None
@@ -30,6 +29,9 @@ class Download(QDialog, Ui_Download):
         self.setupUi(self)
         self.importmainclass = MainWindows
         RemoveWindowsMenu(self)
+
+        self.id_Profile = id_Profile
+        self.settings = settings
 
         # Перенос окна по используя frame в методах mouse press and event
         self.frame_4.move(0, 0)
@@ -133,7 +135,7 @@ class Download(QDialog, Ui_Download):
 
 
     def TransitionAboutTheProgram(self):
-        self.ui = Class.AboutTheProgram.AboutTheProgram()
+        self.ui = Class.AboutTheProgram.AboutTheProgram(self.id_Profile, self.settings)
         self.ui.show()
         self.hide()
 

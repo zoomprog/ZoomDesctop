@@ -3,11 +3,17 @@
 
 import QtQuick
 import QtQuick.Templates as T
+import QtQuick.Controls.Fusion.impl
 
 T.VerticalHeaderView {
     id: control
 
-    implicitWidth: contentWidth
+    // The contentWidth of TableView will be zero at start-up, until the delegate
+    // items have been loaded. This means that even if the implicit width of
+    // VerticalHeaderView should be the same as the content width in the end, we
+    // need to ensure that it has at least a width of 1 at start-up, otherwise
+    // TableView won't bother loading any delegates at all.
+    implicitWidth: Math.max(1, contentWidth)
     implicitHeight: syncView ? syncView.height : 0
 
     delegate: Rectangle {
@@ -16,20 +22,19 @@ T.VerticalHeaderView {
 
         implicitWidth: Math.max(control.width, text.implicitWidth + (cellPadding * 2))
         implicitHeight: text.implicitHeight + (cellPadding * 2)
-        border.color: "#cacaca"
 
         gradient: Gradient {
             GradientStop {
                 position: 0
-                color: "#fbfbfb"
+                color: Fusion.gradientStart(control.palette.button)
             }
             GradientStop {
                 position: 1
-                color: "#e0dfe0"
+                color: Fusion.gradientStop(control.palette.button)
             }
         }
 
-        Text {
+        Label {
             id: text
             text: control.textRole ? (Array.isArray(control.model) ? modelData[control.textRole]
                                         : model[control.textRole])
@@ -38,7 +43,6 @@ T.VerticalHeaderView {
             height: parent.height
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            color: "#ff26282a"
         }
     }
 }

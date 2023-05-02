@@ -1,5 +1,6 @@
 from PyQt6.QtCore import QSettings
 from PyQt6.QtGui import QMouseEvent
+from PyQt6.QtWidgets import QMainWindow, QApplication
 
 import Class.Registration
 from main import *
@@ -7,9 +8,12 @@ from Functions.RemoveWindowsMenu import RemoveWindowsMenu
 from Class.AboutTheProgram import *
 from Class.download import *
 from Class.Registration import *
+
 from Functions.BD.ClearDBLoggedIn.ClearDBLoggedIn import ClearDBLoggedIn
 from Functions.BD.TransferringData.FromUsersToLogedIn import FromUsersToLoggedIn
 from database.DB import client, db, coll, collLoggedIn
+from ui_login import Ui_ImageDialog
+
 
 
 class MainWindows(QDialog, Ui_ImageDialog):
@@ -26,14 +30,8 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.reg = None
         self.abouttheprogram = None
         MainWindows.id_Profile = 6
-        self.MainMenu = Ui_ImageDialog
+
         self.setupUi(self)
-        self.setWindowTitle('ZoomApp')
-        self.setWindowIcon(QtGui.QIcon('image/icon/logo.png'))
-
-
-
-
 
         RemoveWindowsMenu(self)#Убирает windows форму
         #БД
@@ -46,8 +44,8 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.lineEdit.setText(self.settings.value("login", ""))
         self.lineEdit_2.setText(self.settings.value("password", ""))
         self.checkBox.setChecked(bool(self.settings.value("remember", "")))
+
         if self.settings.contains("login") and self.settings.contains("password"):
-            print('s')
             self.LoginAutoLog()
         else:
             self.pushLogin.clicked.connect(self.login)
@@ -84,6 +82,7 @@ class MainWindows(QDialog, Ui_ImageDialog):
             self.offset = None
 
     def login(self):
+
         self.username = self.lineEdit.text()
         self.password = self.lineEdit_2.text()
         if self.checkBox.isChecked():
@@ -102,12 +101,15 @@ class MainWindows(QDialog, Ui_ImageDialog):
                 self.status.setText('Логин или пароль указаны не верно')
             else:
                 self.TransitionAboutTheProgram()
+
+
     def LoginAutoLog(self):
         self.username = self.lineEdit.text()
         self.password = self.lineEdit_2.text()
         result_pass = db.users.find_one({'firstname': self.username, 'password': self.password})
         self.id_Profile = result_pass['_id']  # запомнить id пользователя после логина
         self.TransitionAboutTheProgram()
+
 
     @staticmethod
     def CloseWindow():
@@ -116,9 +118,11 @@ class MainWindows(QDialog, Ui_ImageDialog):
 
 
     def TransitionAboutTheProgram(self):
-        self.widget.close()
         self.abouttheprogram = AboutTheProgram(self.id_Profile, self.settings)
         self.abouttheprogram.show()
+        self.close()
+        self.deleteLater()
+
 
 
 
@@ -127,4 +131,5 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.reg = Class.Registration.Refistration()
         self.reg.show()
         self.hide()
+
 
