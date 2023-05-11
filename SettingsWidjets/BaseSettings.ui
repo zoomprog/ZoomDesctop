@@ -1,0 +1,1735 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BaseSettings</class>
+ <widget class="QWidget" name="BaseSettings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1114</width>
+    <height>576</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">color: rgb(255, 255, 255);</string>
+  </property>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1015</width>
+     <height>602</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 0, 0);</string>
+   </property>
+   <widget class="QWidget" name="widget_2" native="true">
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>20</y>
+      <width>120</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+   </widget>
+   <widget class="QScrollArea" name="scrollArea">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>991</width>
+      <height>581</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">/* VERTICAL SCROLLBAR */
+*{
+margin:0
+
+}
+ QScrollBar:vertical {
+	border: none;
+    background: #161A1E;
+    width: 14px;
+    margin: 15px 0 15px 0;
+	border-radius: 0px;
+ }
+QScrollBar::handle:vertical {	
+	background-color: #34373b;
+	min-height: 30px;
+	border-radius: 7px;
+}
+QScrollBar::handle:vertical:hover{	
+	background-color: rgb(119, 122, 126);
+}
+QScrollBar::handle:vertical:pressed {	
+	background-color: rgb(119, 122, 126);
+}
+QScrollBar::sub-line:vertical {
+	border: none;
+	background-color:#161A1E;
+	height: 15px;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+	subcontrol-position: top;
+	subcontrol-origin: margin;
+}
+QScrollBar::add-line:vertical {
+	border: none;
+	background-color: #161A1E;
+	height: 15px;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+	subcontrol-position: bottom;
+	subcontrol-origin: margin;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+	background: none;
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+	background: none;
+}</string>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>975</width>
+       <height>670</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>670</height>
+      </size>
+     </property>
+     <widget class="QFrame" name="frame">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>951</width>
+        <height>211</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="sizeConstraint">
+        <enum>QLayout::SetMaximumSize</enum>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QFrame" name="frame_AntivirusWindows">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QListWidget" name="listWidget_AntivirusWindows">
+            <property name="maximumSize">
+             <size>
+              <width>800</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Segoe UI Symbol</family>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QListWidget::item {
+    border-bottom: 1px solid rgba(85,98,112,255);;
+}
+
+</string>
+            </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <property name="autoScroll">
+             <bool>true</bool>
+            </property>
+            <item>
+             <property name="text">
+              <string>Антивирус Windows</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Защитник windows. Защищает компьютер от вирусов и угроз. Рекомендуеться выключить т.к. работает в фоне постоянно.</string>
+             </property>
+             <property name="font">
+              <font>
+               <family>Segoe UI Symbol</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_1">
+            <property name="styleSheet">
+             <string notr="true">background-color: transparent;</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QCheckBox" name="toggelAntivirusWindows">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>5</y>
+               <width>61</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>61</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>61</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QCheckBox {
+        /* Устанавливаем базовые параметры переключателя */
+        padding: 0;
+        background: none;
+        border: none;
+        outline: none;
+        /* Размер переключателя */
+        width: 30px;
+        height: 20px;
+        /* Устанавливаем форму переключателя в виде овала */
+        border-radius: 10px;
+        /* Устанавливаем фон для переключателя */
+        background-color: rgb(119, 122, 126);
+        /* Устанавливаем отступ для индикатора */
+        margin-right: 10px;
+		position: absolute
+    }
+    QCheckBox::indicator {
+        /* Устанавливаем размер и форму индикатора в виде круга */
+        width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        /* Устанавливаем цвет индикатора */
+        background-color: rgb(255, 0, 0) ;
+        color: rgb(255, 0, 0);
+        /* Устанавливаем границу для индикатора */
+        border: 1px solid  rgb(119, 122, 126);
+        /* Устанавливаем отступ для индикатора внутри переключателя */
+        margin: 2px;
+        /* Добавляем плавный переход при изменении состояния чекбокса */
+        transition: transform 2s ease-out;
+    }
+    QCheckBox::indicator:checked {
+        /* Смещаем индикатор на 30% вправо при нажатии на чекбокс */
+        position: relative;
+        left:30%;
+        background-color: #7FFF00;    
+    }
+    QCheckBox::indicator:pressed {
+        /* Добавляем эффект нажатия на индикатор */
+        background-color: rgb(204, 204, 204);
+    }</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="pushButtonAntivitusWindowsInfo">
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>0</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>60</width>
+               <height>60</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Social Media Circled</family>
+               <pointsize>21</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton#pushButtonAntivitusWindowsInfo{
+	border-radius:12;
+	background-color:rgba(85,98,112,255);
+	color:rgba(85,98,112,255);
+}
+QPushButton#pushButtonAntivitusWindowsInfo:hover{
+	color:rgba(155,168,182,220);
+}
+QPushButton#pushButtonAntivitusWindowsInfo:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	color:rgba(115,128,142,255)
+}</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../menu.qrc">
+               <normaloff>:/icon/image/icon/information.png</normaloff>:/icon/image/icon/information.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_BraundMaurWindows">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QListWidget" name="listWidget_BraundMaurWindows">
+            <property name="maximumSize">
+             <size>
+              <width>800</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Segoe UI Symbol</family>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QListWidget::item {
+    border-bottom: 1px solid rgba(85,98,112,255);;
+}
+
+</string>
+            </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <item>
+             <property name="text">
+              <string>Брадмауэр Windows</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Брадмауэр. Сканирует весь сетевой трафик.Блокирует соединения. Если вы играете в онлайн-игры, рекомендуеться отключить его, чтобы избежать проблем с подключением.</string>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_4">
+            <property name="styleSheet">
+             <string notr="true">background-color:transparent;</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QCheckBox" name="toggelBraundMaurWindows">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>2</y>
+               <width>61</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>61</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>61</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QCheckBox {
+        /* Устанавливаем базовые параметры переключателя */
+        padding: 0;
+        background: none;
+        border: none;
+        outline: none;
+        /* Размер переключателя */
+        width: 30px;
+        height: 20px;
+        /* Устанавливаем форму переключателя в виде овала */
+        border-radius: 10px;
+        /* Устанавливаем фон для переключателя */
+        background-color: rgb(119, 122, 126);
+        /* Устанавливаем отступ для индикатора */
+        margin-right: 10px;
+		position: absolute
+    }
+    QCheckBox::indicator {
+        /* Устанавливаем размер и форму индикатора в виде круга */
+        width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        /* Устанавливаем цвет индикатора */
+        background-color: rgb(255, 0, 0) ;
+        color: rgb(255, 0, 0);
+        /* Устанавливаем границу для индикатора */
+        border: 1px solid  rgb(119, 122, 126);
+        /* Устанавливаем отступ для индикатора внутри переключателя */
+        margin: 2px;
+        /* Добавляем плавный переход при изменении состояния чекбокса */
+        transition: transform 2s ease-out;
+    }
+    QCheckBox::indicator:checked {
+        /* Смещаем индикатор на 30% вправо при нажатии на чекбокс */
+        position: relative;
+        left:30%;
+        background-color: #7FFF00;    
+    }
+    QCheckBox::indicator:pressed {
+        /* Добавляем эффект нажатия на индикатор */
+        background-color: rgb(204, 204, 204);
+    }</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="pushButtonBraundMaurWindows">
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>0</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>21</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Social Media Circled</family>
+               <pointsize>21</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton#pushButtonBraundMaurWindows{
+	border-radius:12;
+	background-color:rgba(85,98,112,255);
+	color:rgba(85,98,112,255);
+}
+QPushButton#pushButtonBraundMaurWindows:hover{
+	color:rgba(155,168,182,220);
+}
+QPushButton#pushButtonBraundMaurWindows:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	color:rgba(115,128,142,255)
+}</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../menu.qrc">
+               <normaloff>:/icon/image/icon/information.png</normaloff>:/icon/image/icon/information.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_WindowsUpdate">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QListWidget" name="listWidget_WindowsUpdate">
+            <property name="maximumSize">
+             <size>
+              <width>800</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Segoe UI Symbol</family>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QListWidget::item {
+    border-bottom: 1px solid rgba(85,98,112,255);;
+}
+
+</string>
+            </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <item>
+             <property name="text">
+              <string>Обновление Windows</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Обновление Windows всегда работает в фотоновом режиме и могут начать обновление в неудобное время. </string>
+             </property>
+             <property name="font">
+              <font>
+               <family>Segoe UI Symbol</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_6">
+            <property name="styleSheet">
+             <string notr="true">background-color:transparent;</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QCheckBox" name="toggelWindowsUpdate">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>2</y>
+               <width>61</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>61</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>61</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QCheckBox {
+        /* Устанавливаем базовые параметры переключателя */
+        padding: 0;
+        background: none;
+        border: none;
+        outline: none;
+        /* Размер переключателя */
+        width: 30px;
+        height: 20px;
+        /* Устанавливаем форму переключателя в виде овала */
+        border-radius: 10px;
+        /* Устанавливаем фон для переключателя */
+        background-color: rgb(119, 122, 126);
+        /* Устанавливаем отступ для индикатора */
+        margin-right: 10px;
+		position: absolute
+    }
+    QCheckBox::indicator {
+        /* Устанавливаем размер и форму индикатора в виде круга */
+        width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        /* Устанавливаем цвет индикатора */
+        background-color: rgb(255, 0, 0) ;
+        color: rgb(255, 0, 0);
+        /* Устанавливаем границу для индикатора */
+        border: 1px solid  rgb(119, 122, 126);
+        /* Устанавливаем отступ для индикатора внутри переключателя */
+        margin: 2px;
+        /* Добавляем плавный переход при изменении состояния чекбокса */
+        transition: transform 2s ease-out;
+    }
+    QCheckBox::indicator:checked {
+        /* Смещаем индикатор на 30% вправо при нажатии на чекбокс */
+        position: relative;
+        left:30%;
+        background-color: #7FFF00;    
+    }
+    QCheckBox::indicator:pressed {
+        /* Добавляем эффект нажатия на индикатор */
+        background-color: rgb(204, 204, 204);
+    }</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="pushButtonWindowsUpdate">
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>2</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>21</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Social Media Circled</family>
+               <pointsize>21</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton#pushButtonWindowsUpdate{
+	border-radius:12;
+	background-color:rgba(85,98,112,255);
+	color:rgba(85,98,112,255);
+}
+QPushButton#pushButtonWindowsUpdate:hover{
+	color:rgba(155,168,182,220);
+}
+QPushButton#pushButtonWindowsUpdate:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	color:rgba(115,128,142,255)
+}</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../menu.qrc">
+               <normaloff>:/icon/image/icon/information.png</normaloff>:/icon/image/icon/information.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_AcsMouse">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QListWidget" name="listWidget_AcsMouse">
+            <property name="maximumSize">
+             <size>
+              <width>800</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Segoe UI Symbol</family>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QListWidget::item {
+    border-bottom: 1px solid rgba(85,98,112,255);;
+}
+
+</string>
+            </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <item>
+             <property name="text">
+              <string>Акселирация мыши</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Ускорение курсора в зависимости от скорости передвижения мыши. </string>
+             </property>
+             <property name="font">
+              <font>
+               <family>Segoe UI Symbol</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_8">
+            <property name="styleSheet">
+             <string notr="true">background-color:transparent;</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QCheckBox" name="toggelAcsMouse">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>2</y>
+               <width>61</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>61</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>61</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QCheckBox {
+        /* Устанавливаем базовые параметры переключателя */
+        padding: 0;
+        background: none;
+        border: none;
+        outline: none;
+        /* Размер переключателя */
+        width: 30px;
+        height: 20px;
+        /* Устанавливаем форму переключателя в виде овала */
+        border-radius: 10px;
+        /* Устанавливаем фон для переключателя */
+        background-color: rgb(119, 122, 126);
+        /* Устанавливаем отступ для индикатора */
+        margin-right: 10px;
+		position: absolute
+    }
+    QCheckBox::indicator {
+        /* Устанавливаем размер и форму индикатора в виде круга */
+        width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        /* Устанавливаем цвет индикатора */
+        background-color: rgb(255, 0, 0) ;
+        color: rgb(255, 0, 0);
+        /* Устанавливаем границу для индикатора */
+        border: 1px solid  rgb(119, 122, 126);
+        /* Устанавливаем отступ для индикатора внутри переключателя */
+        margin: 2px;
+        /* Добавляем плавный переход при изменении состояния чекбокса */
+        transition: transform 2s ease-out;
+    }
+    QCheckBox::indicator:checked {
+        /* Смещаем индикатор на 30% вправо при нажатии на чекбокс */
+        position: relative;
+        left:30%;
+        background-color: #7FFF00;    
+    }
+    QCheckBox::indicator:pressed {
+        /* Добавляем эффект нажатия на индикатор */
+        background-color: rgb(204, 204, 204);
+    }</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="pushButtonAcsMouse">
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>2</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>21</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Social Media Circled</family>
+               <pointsize>21</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton#pushButtonAcsMouse{
+	border-radius:12;
+	background-color:rgba(85,98,112,255);
+	color:rgba(85,98,112,255);
+}
+QPushButton#pushButtonAcsMouse:hover{
+	color:rgba(155,168,182,220);
+}
+QPushButton#pushButtonAcsMouse:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	color:rgba(115,128,142,255)
+}</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../menu.qrc">
+               <normaloff>:/icon/image/icon/information.png</normaloff>:/icon/image/icon/information.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_UAC">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QListWidget" name="listWidget_UAC">
+            <property name="maximumSize">
+             <size>
+              <width>800</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Segoe UI Symbol</family>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QListWidget::item {
+    border-bottom: 1px solid rgba(85,98,112,255);;
+}
+
+</string>
+            </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <item>
+             <property name="text">
+              <string>Контроль учётных записей(UAC)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>UAC=контроль учетных записей.Постоянно спрашивает точно ли хотите открыть файл от админа. Рекомендуеться отключить.</string>
+             </property>
+             <property name="font">
+              <font>
+               <family>Segoe UI Symbol</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_10">
+            <property name="styleSheet">
+             <string notr="true">background-color:transparent;</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QCheckBox" name="toggelUAC">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>2</y>
+               <width>61</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>61</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>61</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QCheckBox {
+        /* Устанавливаем базовые параметры переключателя */
+        padding: 0;
+        background: none;
+        border: none;
+        outline: none;
+        /* Размер переключателя */
+        width: 30px;
+        height: 20px;
+        /* Устанавливаем форму переключателя в виде овала */
+        border-radius: 10px;
+        /* Устанавливаем фон для переключателя */
+        background-color: rgb(119, 122, 126);
+        /* Устанавливаем отступ для индикатора */
+        margin-right: 10px;
+		position: absolute
+    }
+    QCheckBox::indicator {
+        /* Устанавливаем размер и форму индикатора в виде круга */
+        width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        /* Устанавливаем цвет индикатора */
+        background-color: rgb(255, 0, 0) ;
+        color: rgb(255, 0, 0);
+        /* Устанавливаем границу для индикатора */
+        border: 1px solid  rgb(119, 122, 126);
+        /* Устанавливаем отступ для индикатора внутри переключателя */
+        margin: 2px;
+        /* Добавляем плавный переход при изменении состояния чекбокса */
+        transition: transform 2s ease-out;
+    }
+    QCheckBox::indicator:checked {
+        /* Смещаем индикатор на 30% вправо при нажатии на чекбокс */
+        position: relative;
+        left:30%;
+        background-color: #7FFF00;    
+    }
+    QCheckBox::indicator:pressed {
+        /* Добавляем эффект нажатия на индикатор */
+        background-color: rgb(204, 204, 204);
+    }</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="pushButtonUAC">
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>2</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>21</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Social Media Circled</family>
+               <pointsize>21</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton#pushButtonUAC{
+	border-radius:12;
+	background-color:rgba(85,98,112,255);
+	color:rgba(85,98,112,255);
+}
+QPushButton#pushButtonUAC:hover{
+	color:rgba(155,168,182,220);
+}
+QPushButton#pushButtonUAC:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	color:rgba(115,128,142,255)
+}</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../menu.qrc">
+               <normaloff>:/icon/image/icon/information.png</normaloff>:/icon/image/icon/information.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_DefNotifications">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QListWidget" name="listWidget_DefNotifications">
+            <property name="maximumSize">
+             <size>
+              <width>800</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Segoe UI Symbol</family>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QListWidget::item {
+    border-bottom: 1px solid rgba(85,98,112,255);;
+}
+
+</string>
+            </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <item>
+             <property name="text">
+              <string>Назойлевые уведомления защиты</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Уведомления безопастности которая появляеться, даже после отключения уведомлений, когда выключен анивирус,брандмауэр и т.д.</string>
+             </property>
+             <property name="font">
+              <font>
+               <family>Segoe UI Symbol</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_11">
+            <property name="styleSheet">
+             <string notr="true">background-color:transparent;</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QCheckBox" name="toggelDefNotifications">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>2</y>
+               <width>61</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>61</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>61</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QCheckBox {
+        /* Устанавливаем базовые параметры переключателя */
+        padding: 0;
+        background: none;
+        border: none;
+        outline: none;
+        /* Размер переключателя */
+        width: 30px;
+        height: 20px;
+        /* Устанавливаем форму переключателя в виде овала */
+        border-radius: 10px;
+        /* Устанавливаем фон для переключателя */
+        background-color: rgb(119, 122, 126);
+        /* Устанавливаем отступ для индикатора */
+        margin-right: 10px;
+		position: absolute
+    }
+    QCheckBox::indicator {
+        /* Устанавливаем размер и форму индикатора в виде круга */
+        width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        /* Устанавливаем цвет индикатора */
+        background-color: rgb(255, 0, 0) ;
+        color: rgb(255, 0, 0);
+        /* Устанавливаем границу для индикатора */
+        border: 1px solid  rgb(119, 122, 126);
+        /* Устанавливаем отступ для индикатора внутри переключателя */
+        margin: 2px;
+        /* Добавляем плавный переход при изменении состояния чекбокса */
+        transition: transform 2s ease-out;
+    }
+    QCheckBox::indicator:checked {
+        /* Смещаем индикатор на 30% вправо при нажатии на чекбокс */
+        position: relative;
+        left:30%;
+        background-color: #7FFF00;    
+    }
+    QCheckBox::indicator:pressed {
+        /* Добавляем эффект нажатия на индикатор */
+        background-color: rgb(204, 204, 204);
+    }</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="pushButtonDefNotifications">
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>2</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>21</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Social Media Circled</family>
+               <pointsize>21</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton#pushButtonDefNotifications{
+	border-radius:12;
+	background-color:rgba(85,98,112,255);
+	color:rgba(85,98,112,255);
+}
+QPushButton#pushButtonDefNotifications:hover{
+	color:rgba(155,168,182,220);
+}
+QPushButton#pushButtonDefNotifications:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	color:rgba(115,128,142,255)
+}</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../menu.qrc">
+               <normaloff>:/icon/image/icon/information.png</normaloff>:/icon/image/icon/information.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_AutoUpdateDriversStartWindows">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QListWidget" name="listWidget_AutoUpdateDriversStartWindows">
+            <property name="maximumSize">
+             <size>
+              <width>800</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Segoe UI Symbol</family>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QListWidget::item {
+    border-bottom: 1px solid rgba(85,98,112,255);;
+}
+
+</string>
+            </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <item>
+             <property name="text">
+              <string>Автообновление драйверов при запуске системы</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Windows автоматически обновляет драйвера при запуске системы. </string>
+             </property>
+             <property name="font">
+              <font>
+               <family>Segoe UI Symbol</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_13">
+            <property name="styleSheet">
+             <string notr="true">background-color:transparent;</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QCheckBox" name="toggelAutoUpdateDriversStartWindows">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>2</y>
+               <width>61</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>61</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>61</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QCheckBox {
+        /* Устанавливаем базовые параметры переключателя */
+        padding: 0;
+        background: none;
+        border: none;
+        outline: none;
+        /* Размер переключателя */
+        width: 30px;
+        height: 20px;
+        /* Устанавливаем форму переключателя в виде овала */
+        border-radius: 10px;
+        /* Устанавливаем фон для переключателя */
+        background-color: rgb(119, 122, 126);
+        /* Устанавливаем отступ для индикатора */
+        margin-right: 10px;
+		position: absolute
+    }
+    QCheckBox::indicator {
+        /* Устанавливаем размер и форму индикатора в виде круга */
+        width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        /* Устанавливаем цвет индикатора */
+        background-color: rgb(255, 0, 0) ;
+        color: rgb(255, 0, 0);
+        /* Устанавливаем границу для индикатора */
+        border: 1px solid  rgb(119, 122, 126);
+        /* Устанавливаем отступ для индикатора внутри переключателя */
+        margin: 2px;
+        /* Добавляем плавный переход при изменении состояния чекбокса */
+        transition: transform 2s ease-out;
+    }
+    QCheckBox::indicator:checked {
+        /* Смещаем индикатор на 30% вправо при нажатии на чекбокс */
+        position: relative;
+        left:30%;
+        background-color: #7FFF00;    
+    }
+    QCheckBox::indicator:pressed {
+        /* Добавляем эффект нажатия на индикатор */
+        background-color: rgb(204, 204, 204);
+    }</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="pushButtonAutoUpdateDriversStartWindows">
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>2</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>21</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Social Media Circled</family>
+               <pointsize>21</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton#pushButtonAutoUpdateDriversStartWindows{
+	border-radius:12;
+	background-color:rgba(85,98,112,255);
+	color:rgba(85,98,112,255);
+}
+QPushButton#pushButtonAutoUpdateDriversStartWindows:hover{
+	color:rgba(155,168,182,220);
+}
+QPushButton#pushButtonAutoUpdateDriversStartWindows:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	color:rgba(115,128,142,255)
+}</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../menu.qrc">
+               <normaloff>:/icon/image/icon/information.png</normaloff>:/icon/image/icon/information.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../menu.qrc"/>
+ </resources>
+ <connections/>
+</ui>
