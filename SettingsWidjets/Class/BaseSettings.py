@@ -2,18 +2,29 @@ from PyQt6.QtCore import QEvent
 from PyQt6.QtWidgets import QDialog
 import main
 from main import *
+from Functions.FuncBaseSettings.BraundMaurWindows import disableBraundMaurWindows, EnableBraundMaurWindows
+from Functions.FuncBaseSettings.WindowsDefender import DefenderOn, DefenderOff
+from Functions.FuncBaseSettings.WindowsUpdate import WindowsUpdateOff, WindowsUpdateOn
+from Functions.FuncBaseSettings.MapsAutoUpdate import disable_location_services, enable_location_services
+
 
 from SettingsWidjets.BaseSettings import Ui_BaseSettings
+from Settings import Ui_Settings
+import subprocess
 
-class BaseSet(QDialog,Ui_BaseSettings):
+class BaseSet(QDialog, Ui_BaseSettings):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        disableBraundMaurWindows(self)
+        self.pushButton.clicked.connect(self.accept_button_clicked)
+
+
         self.listWidget_BraundMaurWindows.setWordWrap(True)
         self.listWidget_BraundMaurWindows.setWordWrap(True)
         self.listWidget_DefNotifications.setWordWrap(True)
-        self.IncreaseFrame = 275
-        self.DefolfSizeFrame = 224
+        self.IncreaseFrame = 361
+        self.DefolfSizeFrame = 311
         self.pushButtonAntivitusWindowsInfo.enterEvent = self.AntivitusWindowsInfo
         self.pushButtonAntivitusWindowsInfo.leaveEvent = self.ResetAntivitusWindowsInfo
         self.pushButtonBraundMaurWindows.enterEvent = self.BraundMaurWindowsInfo
@@ -28,6 +39,13 @@ class BaseSet(QDialog,Ui_BaseSettings):
         self.pushButtonDefNotifications.leaveEvent = self.ResetDefNotificationsInf
         self.pushButtonAutoUpdateDriversStartWindows.enterEvent = self.AutoUpdateDriversStartWindowsInfo
         self.pushButtonAutoUpdateDriversStartWindows.leaveEvent = self.ResetAutoUpdateDriversStartWindowsInfo
+        self.pushButtonSmartScreen.enterEvent = self.SmartScreenInfo
+        self.pushButtonSmartScreen.leaveEvent = self.ResetSmartScreenInfo
+        self.pushButtonUWP.enterEvent = self.UWPINFO
+        self.pushButtonUWP.leaveEvent = self.ResetUWPINFO
+        self.pushButtonAutoUpdateMaps.enterEvent = self.AutoUpdateMapsInfo
+        self.pushButtonAutoUpdateMaps.leaveEvent = self.ResetAutoUpdateMapsInfo
+
 
 
     def set_widget_height(self, frame, list_widget, frame_height, list_widget_height, main_frame_height):
@@ -59,15 +77,49 @@ class BaseSet(QDialog,Ui_BaseSettings):
     def ResetDefNotificationsInf(self, event):
         self.set_widget_height(self.frame_DefNotifications,self.listWidget_DefNotifications, 32, 25, self.DefolfSizeFrame)
     def AutoUpdateDriversStartWindowsInfo(self, event):
-        self.set_widget_height(self.frame_AutoUpdateDriversStartWindows, self.listWidget_AutoUpdateDriversStartWindows, 100, 100, self.IncreaseFrame)
+        self.set_widget_height(self.frame_AutoUpdateDriversStartWindows, self.listWidget_AutoUpdateDriversStartWindows, 60, 60, self.IncreaseFrame)
     def ResetAutoUpdateDriversStartWindowsInfo(self, event):
         self.set_widget_height(self.frame_AutoUpdateDriversStartWindows, self.listWidget_AutoUpdateDriversStartWindows, 32, 25, self.DefolfSizeFrame)
+    def SmartScreenInfo(self, event):
+        self.set_widget_height(self.frame_SmartScreen, self.listWidget_SmartScreen, 60,60 ,self.IncreaseFrame)
+    def ResetSmartScreenInfo(self, event):
+        self.set_widget_height(self.frame_SmartScreen, self.listWidget_SmartScreen, 32, 25, self.DefolfSizeFrame)
+    def UWPINFO(self, event):
+        self.set_widget_height(self.frame_UWP, self.listWidget_UWP, 60, 60, self.IncreaseFrame)
+    def ResetUWPINFO(self, event):
+        self.set_widget_height(self.frame_UWP, self.listWidget_UWP, 32, 25, self.DefolfSizeFrame)
+    def AutoUpdateMapsInfo(self, event):
+        self.set_widget_height(self.frame_AutoUpdateMaps, self.listWidget_AutoUpdateMaps, 60, 60, self.IncreaseFrame)
+
+    def ResetAutoUpdateMapsInfo(self, event):
+        self.set_widget_height(self.frame_AutoUpdateMaps, self.listWidget_AutoUpdateMaps, 32, 25, self.IncreaseFrame)
 
 
 
 
 
-           
+
+    #Отключение бредмауера Windows
+    def accept_button_clicked(self):
+        if self.toggelBraundMaurWindows.isChecked():
+            disableBraundMaurWindows(self)
+        else:
+            EnableBraundMaurWindows(self)
+
+        if self.toggelAntivirusWindows.isChecked():
+            DefenderOff(self)
+        else:
+            DefenderOn(self)
+
+        if self.toggelWindowsUpdate.isChecked():
+            WindowsUpdateOff(self)
+        else:
+            WindowsUpdateOn(self)
+
+        if self.toggelAutoUpdateMaps.isChecked():
+            disable_location_services(self)
+        else:
+            enable_location_services(self)
 
 
 if __name__ == '__main__':

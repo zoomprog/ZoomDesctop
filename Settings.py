@@ -263,28 +263,6 @@ class Ui_Settings(object):
         self.verticalLayout_4.addWidget(self.pushButtonDefoltSettings)
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea_2)
-        self.frame_5 = QtWidgets.QFrame(parent=self.frame_3)
-        self.frame_5.setMaximumSize(QtCore.QSize(16777215, 150))
-        self.frame_5.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_5.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_5.setObjectName("frame_5")
-        self.pushButtonAccept = QtWidgets.QPushButton(parent=self.frame_5)
-        self.pushButtonAccept.setGeometry(QtCore.QRect(20, 0, 171, 51))
-        self.pushButtonAccept.setStyleSheet("QPushButton#pushButtonAccept{\n"
-"    color: rgb(255, 255, 255);\n"
-"    background-color: #161A1E;\n"
-"    border-radius:25;\n"
-"}")
-        self.pushButtonAccept.setObjectName("pushButtonAccept")
-        self.pushButtonBack = QtWidgets.QPushButton(parent=self.frame_5)
-        self.pushButtonBack.setGeometry(QtCore.QRect(70, 70, 61, 51))
-        self.pushButtonBack.setStyleSheet("QPushButton#pushButtonBack{\n"
-"    color: rgb(255, 255, 255);\n"
-"    background-color: #161A1E;\n"
-"    border-radius:25;\n"
-"}")
-        self.pushButtonBack.setObjectName("pushButtonBack")
-        self.verticalLayout.addWidget(self.frame_5)
         self.horizontalLayout_2.addWidget(self.frame_3)
         self.MainBody = QtWidgets.QFrame(parent=self.frame_4)
         self.MainBody.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
@@ -308,5 +286,3 @@ class Ui_Settings(object):
         self.pushButtonClear.setText(_translate("Settings", "Очистка"))
         self.pushButtonAutoLoad.setText(_translate("Settings", "Автозагрузки"))
         self.pushButtonDefoltSettings.setText(_translate("Settings", "Базовые настройки"))
-        self.pushButtonAccept.setText(_translate("Settings", "Применить"))
-        self.pushButtonBack.setText(_translate("Settings", "Back"))

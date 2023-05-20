@@ -82,7 +82,7 @@ class Ui_BaseSettings(object):
         self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 670))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.frame = QtWidgets.QFrame(parent=self.scrollAreaWidgetContents)
-        self.frame.setGeometry(QtCore.QRect(10, 10, 951, 211))
+        self.frame.setGeometry(QtCore.QRect(10, 10, 951, 311))
         self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame.setObjectName("frame")
@@ -917,6 +917,365 @@ class Ui_BaseSettings(object):
         self.pushButtonAutoUpdateDriversStartWindows.setObjectName("pushButtonAutoUpdateDriversStartWindows")
         self.horizontalLayout_8.addWidget(self.frame_13)
         self.verticalLayout.addWidget(self.frame_AutoUpdateDriversStartWindows)
+        self.frame_SmartScreen = QtWidgets.QFrame(parent=self.frame)
+        self.frame_SmartScreen.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.frame_SmartScreen.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_SmartScreen.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_SmartScreen.setObjectName("frame_SmartScreen")
+        self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.frame_SmartScreen)
+        self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_9.setSpacing(0)
+        self.horizontalLayout_9.setObjectName("horizontalLayout_9")
+        self.listWidget_SmartScreen = QtWidgets.QListWidget(parent=self.frame_SmartScreen)
+        self.listWidget_SmartScreen.setMaximumSize(QtCore.QSize(800, 25))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Symbol")
+        font.setPointSize(13)
+        self.listWidget_SmartScreen.setFont(font)
+        self.listWidget_SmartScreen.setStyleSheet("QListWidget::item {\n"
+"    border-bottom: 1px solid rgba(85,98,112,255);;\n"
+"}\n"
+"\n"
+"")
+        self.listWidget_SmartScreen.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.listWidget_SmartScreen.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.listWidget_SmartScreen.setObjectName("listWidget_SmartScreen")
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_SmartScreen.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Symbol")
+        font.setPointSize(9)
+        item.setFont(font)
+        self.listWidget_SmartScreen.addItem(item)
+        self.horizontalLayout_9.addWidget(self.listWidget_SmartScreen)
+        self.frame_14 = QtWidgets.QFrame(parent=self.frame_SmartScreen)
+        self.frame_14.setStyleSheet("background-color:transparent;")
+        self.frame_14.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_14.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_14.setObjectName("frame_14")
+        self.toggelSmartScreen = QtWidgets.QCheckBox(parent=self.frame_14)
+        self.toggelSmartScreen.setGeometry(QtCore.QRect(10, 2, 61, 21))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.toggelSmartScreen.sizePolicy().hasHeightForWidth())
+        self.toggelSmartScreen.setSizePolicy(sizePolicy)
+        self.toggelSmartScreen.setMinimumSize(QtCore.QSize(61, 21))
+        self.toggelSmartScreen.setMaximumSize(QtCore.QSize(61, 21))
+        self.toggelSmartScreen.setStyleSheet("QCheckBox {\n"
+"        /* Устанавливаем базовые параметры переключателя */\n"
+"        padding: 0;\n"
+"        background: none;\n"
+"        border: none;\n"
+"        outline: none;\n"
+"        /* Размер переключателя */\n"
+"        width: 30px;\n"
+"        height: 20px;\n"
+"        /* Устанавливаем форму переключателя в виде овала */\n"
+"        border-radius: 10px;\n"
+"        /* Устанавливаем фон для переключателя */\n"
+"        background-color: rgb(119, 122, 126);\n"
+"        /* Устанавливаем отступ для индикатора */\n"
+"        margin-right: 10px;\n"
+"        position: absolute\n"
+"    }\n"
+"    QCheckBox::indicator {\n"
+"        /* Устанавливаем размер и форму индикатора в виде круга */\n"
+"        width: 16px;\n"
+"        height: 16px;\n"
+"        border-radius: 8px;\n"
+"        /* Устанавливаем цвет индикатора */\n"
+"        background-color: rgb(255, 0, 0) ;\n"
+"        color: rgb(255, 0, 0);\n"
+"        /* Устанавливаем границу для индикатора */\n"
+"        border: 1px solid  rgb(119, 122, 126);\n"
+"        /* Устанавливаем отступ для индикатора внутри переключателя */\n"
+"        margin: 2px;\n"
+"        /* Добавляем плавный переход при изменении состояния чекбокса */\n"
+"        transition: transform 2s ease-out;\n"
+"    }\n"
+"    QCheckBox::indicator:checked {\n"
+"        /* Смещаем индикатор на 30% вправо при нажатии на чекбокс */\n"
+"        position: relative;\n"
+"        left:30%;\n"
+"        background-color: #7FFF00;    \n"
+"    }\n"
+"    QCheckBox::indicator:pressed {\n"
+"        /* Добавляем эффект нажатия на индикатор */\n"
+"        background-color: rgb(204, 204, 204);\n"
+"    }")
+        self.toggelSmartScreen.setText("")
+        self.toggelSmartScreen.setChecked(False)
+        self.toggelSmartScreen.setObjectName("toggelSmartScreen")
+        self.pushButtonSmartScreen = QtWidgets.QPushButton(parent=self.frame_14)
+        self.pushButtonSmartScreen.setGeometry(QtCore.QRect(70, 2, 25, 25))
+        self.pushButtonSmartScreen.setMinimumSize(QtCore.QSize(21, 20))
+        self.pushButtonSmartScreen.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Social Media Circled")
+        font.setPointSize(21)
+        self.pushButtonSmartScreen.setFont(font)
+        self.pushButtonSmartScreen.setStyleSheet("QPushButton#pushButtonSmartScreen{\n"
+"    border-radius:12;\n"
+"    background-color:rgba(85,98,112,255);\n"
+"    color:rgba(85,98,112,255);\n"
+"}\n"
+"QPushButton#pushButtonSmartScreen:hover{\n"
+"    color:rgba(155,168,182,220);\n"
+"}\n"
+"QPushButton#pushButtonSmartScreen:pressed{\n"
+"    padding-left:5px;\n"
+"    padding-top:5px;\n"
+"    color:rgba(115,128,142,255)\n"
+"}")
+        self.pushButtonSmartScreen.setText("")
+        self.pushButtonSmartScreen.setIcon(icon)
+        self.pushButtonSmartScreen.setIconSize(QtCore.QSize(25, 25))
+        self.pushButtonSmartScreen.setObjectName("pushButtonSmartScreen")
+        self.horizontalLayout_9.addWidget(self.frame_14)
+        self.verticalLayout.addWidget(self.frame_SmartScreen)
+        self.frame_UWP = QtWidgets.QFrame(parent=self.frame)
+        self.frame_UWP.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.frame_UWP.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_UWP.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_UWP.setObjectName("frame_UWP")
+        self.horizontalLayout_10 = QtWidgets.QHBoxLayout(self.frame_UWP)
+        self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_10.setSpacing(0)
+        self.horizontalLayout_10.setObjectName("horizontalLayout_10")
+        self.listWidget_UWP = QtWidgets.QListWidget(parent=self.frame_UWP)
+        self.listWidget_UWP.setMaximumSize(QtCore.QSize(800, 25))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Symbol")
+        font.setPointSize(13)
+        self.listWidget_UWP.setFont(font)
+        self.listWidget_UWP.setStyleSheet("QListWidget::item {\n"
+"    border-bottom: 1px solid rgba(85,98,112,255);;\n"
+"}\n"
+"\n"
+"")
+        self.listWidget_UWP.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.listWidget_UWP.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.listWidget_UWP.setObjectName("listWidget_UWP")
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_UWP.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Symbol")
+        font.setPointSize(9)
+        item.setFont(font)
+        self.listWidget_UWP.addItem(item)
+        self.horizontalLayout_10.addWidget(self.listWidget_UWP)
+        self.frame_15 = QtWidgets.QFrame(parent=self.frame_UWP)
+        self.frame_15.setStyleSheet("background-color:transparent;")
+        self.frame_15.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_15.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_15.setObjectName("frame_15")
+        self.toggelUWP = QtWidgets.QCheckBox(parent=self.frame_15)
+        self.toggelUWP.setGeometry(QtCore.QRect(10, 2, 61, 21))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.toggelUWP.sizePolicy().hasHeightForWidth())
+        self.toggelUWP.setSizePolicy(sizePolicy)
+        self.toggelUWP.setMinimumSize(QtCore.QSize(61, 21))
+        self.toggelUWP.setMaximumSize(QtCore.QSize(61, 21))
+        self.toggelUWP.setStyleSheet("QCheckBox {\n"
+"        /* Устанавливаем базовые параметры переключателя */\n"
+"        padding: 0;\n"
+"        background: none;\n"
+"        border: none;\n"
+"        outline: none;\n"
+"        /* Размер переключателя */\n"
+"        width: 30px;\n"
+"        height: 20px;\n"
+"        /* Устанавливаем форму переключателя в виде овала */\n"
+"        border-radius: 10px;\n"
+"        /* Устанавливаем фон для переключателя */\n"
+"        background-color: rgb(119, 122, 126);\n"
+"        /* Устанавливаем отступ для индикатора */\n"
+"        margin-right: 10px;\n"
+"        position: absolute\n"
+"    }\n"
+"    QCheckBox::indicator {\n"
+"        /* Устанавливаем размер и форму индикатора в виде круга */\n"
+"        width: 16px;\n"
+"        height: 16px;\n"
+"        border-radius: 8px;\n"
+"        /* Устанавливаем цвет индикатора */\n"
+"        background-color: rgb(255, 0, 0) ;\n"
+"        color: rgb(255, 0, 0);\n"
+"        /* Устанавливаем границу для индикатора */\n"
+"        border: 1px solid  rgb(119, 122, 126);\n"
+"        /* Устанавливаем отступ для индикатора внутри переключателя */\n"
+"        margin: 2px;\n"
+"        /* Добавляем плавный переход при изменении состояния чекбокса */\n"
+"        transition: transform 2s ease-out;\n"
+"    }\n"
+"    QCheckBox::indicator:checked {\n"
+"        /* Смещаем индикатор на 30% вправо при нажатии на чекбокс */\n"
+"        position: relative;\n"
+"        left:30%;\n"
+"        background-color: #7FFF00;    \n"
+"    }\n"
+"    QCheckBox::indicator:pressed {\n"
+"        /* Добавляем эффект нажатия на индикатор */\n"
+"        background-color: rgb(204, 204, 204);\n"
+"    }")
+        self.toggelUWP.setText("")
+        self.toggelUWP.setChecked(False)
+        self.toggelUWP.setObjectName("toggelUWP")
+        self.pushButtonUWP = QtWidgets.QPushButton(parent=self.frame_15)
+        self.pushButtonUWP.setGeometry(QtCore.QRect(70, 2, 25, 25))
+        self.pushButtonUWP.setMinimumSize(QtCore.QSize(21, 20))
+        self.pushButtonUWP.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Social Media Circled")
+        font.setPointSize(21)
+        self.pushButtonUWP.setFont(font)
+        self.pushButtonUWP.setStyleSheet("QPushButton#pushButtonUWP{\n"
+"    border-radius:12;\n"
+"    background-color:rgba(85,98,112,255);\n"
+"    color:rgba(85,98,112,255);\n"
+"}\n"
+"QPushButton#pushButtonUWP:hover{\n"
+"    color:rgba(155,168,182,220);\n"
+"}\n"
+"QPushButton#pushButtonUWP:pressed{\n"
+"    padding-left:5px;\n"
+"    padding-top:5px;\n"
+"    color:rgba(115,128,142,255)\n"
+"}")
+        self.pushButtonUWP.setText("")
+        self.pushButtonUWP.setIcon(icon)
+        self.pushButtonUWP.setIconSize(QtCore.QSize(25, 25))
+        self.pushButtonUWP.setObjectName("pushButtonUWP")
+        self.horizontalLayout_10.addWidget(self.frame_15)
+        self.verticalLayout.addWidget(self.frame_UWP)
+        self.frame_AutoUpdateMaps = QtWidgets.QFrame(parent=self.frame)
+        self.frame_AutoUpdateMaps.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.frame_AutoUpdateMaps.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_AutoUpdateMaps.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_AutoUpdateMaps.setObjectName("frame_AutoUpdateMaps")
+        self.horizontalLayout_11 = QtWidgets.QHBoxLayout(self.frame_AutoUpdateMaps)
+        self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_11.setSpacing(0)
+        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
+        self.listWidget_AutoUpdateMaps = QtWidgets.QListWidget(parent=self.frame_AutoUpdateMaps)
+        self.listWidget_AutoUpdateMaps.setMaximumSize(QtCore.QSize(800, 25))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Symbol")
+        font.setPointSize(13)
+        self.listWidget_AutoUpdateMaps.setFont(font)
+        self.listWidget_AutoUpdateMaps.setStyleSheet("QListWidget::item {\n"
+"    border-bottom: 1px solid rgba(85,98,112,255);;\n"
+"}\n"
+"\n"
+"")
+        self.listWidget_AutoUpdateMaps.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.listWidget_AutoUpdateMaps.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.listWidget_AutoUpdateMaps.setObjectName("listWidget_AutoUpdateMaps")
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_AutoUpdateMaps.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Symbol")
+        font.setPointSize(9)
+        item.setFont(font)
+        self.listWidget_AutoUpdateMaps.addItem(item)
+        self.horizontalLayout_11.addWidget(self.listWidget_AutoUpdateMaps)
+        self.frame_16 = QtWidgets.QFrame(parent=self.frame_AutoUpdateMaps)
+        self.frame_16.setStyleSheet("background-color:transparent;")
+        self.frame_16.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_16.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_16.setObjectName("frame_16")
+        self.toggelAutoUpdateMaps = QtWidgets.QCheckBox(parent=self.frame_16)
+        self.toggelAutoUpdateMaps.setGeometry(QtCore.QRect(10, 2, 61, 21))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.toggelAutoUpdateMaps.sizePolicy().hasHeightForWidth())
+        self.toggelAutoUpdateMaps.setSizePolicy(sizePolicy)
+        self.toggelAutoUpdateMaps.setMinimumSize(QtCore.QSize(61, 21))
+        self.toggelAutoUpdateMaps.setMaximumSize(QtCore.QSize(61, 21))
+        self.toggelAutoUpdateMaps.setStyleSheet("QCheckBox {\n"
+"        /* Устанавливаем базовые параметры переключателя */\n"
+"        padding: 0;\n"
+"        background: none;\n"
+"        border: none;\n"
+"        outline: none;\n"
+"        /* Размер переключателя */\n"
+"        width: 30px;\n"
+"        height: 20px;\n"
+"        /* Устанавливаем форму переключателя в виде овала */\n"
+"        border-radius: 10px;\n"
+"        /* Устанавливаем фон для переключателя */\n"
+"        background-color: rgb(119, 122, 126);\n"
+"        /* Устанавливаем отступ для индикатора */\n"
+"        margin-right: 10px;\n"
+"        position: absolute\n"
+"    }\n"
+"    QCheckBox::indicator {\n"
+"        /* Устанавливаем размер и форму индикатора в виде круга */\n"
+"        width: 16px;\n"
+"        height: 16px;\n"
+"        border-radius: 8px;\n"
+"        /* Устанавливаем цвет индикатора */\n"
+"        background-color: rgb(255, 0, 0) ;\n"
+"        color: rgb(255, 0, 0);\n"
+"        /* Устанавливаем границу для индикатора */\n"
+"        border: 1px solid  rgb(119, 122, 126);\n"
+"        /* Устанавливаем отступ для индикатора внутри переключателя */\n"
+"        margin: 2px;\n"
+"        /* Добавляем плавный переход при изменении состояния чекбокса */\n"
+"        transition: transform 2s ease-out;\n"
+"    }\n"
+"    QCheckBox::indicator:checked {\n"
+"        /* Смещаем индикатор на 30% вправо при нажатии на чекбокс */\n"
+"        position: relative;\n"
+"        left:30%;\n"
+"        background-color: #7FFF00;    \n"
+"    }\n"
+"    QCheckBox::indicator:pressed {\n"
+"        /* Добавляем эффект нажатия на индикатор */\n"
+"        background-color: rgb(204, 204, 204);\n"
+"    }")
+        self.toggelAutoUpdateMaps.setText("")
+        self.toggelAutoUpdateMaps.setChecked(False)
+        self.toggelAutoUpdateMaps.setObjectName("toggelAutoUpdateMaps")
+        self.pushButtonAutoUpdateMaps = QtWidgets.QPushButton(parent=self.frame_16)
+        self.pushButtonAutoUpdateMaps.setGeometry(QtCore.QRect(70, 2, 25, 25))
+        self.pushButtonAutoUpdateMaps.setMinimumSize(QtCore.QSize(21, 20))
+        self.pushButtonAutoUpdateMaps.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Social Media Circled")
+        font.setPointSize(21)
+        self.pushButtonAutoUpdateMaps.setFont(font)
+        self.pushButtonAutoUpdateMaps.setStyleSheet("QPushButton#pushButtonAutoUpdateMaps{\n"
+"    border-radius:12;\n"
+"    background-color:rgba(85,98,112,255);\n"
+"    color:rgba(85,98,112,255);\n"
+"}\n"
+"QPushButton#pushButtonAutoUpdateMaps:hover{\n"
+"    color:rgba(155,168,182,220);\n"
+"}\n"
+"QPushButton#pushButtonAutoUpdateMaps:pressed{\n"
+"    padding-left:5px;\n"
+"    padding-top:5px;\n"
+"    color:rgba(115,128,142,255)\n"
+"}")
+        self.pushButtonAutoUpdateMaps.setText("")
+        self.pushButtonAutoUpdateMaps.setIcon(icon)
+        self.pushButtonAutoUpdateMaps.setIconSize(QtCore.QSize(25, 25))
+        self.pushButtonAutoUpdateMaps.setObjectName("pushButtonAutoUpdateMaps")
+        self.horizontalLayout_11.addWidget(self.frame_16)
+        self.verticalLayout.addWidget(self.frame_AutoUpdateMaps)
+        self.pushButton = QtWidgets.QPushButton(parent=self.scrollAreaWidgetContents)
+        self.pushButton.setGeometry(QtCore.QRect(250, 360, 361, 71))
+        self.pushButton.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"color:black;")
+        self.pushButton.setObjectName("pushButton")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
         self.retranslateUi(BaseSettings)
@@ -974,3 +1333,25 @@ class Ui_BaseSettings(object):
         item = self.listWidget_AutoUpdateDriversStartWindows.item(1)
         item.setText(_translate("BaseSettings", "Windows автоматически обновляет драйвера при запуске системы. "))
         self.listWidget_AutoUpdateDriversStartWindows.setSortingEnabled(__sortingEnabled)
+        __sortingEnabled = self.listWidget_SmartScreen.isSortingEnabled()
+        self.listWidget_SmartScreen.setSortingEnabled(False)
+        item = self.listWidget_SmartScreen.item(0)
+        item.setText(_translate("BaseSettings", "Smartscreen"))
+        item = self.listWidget_SmartScreen.item(1)
+        item.setText(_translate("BaseSettings", "Проверяет сайты или файлы на угрозы. Видит, как угрозу, даже нормальный файлы."))
+        self.listWidget_SmartScreen.setSortingEnabled(__sortingEnabled)
+        __sortingEnabled = self.listWidget_UWP.isSortingEnabled()
+        self.listWidget_UWP.setSortingEnabled(False)
+        item = self.listWidget_UWP.item(0)
+        item.setText(_translate("BaseSettings", "Работа UWP приложений в фоне"))
+        item = self.listWidget_UWP.item(1)
+        item.setText(_translate("BaseSettings", "Отключает отрасли от разных приложений, например, автозагрузка Store, показ уведомлений и т.д."))
+        self.listWidget_UWP.setSortingEnabled(__sortingEnabled)
+        __sortingEnabled = self.listWidget_AutoUpdateMaps.isSortingEnabled()
+        self.listWidget_AutoUpdateMaps.setSortingEnabled(False)
+        item = self.listWidget_AutoUpdateMaps.item(0)
+        item.setText(_translate("BaseSettings", "Автообновление карт"))
+        item = self.listWidget_AutoUpdateMaps.item(1)
+        item.setText(_translate("BaseSettings", "В Windows по умолчанию стоит вкл. автообновлекние карт."))
+        self.listWidget_AutoUpdateMaps.setSortingEnabled(__sortingEnabled)
+        self.pushButton.setText(_translate("BaseSettings", "Accept"))
