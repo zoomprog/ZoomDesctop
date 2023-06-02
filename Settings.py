@@ -223,6 +223,7 @@ class Ui_Settings(object):
         self.pushButtonClear.setMaximumSize(QtCore.QSize(200, 50))
         font = QtGui.QFont()
         font.setPointSize(12)
+
         font.setBold(True)
         font.setWeight(75)
         self.pushButtonClear.setFont(font)
@@ -251,6 +252,9 @@ class Ui_Settings(object):
         self.pushButtonDefoltSettings.setMaximumSize(QtCore.QSize(200, 50))
         font = QtGui.QFont()
         font.setPointSize(12)
+
+
+
         font.setBold(True)
         font.setWeight(75)
         self.pushButtonDefoltSettings.setFont(font)

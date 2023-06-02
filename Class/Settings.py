@@ -13,7 +13,6 @@ import Class.MainWindows
 
 import subprocess
 import glob as gb
-import win32gui
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from Functions.RemoveWindowsMenu import RemoveWindowsMenu
