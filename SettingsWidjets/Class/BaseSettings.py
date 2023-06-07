@@ -1,3 +1,5 @@
+import winreg
+
 from PyQt6.QtCore import QEvent
 from PyQt6.QtWidgets import QDialog
 import main
@@ -6,7 +8,7 @@ from Functions.FuncBaseSettings.BraundMaurWindows import disableBraundMaurWindow
 from Functions.FuncBaseSettings.WindowsDefender import DefenderOn, DefenderOff
 from Functions.FuncBaseSettings.WindowsUpdate import WindowsUpdateOff, WindowsUpdateOn
 from Functions.FuncBaseSettings.MapsAutoUpdate import disable_location_services, enable_location_services
-
+from Functions.FuncBaseSettings.SmartScreenStateActivateAndDisable import SmartScreenActivate,SmartScreenDisable
 
 from SettingsWidjets.BaseSettings import Ui_BaseSettings
 from Settings import Ui_Settings
@@ -53,6 +55,12 @@ class BaseSet(QDialog, Ui_BaseSettings):
         else:
             print("Брандмауэр Windows выключен.")
             self.toggelBraundMaurWindows.setChecked(True)
+        if self.SmartScreenState():
+            print('SmartScreen отключен')
+            self.toggelSmartScreen.setChecked(True)
+        else:
+            print('SmartScreen включен')
+            self.toggelSmartScreen.setChecked(False)
 
     def set_widget_height(self, frame, list_widget, frame_height, list_widget_height, main_frame_height):
         frame.setFixedHeight(frame_height)
@@ -103,13 +111,24 @@ class BaseSet(QDialog, Ui_BaseSettings):
 
 
     #Функции для проверки настройку windows
-    def is_firewall_enabled(self):
+    def is_firewall_enabled(self):#Проверка состояния BraundMaur
         command = 'netsh advfirewall show allprofiles'
         output = subprocess.check_output(command, shell=True, encoding='cp866')
         if 'Состояние                             ВКЛЮЧИТЬ' in output:
             return True
         else:
             return False
+    def SmartScreenState(self):
+        key_path = r"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer"
+        key_name = "SmartScreenEnabled"
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path)
+        value, _ = winreg.QueryValueEx(key, key_name)
+        if value == "Off":
+            return True
+        else:
+            return False
+
+
     #Отключение функций  Windows
     def accept_button_clicked(self):
         if self.toggelBraundMaurWindows.isChecked():
@@ -131,6 +150,10 @@ class BaseSet(QDialog, Ui_BaseSettings):
             disable_location_services(self)
         else:
             enable_location_services(self)
+        if self.toggelSmartScreen.isChecked():
+            SmartScreenDisable(self)
+        else:
+            SmartScreenActivate(self)
 
 
 if __name__ == '__main__':
