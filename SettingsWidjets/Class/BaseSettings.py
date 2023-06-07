@@ -16,8 +16,8 @@ class BaseSet(QDialog, Ui_BaseSettings):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        disableBraundMaurWindows(self)
         self.pushButton.clicked.connect(self.accept_button_clicked)
+
 
 
         self.listWidget_BraundMaurWindows.setWordWrap(True)
@@ -46,7 +46,13 @@ class BaseSet(QDialog, Ui_BaseSettings):
         self.pushButtonAutoUpdateMaps.enterEvent = self.AutoUpdateMapsInfo
         self.pushButtonAutoUpdateMaps.leaveEvent = self.ResetAutoUpdateMapsInfo
 
-
+        #Проверки на настройку Windows
+        if self.is_firewall_enabled():
+            print("Брандмауэр Windows включен.")
+            self.toggelBraundMaurWindows.setChecked(False)
+        else:
+            print("Брандмауэр Windows выключен.")
+            self.toggelBraundMaurWindows.setChecked(True)
 
     def set_widget_height(self, frame, list_widget, frame_height, list_widget_height, main_frame_height):
         frame.setFixedHeight(frame_height)
@@ -96,10 +102,15 @@ class BaseSet(QDialog, Ui_BaseSettings):
 
 
 
-
-
-
-    #Отключение бредмауера Windows
+    #Функции для проверки настройку windows
+    def is_firewall_enabled(self):
+        command = 'netsh advfirewall show allprofiles'
+        output = subprocess.check_output(command, shell=True, encoding='cp866')
+        if 'Состояние                             ВКЛЮЧИТЬ' in output:
+            return True
+        else:
+            return False
+    #Отключение функций  Windows
     def accept_button_clicked(self):
         if self.toggelBraundMaurWindows.isChecked():
             disableBraundMaurWindows(self)
