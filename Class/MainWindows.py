@@ -131,5 +131,3 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.reg = Class.Registration.Refistration()
         self.reg.show()
         self.hide()
-
-

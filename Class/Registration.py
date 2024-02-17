@@ -89,7 +89,8 @@ class Refistration(QDialog, Ui_Ui_Reg):
             })
             xxx = db.users.find_one({'firstname': firstname, 'password': password})
             self.id_Profile = xxx['_id']  # запомнить id пользователя после логина
-            self.abouttheprogram = main.AboutTheProgram(self.id_Profile)
+            self.abouttheprogram = main.MainWindows()  # Replace 'settings' with the appropriate argument
+
             self.abouttheprogram.show()
             self.hide()
 

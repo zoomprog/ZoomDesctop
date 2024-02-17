@@ -1,11 +1,7 @@
 import configparser
+from pymongo import MongoClient
 
-from pymongo import database
-from pymongo.mongo_client import MongoClient
-import pymongo
-import database
 from database.BDConfig import uri
-
 
 client = MongoClient(uri)
 
@@ -18,3 +14,4 @@ except Exception as e:
 db = client.AppWise
 coll = db.users
 collLoggedIn = db.LoggedIn
+# ... rest of your code

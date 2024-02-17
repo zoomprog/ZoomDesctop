@@ -6,7 +6,7 @@ from ui_AboutTheProgram import Ui_AboutTheProgram
 from Functions.RemoveWindowsMenu import RemoveWindowsMenu
 import Class.download
 import Class.Settings
-from PyQt6.QtWidgets import QWidget
+from PyQt6.QtWidgets import QWidget, QDialog
 from PyQt6.QtGui import QMouseEvent
 from database.DB import db, coll,collLoggedIn
 from database import *
