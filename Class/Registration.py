@@ -20,16 +20,20 @@ class Refistration(QDialog, Ui_Ui_Reg):
         self.ui = Ui_Ui_Reg
         self.setupUi(self)
         RemoveWindowsMenu(self)
-
         self.MainClass = Class.MainWindows.MainWindows()  # Методы из MainWindows
+        self.connect_signals()
+        self.connect_upbar()
 
+    # Сигнал методов
+    def connect_signals(self):
         self.pushClose.clicked.connect(self.MainClass.CloseWindow)
         self.pushReg.clicked.connect(self.register)
-        # self.RemoveWindowsMenu()
-        self.status = self.label_2
-        self.status.setStyleSheet('font-size:10px; color: red;text-align: center;')
         self.pushBack.clicked.connect(self.PushBack)
 
+    # Сигнал методов для перемещения окна UpBar
+    def connect_upbar(self):
+        self.status = self.label_2
+        self.status.setStyleSheet('font-size:10px; color: red;text-align: center;')
         # Перемещение окна UpBar
         self.UpBar.move(80, 35)
         self.UpBar.setFixedHeight(50)
@@ -47,14 +51,11 @@ class Refistration(QDialog, Ui_Ui_Reg):
         else:
             self.offset = None
 
-
-
     def PushBack(self):
         self.ui = main.MainWindows()
         self.ui.show()
         self.hide()
 
-    #
 
     def is_valid_password(self, password):
         count_digit = sum(c.isdigit() for c in password)
@@ -67,6 +68,7 @@ class Refistration(QDialog, Ui_Ui_Reg):
         regex = re.compile(r'[A-Za-z0-9]+([._-][A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z]{2,})+')
         return re.fullmatch(regex, email)
 
+    # Проверки во время регистрации
     def register(self):
         firstname = self.FirstName.text()
         lastname = self.LastName.text()
@@ -77,14 +79,9 @@ class Refistration(QDialog, Ui_Ui_Reg):
         existing_user = coll.users.find_one({"email": email})
 
         if existing_user is not None:
-            # Пользователь существует, выводим сообщение об ошибке
             self.status.setText('Аккаунт с данными уже был зарегистрирован')
         elif password != confirmpassword:
             self.status.setText('Пароли не совпадают')
-        elif len(password) < 6:
-            self.status.setText('Пароль слишком короткий')
-        elif len(password) > 20:
-            self.status.setText('Пароль слишком длинный')
         elif not self.is_valid_password(password):
             self.status.setText('Некорректный формат пароля')
         elif len(firstname) < 5:
@@ -92,22 +89,22 @@ class Refistration(QDialog, Ui_Ui_Reg):
         elif not self.is_valid_email(email):
             self.status.setText('Email указан неверно')
         else:
-            # Пользователя нет, производим регистрацию
-            insert_result = coll.users.insert_one({
-                "firstname": firstname,
-                "lastname": lastname,
-                "email": email,
-                "password": password,
-                "confirmpassword": confirmpassword
-            })
+            self.create_user(firstname, lastname, email, password, confirmpassword)
 
-            if insert_result.inserted_id:
-                self.id_Profile = insert_result.inserted_id
-                # Ваши дальнейшие действия с id_Profile
-                self.abouttheprogram = main.MainWindows()
-                self.abouttheprogram.show()
-                self.hide()
-            else:
-                # Обработка ситуации, когда не удалось получить _id после регистрации
-                self.status.setText('Ошибка при логине. Проверьте правильность введенных данных.')
+    # Создание пользователя
+    def create_user(self, firstname, lastname, email, password, confirmpassword):
+        insert_result = coll.users.insert_one({
+            "firstname": firstname,
+            "lastname": lastname,
+            "email": email,
+            "password": password,
+            "confirmpassword": confirmpassword
+        })
 
+        if insert_result.inserted_id:
+            self.id_Profile = insert_result.inserted_id
+            self.abouttheprogram = main.MainWindows()
+            self.abouttheprogram.show()
+            self.hide()
+        else:
+            self.status.setText('Ошибка при логине. Проверьте правильность введенных данных.')
