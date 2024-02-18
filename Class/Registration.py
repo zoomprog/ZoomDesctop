@@ -56,61 +56,58 @@ class Refistration(QDialog, Ui_Ui_Reg):
 
     #
 
-    def register(self):
+    def is_valid_password(self, password):
+        count_digit = sum(c.isdigit() for c in password)
+        count_upper = sum(c.isupper() for c in password)
+        count_spec = sum(c in '!@#$%&' for c in password)
 
+        return count_digit >= 3 and count_upper > 0 and count_spec > 0 and 6 <= len(password) <= 20
+
+    def is_valid_email(self, email):
+        regex = re.compile(r'[A-Za-z0-9]+([._-][A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z]{2,})+')
+        return re.fullmatch(regex, email)
+
+    def register(self):
         firstname = self.FirstName.text()
         lastname = self.LastName.text()
         email = self.Email.text()
         password = self.Password.text()
         confirmpassword = self.ConfirmPassword.text()
 
-        # Проверка пароля
-        regex = re.compile(r'[A-Za-z0-9]+([._-][A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z]{2,})+')
-        count_digit = 0
-        count_upper = 0
-        count_spec = 0
-        spec_simvol = '!@#$%&'
-        for s in password:
-            if s.isdigit():
-                count_digit += 1
-            if s.isupper():
-                count_upper += 1
-            if s in spec_simvol:
-                count_spec += 1
-        result_count = coll.users.count_documents({"firstname": firstname, "email": email})
+        existing_user = coll.users.find_one({"email": email})
 
-        if result_count == 0 and count_digit >= 3 and count_upper > 0 and count_spec > 0 and 6 <= len(password) <= 20 and len(firstname) > 0 and re.fullmatch(regex, email):
-            coll.insert_one({
+        if existing_user is not None:
+            # Пользователь существует, выводим сообщение об ошибке
+            self.status.setText('Аккаунт с данными уже был зарегистрирован')
+        elif password != confirmpassword:
+            self.status.setText('Пароли не совпадают')
+        elif len(password) < 6:
+            self.status.setText('Пароль слишком короткий')
+        elif len(password) > 20:
+            self.status.setText('Пароль слишком длинный')
+        elif not self.is_valid_password(password):
+            self.status.setText('Некорректный формат пароля')
+        elif len(firstname) < 5:
+            self.status.setText('Имя пользователя должно быть не менее 5 символов')
+        elif not self.is_valid_email(email):
+            self.status.setText('Email указан неверно')
+        else:
+            # Пользователя нет, производим регистрацию
+            insert_result = coll.users.insert_one({
                 "firstname": firstname,
                 "lastname": lastname,
                 "email": email,
                 "password": password,
                 "confirmpassword": confirmpassword
             })
-            xxx = db.users.find_one({'firstname': firstname, 'password': password})
-            self.id_Profile = xxx['_id']  # запомнить id пользователя после логина
-            self.abouttheprogram = main.MainWindows()  # Replace 'settings' with the appropriate argument
 
-            self.abouttheprogram.show()
-            self.hide()
-
-        else:
-            if password != confirmpassword:
-                self.status.setText('Пароли не совпадают')
-            elif len(password) < 6:
-                self.status.setText('Пароль слишком короткий')
-            elif len(password) > 20:
-                self.status.setText('Пароль слишком длинный')
-            elif count_spec == 0:
-                self.status.setText('Пароль должен содержать хотя бы один специальный символ (!@#$%&)')
-            elif count_upper == 0:
-                self.status.setText('Пароль должен содержать хотя бы одну заглавную букву')
-            elif count_digit < 3:
-                self.status.setText('Пароль должен содержать хотя бы три цифры')
-            elif len(firstname) < 5:
-                self.status.setText('Имя пользователя должно быть не менее 5 символов')
-            elif not re.fullmatch(regex, email):
-                self.status.setText('Email указан неверно')
+            if insert_result.inserted_id:
+                self.id_Profile = insert_result.inserted_id
+                # Ваши дальнейшие действия с id_Profile
+                self.abouttheprogram = main.MainWindows()
+                self.abouttheprogram.show()
+                self.hide()
             else:
-                self.status.setText('Аккаунт с данными уже был зарегистрирован')
+                # Обработка ситуации, когда не удалось получить _id после регистрации
+                self.status.setText('Ошибка при логине. Проверьте правильность введенных данных.')
 
