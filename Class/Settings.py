@@ -27,6 +27,7 @@ class Setings(QDialog,Ui_Settings):
         self.setupUi(self)
         RemoveWindowsMenu(self)
         self.importmainclass = main.MainWindows
+        self.connect_signals_text()
         #закрытие программы
 
 
@@ -63,3 +64,19 @@ class Setings(QDialog,Ui_Settings):
             self.move(self.mapToGlobal(event.pos() - self.offset))
         else:
             self.offset = None
+    def connect_signals_text(self):
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        font.setBold(True)
+        self.pushButtonAutoLoad.setFont(font)
+        self.pushButtonAutoLoad.setText("Автозагрузки")
+        self.pushButtonDefoltSettings.setFont(font)
+        self.pushButtonDefoltSettings.setText("Базовые настройки")
+        self.pushButtonClear.setFont(font)
+        self.pushButtonClear.setText("Очистка")
+        self.pushButtonServise.setFont(font)
+        self.pushButtonServise.setText("Службы")
+        self.pushButtonPowerSupply.setFont(font)
+        self.pushButtonPowerSupply.setText("Электропитание")
+        self.pushButtonPowerSupply.setFont(font)
+        self.pushButtonPowerSupply.setText("Электропитание")

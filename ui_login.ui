@@ -280,7 +280,17 @@ pading-bottom:7px;</string>
      </font>
     </property>
     <property name="text">
-     <string>Y</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="login.qrc">
+      <normaloff>:/image/image/icon/free-icon-discord-2626288.png</normaloff>:/image/image/icon/free-icon-discord-2626288.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
     </property>
    </widget>
    <widget class="QPushButton" name="pushUrlGitHub">
@@ -305,7 +315,17 @@ pading-bottom:7px;</string>
      </font>
     </property>
     <property name="text">
-     <string>)</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="login.qrc">
+      <normaloff>:/image/image/icon/free-icon-github-733553 (1).png</normaloff>:/image/image/icon/free-icon-github-733553 (1).png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
     </property>
    </widget>
    <widget class="QPushButton" name="pushUrlFacebook">
@@ -330,7 +350,17 @@ pading-bottom:7px;</string>
      </font>
     </property>
     <property name="text">
-     <string>E</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="login.qrc">
+      <normaloff>:/image/image/icon/facebook_logo_icon_147291.png</normaloff>:/image/image/icon/facebook_logo_icon_147291.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
     </property>
    </widget>
    <widget class="QPushButton" name="pushUrlYouTube">
@@ -355,7 +385,17 @@ pading-bottom:7px;</string>
      </font>
     </property>
     <property name="text">
-     <string>P</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="login.qrc">
+      <normaloff>:/image/image/icon/1491580651-yumminkysocialmedia28_83061.png</normaloff>:/image/image/icon/1491580651-yumminkysocialmedia28_83061.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
     </property>
    </widget>
    <widget class="QPushButton" name="pushClose">

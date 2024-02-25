@@ -14,8 +14,6 @@ from Functions.BD.TransferringData.FromUsersToLogedIn import FromUsersToLoggedIn
 from database.DB import client, db, coll, collLoggedIn
 from ui_login import Ui_ImageDialog
 
-
-
 class MainWindows(QDialog, Ui_ImageDialog):
     homeAction = None
 
@@ -50,6 +48,9 @@ class MainWindows(QDialog, Ui_ImageDialog):
         else:
             self.pushLogin.clicked.connect(self.login)
 
+
+
+        self.connect_signals_text()
 
 
         # Кнопки
@@ -125,9 +126,17 @@ class MainWindows(QDialog, Ui_ImageDialog):
 
 
 
-
-
     def WindowReg(self):
         self.reg = Class.Registration.Refistration()
         self.reg.show()
         self.hide()
+
+    def connect_signals_text(self):
+        self.label_3.setText("<html><head/><body><p align=\"center\"><span style=\" font-size:29pt; font-weight:600; color:#ffffff;\">zoomApp</span></p></body></html>")
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        self.pushReg.setFont(font)
+        self.pushReg.setText("Registration")
+        self.pushLogin.setFont(font)
+        self.pushLogin.setText("Login")

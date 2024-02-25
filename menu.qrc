@@ -3,6 +3,11 @@
     <file>image/photo/menu.png</file>
   </qresource>
   <qresource prefix="icon">
+    <file>image/icon/1491580651-yumminkysocialmedia28_83061.png</file>
+    <file>image/icon/facebook_logo_icon_147291.png</file>
+    <file>image/icon/free-icon-github-733553 (1).png</file>
+    <file>image/icon/free-icon-github-733553.png</file>
+    <file>image/icon/free-icon-discord-2626288.png</file>
     <file>image/icon/information.png</file>
     <file>image/icon/icons8-информация-64.png</file>
     <file>image/icon/icons8-информация-50.png</file>

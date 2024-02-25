@@ -15,6 +15,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from Functions.RemoveWindowsMenu import RemoveWindowsMenu
 import Class.AboutTheProgram
+import win32gui
 
 class Download(QDialog, Ui_Download):
     def __init__(self,id_Profile, settings):

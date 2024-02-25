@@ -29,6 +29,12 @@ class Refistration(QDialog, Ui_Ui_Reg):
         self.pushClose.clicked.connect(self.MainClass.CloseWindow)
         self.pushReg.clicked.connect(self.register)
         self.pushBack.clicked.connect(self.PushBack)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        self.pushReg.setFont(font)
+        self.pushReg.setText("Registration")
+
 
     # Сигнал методов для перемещения окна UpBar
     def connect_upbar(self):
@@ -108,3 +114,4 @@ class Refistration(QDialog, Ui_Ui_Reg):
             self.hide()
         else:
             self.status.setText('Ошибка при логине. Проверьте правильность введенных данных.')
+

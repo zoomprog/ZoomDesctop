@@ -3,6 +3,7 @@ import sys
 import webbrowser
 import re
 import os
+# import win32gui
 import menu, login, DownloadSoft
 from PyQt6.QtWidgets import QDialog, QVBoxLayout
 from PyQt6 import QtWidgets, QtCore, QtGui

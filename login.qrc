@@ -1,5 +1,12 @@
 <RCC>
   <qresource prefix="image">
+    <file>image/icon/1491580651-yumminkysocialmedia28_83061.png</file>
+    <file>image/icon/facebook_logo_icon_147291.png</file>
+    <file>image/icon/free-icon-github-733553 (1).png</file>
+    <file>image/icon/free-icon-github-733553.png</file>
+    <file>image/icon/free-icon-discord-2626288.png</file>
+    <file>image/icon/free-icon-github-733553.png</file>
+    <file>image/icon/free-icon-logo-11423407.png</file>
     <file>image/photo/login.jpg</file>
   </qresource>
 </RCC>

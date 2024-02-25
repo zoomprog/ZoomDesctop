@@ -8,7 +8,7 @@ import Class.download
 import Class.Settings
 from PyQt6.QtWidgets import QWidget, QDialog
 from PyQt6.QtGui import QMouseEvent
-from database.DB import db, coll,collLoggedIn
+from database.DB import db, coll, collLoggedIn
 from database import *
 from PyQt6.QtCore import QSettings
 
@@ -25,6 +25,7 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.abouttheprogram = Ui_AboutTheProgram
         self.setupUi(self)
         RemoveWindowsMenu(self)  # Убирает windows форму
+        self.connect_signals_text()
 
         self.id_Profile = id_Profile
         self.settings = settings
@@ -162,3 +163,18 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.ui = Class.Settings.Setings()
         self.ui.show()
         self.hide()
+
+    def connect_signals_text(self):
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        font.setBold(True)
+        self.pushDownload.setFont(font)
+        self.pushDownload.setText("SOFT")
+        self.pushSetting.setFont(font)
+        self.pushSetting.setText("SETTINGS")
+        self.pushActivate.setFont(font)
+        self.pushActivate.setText("ACTIVATE")
+        self.pushButtonProfile.setFont(font)
+        self.pushButtonProfile.setText("Profile")
+        self.pushDownloadUpdate.setFont(font)
+        self.pushDownloadUpdate.setText("Скачать")
