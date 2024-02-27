@@ -6,9 +6,10 @@ from PyQt6.QtGui import QMouseEvent
 from PyQt6.QtWidgets import QMainWindow, QVBoxLayout, QFrame, QPushButton
 
 import SettingsWidjets.Class.BaseSettings
+import SettingsWidjets.Class.WindowsCleaning
 import main
 from main import *
-#from main import MainWindows
+# from main import MainWindows
 import Class.MainWindows
 
 import subprocess
@@ -19,38 +20,38 @@ from Functions.RemoveWindowsMenu import RemoveWindowsMenu
 import Class.AboutTheProgram
 
 
-class Setings(QDialog,Ui_Settings):
+class Setings(QDialog, Ui_Settings):
     def __init__(self):
         super().__init__()
         self.aa = None
         self.settings = Ui_Settings
         self.setupUi(self)
         RemoveWindowsMenu(self)
-        self.importmainclass = main.MainWindows
-        self.connect_signals_text()
-        #закрытие программы
-
-
-        self.pushButtonDefoltSettings.clicked.connect(self.DefoltSettings)
-
-
-
-
-
-
-    def DefoltSettings(self):
+        self.current_menu = None  # Keep track of the currently open menu
         self.frame = QFrame(self)
         self.layout = QVBoxLayout(self.MainBody)
-        self.aa = SettingsWidjets.Class.BaseSettings.BaseSet()
-        self.layout.addWidget(self.aa)
+        self.importmainclass = main.MainWindows
+        self.connect_signals_text()
+        # закрытие программы
 
+        self.pushButtonDefoltSettings.clicked.connect(self.DefoltSettings)
+        self.pushButtonClear.clicked.connect(self.Clear)
 
-        # self.aa = SettingsWidjets.Class.BaseSettings.BaseSet()
-        # self.layout.addWidget(self.aa)
-        # self.main_window.setCentralWidget(self.frame)
-        # self.main_window.show()
+    def DefoltSettings(self):
+        self.update_menu(SettingsWidjets.Class.BaseSettings.BaseSet())
 
+    def Clear(self):
+        self.update_menu(SettingsWidjets.Class.WindowsCleaning.WindowsCleaning())
 
+    def update_menu(self, new_menu):
+        if self.current_menu is not None:
+            self.current_menu.close()
+            self.layout.removeWidget(self.current_menu)
+            self.current_menu.deleteLater()
+
+        self.current_menu = new_menu
+        self.layout.addWidget(self.current_menu)
+        self.current_menu.show()
 
 
     def mousePressEvent(self, event: QMouseEvent) -> None:
@@ -64,6 +65,7 @@ class Setings(QDialog,Ui_Settings):
             self.move(self.mapToGlobal(event.pos() - self.offset))
         else:
             self.offset = None
+
     def connect_signals_text(self):
         font = QtGui.QFont()
         font.setPointSize(14)
