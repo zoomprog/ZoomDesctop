@@ -19,5 +19,3 @@ thumbnail_cache_size_bytes = get_thumbnail_cache_size()
 
 # Преобразовать размер в мегабайты
 thumbnail_cache_size_megabytes = thumbnail_cache_size_bytes / (1024 * 1024)
-
-print(f"Размер кэша эскизов: {thumbnail_cache_size_megabytes} МБ")
