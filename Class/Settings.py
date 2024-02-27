@@ -26,6 +26,7 @@ class Setings(QDialog, Ui_Settings):
         self.aa = None
         self.settings = Ui_Settings
         self.setupUi(self)
+
         RemoveWindowsMenu(self)
         self.current_menu = None  # Keep track of the currently open menu
         self.frame = QFrame(self)
@@ -36,6 +37,8 @@ class Setings(QDialog, Ui_Settings):
 
         self.pushButtonDefoltSettings.clicked.connect(self.DefoltSettings)
         self.pushButtonClear.clicked.connect(self.Clear)
+        self.pushButtonClose.clicked.connect(self.CloseWindow)
+
 
     def DefoltSettings(self):
         self.update_menu(SettingsWidjets.Class.BaseSettings.BaseSet())
@@ -82,3 +85,7 @@ class Setings(QDialog, Ui_Settings):
         self.pushButtonPowerSupply.setText("Электропитание")
         self.pushButtonPowerSupply.setFont(font)
         self.pushButtonPowerSupply.setText("Электропитание")
+
+    @staticmethod
+    def CloseWindow():
+        sys.exit()

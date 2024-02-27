@@ -156,8 +156,3 @@ class BaseSet(QDialog, Ui_BaseSettings):
             SmartScreenActivate(self)
 
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    base_set = BaseSet()
-    base_set.show()
-    sys.exit(app.exec())
