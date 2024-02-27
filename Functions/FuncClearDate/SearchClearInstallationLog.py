@@ -15,12 +15,7 @@ def get_total_size_in_mb(directories):
     return total_size_mb
 
 # Замените список директорий на необходимые вам
-directories_to_check = [
-    'X:\\Windows\\panther\\',
-    '%WINDIR%\\Panther',
-    '%WINDIR%\\Inf\\Setupapi.log',
-    '%WINDIR%\\System32\\Sysprep\\Panther'
-]
 
-total_size = get_total_size_in_mb(directories_to_check)
-print(f'{total_size:.2f} MB')
+
+
+
