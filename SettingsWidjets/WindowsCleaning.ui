@@ -125,7 +125,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
        <rect>
         <x>10</x>
         <y>20</y>
-        <width>951</width>
+        <width>961</width>
         <height>551</height>
        </rect>
       </property>
@@ -155,12 +155,21 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
         <number>0</number>
        </property>
        <item>
-        <widget class="QFrame" name="frame_AntivirusWindows">
+        <widget class="QFrame" name="frame_ClearTemporaryFiles">
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>32</height>
+           <height>45</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">/* styles.qss */
+
+#frame_ClearTemporaryFiles {
+    background-color: #161A1E;
+    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */
+}
+</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -185,41 +194,13 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
            <number>0</number>
           </property>
           <item>
-           <widget class="QListWidget" name="listWidget_AntivirusWindows">
-            <property name="maximumSize">
+           <widget class="QFrame" name="frame_1">
+            <property name="minimumSize">
              <size>
-              <width>700</width>
-              <height>25</height>
+              <width>0</width>
+              <height>50</height>
              </size>
             </property>
-            <property name="font">
-             <font>
-              <family>Segoe UI Symbol</family>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QListWidget::item {
-    border-bottom: 1px solid rgba(85,98,112,255);;
-}
-
-</string>
-            </property>
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="autoScroll">
-             <bool>true</bool>
-            </property>
-            <item>
-             <property name="text">
-              <string>Временные файлы</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
-           <widget class="QFrame" name="frame_1">
             <property name="styleSheet">
              <string notr="true">background-color: transparent;</string>
             </property>
@@ -229,34 +210,110 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
+            <widget class="QLabel" name="labelClearTemporaryFiles">
+             <property name="geometry">
+              <rect>
+               <x>760</x>
+               <y>10</y>
+               <width>70</width>
+               <height>31</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>70</horstretch>
+               <verstretch>30</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: white; /* Установите цвет текста в белый */
+font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+font-weight: bold; /* Установите жирность шрифта (если нужно) */
+margin-top: 5px; /* Опустить текст на 10 пикселей вниз */</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
             <widget class="QPushButton" name="pushClearTemporaryFiles">
              <property name="geometry">
               <rect>
-               <x>150</x>
-               <y>0</y>
-               <width>75</width>
-               <height>23</height>
+               <x>850</x>
+               <y>10</y>
+               <width>91</width>
+               <height>31</height>
               </rect>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>91</width>
+               <height>31</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>91</width>
+               <height>31</height>
+              </size>
+             </property>
+             <property name="baseSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(255, 255, 255);
-color:black</string>
+              <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: #161A1E;
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+    font-size: 11px; /* Установите размер шрифта */
+    padding: 10px 20px; /* Установите отступы */
+    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */
+}
+
+QPushButton:hover {
+    background-color: #2C3236;
+    transition: background-color 0.3s ease;
+}
+</string>
              </property>
              <property name="text">
               <string>Очистка</string>
              </property>
             </widget>
-            <widget class="QLabel" name="labelClearTemporaryFiles">
+            <widget class="QLabel" name="label">
              <property name="geometry">
               <rect>
-               <x>20</x>
-               <y>5</y>
-               <width>81</width>
+               <x>30</x>
+               <y>10</y>
+               <width>131</width>
                <height>21</height>
               </rect>
              </property>
+             <property name="styleSheet">
+              <string notr="true">/* styles.qss */
+
+QLabel {
+    color: white; /* Установите цвет текста в белый */
+    font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+    font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+    font-weight: bold; /* Установите жирность шрифта (если нужно) */
+    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */
+}
+</string>
+             </property>
              <property name="text">
-              <string/>
+              <string>Временные файлы</string>
              </property>
             </widget>
            </widget>
@@ -298,12 +355,27 @@ color:black</string>
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frame_AntivirusWindows_3">
+        <widget class="QFrame" name="frame_Clearthumbnailcache">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>45</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>32</height>
+           <height>40</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">/* styles.qss */
+
+#frame_Clearthumbnailcache {
+    background-color: #161A1E;
+    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */
+}
+</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -328,40 +400,6 @@ color:black</string>
            <number>0</number>
           </property>
           <item>
-           <widget class="QListWidget" name="listWidget_AntivirusWindows_2">
-            <property name="maximumSize">
-             <size>
-              <width>700</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Segoe UI Symbol</family>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QListWidget::item {
-    border-bottom: 1px solid rgba(85,98,112,255);;
-}
-
-</string>
-            </property>
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="autoScroll">
-             <bool>true</bool>
-            </property>
-            <item>
-             <property name="text">
-              <string>Кэш экскизов</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
            <widget class="QFrame" name="frame_2">
             <property name="styleSheet">
              <string notr="true">background-color: transparent;</string>
@@ -375,15 +413,35 @@ color:black</string>
             <widget class="QPushButton" name="pushClearthumbnailcache">
              <property name="geometry">
               <rect>
-               <x>150</x>
-               <y>0</y>
-               <width>75</width>
-               <height>23</height>
+               <x>850</x>
+               <y>10</y>
+               <width>91</width>
+               <height>31</height>
               </rect>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>91</width>
+               <height>31</height>
+              </size>
+             </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(255, 255, 255);
-color:black</string>
+              <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: #161A1E;
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+    font-size: 11px; /* Установите размер шрифта */
+    padding: 10px 20px; /* Установите отступы */
+    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */
+}
+
+QPushButton:hover {
+    background-color: #2C3236;
+    transition: background-color 0.3s ease;
+}
+</string>
              </property>
              <property name="text">
               <string>Очистка</string>
@@ -392,14 +450,58 @@ color:black</string>
             <widget class="QLabel" name="labelClearthumbnailcache">
              <property name="geometry">
               <rect>
-               <x>20</x>
-               <y>5</y>
+               <x>750</x>
+               <y>10</y>
                <width>81</width>
-               <height>21</height>
+               <height>30</height>
               </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>70</horstretch>
+               <verstretch>30</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: white; /* Установите цвет текста в белый */
+font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+font-weight: bold; /* Установите жирность шрифта (если нужно) */
+margin-top: 5px; /* Опустить текст на 10 пикселей вниз */</string>
              </property>
              <property name="text">
               <string/>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_2">
+             <property name="geometry">
+              <rect>
+               <x>30</x>
+               <y>10</y>
+               <width>111</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">/* styles.qss */
+
+QLabel {
+    color: white; /* Установите цвет текста в белый */
+    font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+    font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+    font-weight: bold; /* Установите жирность шрифта (если нужно) */
+    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */
+}
+</string>
+             </property>
+             <property name="text">
+              <string>Кэш экскизов</string>
              </property>
             </widget>
            </widget>
@@ -441,12 +543,28 @@ color:black</string>
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frame_AntivirusWindows_4">
+        <widget class="QFrame" name="frame_Clearinstallationlogfiles">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>45</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>32</height>
+           <height>40</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+/* styles.qss */
+
+#frame_Clearinstallationlogfiles {
+    background-color: #161A1E;
+    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */
+}
+</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -471,40 +589,6 @@ color:black</string>
            <number>0</number>
           </property>
           <item>
-           <widget class="QListWidget" name="listWidget_AntivirusWindows_3">
-            <property name="maximumSize">
-             <size>
-              <width>700</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Segoe UI Symbol</family>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QListWidget::item {
-    border-bottom: 1px solid rgba(85,98,112,255);;
-}
-
-</string>
-            </property>
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="autoScroll">
-             <bool>true</bool>
-            </property>
-            <item>
-             <property name="text">
-              <string>Файлы журнала установок</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
            <widget class="QFrame" name="frame_3">
             <property name="styleSheet">
              <string notr="true">background-color: transparent;</string>
@@ -518,15 +602,41 @@ color:black</string>
             <widget class="QPushButton" name="pushClearinstallationlogfiles">
              <property name="geometry">
               <rect>
-               <x>150</x>
+               <x>850</x>
                <y>0</y>
-               <width>75</width>
-               <height>23</height>
+               <width>91</width>
+               <height>31</height>
               </rect>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>91</width>
+               <height>31</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>91</width>
+               <height>31</height>
+              </size>
+             </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(255, 255, 255);
-color:black</string>
+              <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: #161A1E;
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+    font-size: 11px; /* Установите размер шрифта */
+    padding: 10px 20px; /* Установите отступы */
+    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */
+}
+
+QPushButton:hover {
+    background-color: #2C3236;
+    transition: background-color 0.3s ease;
+}
+</string>
              </property>
              <property name="text">
               <string>Очистка</string>
@@ -535,14 +645,58 @@ color:black</string>
             <widget class="QLabel" name="labelClearinstallationlogfiles">
              <property name="geometry">
               <rect>
-               <x>20</x>
-               <y>5</y>
+               <x>750</x>
+               <y>10</y>
                <width>81</width>
-               <height>21</height>
+               <height>30</height>
               </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>70</horstretch>
+               <verstretch>30</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: white; /* Установите цвет текста в белый */
+font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+font-weight: bold; /* Установите жирность шрифта (если нужно) */
+margin-top: 5px; /* Опустить текст на 10 пикселей вниз */</string>
              </property>
              <property name="text">
               <string/>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_3">
+             <property name="geometry">
+              <rect>
+               <x>30</x>
+               <y>10</y>
+               <width>181</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">/* styles.qss */
+
+QLabel {
+    color: white; /* Установите цвет текста в белый */
+    font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+    font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+    font-weight: bold; /* Установите жирность шрифта (если нужно) */
+    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */
+}
+</string>
+             </property>
+             <property name="text">
+              <string>Файлы журнала установок</string>
              </property>
             </widget>
            </widget>
@@ -584,12 +738,28 @@ color:black</string>
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frame_AntivirusWindows_5">
+        <widget class="QFrame" name="frame_ClearDownloadedprogramfiles">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>45</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>32</height>
+           <height>40</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+/* styles.qss */
+
+#frame_ClearDownloadedprogramfiles {
+    background-color: #161A1E;
+    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */
+}
+</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -614,40 +784,6 @@ color:black</string>
            <number>0</number>
           </property>
           <item>
-           <widget class="QListWidget" name="listWidget_AntivirusWindows_4">
-            <property name="maximumSize">
-             <size>
-              <width>700</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Segoe UI Symbol</family>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QListWidget::item {
-    border-bottom: 1px solid rgba(85,98,112,255);;
-}
-
-</string>
-            </property>
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="autoScroll">
-             <bool>true</bool>
-            </property>
-            <item>
-             <property name="text">
-              <string>Загруженные файлы программ</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
            <widget class="QFrame" name="frame_4">
             <property name="styleSheet">
              <string notr="true">background-color: transparent;</string>
@@ -658,34 +794,104 @@ color:black</string>
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <widget class="QPushButton" name="pushDownloadedprogramfiles">
+            <widget class="QPushButton" name="pushClearDownloadedprogramfiles">
              <property name="geometry">
               <rect>
-               <x>150</x>
-               <y>0</y>
-               <width>75</width>
-               <height>23</height>
+               <x>850</x>
+               <y>10</y>
+               <width>91</width>
+               <height>31</height>
               </rect>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>91</width>
+               <height>31</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>91</width>
+               <height>31</height>
+              </size>
+             </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(255, 255, 255);
-color:black</string>
+              <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: #161A1E;
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+    font-size: 11px; /* Установите размер шрифта */
+    padding: 10px 20px; /* Установите отступы */
+    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */
+}
+
+QPushButton:hover {
+    background-color: #2C3236;
+    transition: background-color 0.3s ease;
+}
+</string>
              </property>
              <property name="text">
               <string>Очистка</string>
              </property>
             </widget>
-            <widget class="QLabel" name="labelDownloadedprogramfiles">
+            <widget class="QLabel" name="labelClearDownloadedprogramfiles">
              <property name="geometry">
               <rect>
-               <x>20</x>
-               <y>5</y>
-               <width>81</width>
-               <height>21</height>
+               <x>720</x>
+               <y>10</y>
+               <width>101</width>
+               <height>30</height>
               </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>70</horstretch>
+               <verstretch>30</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: white; /* Установите цвет текста в белый */
+font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+font-weight: bold; /* Установите жирность шрифта (если нужно) */
+margin-top: 5px; /* Опустить текст на 10 пикселей вниз */</string>
              </property>
              <property name="text">
               <string/>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_4">
+             <property name="geometry">
+              <rect>
+               <x>30</x>
+               <y>10</y>
+               <width>201</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">/* styles.qss */
+
+QLabel {
+    color: white; /* Установите цвет текста в белый */
+    font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+    font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+    font-weight: bold; /* Установите жирность шрифта (если нужно) */
+    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */
+}
+</string>
+             </property>
+             <property name="text">
+              <string>Загруженные файлы программ</string>
              </property>
             </widget>
            </widget>
@@ -727,12 +933,22 @@ color:black</string>
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frame_AntivirusWindows_6">
+        <widget class="QFrame" name="frame_ClearDeliveryOptimizationFiles">
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>32</height>
+           <height>46</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+/* styles.qss */
+
+#frame_ClearDeliveryOptimizationFiles {
+    background-color: #161A1E;
+    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */
+}
+</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -757,41 +973,13 @@ color:black</string>
            <number>0</number>
           </property>
           <item>
-           <widget class="QListWidget" name="listWidget_AntivirusWindows_5">
-            <property name="maximumSize">
+           <widget class="QFrame" name="frame_5">
+            <property name="minimumSize">
              <size>
-              <width>700</width>
-              <height>25</height>
+              <width>0</width>
+              <height>45</height>
              </size>
             </property>
-            <property name="font">
-             <font>
-              <family>Segoe UI Symbol</family>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QListWidget::item {
-    border-bottom: 1px solid rgba(85,98,112,255);;
-}
-
-</string>
-            </property>
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="autoScroll">
-             <bool>true</bool>
-            </property>
-            <item>
-             <property name="text">
-              <string>Файлы оптимизации доставки</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
-           <widget class="QFrame" name="frame_5">
             <property name="styleSheet">
              <string notr="true">background-color: transparent;</string>
             </property>
@@ -804,15 +992,41 @@ color:black</string>
             <widget class="QPushButton" name="pushClearDeliveryOptimizationFiles">
              <property name="geometry">
               <rect>
-               <x>150</x>
-               <y>0</y>
-               <width>75</width>
-               <height>23</height>
+               <x>850</x>
+               <y>10</y>
+               <width>91</width>
+               <height>31</height>
               </rect>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>91</width>
+               <height>31</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>91</width>
+               <height>31</height>
+              </size>
+             </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(255, 255, 255);
-color:black</string>
+              <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: #161A1E;
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+    font-size: 11px; /* Установите размер шрифта */
+    padding: 10px 20px; /* Установите отступы */
+    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */
+}
+
+QPushButton:hover {
+    background-color: #2C3236;
+    transition: background-color 0.3s ease;
+}
+</string>
              </property>
              <property name="text">
               <string>Очистка</string>
@@ -821,14 +1035,58 @@ color:black</string>
             <widget class="QLabel" name="labelClearDeliveryOptimizationFiles">
              <property name="geometry">
               <rect>
-               <x>20</x>
-               <y>5</y>
+               <x>750</x>
+               <y>10</y>
                <width>81</width>
-               <height>21</height>
+               <height>30</height>
               </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>70</horstretch>
+               <verstretch>30</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: white; /* Установите цвет текста в белый */
+font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+font-weight: bold; /* Установите жирность шрифта (если нужно) */
+margin-top: 5px; /* Опустить текст на 10 пикселей вниз */</string>
              </property>
              <property name="text">
               <string/>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_5">
+             <property name="geometry">
+              <rect>
+               <x>30</x>
+               <y>10</y>
+               <width>201</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">/* styles.qss */
+
+QLabel {
+    color: white; /* Установите цвет текста в белый */
+    font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+    font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+    font-weight: bold; /* Установите жирность шрифта (если нужно) */
+    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */
+}
+</string>
+             </property>
+             <property name="text">
+              <string>Файлы оптимизации доставки</string>
              </property>
             </widget>
            </widget>
@@ -870,12 +1128,28 @@ color:black</string>
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frame_AntivirusWindows_7">
+        <widget class="QFrame" name="frame_ClearDirectXShaderCache">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>45</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>32</height>
+           <height>40</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+/* styles.qss */
+
+#frame_ClearDirectXShaderCache {
+    background-color: #161A1E;
+    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */
+}
+</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -900,40 +1174,6 @@ color:black</string>
            <number>0</number>
           </property>
           <item>
-           <widget class="QListWidget" name="listWidget_AntivirusWindows_6">
-            <property name="maximumSize">
-             <size>
-              <width>700</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Segoe UI Symbol</family>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QListWidget::item {
-    border-bottom: 1px solid rgba(85,98,112,255);;
-}
-
-</string>
-            </property>
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="autoScroll">
-             <bool>true</bool>
-            </property>
-            <item>
-             <property name="text">
-              <string>DirectX Shader Cache</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
            <widget class="QFrame" name="frame_6">
             <property name="styleSheet">
              <string notr="true">background-color: transparent;</string>
@@ -947,15 +1187,41 @@ color:black</string>
             <widget class="QPushButton" name="pushClearDirectXShaderCache">
              <property name="geometry">
               <rect>
-               <x>150</x>
+               <x>850</x>
                <y>0</y>
-               <width>75</width>
-               <height>23</height>
+               <width>91</width>
+               <height>31</height>
               </rect>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>91</width>
+               <height>31</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>91</width>
+               <height>31</height>
+              </size>
+             </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(255, 255, 255);
-color:black</string>
+              <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: #161A1E;
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+    font-size: 11px; /* Установите размер шрифта */
+    padding: 10px 20px; /* Установите отступы */
+    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */
+}
+
+QPushButton:hover {
+    background-color: #2C3236;
+    transition: background-color 0.3s ease;
+}
+</string>
              </property>
              <property name="text">
               <string>Очистка</string>
@@ -964,14 +1230,58 @@ color:black</string>
             <widget class="QLabel" name="labelClearDirectXShaderCache">
              <property name="geometry">
               <rect>
-               <x>20</x>
-               <y>5</y>
+               <x>750</x>
+               <y>10</y>
                <width>81</width>
-               <height>21</height>
+               <height>30</height>
               </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>70</horstretch>
+               <verstretch>30</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: white; /* Установите цвет текста в белый */
+font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+font-weight: bold; /* Установите жирность шрифта (если нужно) */
+margin-top: 5px; /* Опустить текст на 10 пикселей вниз */</string>
              </property>
              <property name="text">
               <string/>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_6">
+             <property name="geometry">
+              <rect>
+               <x>30</x>
+               <y>10</y>
+               <width>181</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">/* styles.qss */
+
+QLabel {
+    color: white; /* Установите цвет текста в белый */
+    font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+    font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+    font-weight: bold; /* Установите жирность шрифта (если нужно) */
+    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */
+}
+</string>
+             </property>
+             <property name="text">
+              <string>DirectX Shader Cache</string>
              </property>
             </widget>
            </widget>
@@ -1013,12 +1323,28 @@ color:black</string>
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frame_AntivirusWindows_9">
+        <widget class="QFrame" name="frame_ClearFileSysremError">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>45</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>32</height>
+           <height>40</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+/* styles.qss */
+
+#frame_ClearFileSysremError {
+    background-color: #161A1E;
+    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */
+}
+</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -1043,40 +1369,6 @@ color:black</string>
            <number>0</number>
           </property>
           <item>
-           <widget class="QListWidget" name="listWidget_AntivirusWindows_7">
-            <property name="maximumSize">
-             <size>
-              <width>700</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Segoe UI Symbol</family>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QListWidget::item {
-    border-bottom: 1px solid rgba(85,98,112,255);;
-}
-
-</string>
-            </property>
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="autoScroll">
-             <bool>true</bool>
-            </property>
-            <item>
-             <property name="text">
-              <string>Фаилы системных ошибок</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
            <widget class="QFrame" name="frame_7">
             <property name="styleSheet">
              <string notr="true">background-color: transparent;</string>
@@ -1090,15 +1382,41 @@ color:black</string>
             <widget class="QPushButton" name="pushClearFileSysremError">
              <property name="geometry">
               <rect>
-               <x>150</x>
-               <y>0</y>
-               <width>75</width>
-               <height>23</height>
+               <x>850</x>
+               <y>10</y>
+               <width>91</width>
+               <height>31</height>
               </rect>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>91</width>
+               <height>31</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>91</width>
+               <height>31</height>
+              </size>
+             </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(255, 255, 255);
-color:black</string>
+              <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: #161A1E;
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+    font-size: 11px; /* Установите размер шрифта */
+    padding: 10px 20px; /* Установите отступы */
+    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */
+}
+
+QPushButton:hover {
+    background-color: #2C3236;
+    transition: background-color 0.3s ease;
+}
+</string>
              </property>
              <property name="text">
               <string>Очистка</string>
@@ -1107,14 +1425,58 @@ color:black</string>
             <widget class="QLabel" name="labelClearFileSysremError">
              <property name="geometry">
               <rect>
-               <x>20</x>
-               <y>5</y>
+               <x>760</x>
+               <y>10</y>
                <width>81</width>
-               <height>21</height>
+               <height>30</height>
               </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>70</horstretch>
+               <verstretch>30</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: white; /* Установите цвет текста в белый */
+font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+font-weight: bold; /* Установите жирность шрифта (если нужно) */
+margin-top: 5px; /* Опустить текст на 10 пикселей вниз */</string>
              </property>
              <property name="text">
               <string/>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_7">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>10</y>
+               <width>181</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">/* styles.qss */
+
+QLabel {
+    color: white; /* Установите цвет текста в белый */
+    font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+    font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+    font-weight: bold; /* Установите жирность шрифта (если нужно) */
+    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */
+}
+</string>
+             </property>
+             <property name="text">
+              <string>Фаилы системных ошибок</string>
              </property>
             </widget>
            </widget>
@@ -1156,12 +1518,28 @@ color:black</string>
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frame_AntivirusWindows_10">
+        <widget class="QFrame" name="frame_ClearChkDsk">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>45</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>32</height>
+           <height>45</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+/* styles.qss */
+
+#frame_ClearChkDsk {
+    background-color: #161A1E;
+    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */
+}
+</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -1186,40 +1564,6 @@ color:black</string>
            <number>0</number>
           </property>
           <item>
-           <widget class="QListWidget" name="listWidget_AntivirusWindows_8">
-            <property name="maximumSize">
-             <size>
-              <width>700</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Segoe UI Symbol</family>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QListWidget::item {
-    border-bottom: 1px solid rgba(85,98,112,255);;
-}
-
-</string>
-            </property>
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="autoScroll">
-             <bool>true</bool>
-            </property>
-            <item>
-             <property name="text">
-              <string>Старые файлы ChkDsk</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
            <widget class="QFrame" name="frame_8">
             <property name="styleSheet">
              <string notr="true">background-color: transparent;</string>
@@ -1233,15 +1577,41 @@ color:black</string>
             <widget class="QPushButton" name="pushClearChkDsk">
              <property name="geometry">
               <rect>
-               <x>150</x>
-               <y>0</y>
-               <width>75</width>
-               <height>23</height>
+               <x>850</x>
+               <y>10</y>
+               <width>91</width>
+               <height>31</height>
               </rect>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>91</width>
+               <height>31</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>91</width>
+               <height>31</height>
+              </size>
+             </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(255, 255, 255);
-color:black</string>
+              <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: #161A1E;
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+    font-size: 11px; /* Установите размер шрифта */
+    padding: 10px 20px; /* Установите отступы */
+    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */
+}
+
+QPushButton:hover {
+    background-color: #2C3236;
+    transition: background-color 0.3s ease;
+}
+</string>
              </property>
              <property name="text">
               <string>Очистка</string>
@@ -1250,14 +1620,58 @@ color:black</string>
             <widget class="QLabel" name="labelClearChkDsk">
              <property name="geometry">
               <rect>
-               <x>20</x>
-               <y>5</y>
+               <x>750</x>
+               <y>10</y>
                <width>81</width>
-               <height>21</height>
+               <height>30</height>
               </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>70</horstretch>
+               <verstretch>30</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: white; /* Установите цвет текста в белый */
+font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+font-weight: bold; /* Установите жирность шрифта (если нужно) */
+margin-top: 5px; /* Опустить текст на 10 пикселей вниз */</string>
              </property>
              <property name="text">
               <string/>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_8">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>10</y>
+               <width>161</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">/* styles.qss */
+
+QLabel {
+    color: white; /* Установите цвет текста в белый */
+    font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+    font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+    font-weight: bold; /* Установите жирность шрифта (если нужно) */
+    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */
+}
+</string>
+             </property>
+             <property name="text">
+              <string>Старые файлы ChkDsk</string>
              </property>
             </widget>
            </widget>
