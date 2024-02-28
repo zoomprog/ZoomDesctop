@@ -4,13 +4,16 @@ from PyQt6.QtWidgets import QDialog, QApplication
 from SettingsWidjets.WindowsCleaning import Ui_WindowsCleaning
 from Settings import Ui_Settings
 from Functions.FuncClearDate.SearchTemporaryFiles import search_get_temp_files_size, search_clean_temp_files
+
 from Functions.FuncClearDate.ClearTemporaryFiles import clean_temp_files, clean_directory, get_temp_files_size
 from Functions.FuncClearDate.SearchCachThumbnail import get_thumbnail_cache_size
 from Functions.FuncClearDate.ClearCachThumbnail import delete_thumbnail_cache
+
+
 from Functions.FuncClearDate.SearchClearInstallationLog import get_total_size_in_mb
 from Functions.FuncClearDate.ClearInstallationLog import delete_files_in_directories
-from Functions.FuncClearDate.SearchAntivirusWindows import calculate_total_size
-from Functions.FuncClearDate.ClearAntivirusWindows import delete_calculate_total_size
+# from Functions.FuncClearDate.SearchAntivirusWindows import calculate_total_size
+# from Functions.FuncClearDate.ClearAntivirusWindows import delete_calculate_total_size
 
 
 class WindowsCleaning(QDialog, Ui_WindowsCleaning):
@@ -19,32 +22,31 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
         self.setupUi(self)
         search_clean_temp_files()
         self.update_label()
+
         self.pushClearTemporaryFiles.clicked.connect(self.on_clear_temp_files_clicked)
-        self.pushClearCachThumbnail.clicked.connect(self.on_clear_cach_thumbnail)
-        self.pushClearInstallationLog.clicked.connect(self.on_clear_installation_log)
-        self.pushClearAntivirusWindows.clicked.connect(self.on_clear_antivirus_windows)
+        self.pushClearthumbnailcache.clicked.connect(self.on_clear_thumbnail_cache_clicked)
+
 
     def update_label(self):
         self.labelClearTemporaryFiles.setText(f"{search_get_temp_files_size():.2f} MB")
         self.labelClearTemporaryFiles.setStyleSheet("color: red;")
-        self.labelClearCachThumbnail.setText(f"{get_thumbnail_cache_size() / (1024 * 1024):.2f} MB")
-        self.labelClearCachThumbnail.setStyleSheet("color: red;")
+        self.labelClearthumbnailcache.setText(f"{get_thumbnail_cache_size() / (1024 * 1024):.2f} MB")
+        self.labelClearthumbnailcache.setStyleSheet("color: red;")
         directories_to_check = [
             'X:\\Windows\\panther\\',
             '%WINDIR%\\Panther',
             '%WINDIR%\\Inf\\Setupapi.log',
             '%WINDIR%\\System32\\Sysprep\\Panther'
         ]
-        self.labelClearInstallationLog.setText(f"{get_total_size_in_mb(directories_to_check):.2f} MB")
-        self.labelClearInstallationLog.setStyleSheet("color: red;")
-        self.labelClearAntivirusWindows.setText(f"{calculate_total_size():.2f} MB")
-        self.labelClearAntivirusWindows.setStyleSheet("color: red;")
+        self.labelClearinstallationlogfiles.setText(f"{get_total_size_in_mb(directories_to_check):.2f} MB")
+        self.labelClearinstallationlogfiles.setStyleSheet("color: red;")
+        self.pushClearinstallationlogfiles.clicked.connect(self.on_clear_installation_log)
 
     def on_clear_temp_files_clicked(self):
         clean_temp_files()
         self.update_label()
 
-    def on_clear_cach_thumbnail(self):
+    def on_clear_thumbnail_cache_clicked(self):
         delete_thumbnail_cache()
         self.update_label()
 
@@ -59,9 +61,7 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
         delete_files_in_directories(directories_to_delete_files)
         self.update_label()
 
-    def on_clear_antivirus_windows(self):
-        delete_calculate_total_size()
-        self.update_label()
+
 
 
 if __name__ == '__main__':

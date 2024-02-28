@@ -12,5 +12,3 @@ def delete_thumbnail_cache():
                 print(f"Удален файл: {fp}")
             except Exception as e:
                 print(f"Не удалось удалить файл: {fp}. Причина: {str(e)}")
-
-delete_thumbnail_cache()
