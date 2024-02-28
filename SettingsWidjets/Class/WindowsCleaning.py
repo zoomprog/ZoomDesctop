@@ -9,6 +9,8 @@ from Functions.FuncClearDate.SearchCachThumbnail import get_thumbnail_cache_size
 from Functions.FuncClearDate.ClearCachThumbnail import delete_thumbnail_cache
 from Functions.FuncClearDate.SearchClearInstallationLog import get_total_size_in_mb
 from Functions.FuncClearDate.ClearInstallationLog import delete_files_in_directories
+from Functions.FuncClearDate.SearchAntivirusWindows import calculate_total_size
+from Functions.FuncClearDate.ClearAntivirusWindows import delete_calculate_total_size
 
 
 class WindowsCleaning(QDialog, Ui_WindowsCleaning):
@@ -20,6 +22,7 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
         self.pushClearTemporaryFiles.clicked.connect(self.on_clear_temp_files_clicked)
         self.pushClearCachThumbnail.clicked.connect(self.on_clear_cach_thumbnail)
         self.pushClearInstallationLog.clicked.connect(self.on_clear_installation_log)
+        self.pushClearAntivirusWindows.clicked.connect(self.on_clear_antivirus_windows)
 
     def update_label(self):
         self.labelClearTemporaryFiles.setText(f"{search_get_temp_files_size():.2f} MB")
@@ -34,6 +37,8 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
         ]
         self.labelClearInstallationLog.setText(f"{get_total_size_in_mb(directories_to_check):.2f} MB")
         self.labelClearInstallationLog.setStyleSheet("color: red;")
+        self.labelClearAntivirusWindows.setText(f"{calculate_total_size():.2f} MB")
+        self.labelClearAntivirusWindows.setStyleSheet("color: red;")
 
     def on_clear_temp_files_clicked(self):
         clean_temp_files()
@@ -52,6 +57,10 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
         ]
 
         delete_files_in_directories(directories_to_delete_files)
+        self.update_label()
+
+    def on_clear_antivirus_windows(self):
+        delete_calculate_total_size()
         self.update_label()
 
 
