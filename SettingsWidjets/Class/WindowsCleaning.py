@@ -28,6 +28,7 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
         self.pushClearthumbnailcache.clicked.connect(self.on_clear_thumbnail_cache_clicked)
         self.position_of_the_windows_cleaning_widget_buttons()
         self.position_of_the_windows_cleaning_widget_label()
+        self.position_of_the_windows_cleaning_widget_labelName()
 
     def update_label(self):
         self.labelClearTemporaryFiles.setText(f"{search_get_temp_files_size():.2f} MB")
@@ -61,24 +62,56 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
         self.update_label()
 
     def position_of_the_windows_cleaning_widget_buttons(self):
-        self.pushClearTemporaryFiles.move(850, 7)
-        self.pushClearthumbnailcache.move(850, 7)
-        self.pushClearinstallationlogfiles.move(850, 7)
-        self.pushClearDownloadedprogramfiles.move(850, 7)
-        self.pushClearDeliveryOptimizationFiles.move(850, 7)
-        self.pushClearDirectXShaderCache.move(850, 7)
-        self.pushClearFileSysremError.move(850, 7)
-        self.pushClearChkDsk.move(850, 7)
+        button_names = [
+            "pushClearTemporaryFiles",
+            "pushClearthumbnailcache",
+            "pushClearinstallationlogfiles",
+            "pushClearDownloadedprogramfiles",
+            "pushClearDeliveryOptimizationFiles",
+            "pushClearDirectXShaderCache",
+            "pushClearFileSysremError",
+            "pushClearChkDsk"
+        ]
+
+        x_position = 850
+        # Loop through button names and set their position
+        for button_name in button_names:
+            button = getattr(self, button_name)
+            button.move(x_position, 7)
 
     def position_of_the_windows_cleaning_widget_label(self):
-        self.labelClearTemporaryFiles.move(750, 7)
-        self.labelClearthumbnailcache.move(750, 7)
-        self.labelClearinstallationlogfiles.move(750, 7)
-        self.labelClearDownloadedprogramfiles.move(750, 7)
-        self.labelClearDeliveryOptimizationFiles.move(750, 7)
-        self.labelClearDirectXShaderCache.move(750, 7)
-        self.labelClearFileSysremError.move(750, 7)
-        self.labelClearChkDsk.move(750, 7)
+        label_names = [
+            "labelClearTemporaryFiles",
+            "labelClearthumbnailcache",
+            "labelClearinstallationlogfiles",
+            "labelClearDownloadedprogramfiles",
+            "labelClearDeliveryOptimizationFiles",
+            "labelClearDirectXShaderCache",
+            "labelClearFileSysremError",
+            "labelClearChkDsk"
+        ]
+
+        x_position = 750
+        # Loop through label names and set their position
+        for label_name in label_names:
+            label = getattr(self, label_name)
+            label.move(x_position, 7)
+
+    def position_of_the_windows_cleaning_widget_labelName(self):
+        label_Text_name = [
+            "labelTextClearTemporaryFiles",
+            "labelTextClearthumbnailcache",
+            "labelTextClearinstallationlogfiles",
+            "labelTextClearDownloadedprogramfiles",
+            "labelTextClearDeliveryOptimizationFiles",
+            "labelTextClearDirectXShaderCache",
+            "labelTextClearFileSysremError",
+            "labelTextClearChkDsk"
+        ]
+        x_position = 20
+        for label_Text_name in label_Text_name:
+            label_text = getattr(self, label_Text_name)
+            label_text.move(x_position, 12)
 
 
 if __name__ == '__main__':

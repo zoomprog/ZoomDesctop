@@ -150,9 +150,9 @@ class Ui_WindowsCleaning(object):
 "}\n"
 "")
         self.pushClearTemporaryFiles.setObjectName("pushClearTemporaryFiles")
-        self.label = QtWidgets.QLabel(parent=self.frame_1)
-        self.label.setGeometry(QtCore.QRect(30, 10, 131, 21))
-        self.label.setStyleSheet("/* styles.qss */\n"
+        self.labelTextClearTemporaryFiles = QtWidgets.QLabel(parent=self.frame_1)
+        self.labelTextClearTemporaryFiles.setGeometry(QtCore.QRect(30, 10, 131, 21))
+        self.labelTextClearTemporaryFiles.setStyleSheet("/* styles.qss */\n"
 "\n"
 "QLabel {\n"
 "    color: white; /* Установите цвет текста в белый */\n"
@@ -162,7 +162,7 @@ class Ui_WindowsCleaning(object):
 "    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */\n"
 "}\n"
 "")
-        self.label.setObjectName("label")
+        self.labelTextClearTemporaryFiles.setObjectName("labelTextClearTemporaryFiles")
         self.horizontalLayout.addWidget(self.frame_1)
         self.verticalLayout.addWidget(self.frame_ClearTemporaryFiles)
         self.frame_AntivirusWindows_8 = QtWidgets.QFrame(parent=self.frame)
@@ -232,9 +232,9 @@ class Ui_WindowsCleaning(object):
 "margin-top: 5px; /* Опустить текст на 10 пикселей вниз */")
         self.labelClearthumbnailcache.setText("")
         self.labelClearthumbnailcache.setObjectName("labelClearthumbnailcache")
-        self.label_2 = QtWidgets.QLabel(parent=self.frame_2)
-        self.label_2.setGeometry(QtCore.QRect(30, 10, 111, 16))
-        self.label_2.setStyleSheet("/* styles.qss */\n"
+        self.labelTextClearthumbnailcache = QtWidgets.QLabel(parent=self.frame_2)
+        self.labelTextClearthumbnailcache.setGeometry(QtCore.QRect(30, 10, 111, 16))
+        self.labelTextClearthumbnailcache.setStyleSheet("/* styles.qss */\n"
 "\n"
 "QLabel {\n"
 "    color: white; /* Установите цвет текста в белый */\n"
@@ -244,7 +244,7 @@ class Ui_WindowsCleaning(object):
 "    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */\n"
 "}\n"
 "")
-        self.label_2.setObjectName("label_2")
+        self.labelTextClearthumbnailcache.setObjectName("labelTextClearthumbnailcache")
         self.horizontalLayout_3.addWidget(self.frame_2)
         self.verticalLayout.addWidget(self.frame_Clearthumbnailcache)
         self.frame_AntivirusWindows_11 = QtWidgets.QFrame(parent=self.frame)
@@ -316,9 +316,9 @@ class Ui_WindowsCleaning(object):
 "margin-top: 5px; /* Опустить текст на 10 пикселей вниз */")
         self.labelClearinstallationlogfiles.setText("")
         self.labelClearinstallationlogfiles.setObjectName("labelClearinstallationlogfiles")
-        self.label_3 = QtWidgets.QLabel(parent=self.frame_3)
-        self.label_3.setGeometry(QtCore.QRect(30, 10, 181, 21))
-        self.label_3.setStyleSheet("/* styles.qss */\n"
+        self.labelTextClearinstallationlogfiles = QtWidgets.QLabel(parent=self.frame_3)
+        self.labelTextClearinstallationlogfiles.setGeometry(QtCore.QRect(30, 10, 181, 21))
+        self.labelTextClearinstallationlogfiles.setStyleSheet("/* styles.qss */\n"
 "\n"
 "QLabel {\n"
 "    color: white; /* Установите цвет текста в белый */\n"
@@ -328,7 +328,7 @@ class Ui_WindowsCleaning(object):
 "    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */\n"
 "}\n"
 "")
-        self.label_3.setObjectName("label_3")
+        self.labelTextClearinstallationlogfiles.setObjectName("labelTextClearinstallationlogfiles")
         self.horizontalLayout_4.addWidget(self.frame_3)
         self.verticalLayout.addWidget(self.frame_Clearinstallationlogfiles)
         self.frame_AntivirusWindows_12 = QtWidgets.QFrame(parent=self.frame)
@@ -400,9 +400,9 @@ class Ui_WindowsCleaning(object):
 "margin-top: 5px; /* Опустить текст на 10 пикселей вниз */")
         self.labelClearDownloadedprogramfiles.setText("")
         self.labelClearDownloadedprogramfiles.setObjectName("labelClearDownloadedprogramfiles")
-        self.label_4 = QtWidgets.QLabel(parent=self.frame_4)
-        self.label_4.setGeometry(QtCore.QRect(30, 10, 201, 20))
-        self.label_4.setStyleSheet("/* styles.qss */\n"
+        self.labelTextClearDownloadedprogramfiles = QtWidgets.QLabel(parent=self.frame_4)
+        self.labelTextClearDownloadedprogramfiles.setGeometry(QtCore.QRect(30, 10, 201, 20))
+        self.labelTextClearDownloadedprogramfiles.setStyleSheet("/* styles.qss */\n"
 "\n"
 "QLabel {\n"
 "    color: white; /* Установите цвет текста в белый */\n"
@@ -412,7 +412,7 @@ class Ui_WindowsCleaning(object):
 "    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */\n"
 "}\n"
 "")
-        self.label_4.setObjectName("label_4")
+        self.labelTextClearDownloadedprogramfiles.setObjectName("labelTextClearDownloadedprogramfiles")
         self.horizontalLayout_5.addWidget(self.frame_4)
         self.verticalLayout.addWidget(self.frame_ClearDownloadedprogramfiles)
         self.frame_AntivirusWindows_13 = QtWidgets.QFrame(parent=self.frame)
@@ -484,9 +484,9 @@ class Ui_WindowsCleaning(object):
 "margin-top: 5px; /* Опустить текст на 10 пикселей вниз */")
         self.labelClearDeliveryOptimizationFiles.setText("")
         self.labelClearDeliveryOptimizationFiles.setObjectName("labelClearDeliveryOptimizationFiles")
-        self.label_5 = QtWidgets.QLabel(parent=self.frame_5)
-        self.label_5.setGeometry(QtCore.QRect(30, 10, 201, 21))
-        self.label_5.setStyleSheet("/* styles.qss */\n"
+        self.labelTextClearDeliveryOptimizationFiles = QtWidgets.QLabel(parent=self.frame_5)
+        self.labelTextClearDeliveryOptimizationFiles.setGeometry(QtCore.QRect(30, 10, 201, 21))
+        self.labelTextClearDeliveryOptimizationFiles.setStyleSheet("/* styles.qss */\n"
 "\n"
 "QLabel {\n"
 "    color: white; /* Установите цвет текста в белый */\n"
@@ -496,7 +496,7 @@ class Ui_WindowsCleaning(object):
 "    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */\n"
 "}\n"
 "")
-        self.label_5.setObjectName("label_5")
+        self.labelTextClearDeliveryOptimizationFiles.setObjectName("labelTextClearDeliveryOptimizationFiles")
         self.horizontalLayout_6.addWidget(self.frame_5)
         self.verticalLayout.addWidget(self.frame_ClearDeliveryOptimizationFiles)
         self.frame_AntivirusWindows_14 = QtWidgets.QFrame(parent=self.frame)
@@ -568,9 +568,9 @@ class Ui_WindowsCleaning(object):
 "margin-top: 5px; /* Опустить текст на 10 пикселей вниз */")
         self.labelClearDirectXShaderCache.setText("")
         self.labelClearDirectXShaderCache.setObjectName("labelClearDirectXShaderCache")
-        self.label_6 = QtWidgets.QLabel(parent=self.frame_6)
-        self.label_6.setGeometry(QtCore.QRect(30, 10, 181, 16))
-        self.label_6.setStyleSheet("/* styles.qss */\n"
+        self.labelTextClearDirectXShaderCache = QtWidgets.QLabel(parent=self.frame_6)
+        self.labelTextClearDirectXShaderCache.setGeometry(QtCore.QRect(30, 10, 181, 16))
+        self.labelTextClearDirectXShaderCache.setStyleSheet("/* styles.qss */\n"
 "\n"
 "QLabel {\n"
 "    color: white; /* Установите цвет текста в белый */\n"
@@ -580,7 +580,7 @@ class Ui_WindowsCleaning(object):
 "    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */\n"
 "}\n"
 "")
-        self.label_6.setObjectName("label_6")
+        self.labelTextClearDirectXShaderCache.setObjectName("labelTextClearDirectXShaderCache")
         self.horizontalLayout_7.addWidget(self.frame_6)
         self.verticalLayout.addWidget(self.frame_ClearDirectXShaderCache)
         self.frame_AntivirusWindows_15 = QtWidgets.QFrame(parent=self.frame)
@@ -652,9 +652,9 @@ class Ui_WindowsCleaning(object):
 "margin-top: 5px; /* Опустить текст на 10 пикселей вниз */")
         self.labelClearFileSysremError.setText("")
         self.labelClearFileSysremError.setObjectName("labelClearFileSysremError")
-        self.label_7 = QtWidgets.QLabel(parent=self.frame_7)
-        self.label_7.setGeometry(QtCore.QRect(20, 10, 181, 16))
-        self.label_7.setStyleSheet("/* styles.qss */\n"
+        self.labelTextClearFileSysremError = QtWidgets.QLabel(parent=self.frame_7)
+        self.labelTextClearFileSysremError.setGeometry(QtCore.QRect(20, 10, 181, 16))
+        self.labelTextClearFileSysremError.setStyleSheet("/* styles.qss */\n"
 "\n"
 "QLabel {\n"
 "    color: white; /* Установите цвет текста в белый */\n"
@@ -664,7 +664,7 @@ class Ui_WindowsCleaning(object):
 "    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */\n"
 "}\n"
 "")
-        self.label_7.setObjectName("label_7")
+        self.labelTextClearFileSysremError.setObjectName("labelTextClearFileSysremError")
         self.horizontalLayout_9.addWidget(self.frame_7)
         self.verticalLayout.addWidget(self.frame_ClearFileSysremError)
         self.frame_AntivirusWindows_16 = QtWidgets.QFrame(parent=self.frame)
@@ -736,9 +736,9 @@ class Ui_WindowsCleaning(object):
 "margin-top: 5px; /* Опустить текст на 10 пикселей вниз */")
         self.labelClearChkDsk.setText("")
         self.labelClearChkDsk.setObjectName("labelClearChkDsk")
-        self.label_8 = QtWidgets.QLabel(parent=self.frame_8)
-        self.label_8.setGeometry(QtCore.QRect(20, 10, 161, 21))
-        self.label_8.setStyleSheet("/* styles.qss */\n"
+        self.labelTextClearChkDsk = QtWidgets.QLabel(parent=self.frame_8)
+        self.labelTextClearChkDsk.setGeometry(QtCore.QRect(20, 10, 161, 21))
+        self.labelTextClearChkDsk.setStyleSheet("/* styles.qss */\n"
 "\n"
 "QLabel {\n"
 "    color: white; /* Установите цвет текста в белый */\n"
@@ -748,7 +748,7 @@ class Ui_WindowsCleaning(object):
 "    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */\n"
 "}\n"
 "")
-        self.label_8.setObjectName("label_8")
+        self.labelTextClearChkDsk.setObjectName("labelTextClearChkDsk")
         self.horizontalLayout_10.addWidget(self.frame_8)
         self.verticalLayout.addWidget(self.frame_ClearChkDsk)
         self.frame_AntivirusWindows_2 = QtWidgets.QFrame(parent=self.frame)
@@ -780,21 +780,21 @@ class Ui_WindowsCleaning(object):
         _translate = QtCore.QCoreApplication.translate
         WindowsCleaning.setWindowTitle(_translate("WindowsCleaning", "Form"))
         self.pushClearTemporaryFiles.setText(_translate("WindowsCleaning", "Очистка"))
-        self.label.setText(_translate("WindowsCleaning", "Временные файлы"))
+        self.labelTextClearTemporaryFiles.setText(_translate("WindowsCleaning", "Временные файлы"))
         self.pushClearthumbnailcache.setText(_translate("WindowsCleaning", "Очистка"))
-        self.label_2.setText(_translate("WindowsCleaning", "Кэш экскизов"))
+        self.labelTextClearthumbnailcache.setText(_translate("WindowsCleaning", "Кэш экскизов"))
         self.pushClearinstallationlogfiles.setText(_translate("WindowsCleaning", "Очистка"))
-        self.label_3.setText(_translate("WindowsCleaning", "Файлы журнала установок"))
+        self.labelTextClearinstallationlogfiles.setText(_translate("WindowsCleaning", "Файлы журнала установок"))
         self.pushClearDownloadedprogramfiles.setText(_translate("WindowsCleaning", "Очистка"))
-        self.label_4.setText(_translate("WindowsCleaning", "Загруженные файлы программ"))
+        self.labelTextClearDownloadedprogramfiles.setText(_translate("WindowsCleaning", "Загруженные файлы программ"))
         self.pushClearDeliveryOptimizationFiles.setText(_translate("WindowsCleaning", "Очистка"))
-        self.label_5.setText(_translate("WindowsCleaning", "Файлы оптимизации доставки"))
+        self.labelTextClearDeliveryOptimizationFiles.setText(_translate("WindowsCleaning", "Файлы оптимизации доставки"))
         self.pushClearDirectXShaderCache.setText(_translate("WindowsCleaning", "Очистка"))
-        self.label_6.setText(_translate("WindowsCleaning", "DirectX Shader Cache"))
+        self.labelTextClearDirectXShaderCache.setText(_translate("WindowsCleaning", "DirectX Shader Cache"))
         self.pushClearFileSysremError.setText(_translate("WindowsCleaning", "Очистка"))
-        self.label_7.setText(_translate("WindowsCleaning", "Фаилы системных ошибок"))
+        self.labelTextClearFileSysremError.setText(_translate("WindowsCleaning", "Фаилы системных ошибок"))
         self.pushClearChkDsk.setText(_translate("WindowsCleaning", "Очистка"))
-        self.label_8.setText(_translate("WindowsCleaning", "Старые файлы ChkDsk"))
+        self.labelTextClearChkDsk.setText(_translate("WindowsCleaning", "Старые файлы ChkDsk"))
 
 
 if __name__ == "__main__":
