@@ -28,4 +28,3 @@ def clear_delivery_optimization():
     except Exception as e:
         print(f"Произошла ошибка: {e}")
 
-
