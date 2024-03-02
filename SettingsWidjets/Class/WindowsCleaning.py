@@ -1,3 +1,4 @@
+import os
 import sys
 from PyQt6.QtWidgets import QDialog, QApplication
 from SettingsWidjets.WindowsCleaning import Ui_WindowsCleaning
@@ -13,6 +14,10 @@ from Functions.FuncClearDate.Search.SearchClearDownloadedprogramfiles import get
 from Functions.FuncClearDate.Clear.ClearDownloadedprogramfiles import ClearDownloadedprogramfiles
 from Functions.FuncClearDate.Search.SearchTextClearDeliveryOptimizationFiles import get_delivery_optimization_size
 from Functions.FuncClearDate.Clear.ClearTextClearDeliveryOptimizationFiles import clear_delivery_optimization
+from Functions.FuncClearDate.Search.SearchClearDirectXShaderCache import get_directory_size
+from Functions.FuncClearDate.Clear.ClearDirectXShaderCache import clear_directx_shader_cache
+from Functions.FuncClearDate.Search.SearchClearFileSysremError import get_directory_size_FileSysremError
+from Functions.FuncClearDate.Clear.ClearFileSysremError import clear_directory_FileSystemError
 
 
 # from Functions.FuncClearDate.SearchAntivirusWindows import calculate_total_size
@@ -30,6 +35,8 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
         self.pushClearthumbnailcache.clicked.connect(self.on_clear_thumbnail_cache_clicked)
         self.pushClearDownloadedprogramfiles.clicked.connect(self.on_clear_Downloadedprogramfiles)
         self.pushClearDeliveryOptimizationFiles.clicked.connect(self.on_clear_clear_delivery_optimization)
+        self.pushClearDirectXShaderCache.clicked.connect(self. on_clear_clear_directx_shader_cache)
+        self.pushClearFileSysremError.clicked.connect(self.on_clear_clear_file_sysrem_error)
 
         self.position_of_the_windows_cleaning_widget_buttons()
         self.position_of_the_windows_cleaning_widget_label()
@@ -48,6 +55,8 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
         self.pushClearinstallationlogfiles.clicked.connect(self.on_clear_installation_log)
         self.labelClearDownloadedprogramfiles.setText(f"{get_search_Downloadedprogramfiles():.2f} MB")
         self.labelClearDeliveryOptimizationFiles.setText(f"{get_delivery_optimization_size():.2f} MB")
+        self.labelClearDirectXShaderCache.setText(f"{get_directory_size(os.getlogin()):.2f} MB")
+        self.labelClearFileSysremError.setText(f"{get_directory_size_FileSysremError():.2f} MB")
 
     def on_clear_temp_files_clicked(self):
         clean_temp_files()
@@ -75,6 +84,15 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
     def on_clear_clear_delivery_optimization(self):
         clear_delivery_optimization()
         self.update_label()
+
+    def on_clear_clear_directx_shader_cache(self):
+        clear_directx_shader_cache(os.getlogin())
+        self.update_label()
+
+    def on_clear_clear_file_sysrem_error(self):
+        clear_directory_FileSystemError(r'C:\Windows\System32\Winevt\Logs')
+        self.update_label()
+
 
     def position_of_the_windows_cleaning_widget_buttons(self):
         button_names = [
