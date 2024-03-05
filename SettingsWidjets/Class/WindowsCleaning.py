@@ -18,6 +18,10 @@ from Functions.FuncClearDate.Search.SearchClearDirectXShaderCache import get_dir
 from Functions.FuncClearDate.Clear.ClearDirectXShaderCache import clear_directx_shader_cache
 from Functions.FuncClearDate.Search.SearchClearFileSysremError import get_directory_size_FileSysremError
 from Functions.FuncClearDate.Clear.ClearFileSysremError import clear_directory_FileSystemError
+from Functions.FuncClearDate.Search.Search_clear_folder_download import get_folder_size_folder_download
+from Functions.FuncClearDate.Clear.Clear_delete_files_except_telegram import delete_files_except_telegram
+from Functions.FuncClearDate.Search.Search_Clear_basket import get_frame_Clear_basket
+from Functions.FuncClearDate.Clear.Clear_basket import clear_basket
 
 
 # from Functions.FuncClearDate.SearchAntivirusWindows import calculate_total_size
@@ -35,8 +39,10 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
         self.pushClearthumbnailcache.clicked.connect(self.on_clear_thumbnail_cache_clicked)
         self.pushClearDownloadedprogramfiles.clicked.connect(self.on_clear_Downloadedprogramfiles)
         self.pushClearDeliveryOptimizationFiles.clicked.connect(self.on_clear_clear_delivery_optimization)
-        self.pushClearDirectXShaderCache.clicked.connect(self. on_clear_clear_directx_shader_cache)
+        self.pushClearDirectXShaderCache.clicked.connect(self.on_clear_clear_directx_shader_cache)
         self.pushClearFileSysremError.clicked.connect(self.on_clear_clear_file_sysrem_error)
+        self.pushClear_basket.clicked.connect(self.on_clear_basket)
+        self.push_clear_folder_download.clicked.connect(self.on_clear_folder_download)
 
         self.position_of_the_windows_cleaning_widget_buttons()
         self.position_of_the_windows_cleaning_widget_label()
@@ -57,6 +63,8 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
         self.labelClearDeliveryOptimizationFiles.setText(f"{get_delivery_optimization_size():.2f} MB")
         self.labelClearDirectXShaderCache.setText(f"{get_directory_size(os.getlogin()):.2f} MB")
         self.labelClearFileSysremError.setText(f"{get_directory_size_FileSysremError():.2f} MB")
+        self.labelClear_basket.setText(f"{get_frame_Clear_basket():.2f} MB")
+        self.label_clear_folder_download.setText(f"{get_folder_size_folder_download():.2f} MB")
 
     def on_clear_temp_files_clicked(self):
         clean_temp_files()
@@ -93,6 +101,13 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
         clear_directory_FileSystemError(r'C:\Windows\System32\Winevt\Logs')
         self.update_label()
 
+    def on_clear_folder_download(self):
+        delete_files_except_telegram()
+        self.update_label()
+
+    def on_clear_basket(self):
+        clear_basket()
+        self.update_label()
 
     def position_of_the_windows_cleaning_widget_buttons(self):
         button_names = [
@@ -103,7 +118,8 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
             "pushClearDeliveryOptimizationFiles",
             "pushClearDirectXShaderCache",
             "pushClearFileSysremError",
-            "pushClearChkDsk"
+            "pushClear_basket",
+            "push_clear_folder_download"
         ]
 
         x_position = 850
@@ -121,7 +137,8 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
             "labelClearDeliveryOptimizationFiles",
             "labelClearDirectXShaderCache",
             "labelClearFileSysremError",
-            "labelClearChkDsk"
+            "labelClear_basket",
+            "label_clear_folder_download"
         ]
 
         x_position = 750
@@ -139,7 +156,8 @@ class WindowsCleaning(QDialog, Ui_WindowsCleaning):
             "labelTextClearDeliveryOptimizationFiles",
             "labelTextClearDirectXShaderCache",
             "labelTextClearFileSysremError",
-            "labelTextClearChkDsk"
+            "labelTextClear_basket",
+            "label_clear_folder_download_2"
         ]
         x_position = 20
         for label_Text_name in label_Text_name:

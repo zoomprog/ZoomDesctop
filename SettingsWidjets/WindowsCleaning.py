@@ -78,11 +78,11 @@ class Ui_WindowsCleaning(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 975, 670))
-        self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 670))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -1134, 975, 2000))
+        self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 2000))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.frame = QtWidgets.QFrame(parent=self.scrollAreaWidgetContents)
-        self.frame.setGeometry(QtCore.QRect(10, 20, 961, 551))
+        self.frame.setGeometry(QtCore.QRect(10, 20, 961, 1701))
         self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame.setObjectName("frame")
@@ -676,35 +676,45 @@ class Ui_WindowsCleaning(object):
         self.horizontalLayout_17.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_17.setSpacing(0)
         self.horizontalLayout_17.setObjectName("horizontalLayout_17")
+        self.frame_AntivirusWindows_17 = QtWidgets.QFrame(parent=self.frame_AntivirusWindows_16)
+        self.frame_AntivirusWindows_17.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.frame_AntivirusWindows_17.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_AntivirusWindows_17.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_AntivirusWindows_17.setObjectName("frame_AntivirusWindows_17")
+        self.horizontalLayout_18 = QtWidgets.QHBoxLayout(self.frame_AntivirusWindows_17)
+        self.horizontalLayout_18.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_18.setSpacing(0)
+        self.horizontalLayout_18.setObjectName("horizontalLayout_18")
+        self.horizontalLayout_17.addWidget(self.frame_AntivirusWindows_17)
         self.verticalLayout.addWidget(self.frame_AntivirusWindows_16)
-        self.frame_ClearChkDsk = QtWidgets.QFrame(parent=self.frame)
-        self.frame_ClearChkDsk.setMinimumSize(QtCore.QSize(0, 45))
-        self.frame_ClearChkDsk.setMaximumSize(QtCore.QSize(16777215, 45))
-        self.frame_ClearChkDsk.setStyleSheet("\n"
+        self.frame_Clear_basket = QtWidgets.QFrame(parent=self.frame)
+        self.frame_Clear_basket.setMinimumSize(QtCore.QSize(0, 45))
+        self.frame_Clear_basket.setMaximumSize(QtCore.QSize(16777215, 45))
+        self.frame_Clear_basket.setStyleSheet("\n"
 "/* styles.qss */\n"
 "\n"
-"#frame_ClearChkDsk {\n"
+"#frame_Clear_basket {\n"
 "    background-color: #161A1E;\n"
 "    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */\n"
 "}\n"
 "")
-        self.frame_ClearChkDsk.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_ClearChkDsk.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_ClearChkDsk.setObjectName("frame_ClearChkDsk")
-        self.horizontalLayout_10 = QtWidgets.QHBoxLayout(self.frame_ClearChkDsk)
+        self.frame_Clear_basket.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_Clear_basket.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_Clear_basket.setObjectName("frame_Clear_basket")
+        self.horizontalLayout_10 = QtWidgets.QHBoxLayout(self.frame_Clear_basket)
         self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_10.setSpacing(0)
         self.horizontalLayout_10.setObjectName("horizontalLayout_10")
-        self.frame_8 = QtWidgets.QFrame(parent=self.frame_ClearChkDsk)
+        self.frame_8 = QtWidgets.QFrame(parent=self.frame_Clear_basket)
         self.frame_8.setStyleSheet("background-color: transparent;")
         self.frame_8.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_8.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_8.setObjectName("frame_8")
-        self.pushClearChkDsk = QtWidgets.QPushButton(parent=self.frame_8)
-        self.pushClearChkDsk.setGeometry(QtCore.QRect(850, 10, 91, 31))
-        self.pushClearChkDsk.setMinimumSize(QtCore.QSize(91, 31))
-        self.pushClearChkDsk.setMaximumSize(QtCore.QSize(91, 31))
-        self.pushClearChkDsk.setStyleSheet("/* styles.qss */\n"
+        self.pushClear_basket = QtWidgets.QPushButton(parent=self.frame_8)
+        self.pushClear_basket.setGeometry(QtCore.QRect(850, 10, 91, 31))
+        self.pushClear_basket.setMinimumSize(QtCore.QSize(91, 31))
+        self.pushClear_basket.setMaximumSize(QtCore.QSize(91, 31))
+        self.pushClear_basket.setStyleSheet("/* styles.qss */\n"
 "\n"
 "QPushButton {\n"
 "    background-color: #161A1E;\n"
@@ -720,25 +730,25 @@ class Ui_WindowsCleaning(object):
 "    transition: background-color 0.3s ease;\n"
 "}\n"
 "")
-        self.pushClearChkDsk.setObjectName("pushClearChkDsk")
-        self.labelClearChkDsk = QtWidgets.QLabel(parent=self.frame_8)
-        self.labelClearChkDsk.setGeometry(QtCore.QRect(750, 10, 81, 30))
+        self.pushClear_basket.setObjectName("pushClear_basket")
+        self.labelClear_basket = QtWidgets.QLabel(parent=self.frame_8)
+        self.labelClear_basket.setGeometry(QtCore.QRect(750, 10, 81, 30))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(30)
-        sizePolicy.setHeightForWidth(self.labelClearChkDsk.sizePolicy().hasHeightForWidth())
-        self.labelClearChkDsk.setSizePolicy(sizePolicy)
-        self.labelClearChkDsk.setMinimumSize(QtCore.QSize(70, 30))
-        self.labelClearChkDsk.setStyleSheet("color: white; /* Установите цвет текста в белый */\n"
+        sizePolicy.setHeightForWidth(self.labelClear_basket.sizePolicy().hasHeightForWidth())
+        self.labelClear_basket.setSizePolicy(sizePolicy)
+        self.labelClear_basket.setMinimumSize(QtCore.QSize(70, 30))
+        self.labelClear_basket.setStyleSheet("color: white; /* Установите цвет текста в белый */\n"
 "font-size: 14px; /* Установите размер шрифта в 14 пикселей */\n"
 "font-family: \"Times New Roman\"; /* Установите тип шрифта по вашему выбору */\n"
 "font-weight: bold; /* Установите жирность шрифта (если нужно) */\n"
 "margin-top: 5px; /* Опустить текст на 10 пикселей вниз */")
-        self.labelClearChkDsk.setText("")
-        self.labelClearChkDsk.setObjectName("labelClearChkDsk")
-        self.labelTextClearChkDsk = QtWidgets.QLabel(parent=self.frame_8)
-        self.labelTextClearChkDsk.setGeometry(QtCore.QRect(20, 10, 161, 21))
-        self.labelTextClearChkDsk.setStyleSheet("/* styles.qss */\n"
+        self.labelClear_basket.setText("")
+        self.labelClear_basket.setObjectName("labelClear_basket")
+        self.labelTextClear_basket = QtWidgets.QLabel(parent=self.frame_8)
+        self.labelTextClear_basket.setGeometry(QtCore.QRect(20, 10, 161, 21))
+        self.labelTextClear_basket.setStyleSheet("/* styles.qss */\n"
 "\n"
 "QLabel {\n"
 "    color: white; /* Установите цвет текста в белый */\n"
@@ -748,9 +758,9 @@ class Ui_WindowsCleaning(object):
 "    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */\n"
 "}\n"
 "")
-        self.labelTextClearChkDsk.setObjectName("labelTextClearChkDsk")
+        self.labelTextClear_basket.setObjectName("labelTextClear_basket")
         self.horizontalLayout_10.addWidget(self.frame_8)
-        self.verticalLayout.addWidget(self.frame_ClearChkDsk)
+        self.verticalLayout.addWidget(self.frame_Clear_basket)
         self.frame_AntivirusWindows_2 = QtWidgets.QFrame(parent=self.frame)
         self.frame_AntivirusWindows_2.setMaximumSize(QtCore.QSize(16777215, 32))
         self.frame_AntivirusWindows_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
@@ -761,6 +771,71 @@ class Ui_WindowsCleaning(object):
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.verticalLayout.addWidget(self.frame_AntivirusWindows_2)
+        self.frame_clear_folder_download = QtWidgets.QFrame(parent=self.frame)
+        self.frame_clear_folder_download.setMinimumSize(QtCore.QSize(0, 50))
+        self.frame_clear_folder_download.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.frame_clear_folder_download.setStyleSheet("\n"
+"/* styles.qss */\n"
+"\n"
+"#frame_clear_folder_download {\n"
+"    background-color: #161A1E;\n"
+"    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */\n"
+"}\n"
+"")
+        self.frame_clear_folder_download.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_clear_folder_download.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_clear_folder_download.setObjectName("frame_clear_folder_download")
+        self.label_clear_folder_download = QtWidgets.QLabel(parent=self.frame_clear_folder_download)
+        self.label_clear_folder_download.setGeometry(QtCore.QRect(760, 10, 70, 31))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(70)
+        sizePolicy.setVerticalStretch(30)
+        sizePolicy.setHeightForWidth(self.label_clear_folder_download.sizePolicy().hasHeightForWidth())
+        self.label_clear_folder_download.setSizePolicy(sizePolicy)
+        self.label_clear_folder_download.setMinimumSize(QtCore.QSize(70, 30))
+        self.label_clear_folder_download.setStyleSheet("color: white; /* Установите цвет текста в белый */\n"
+"font-size: 14px; /* Установите размер шрифта в 14 пикселей */\n"
+"font-family: \"Times New Roman\"; /* Установите тип шрифта по вашему выбору */\n"
+"font-weight: bold; /* Установите жирность шрифта (если нужно) */\n"
+"margin-top: 5px; /* Опустить текст на 10 пикселей вниз */\n"
+"background-color: #161A1E;")
+        self.label_clear_folder_download.setText("")
+        self.label_clear_folder_download.setObjectName("label_clear_folder_download")
+        self.push_clear_folder_download = QtWidgets.QPushButton(parent=self.frame_clear_folder_download)
+        self.push_clear_folder_download.setGeometry(QtCore.QRect(850, 10, 91, 31))
+        self.push_clear_folder_download.setMinimumSize(QtCore.QSize(91, 31))
+        self.push_clear_folder_download.setMaximumSize(QtCore.QSize(91, 31))
+        self.push_clear_folder_download.setBaseSize(QtCore.QSize(0, 0))
+        self.push_clear_folder_download.setStyleSheet("/* styles.qss */\n"
+"\n"
+"QPushButton {\n"
+"    background-color: #161A1E;\n"
+"    border-radius: 15px;\n"
+"    color: white; /* Установите цвет текста */\n"
+"    font-size: 11px; /* Установите размер шрифта */\n"
+"    padding: 10px 20px; /* Установите отступы */\n"
+"    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #2C3236;\n"
+"    transition: background-color 0.3s ease;\n"
+"}\n"
+"")
+        self.push_clear_folder_download.setObjectName("push_clear_folder_download")
+        self.label_clear_folder_download_2 = QtWidgets.QLabel(parent=self.frame_clear_folder_download)
+        self.label_clear_folder_download_2.setGeometry(QtCore.QRect(30, 10, 201, 21))
+        self.label_clear_folder_download_2.setStyleSheet("QLabel {\n"
+"    background-color: #161A1E;\n"
+"    color: white; /* Установите цвет текста в белый */\n"
+"    font-size: 14px; /* Установите размер шрифта в 14 пикселей */\n"
+"    font-family: \"Times New Roman\"; /* Установите тип шрифта по вашему выбору */\n"
+"    font-weight: bold; /* Установите жирность шрифта (если нужно) */\n"
+"    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */\n"
+"}\n"
+"")
+        self.label_clear_folder_download_2.setObjectName("label_clear_folder_download_2")
+        self.verticalLayout.addWidget(self.frame_clear_folder_download)
         self.frame_AutoUpdateMaps = QtWidgets.QFrame(parent=self.frame)
         self.frame_AutoUpdateMaps.setMaximumSize(QtCore.QSize(16777215, 32))
         self.frame_AutoUpdateMaps.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
@@ -793,8 +868,10 @@ class Ui_WindowsCleaning(object):
         self.labelTextClearDirectXShaderCache.setText(_translate("WindowsCleaning", "DirectX Shader Cache"))
         self.pushClearFileSysremError.setText(_translate("WindowsCleaning", "Очистка"))
         self.labelTextClearFileSysremError.setText(_translate("WindowsCleaning", "Фаилы системных ошибок"))
-        self.pushClearChkDsk.setText(_translate("WindowsCleaning", "Очистка"))
-        self.labelTextClearChkDsk.setText(_translate("WindowsCleaning", "Старые файлы ChkDsk"))
+        self.pushClear_basket.setText(_translate("WindowsCleaning", "Очистка"))
+        self.labelTextClear_basket.setText(_translate("WindowsCleaning", "Очистка корзины"))
+        self.push_clear_folder_download.setText(_translate("WindowsCleaning", "Очистка"))
+        self.label_clear_folder_download_2.setText(_translate("WindowsCleaning", "Очистка папки Download"))
 
 
 if __name__ == "__main__":

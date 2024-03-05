@@ -109,15 +109,15 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
+       <y>-1134</y>
        <width>975</width>
-       <height>670</height>
+       <height>2000</height>
       </rect>
      </property>
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>670</height>
+       <height>2000</height>
       </size>
      </property>
      <widget class="QFrame" name="frame">
@@ -126,7 +126,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
         <x>10</x>
         <y>20</y>
         <width>961</width>
-        <height>551</height>
+        <height>1701</height>
        </rect>
       </property>
       <property name="frameShape">
@@ -1514,11 +1514,44 @@ QLabel {
           <property name="bottomMargin">
            <number>0</number>
           </property>
+          <item>
+           <widget class="QFrame" name="frame_AntivirusWindows_17">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_18">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+            </layout>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frame_ClearChkDsk">
+        <widget class="QFrame" name="frame_Clear_basket">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -1535,7 +1568,7 @@ QLabel {
           <string notr="true">
 /* styles.qss */
 
-#frame_ClearChkDsk {
+#frame_Clear_basket {
     background-color: #161A1E;
     border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */
 }
@@ -1574,7 +1607,7 @@ QLabel {
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <widget class="QPushButton" name="pushClearChkDsk">
+            <widget class="QPushButton" name="pushClear_basket">
              <property name="geometry">
               <rect>
                <x>850</x>
@@ -1617,7 +1650,7 @@ QPushButton:hover {
               <string>Очистка</string>
              </property>
             </widget>
-            <widget class="QLabel" name="labelClearChkDsk">
+            <widget class="QLabel" name="labelClear_basket">
              <property name="geometry">
               <rect>
                <x>750</x>
@@ -1649,7 +1682,7 @@ margin-top: 5px; /* Опустить текст на 10 пикселей вни�
               <string/>
              </property>
             </widget>
-            <widget class="QLabel" name="labelTextClearChkDsk">
+            <widget class="QLabel" name="labelTextClear_basket">
              <property name="geometry">
               <rect>
                <x>20</x>
@@ -1671,7 +1704,7 @@ QLabel {
 </string>
              </property>
              <property name="text">
-              <string>Старые файлы ChkDsk</string>
+              <string>Очистка корзины</string>
              </property>
             </widget>
            </widget>
@@ -1710,6 +1743,144 @@ QLabel {
            <number>0</number>
           </property>
          </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_clear_folder_download">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+/* styles.qss */
+
+#frame_clear_folder_download {
+    background-color: #161A1E;
+    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */
+}
+</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QLabel" name="label_clear_folder_download">
+          <property name="geometry">
+           <rect>
+            <x>760</x>
+            <y>10</y>
+            <width>70</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>70</horstretch>
+            <verstretch>30</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>70</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: white; /* Установите цвет текста в белый */
+font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+font-weight: bold; /* Установите жирность шрифта (если нужно) */
+margin-top: 5px; /* Опустить текст на 10 пикселей вниз */
+background-color: #161A1E;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="push_clear_folder_download">
+          <property name="geometry">
+           <rect>
+            <x>850</x>
+            <y>10</y>
+            <width>91</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>91</width>
+            <height>31</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>91</width>
+            <height>31</height>
+           </size>
+          </property>
+          <property name="baseSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: #161A1E;
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+    font-size: 11px; /* Установите размер шрифта */
+    padding: 10px 20px; /* Установите отступы */
+    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */
+}
+
+QPushButton:hover {
+    background-color: #2C3236;
+    transition: background-color 0.3s ease;
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Очистка</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_clear_folder_download_2">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>10</y>
+            <width>201</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background-color: #161A1E;
+    color: white; /* Установите цвет текста в белый */
+    font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+    font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+    font-weight: bold; /* Установите жирность шрифта (если нужно) */
+    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Очистка папки Download</string>
+          </property>
+         </widget>
         </widget>
        </item>
        <item>
