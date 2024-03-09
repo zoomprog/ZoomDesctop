@@ -7,6 +7,7 @@ from PyQt6.QtWidgets import QMainWindow, QVBoxLayout, QFrame, QPushButton
 
 import SettingsWidjets.Class.BaseSettings
 import SettingsWidjets.Class.WindowsCleaning
+import SettingsWidjets.Class.Energy
 import main
 from main import *
 # from main import MainWindows
@@ -38,13 +39,17 @@ class Setings(QDialog, Ui_Settings):
         self.pushButtonDefoltSettings.clicked.connect(self.DefoltSettings)
         self.pushButtonClear.clicked.connect(self.Clear)
         self.pushButtonClose.clicked.connect(self.CloseWindow)
-
+        self.pushButtonPowerSupply.clicked.connect(self.PowerEnergy)
 
     def DefoltSettings(self):
         self.update_menu(SettingsWidjets.Class.BaseSettings.BaseSet())
 
     def Clear(self):
         self.update_menu(SettingsWidjets.Class.WindowsCleaning.WindowsCleaning())
+
+    def PowerEnergy(self):
+        self.update_menu(SettingsWidjets.Class.Energy.EnergyWindows())
+
 
     def update_menu(self, new_menu):
         if self.current_menu is not None:
@@ -55,7 +60,6 @@ class Setings(QDialog, Ui_Settings):
         self.current_menu = new_menu
         self.layout.addWidget(self.current_menu)
         self.current_menu.show()
-
 
     def mousePressEvent(self, event: QMouseEvent) -> None:
         if event.button() == Qt.MouseButton.LeftButton and self.UpBar.underMouse():
