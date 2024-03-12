@@ -1,4 +1,5 @@
 import sys
+import time
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QAction, QIcon
@@ -8,6 +9,9 @@ from SettingsWidjets.EnergyPower import Ui_Energy
 from Functions.Energy.Preset.Balanced import Balance_Preset
 from Functions.Energy.Preset.HightPerformance import Hight_Performance_Preset
 from Functions.Energy.Preset.PowerSaver import PowerSaver_Preset
+from Functions.Energy.Hibernation.check_hibernation import check_hibernation_PC
+from Functions.Energy.Hibernation.hibernation_OnAndOff import hibernation_PC_ON, hibernation_PC_OFF
+
 
 
 class EnergyWindows(QDialog, Ui_Energy):
@@ -16,6 +20,15 @@ class EnergyWindows(QDialog, Ui_Energy):
         self.setupUi(self)
         self.stackedWidget.setCurrentIndex(1)
         self.pushEnergy_Preset.clicked.connect(self.showMenu)
+
+        # Изменение навзвание кнопок
+
+
+        self.updateHibernationButton()
+        self.pushHibernation.clicked.connect(self.hibernationButtonClicked)
+
+
+
 
         # Создаем меню и добавляем дополнительные кнопки
         self.menu = QMenu(self.pushEnergy_Preset)
@@ -71,6 +84,30 @@ class EnergyWindows(QDialog, Ui_Energy):
         PowerSaver_Preset()
         print("Button 3 clicked")
 
+    def updateHibernationButton(self):
+        state = check_hibernation_PC()
+        self.pushHibernation.setText(state)
+        if state == "on":
+            self.setStyleForHibernationButton(True)
+        else:
+            self.setStyleForHibernationButton(False)
+
+    def setStyleForHibernationButton(self, is_on):
+        style = self.styleButtonHibernationOn() if is_on else self.styleButtonHibernationOff()
+        self.pushHibernation.setStyleSheet(style)
+
+    def hibernationButtonClicked(self):
+        if self.pushHibernation.text() == "on":
+            hibernation_PC_OFF()
+        else:
+            hibernation_PC_ON()
+        self.updateHibernationButton()
+
+    def styleButtonHibernationOn(self):
+        return "QPushButton { color: red;background-color: #161A1E;border-radius: 15px;font-size: 11px;padding: 10px 20px;border: 1px solid white;} QPushButton:hover {background-color: #2C3236; transition: background-color 0.3s ease;}"
+
+    def styleButtonHibernationOff(self):
+        return "QPushButton { color: green;background-color: #161A1E;border-radius: 15px;font-size: 11px;padding: 10px 20px;border: 1px solid white;} QPushButton:hover {background-color: #2C3236; transition: background-color 0.3s ease;}"
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

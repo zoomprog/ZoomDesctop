@@ -49,7 +49,7 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>991</width>
+      <width>961</width>
       <height>581</height>
      </rect>
     </property>
@@ -110,7 +110,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>975</width>
+       <width>945</width>
        <height>700</height>
       </rect>
      </property>
@@ -140,7 +140,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
         <rect>
          <x>0</x>
          <y>10</y>
-         <width>959</width>
+         <width>831</width>
          <height>45</height>
         </rect>
        </property>
@@ -319,6 +319,214 @@ QLabel {
          </widget>
         </item>
        </layout>
+      </widget>
+      <widget class="QFrame" name="frame_Pow">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>70</y>
+         <width>831</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#frame_Pow {
+    background-color: #161A1E;
+    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */
+}
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QPushButton" name="pushPow">
+        <property name="geometry">
+         <rect>
+          <x>730</x>
+          <y>10</y>
+          <width>91</width>
+          <height>35</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>91</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>91</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: #161A1E;
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+    font-size: 11px; /* Установите размер шрифта */
+    padding: 10px 20px; /* Установите отступы */
+    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */
+}
+
+QPushButton:hover {
+    background-color: #2C3236;
+    transition: background-color 0.3s ease;
+}
+</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelTextPow">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>10</y>
+          <width>231</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">/* styles.qss */
+
+QLabel {
+    color: white; /* Установите цвет текста в белый */
+	background-color: #161A1E;
+    font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+    font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+    font-weight: bold; /* Установите жирность шрифта (если нужно) */
+    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Возможность импорта .pow файлов</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frame_Hibernation">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>150</y>
+         <width>831</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#frame_Hibernation {
+    background-color: #161A1E;
+    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */
+}
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QPushButton" name="pushHibernation">
+        <property name="geometry">
+         <rect>
+          <x>730</x>
+          <y>10</y>
+          <width>91</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>91</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>91</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: #161A1E;
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+    font-size: 11px; /* Установите размер шрифта */
+    padding: 10px 20px; /* Установите отступы */
+    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */
+}
+
+QPushButton:hover {
+    background-color: #2C3236;
+    transition: background-color 0.3s ease;
+}
+</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelTextHibernation">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>10</y>
+          <width>231</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">/* styles.qss */
+
+QLabel {
+    color: white; /* Установите цвет текста в белый */
+	background-color: #161A1E;
+    font-size: 14px; /* Установите размер шрифта в 14 пикселей */
+    font-family: &quot;Times New Roman&quot;; /* Установите тип шрифта по вашему выбору */
+    font-weight: bold; /* Установите жирность шрифта (если нужно) */
+    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Гибернация</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </widget>
