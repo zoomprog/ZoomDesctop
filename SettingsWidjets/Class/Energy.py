@@ -11,6 +11,9 @@ from Functions.Energy.Preset.HightPerformance import Hight_Performance_Preset
 from Functions.Energy.Preset.PowerSaver import PowerSaver_Preset
 from Functions.Energy.Hibernation.check_hibernation import check_hibernation_PC
 from Functions.Energy.Hibernation.hibernation_OnAndOff import hibernation_PC_ON, hibernation_PC_OFF
+from Functions.Energy.PowerThrottling.Search import check_power_throttling_policy
+from Functions.Energy.PowerThrottling.OffPowerThrottling import disable_power_throttling_policy
+from Functions.Energy.PowerThrottling.OnPowerThrottling import enable_power_throttling_policy
 
 
 
@@ -21,9 +24,12 @@ class EnergyWindows(QDialog, Ui_Energy):
         self.stackedWidget.setCurrentIndex(1)
         self.pushEnergy_Preset.clicked.connect(self.showMenu)
 
+        #PowerTgrottling
+
+        self.updatePowerThrottling()
+        self.pushPow_PowerThrottling.clicked.connect(self.PowerThrottlingClicked)
+
         # Изменение навзвание кнопок
-
-
         self.updateHibernationButton()
         self.pushHibernation.clicked.connect(self.hibernationButtonClicked)
 
@@ -93,7 +99,7 @@ class EnergyWindows(QDialog, Ui_Energy):
             self.setStyleForHibernationButton(False)
 
     def setStyleForHibernationButton(self, is_on):
-        style = self.styleButtonHibernationOn() if is_on else self.styleButtonHibernationOff()
+        style = self.styleButtonOn() if is_on else self.styleButtonOff()
         self.pushHibernation.setStyleSheet(style)
 
     def hibernationButtonClicked(self):
@@ -103,11 +109,37 @@ class EnergyWindows(QDialog, Ui_Energy):
             hibernation_PC_ON()
         self.updateHibernationButton()
 
-    def styleButtonHibernationOn(self):
+    def styleButtonOn(self):
         return "QPushButton { color: red;background-color: #161A1E;border-radius: 15px;font-size: 11px;padding: 10px 20px;border: 1px solid white;} QPushButton:hover {background-color: #2C3236; transition: background-color 0.3s ease;}"
 
-    def styleButtonHibernationOff(self):
+    def styleButtonOff(self):
         return "QPushButton { color: green;background-color: #161A1E;border-radius: 15px;font-size: 11px;padding: 10px 20px;border: 1px solid white;} QPushButton:hover {background-color: #2C3236; transition: background-color 0.3s ease;}"
+
+    def updatePowerThrottling(self):
+        state = check_power_throttling_policy()
+        self.pushPow_PowerThrottling.setText(state)
+        if state == "enabled":
+            self.setStyleForPowerThrottlingButton(True)
+        else:
+            self.setStyleForPowerThrottlingButton(False)
+
+    def setStyleForPowerThrottlingButton(self, is_on):
+        style = self.styleButtonOn() if is_on else self.styleButtonOff()
+        self.pushPow_PowerThrottling.setStyleSheet(style)
+
+
+
+
+    def PowerThrottlingClicked(self):
+        if self.pushPow_PowerThrottling.text() == "enabled":
+            disable_power_throttling_policy()
+        else:
+            enable_power_throttling_policy()
+        self.updatePowerThrottling()
+
+
+
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
