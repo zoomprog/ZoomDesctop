@@ -8,6 +8,7 @@ from PyQt6.QtWidgets import QMainWindow, QVBoxLayout, QFrame, QPushButton
 import SettingsWidjets.Class.BaseSettings
 import SettingsWidjets.Class.WindowsCleaning
 import SettingsWidjets.Class.Energy
+import SettingsWidjets.Class.AutoLoading
 import main
 from main import *
 # from main import MainWindows
@@ -40,6 +41,7 @@ class Setings(QDialog, Ui_Settings):
         self.pushButtonClear.clicked.connect(self.Clear)
         self.pushButtonClose.clicked.connect(self.CloseWindow)
         self.pushButtonPowerSupply.clicked.connect(self.PowerEnergy)
+        self.pushButtonAutoLoad.clicked.connect(self.AutoLoad)
 
     def DefoltSettings(self):
         self.update_menu(SettingsWidjets.Class.BaseSettings.BaseSet())
@@ -49,6 +51,8 @@ class Setings(QDialog, Ui_Settings):
 
     def PowerEnergy(self):
         self.update_menu(SettingsWidjets.Class.Energy.EnergyWindows())
+    def AutoLoad(self):
+        self.update_menu(SettingsWidjets.Class.AutoLoading.AutoLoadingWindows())
 
 
     def update_menu(self, new_menu):

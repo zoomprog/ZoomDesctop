@@ -1,10 +1,19 @@
 import subprocess
+import chardet
 
-def set_hdparm_never():
-    try:
-        subprocess.run(['hdparm', '-S', '0', '/dev/sda'])  # Замените '/dev/sda' на путь к вашему жесткому диску
-        print("Время отключения жесткого диска установлено на 'Никогда'.")
-    except FileNotFoundError:
-        print("Команда hdparm не найдена. Убедитесь, что она установлена на вашей системе.")
 
-set_hdparm_never()
+def get_startup_apps():
+    startup_apps = []
+    output = subprocess.check_output(['wmic', 'startup', 'get', 'Caption'])
+    encoding = chardet.detect(output)['encoding']
+    decoded_output = output.decode(encoding)
+    lines = decoded_output.strip().split('\n')[1:]
+
+    for line in lines:
+        app_name = line.strip()
+        if app_name:
+            startup_apps.append(app_name)
+
+    return startup_apps
+
+print(get_startup_apps())
