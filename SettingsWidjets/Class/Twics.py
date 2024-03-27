@@ -10,6 +10,10 @@ from Functions.Twics.Search.SearchWin32PrioritySeparation import get_win32_prior
 from Functions.Twics.Disable.DisableWin32PrioritySeparation import set_win32_priority_separation_Disable
 from Functions.Twics.Enable.EnableWin32PrioritySeparation import set_win32_priority_separation_Enable
 
+from Functions.Twics.Search.SearchMeltdownSpectre import MeltdownSpectre_Search
+from Functions.Twics.Disable.DisableMeltdownSpectre import MeltdownSpectre_Disable
+from Functions.Twics.Enable.EnableMeltdownSpectre import MeltdownSpectre_Enable
+
 from enum import Enum, auto
 
 
@@ -31,8 +35,10 @@ class TwicsWindows(QDialog, Ui_Twics):
         self.setupUi(self)
         self.updateSystemResponsiveness()
         self.updateWin32_priority_separation()
+        self.updateMeltdownSpectre()
         self.pushSystemResponsiveness.clicked.connect(self.ButtonSearchSystemResponsiveness)
         self.pushWin32PrioritySeparation.clicked.connect(self.ButtonSearchWin32PrioritySeparation)
+        self.pushSpectreMeltdown.clicked.connect(self.ButtonSearchMeltdownSpectre)
 
     def updateSystemResponsiveness(self):
         result = SystemResponsivenessSearch()
@@ -66,6 +72,7 @@ class TwicsWindows(QDialog, Ui_Twics):
                 print(f"{result}")
         else:
             print('Не удалось получитьзначения Win32')
+
     def ButtonSearchWin32PrioritySeparation(self):
         result = get_win32_priority_separation_Search()
         if result is not None:
@@ -79,6 +86,22 @@ class TwicsWindows(QDialog, Ui_Twics):
             print('Не удалось получитьзначения Win32')
         self.updateWin32_priority_separation()
 
+    def updateMeltdownSpectre(self):
+        result = MeltdownSpectre_Search()
+        if result == STATUS_DISABLED:
+            self.labelSpectreMeltdown.setText('Disable')
+            self.labelSpectreMeltdown.setStyleSheet('color:red')
+        else:
+            self.labelSpectreMeltdown.setText('Enable')
+            self.labelSpectreMeltdown.setStyleSheet('color:green')
+
+    def ButtonSearchMeltdownSpectre(self):
+        result = MeltdownSpectre_Search()
+        if result == STATUS_DISABLED:
+            MeltdownSpectre_Enable()
+        else:
+            MeltdownSpectre_Disable()
+        self.updateMeltdownSpectre()
 
 
 if __name__ == "__main__":
