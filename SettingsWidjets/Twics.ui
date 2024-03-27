@@ -374,9 +374,9 @@ QLabel {
           <widget class="QLabel" name="labelWin32PrioritySeparation">
            <property name="geometry">
             <rect>
-             <x>760</x>
+             <x>580</x>
              <y>10</y>
-             <width>70</width>
+             <width>111</width>
              <height>31</height>
             </rect>
            </property>
@@ -547,9 +547,9 @@ QLabel {
           <widget class="QLabel" name="labelSpectreMeltdown">
            <property name="geometry">
             <rect>
-             <x>760</x>
+             <x>579</x>
              <y>10</y>
-             <width>70</width>
+             <width>131</width>
              <height>31</height>
             </rect>
            </property>
@@ -720,9 +720,9 @@ QLabel {
           <widget class="QLabel" name="labelsvchosts">
            <property name="geometry">
             <rect>
-             <x>760</x>
-             <y>10</y>
-             <width>70</width>
+             <x>580</x>
+             <y>0</y>
+             <width>111</width>
              <height>31</height>
             </rect>
            </property>
@@ -893,9 +893,9 @@ QLabel {
           <widget class="QLabel" name="labelStorageUpdate">
            <property name="geometry">
             <rect>
-             <x>760</x>
+             <x>579</x>
              <y>10</y>
-             <width>70</width>
+             <width>131</width>
              <height>31</height>
             </rect>
            </property>
@@ -1066,9 +1066,9 @@ QLabel {
           <widget class="QLabel" name="labelUpdateNFS">
            <property name="geometry">
             <rect>
-             <x>760</x>
+             <x>589</x>
              <y>10</y>
-             <width>70</width>
+             <width>121</width>
              <height>31</height>
             </rect>
            </property>
@@ -1239,9 +1239,9 @@ QLabel {
           <widget class="QLabel" name="labelConvNameFile83">
            <property name="geometry">
             <rect>
-             <x>760</x>
+             <x>569</x>
              <y>10</y>
-             <width>70</width>
+             <width>151</width>
              <height>31</height>
             </rect>
            </property>
@@ -1412,9 +1412,9 @@ QLabel {
           <widget class="QLabel" name="labelDiagnosricEvents">
            <property name="geometry">
             <rect>
-             <x>760</x>
+             <x>589</x>
              <y>10</y>
-             <width>70</width>
+             <width>131</width>
              <height>31</height>
             </rect>
            </property>

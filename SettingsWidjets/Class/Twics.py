@@ -6,33 +6,78 @@ from Functions.Twics.Search.SearchSystemResponsiveness import SystemResponsivene
 from Functions.Twics.Disable.DisableSystemResponsiveness import SystemResponsivenessDisable
 from Functions.Twics.Enable.EnableSystemResponsiveness import SystemResponsivenessEnable
 
+from Functions.Twics.Search.SearchWin32PrioritySeparation import get_win32_priority_separation_Search
+from Functions.Twics.Disable.DisableWin32PrioritySeparation import set_win32_priority_separation_Disable
+from Functions.Twics.Enable.EnableWin32PrioritySeparation import set_win32_priority_separation_Enable
+
+from enum import Enum, auto
+
+
+class SystemStatus(Enum):
+    DISABLED = auto()
+    ENABLED = auto()
+    ERROR = auto()
+
+
+# Constants for repeated strings
+STATUS_DISABLED = "Disable"
+STATUS_ENABLED = "Enabled"
+STATUS_ERROR = "Error"
+
 
 class TwicsWindows(QDialog, Ui_Twics):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.updateSystemResponsiveness()
+        self.updateWin32_priority_separation()
         self.pushSystemResponsiveness.clicked.connect(self.ButtonSearchSystemResponsiveness)
+        self.pushWin32PrioritySeparation.clicked.connect(self.ButtonSearchWin32PrioritySeparation)
 
     def updateSystemResponsiveness(self):
         result = SystemResponsivenessSearch()
-        status = result.get("SystemResponsiveness", "Error")
+        status = result.get("SystemResponsiveness", STATUS_ERROR)
         if status == "Disable":
-            self.labelSystemResponsiveness.setText("Disable")
+            self.labelSystemResponsiveness.setText(STATUS_DISABLED)
             self.labelSystemResponsiveness.setStyleSheet('color: red;')
         else:
-            self.labelSystemResponsiveness.setText("Enabled")
+            self.labelSystemResponsiveness.setText(STATUS_ENABLED)
             self.labelSystemResponsiveness.setStyleSheet('color: green;')
 
     def ButtonSearchSystemResponsiveness(self):
         result = SystemResponsivenessSearch()
-        status = result.get("SystemResponsiveness", "Error")
+        status = result.get("SystemResponsiveness", STATUS_ERROR)
         if status == "Disable":
             SystemResponsivenessEnable()
         else:
             SystemResponsivenessDisable()
         self.updateSystemResponsiveness()
 
+    def updateWin32_priority_separation(self):
+        result = get_win32_priority_separation_Search()
+        if result is not None:
+            if result == 26:
+                self.labelWin32PrioritySeparation.setText(STATUS_ENABLED)
+                self.labelWin32PrioritySeparation.setStyleSheet('color: green;')
+            elif result == 2:
+                self.labelWin32PrioritySeparation.setText(STATUS_DISABLED)
+                self.labelWin32PrioritySeparation.setStyleSheet('color: red;')
+            else:
+                print(f"{result}")
+        else:
+            print('Не удалось получитьзначения Win32')
+    def ButtonSearchWin32PrioritySeparation(self):
+        result = get_win32_priority_separation_Search()
+        if result is not None:
+            if result == 26:
+                set_win32_priority_separation_Disable(2)
+            elif result == 2:
+                set_win32_priority_separation_Enable(26)
+            else:
+                print(f"{result}")
+        else:
+            print('Не удалось получитьзначения Win32')
+        self.updateWin32_priority_separation()
 
 
 
