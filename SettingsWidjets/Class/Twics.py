@@ -14,6 +14,10 @@ from Functions.Twics.Search.SearchMeltdownSpectre import MeltdownSpectre_Search
 from Functions.Twics.Disable.DisableMeltdownSpectre import MeltdownSpectre_Disable
 from Functions.Twics.Enable.EnableMeltdownSpectre import MeltdownSpectre_Enable
 
+from Functions.Twics.Search.SearchWindowsReservedStorage import check_reserved_storage_Search
+from Functions.Twics.Disable.DisableWindowsReservedStorage import disable_reserved_storage
+from Functions.Twics.Enable.EnableWindowsReservedStorage import enable_reserved_storage
+
 from enum import Enum, auto
 
 
@@ -36,9 +40,11 @@ class TwicsWindows(QDialog, Ui_Twics):
         self.updateSystemResponsiveness()
         self.updateWin32_priority_separation()
         self.updateMeltdownSpectre()
+        self.updateWindowsReservedStorage()
         self.pushSystemResponsiveness.clicked.connect(self.ButtonSearchSystemResponsiveness)
         self.pushWin32PrioritySeparation.clicked.connect(self.ButtonSearchWin32PrioritySeparation)
         self.pushSpectreMeltdown.clicked.connect(self.ButtonSearchMeltdownSpectre)
+        self.pushStorageUpdate.clicked.connect(self.ButtonSearchStorageUpdate)
 
     def updateSystemResponsiveness(self):
         result = SystemResponsivenessSearch()
@@ -102,6 +108,26 @@ class TwicsWindows(QDialog, Ui_Twics):
         else:
             MeltdownSpectre_Disable()
         self.updateMeltdownSpectre()
+
+    def updateWindowsReservedStorage(self):
+        result = check_reserved_storage_Search()
+        print(result)
+        if result == STATUS_ENABLED:
+            self.labelStorageUpdate.setText(STATUS_ENABLED)
+            self.labelStorageUpdate.setStyleSheet('color: red;')
+        else:
+            self.labelStorageUpdate.setText(STATUS_DISABLED)
+            self.labelStorageUpdate.setStyleSheet('color: green;')
+
+    def ButtonSearchStorageUpdate(self):
+        result = check_reserved_storage_Search()
+        if result == STATUS_ENABLED:
+            disable_reserved_storage()
+        else:
+            enable_reserved_storage()
+        self.updateWindowsReservedStorage()
+
+
 
 
 if __name__ == "__main__":
