@@ -9,6 +9,7 @@ import SettingsWidjets.Class.BaseSettings
 import SettingsWidjets.Class.WindowsCleaning
 import SettingsWidjets.Class.Energy
 import SettingsWidjets.Class.AutoLoading
+import SettingsWidjets.Class.Twics
 import main
 from main import *
 # from main import MainWindows
@@ -42,6 +43,7 @@ class Setings(QDialog, Ui_Settings):
         self.pushButtonClose.clicked.connect(self.CloseWindow)
         self.pushButtonPowerSupply.clicked.connect(self.PowerEnergy)
         self.pushButtonAutoLoad.clicked.connect(self.AutoLoad)
+        self.pushButtonServise.clicked.connect(self.Twics)
 
     def DefoltSettings(self):
         self.update_menu(SettingsWidjets.Class.BaseSettings.BaseSet())
@@ -53,6 +55,9 @@ class Setings(QDialog, Ui_Settings):
         self.update_menu(SettingsWidjets.Class.Energy.EnergyWindows())
     def AutoLoad(self):
         self.update_menu(SettingsWidjets.Class.AutoLoading.AutoLoadingWindows())
+
+    def Twics(self):
+        self.update_menu(SettingsWidjets.Class.Twics.TwicsWindows())
 
 
     def update_menu(self, new_menu):
@@ -88,7 +93,7 @@ class Setings(QDialog, Ui_Settings):
         self.pushButtonClear.setFont(font)
         self.pushButtonClear.setText("Очистка")
         self.pushButtonServise.setFont(font)
-        self.pushButtonServise.setText("Службы")
+        self.pushButtonServise.setText("Твики")
         self.pushButtonPowerSupply.setFont(font)
         self.pushButtonPowerSupply.setText("Электропитание")
         self.pushButtonPowerSupply.setFont(font)

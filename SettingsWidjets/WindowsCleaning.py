@@ -78,20 +78,16 @@ class Ui_WindowsCleaning(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -1134, 975, 2000))
-        self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 2000))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 989, 579))
+        self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 0))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.frame = QtWidgets.QFrame(parent=self.scrollAreaWidgetContents)
-        self.frame.setGeometry(QtCore.QRect(10, 20, 961, 1701))
+        self.frame.setGeometry(QtCore.QRect(10, 20, 971, 551))
         self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame.setObjectName("frame")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.frame)
-        self.verticalLayout.setSizeConstraint(QtWidgets.QLayout.SizeConstraint.SetMaximumSize)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setObjectName("verticalLayout")
         self.frame_ClearTemporaryFiles = QtWidgets.QFrame(parent=self.frame)
+        self.frame_ClearTemporaryFiles.setGeometry(QtCore.QRect(10, 10, 951, 45))
         self.frame_ClearTemporaryFiles.setMaximumSize(QtCore.QSize(16777215, 45))
         self.frame_ClearTemporaryFiles.setStyleSheet("/* styles.qss */\n"
 "\n"
@@ -164,18 +160,8 @@ class Ui_WindowsCleaning(object):
 "")
         self.labelTextClearTemporaryFiles.setObjectName("labelTextClearTemporaryFiles")
         self.horizontalLayout.addWidget(self.frame_1)
-        self.verticalLayout.addWidget(self.frame_ClearTemporaryFiles)
-        self.frame_AntivirusWindows_8 = QtWidgets.QFrame(parent=self.frame)
-        self.frame_AntivirusWindows_8.setMaximumSize(QtCore.QSize(16777215, 32))
-        self.frame_AntivirusWindows_8.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_AntivirusWindows_8.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_AntivirusWindows_8.setObjectName("frame_AntivirusWindows_8")
-        self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.frame_AntivirusWindows_8)
-        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_8.setSpacing(0)
-        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
-        self.verticalLayout.addWidget(self.frame_AntivirusWindows_8)
         self.frame_Clearthumbnailcache = QtWidgets.QFrame(parent=self.frame)
+        self.frame_Clearthumbnailcache.setGeometry(QtCore.QRect(10, 63, 951, 45))
         self.frame_Clearthumbnailcache.setMinimumSize(QtCore.QSize(0, 45))
         self.frame_Clearthumbnailcache.setMaximumSize(QtCore.QSize(16777215, 40))
         self.frame_Clearthumbnailcache.setStyleSheet("/* styles.qss */\n"
@@ -246,18 +232,8 @@ class Ui_WindowsCleaning(object):
 "")
         self.labelTextClearthumbnailcache.setObjectName("labelTextClearthumbnailcache")
         self.horizontalLayout_3.addWidget(self.frame_2)
-        self.verticalLayout.addWidget(self.frame_Clearthumbnailcache)
-        self.frame_AntivirusWindows_11 = QtWidgets.QFrame(parent=self.frame)
-        self.frame_AntivirusWindows_11.setMaximumSize(QtCore.QSize(16777215, 32))
-        self.frame_AntivirusWindows_11.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_AntivirusWindows_11.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_AntivirusWindows_11.setObjectName("frame_AntivirusWindows_11")
-        self.horizontalLayout_12 = QtWidgets.QHBoxLayout(self.frame_AntivirusWindows_11)
-        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_12.setSpacing(0)
-        self.horizontalLayout_12.setObjectName("horizontalLayout_12")
-        self.verticalLayout.addWidget(self.frame_AntivirusWindows_11)
         self.frame_Clearinstallationlogfiles = QtWidgets.QFrame(parent=self.frame)
+        self.frame_Clearinstallationlogfiles.setGeometry(QtCore.QRect(10, 114, 951, 45))
         self.frame_Clearinstallationlogfiles.setMinimumSize(QtCore.QSize(0, 45))
         self.frame_Clearinstallationlogfiles.setMaximumSize(QtCore.QSize(16777215, 40))
         self.frame_Clearinstallationlogfiles.setStyleSheet("\n"
@@ -330,18 +306,8 @@ class Ui_WindowsCleaning(object):
 "")
         self.labelTextClearinstallationlogfiles.setObjectName("labelTextClearinstallationlogfiles")
         self.horizontalLayout_4.addWidget(self.frame_3)
-        self.verticalLayout.addWidget(self.frame_Clearinstallationlogfiles)
-        self.frame_AntivirusWindows_12 = QtWidgets.QFrame(parent=self.frame)
-        self.frame_AntivirusWindows_12.setMaximumSize(QtCore.QSize(16777215, 32))
-        self.frame_AntivirusWindows_12.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_AntivirusWindows_12.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_AntivirusWindows_12.setObjectName("frame_AntivirusWindows_12")
-        self.horizontalLayout_13 = QtWidgets.QHBoxLayout(self.frame_AntivirusWindows_12)
-        self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_13.setSpacing(0)
-        self.horizontalLayout_13.setObjectName("horizontalLayout_13")
-        self.verticalLayout.addWidget(self.frame_AntivirusWindows_12)
         self.frame_ClearDownloadedprogramfiles = QtWidgets.QFrame(parent=self.frame)
+        self.frame_ClearDownloadedprogramfiles.setGeometry(QtCore.QRect(10, 165, 951, 45))
         self.frame_ClearDownloadedprogramfiles.setMinimumSize(QtCore.QSize(0, 45))
         self.frame_ClearDownloadedprogramfiles.setMaximumSize(QtCore.QSize(16777215, 40))
         self.frame_ClearDownloadedprogramfiles.setStyleSheet("\n"
@@ -414,102 +380,8 @@ class Ui_WindowsCleaning(object):
 "")
         self.labelTextClearDownloadedprogramfiles.setObjectName("labelTextClearDownloadedprogramfiles")
         self.horizontalLayout_5.addWidget(self.frame_4)
-        self.verticalLayout.addWidget(self.frame_ClearDownloadedprogramfiles)
-        self.frame_AntivirusWindows_13 = QtWidgets.QFrame(parent=self.frame)
-        self.frame_AntivirusWindows_13.setMaximumSize(QtCore.QSize(16777215, 32))
-        self.frame_AntivirusWindows_13.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_AntivirusWindows_13.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_AntivirusWindows_13.setObjectName("frame_AntivirusWindows_13")
-        self.horizontalLayout_14 = QtWidgets.QHBoxLayout(self.frame_AntivirusWindows_13)
-        self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_14.setSpacing(0)
-        self.horizontalLayout_14.setObjectName("horizontalLayout_14")
-        self.verticalLayout.addWidget(self.frame_AntivirusWindows_13)
-        self.frame_ClearDeliveryOptimizationFiles = QtWidgets.QFrame(parent=self.frame)
-        self.frame_ClearDeliveryOptimizationFiles.setMaximumSize(QtCore.QSize(16777215, 46))
-        self.frame_ClearDeliveryOptimizationFiles.setStyleSheet("\n"
-"/* styles.qss */\n"
-"\n"
-"#frame_ClearDeliveryOptimizationFiles {\n"
-"    background-color: #161A1E;\n"
-"    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */\n"
-"}\n"
-"")
-        self.frame_ClearDeliveryOptimizationFiles.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_ClearDeliveryOptimizationFiles.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_ClearDeliveryOptimizationFiles.setObjectName("frame_ClearDeliveryOptimizationFiles")
-        self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.frame_ClearDeliveryOptimizationFiles)
-        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_6.setSpacing(0)
-        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
-        self.frame_5 = QtWidgets.QFrame(parent=self.frame_ClearDeliveryOptimizationFiles)
-        self.frame_5.setMinimumSize(QtCore.QSize(0, 45))
-        self.frame_5.setStyleSheet("background-color: transparent;")
-        self.frame_5.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_5.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_5.setObjectName("frame_5")
-        self.pushClearDeliveryOptimizationFiles = QtWidgets.QPushButton(parent=self.frame_5)
-        self.pushClearDeliveryOptimizationFiles.setGeometry(QtCore.QRect(850, 10, 91, 31))
-        self.pushClearDeliveryOptimizationFiles.setMinimumSize(QtCore.QSize(91, 31))
-        self.pushClearDeliveryOptimizationFiles.setMaximumSize(QtCore.QSize(91, 31))
-        self.pushClearDeliveryOptimizationFiles.setStyleSheet("/* styles.qss */\n"
-"\n"
-"QPushButton {\n"
-"    background-color: #161A1E;\n"
-"    border-radius: 15px;\n"
-"    color: white; /* Установите цвет текста */\n"
-"    font-size: 11px; /* Установите размер шрифта */\n"
-"    padding: 10px 20px; /* Установите отступы */\n"
-"    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #2C3236;\n"
-"    transition: background-color 0.3s ease;\n"
-"}\n"
-"")
-        self.pushClearDeliveryOptimizationFiles.setObjectName("pushClearDeliveryOptimizationFiles")
-        self.labelClearDeliveryOptimizationFiles = QtWidgets.QLabel(parent=self.frame_5)
-        self.labelClearDeliveryOptimizationFiles.setGeometry(QtCore.QRect(750, 10, 81, 30))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(30)
-        sizePolicy.setHeightForWidth(self.labelClearDeliveryOptimizationFiles.sizePolicy().hasHeightForWidth())
-        self.labelClearDeliveryOptimizationFiles.setSizePolicy(sizePolicy)
-        self.labelClearDeliveryOptimizationFiles.setMinimumSize(QtCore.QSize(70, 30))
-        self.labelClearDeliveryOptimizationFiles.setStyleSheet("color: white; /* Установите цвет текста в белый */\n"
-"font-size: 14px; /* Установите размер шрифта в 14 пикселей */\n"
-"font-family: \"Times New Roman\"; /* Установите тип шрифта по вашему выбору */\n"
-"font-weight: bold; /* Установите жирность шрифта (если нужно) */\n"
-"margin-top: 5px; /* Опустить текст на 10 пикселей вниз */")
-        self.labelClearDeliveryOptimizationFiles.setText("")
-        self.labelClearDeliveryOptimizationFiles.setObjectName("labelClearDeliveryOptimizationFiles")
-        self.labelTextClearDeliveryOptimizationFiles = QtWidgets.QLabel(parent=self.frame_5)
-        self.labelTextClearDeliveryOptimizationFiles.setGeometry(QtCore.QRect(30, 10, 201, 21))
-        self.labelTextClearDeliveryOptimizationFiles.setStyleSheet("/* styles.qss */\n"
-"\n"
-"QLabel {\n"
-"    color: white; /* Установите цвет текста в белый */\n"
-"    font-size: 14px; /* Установите размер шрифта в 14 пикселей */\n"
-"    font-family: \"Times New Roman\"; /* Установите тип шрифта по вашему выбору */\n"
-"    font-weight: bold; /* Установите жирность шрифта (если нужно) */\n"
-"    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */\n"
-"}\n"
-"")
-        self.labelTextClearDeliveryOptimizationFiles.setObjectName("labelTextClearDeliveryOptimizationFiles")
-        self.horizontalLayout_6.addWidget(self.frame_5)
-        self.verticalLayout.addWidget(self.frame_ClearDeliveryOptimizationFiles)
-        self.frame_AntivirusWindows_14 = QtWidgets.QFrame(parent=self.frame)
-        self.frame_AntivirusWindows_14.setMaximumSize(QtCore.QSize(16777215, 32))
-        self.frame_AntivirusWindows_14.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_AntivirusWindows_14.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_AntivirusWindows_14.setObjectName("frame_AntivirusWindows_14")
-        self.horizontalLayout_15 = QtWidgets.QHBoxLayout(self.frame_AntivirusWindows_14)
-        self.horizontalLayout_15.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_15.setSpacing(0)
-        self.horizontalLayout_15.setObjectName("horizontalLayout_15")
-        self.verticalLayout.addWidget(self.frame_AntivirusWindows_14)
         self.frame_ClearDirectXShaderCache = QtWidgets.QFrame(parent=self.frame)
+        self.frame_ClearDirectXShaderCache.setGeometry(QtCore.QRect(10, 216, 951, 45))
         self.frame_ClearDirectXShaderCache.setMinimumSize(QtCore.QSize(0, 45))
         self.frame_ClearDirectXShaderCache.setMaximumSize(QtCore.QSize(16777215, 40))
         self.frame_ClearDirectXShaderCache.setStyleSheet("\n"
@@ -582,18 +454,8 @@ class Ui_WindowsCleaning(object):
 "")
         self.labelTextClearDirectXShaderCache.setObjectName("labelTextClearDirectXShaderCache")
         self.horizontalLayout_7.addWidget(self.frame_6)
-        self.verticalLayout.addWidget(self.frame_ClearDirectXShaderCache)
-        self.frame_AntivirusWindows_15 = QtWidgets.QFrame(parent=self.frame)
-        self.frame_AntivirusWindows_15.setMaximumSize(QtCore.QSize(16777215, 32))
-        self.frame_AntivirusWindows_15.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_AntivirusWindows_15.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_AntivirusWindows_15.setObjectName("frame_AntivirusWindows_15")
-        self.horizontalLayout_16 = QtWidgets.QHBoxLayout(self.frame_AntivirusWindows_15)
-        self.horizontalLayout_16.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_16.setSpacing(0)
-        self.horizontalLayout_16.setObjectName("horizontalLayout_16")
-        self.verticalLayout.addWidget(self.frame_AntivirusWindows_15)
         self.frame_ClearFileSysremError = QtWidgets.QFrame(parent=self.frame)
+        self.frame_ClearFileSysremError.setGeometry(QtCore.QRect(10, 267, 951, 45))
         self.frame_ClearFileSysremError.setMinimumSize(QtCore.QSize(0, 45))
         self.frame_ClearFileSysremError.setMaximumSize(QtCore.QSize(16777215, 40))
         self.frame_ClearFileSysremError.setStyleSheet("\n"
@@ -666,28 +528,8 @@ class Ui_WindowsCleaning(object):
 "")
         self.labelTextClearFileSysremError.setObjectName("labelTextClearFileSysremError")
         self.horizontalLayout_9.addWidget(self.frame_7)
-        self.verticalLayout.addWidget(self.frame_ClearFileSysremError)
-        self.frame_AntivirusWindows_16 = QtWidgets.QFrame(parent=self.frame)
-        self.frame_AntivirusWindows_16.setMaximumSize(QtCore.QSize(16777215, 32))
-        self.frame_AntivirusWindows_16.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_AntivirusWindows_16.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_AntivirusWindows_16.setObjectName("frame_AntivirusWindows_16")
-        self.horizontalLayout_17 = QtWidgets.QHBoxLayout(self.frame_AntivirusWindows_16)
-        self.horizontalLayout_17.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_17.setSpacing(0)
-        self.horizontalLayout_17.setObjectName("horizontalLayout_17")
-        self.frame_AntivirusWindows_17 = QtWidgets.QFrame(parent=self.frame_AntivirusWindows_16)
-        self.frame_AntivirusWindows_17.setMaximumSize(QtCore.QSize(16777215, 32))
-        self.frame_AntivirusWindows_17.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_AntivirusWindows_17.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_AntivirusWindows_17.setObjectName("frame_AntivirusWindows_17")
-        self.horizontalLayout_18 = QtWidgets.QHBoxLayout(self.frame_AntivirusWindows_17)
-        self.horizontalLayout_18.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_18.setSpacing(0)
-        self.horizontalLayout_18.setObjectName("horizontalLayout_18")
-        self.horizontalLayout_17.addWidget(self.frame_AntivirusWindows_17)
-        self.verticalLayout.addWidget(self.frame_AntivirusWindows_16)
         self.frame_Clear_basket = QtWidgets.QFrame(parent=self.frame)
+        self.frame_Clear_basket.setGeometry(QtCore.QRect(10, 316, 951, 45))
         self.frame_Clear_basket.setMinimumSize(QtCore.QSize(0, 45))
         self.frame_Clear_basket.setMaximumSize(QtCore.QSize(16777215, 45))
         self.frame_Clear_basket.setStyleSheet("\n"
@@ -760,18 +602,8 @@ class Ui_WindowsCleaning(object):
 "")
         self.labelTextClear_basket.setObjectName("labelTextClear_basket")
         self.horizontalLayout_10.addWidget(self.frame_8)
-        self.verticalLayout.addWidget(self.frame_Clear_basket)
-        self.frame_AntivirusWindows_2 = QtWidgets.QFrame(parent=self.frame)
-        self.frame_AntivirusWindows_2.setMaximumSize(QtCore.QSize(16777215, 32))
-        self.frame_AntivirusWindows_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_AntivirusWindows_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_AntivirusWindows_2.setObjectName("frame_AntivirusWindows_2")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame_AntivirusWindows_2)
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_2.setSpacing(0)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.verticalLayout.addWidget(self.frame_AntivirusWindows_2)
         self.frame_clear_folder_download = QtWidgets.QFrame(parent=self.frame)
+        self.frame_clear_folder_download.setGeometry(QtCore.QRect(10, 367, 951, 50))
         self.frame_clear_folder_download.setMinimumSize(QtCore.QSize(0, 50))
         self.frame_clear_folder_download.setMaximumSize(QtCore.QSize(16777215, 50))
         self.frame_clear_folder_download.setStyleSheet("\n"
@@ -835,17 +667,80 @@ class Ui_WindowsCleaning(object):
 "}\n"
 "")
         self.label_clear_folder_download_2.setObjectName("label_clear_folder_download_2")
-        self.verticalLayout.addWidget(self.frame_clear_folder_download)
-        self.frame_AutoUpdateMaps = QtWidgets.QFrame(parent=self.frame)
-        self.frame_AutoUpdateMaps.setMaximumSize(QtCore.QSize(16777215, 32))
-        self.frame_AutoUpdateMaps.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_AutoUpdateMaps.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_AutoUpdateMaps.setObjectName("frame_AutoUpdateMaps")
-        self.horizontalLayout_11 = QtWidgets.QHBoxLayout(self.frame_AutoUpdateMaps)
-        self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_11.setSpacing(0)
-        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
-        self.verticalLayout.addWidget(self.frame_AutoUpdateMaps)
+        self.frame_ClearDeliveryOptimizationFiles = QtWidgets.QFrame(parent=self.frame)
+        self.frame_ClearDeliveryOptimizationFiles.setGeometry(QtCore.QRect(10, 423, 951, 45))
+        self.frame_ClearDeliveryOptimizationFiles.setMaximumSize(QtCore.QSize(16777215, 46))
+        self.frame_ClearDeliveryOptimizationFiles.setStyleSheet("\n"
+"/* styles.qss */\n"
+"\n"
+"#frame_ClearDeliveryOptimizationFiles {\n"
+"    background-color: #161A1E;\n"
+"    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */\n"
+"}\n"
+"")
+        self.frame_ClearDeliveryOptimizationFiles.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_ClearDeliveryOptimizationFiles.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_ClearDeliveryOptimizationFiles.setObjectName("frame_ClearDeliveryOptimizationFiles")
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.frame_ClearDeliveryOptimizationFiles)
+        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_6.setSpacing(0)
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.frame_5 = QtWidgets.QFrame(parent=self.frame_ClearDeliveryOptimizationFiles)
+        self.frame_5.setMinimumSize(QtCore.QSize(0, 45))
+        self.frame_5.setStyleSheet("background-color: transparent;")
+        self.frame_5.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_5.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_5.setObjectName("frame_5")
+        self.pushClearDeliveryOptimizationFiles = QtWidgets.QPushButton(parent=self.frame_5)
+        self.pushClearDeliveryOptimizationFiles.setGeometry(QtCore.QRect(850, 10, 91, 31))
+        self.pushClearDeliveryOptimizationFiles.setMinimumSize(QtCore.QSize(91, 31))
+        self.pushClearDeliveryOptimizationFiles.setMaximumSize(QtCore.QSize(91, 31))
+        self.pushClearDeliveryOptimizationFiles.setStyleSheet("/* styles.qss */\n"
+"\n"
+"QPushButton {\n"
+"    background-color: #161A1E;\n"
+"    border-radius: 15px;\n"
+"    color: white; /* Установите цвет текста */\n"
+"    font-size: 11px; /* Установите размер шрифта */\n"
+"    padding: 10px 20px; /* Установите отступы */\n"
+"    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #2C3236;\n"
+"    transition: background-color 0.3s ease;\n"
+"}\n"
+"")
+        self.pushClearDeliveryOptimizationFiles.setObjectName("pushClearDeliveryOptimizationFiles")
+        self.labelClearDeliveryOptimizationFiles = QtWidgets.QLabel(parent=self.frame_5)
+        self.labelClearDeliveryOptimizationFiles.setGeometry(QtCore.QRect(750, 10, 81, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(70)
+        sizePolicy.setVerticalStretch(30)
+        sizePolicy.setHeightForWidth(self.labelClearDeliveryOptimizationFiles.sizePolicy().hasHeightForWidth())
+        self.labelClearDeliveryOptimizationFiles.setSizePolicy(sizePolicy)
+        self.labelClearDeliveryOptimizationFiles.setMinimumSize(QtCore.QSize(70, 30))
+        self.labelClearDeliveryOptimizationFiles.setStyleSheet("color: white; /* Установите цвет текста в белый */\n"
+"font-size: 14px; /* Установите размер шрифта в 14 пикселей */\n"
+"font-family: \"Times New Roman\"; /* Установите тип шрифта по вашему выбору */\n"
+"font-weight: bold; /* Установите жирность шрифта (если нужно) */\n"
+"margin-top: 5px; /* Опустить текст на 10 пикселей вниз */")
+        self.labelClearDeliveryOptimizationFiles.setText("")
+        self.labelClearDeliveryOptimizationFiles.setObjectName("labelClearDeliveryOptimizationFiles")
+        self.labelTextClearDeliveryOptimizationFiles = QtWidgets.QLabel(parent=self.frame_5)
+        self.labelTextClearDeliveryOptimizationFiles.setGeometry(QtCore.QRect(30, 10, 201, 21))
+        self.labelTextClearDeliveryOptimizationFiles.setStyleSheet("/* styles.qss */\n"
+"\n"
+"QLabel {\n"
+"    color: white; /* Установите цвет текста в белый */\n"
+"    font-size: 14px; /* Установите размер шрифта в 14 пикселей */\n"
+"    font-family: \"Times New Roman\"; /* Установите тип шрифта по вашему выбору */\n"
+"    font-weight: bold; /* Установите жирность шрифта (если нужно) */\n"
+"    margin-top: 5px; /* Опустить текст на 10 пикселей вниз */\n"
+"}\n"
+"")
+        self.labelTextClearDeliveryOptimizationFiles.setObjectName("labelTextClearDeliveryOptimizationFiles")
+        self.horizontalLayout_6.addWidget(self.frame_5)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
         self.retranslateUi(WindowsCleaning)
@@ -862,8 +757,6 @@ class Ui_WindowsCleaning(object):
         self.labelTextClearinstallationlogfiles.setText(_translate("WindowsCleaning", "Файлы журнала установок"))
         self.pushClearDownloadedprogramfiles.setText(_translate("WindowsCleaning", "Очистка"))
         self.labelTextClearDownloadedprogramfiles.setText(_translate("WindowsCleaning", "Загруженные файлы программ"))
-        self.pushClearDeliveryOptimizationFiles.setText(_translate("WindowsCleaning", "Очистка"))
-        self.labelTextClearDeliveryOptimizationFiles.setText(_translate("WindowsCleaning", "Файлы оптимизации доставки"))
         self.pushClearDirectXShaderCache.setText(_translate("WindowsCleaning", "Очистка"))
         self.labelTextClearDirectXShaderCache.setText(_translate("WindowsCleaning", "DirectX Shader Cache"))
         self.pushClearFileSysremError.setText(_translate("WindowsCleaning", "Очистка"))
@@ -872,6 +765,8 @@ class Ui_WindowsCleaning(object):
         self.labelTextClear_basket.setText(_translate("WindowsCleaning", "Очистка корзины"))
         self.push_clear_folder_download.setText(_translate("WindowsCleaning", "Очистка"))
         self.label_clear_folder_download_2.setText(_translate("WindowsCleaning", "Очистка папки Download"))
+        self.pushClearDeliveryOptimizationFiles.setText(_translate("WindowsCleaning", "Очистка"))
+        self.labelTextClearDeliveryOptimizationFiles.setText(_translate("WindowsCleaning", "Файлы оптимизации доставки"))
 
 
 if __name__ == "__main__":
