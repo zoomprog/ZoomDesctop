@@ -18,6 +18,10 @@ from Functions.Twics.Search.SearchWindowsReservedStorage import check_reserved_s
 from Functions.Twics.Disable.DisableWindowsReservedStorage import disable_reserved_storage
 from Functions.Twics.Enable.EnableWindowsReservedStorage import enable_reserved_storage
 
+from Functions.Twics.Search.SearchSvchost import check_svc_host_split_threshold_Search
+from Functions.Twics.Disable.DisableSvchost import svc_host_split_threshold_Disable
+from Functions.Twics.Enable.EnableSvchost import svc_host_split_threshold_Enable
+
 from enum import Enum, auto
 
 
@@ -41,10 +45,13 @@ class TwicsWindows(QDialog, Ui_Twics):
         self.updateWin32_priority_separation()
         self.updateMeltdownSpectre()
         self.updateWindowsReservedStorage()
+        self.updateSvchost()
+
         self.pushSystemResponsiveness.clicked.connect(self.ButtonSearchSystemResponsiveness)
         self.pushWin32PrioritySeparation.clicked.connect(self.ButtonSearchWin32PrioritySeparation)
         self.pushSpectreMeltdown.clicked.connect(self.ButtonSearchMeltdownSpectre)
         self.pushStorageUpdate.clicked.connect(self.ButtonSearchStorageUpdate)
+        self.pushsvchosts.clicked.connect(self.ButtonSearchSvchost)
 
     def updateSystemResponsiveness(self):
         result = SystemResponsivenessSearch()
@@ -111,7 +118,6 @@ class TwicsWindows(QDialog, Ui_Twics):
 
     def updateWindowsReservedStorage(self):
         result = check_reserved_storage_Search()
-        print(result)
         if result == STATUS_ENABLED:
             self.labelStorageUpdate.setText(STATUS_ENABLED)
             self.labelStorageUpdate.setStyleSheet('color: red;')
@@ -127,7 +133,23 @@ class TwicsWindows(QDialog, Ui_Twics):
             enable_reserved_storage()
         self.updateWindowsReservedStorage()
 
+    def updateSvchost(self):
+        result = check_svc_host_split_threshold_Search()
+        if result == STATUS_ENABLED:
+            print(1)
+            self.labelsvchosts.setText(STATUS_ENABLED)
+            self.labelsvchosts.setStyleSheet('color: green;')
+        else:
+            self.labelsvchosts.setText(STATUS_DISABLED)
+            self.labelsvchosts.setStyleSheet('color: red;')
 
+    def ButtonSearchSvchost(self):
+        result = check_svc_host_split_threshold_Search()
+        if result == STATUS_ENABLED:
+            svc_host_split_threshold_Disable()
+        else:
+            svc_host_split_threshold_Enable()
+        self.updateSvchost()
 
 
 if __name__ == "__main__":
