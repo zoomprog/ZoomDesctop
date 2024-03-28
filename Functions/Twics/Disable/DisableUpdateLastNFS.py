@@ -11,4 +11,3 @@ def nfs_atime_status_windows_Disable():
         print(f"Ошибка при чтении реестра: {e}")
         return None
 
-nfs_atime_status_windows_Disable()

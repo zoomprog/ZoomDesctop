@@ -26,6 +26,10 @@ from Functions.Twics.Search.SearchUpdateLastNFS import nfs_atime_status_windows_
 from Functions.Twics.Disable.DisableUpdateLastNFS import nfs_atime_status_windows_Disable
 from Functions.Twics.Enable.EnableUpdateLastNFS import nfs_atime_status_windows_Enable
 
+from Functions.Twics.Search.SearchConvertNameFile83 import ConvertNameFile83_Update
+from Functions.Twics.Disable.DisableConvertNameFile83 import ConvertNameFile83_Disable
+from Functions.Twics.Enable.EnableConvertNameFile83 import ConvertNameFile83_Enable
+
 from enum import Enum, auto
 
 
@@ -51,6 +55,7 @@ class TwicsWindows(QDialog, Ui_Twics):
         self.updateWindowsReservedStorage()
         self.updateSvchost()
         self.updateUpdateLastNFS()
+        self.updateConvertNameFile83()
 
         self.pushSystemResponsiveness.clicked.connect(self.ButtonSearchSystemResponsiveness)
         self.pushWin32PrioritySeparation.clicked.connect(self.ButtonSearchWin32PrioritySeparation)
@@ -58,6 +63,7 @@ class TwicsWindows(QDialog, Ui_Twics):
         self.pushStorageUpdate.clicked.connect(self.ButtonSearchStorageUpdate)
         self.pushsvchosts.clicked.connect(self.ButtonSearchSvchost)
         self.pushUpdateNFS.clicked.connect(self.ButtonSearchUpdate)
+        self.pushConvNameFile83.clicked.connect(self.ButtonSearchConvNameFile83)
 
     def updateSystemResponsiveness(self):
         result = SystemResponsivenessSearch()
@@ -172,6 +178,23 @@ class TwicsWindows(QDialog, Ui_Twics):
         else:
             nfs_atime_status_windows_Enable()
         self.updateUpdateLastNFS()
+
+    def updateConvertNameFile83(self):
+        result = ConvertNameFile83_Update()
+        if result == 1:
+            self.labelConvNameFile83.setText(STATUS_DISABLED)
+            self.labelConvNameFile83.setStyleSheet('color: green;')
+        else:
+            self.labelConvNameFile83.setText(STATUS_ENABLED)
+            self.labelConvNameFile83.setStyleSheet('color: red;')
+
+    def ButtonSearchConvNameFile83(self):
+        result = ConvertNameFile83_Update()
+        if result == 1:
+            ConvertNameFile83_Disable()
+        else:
+            ConvertNameFile83_Enable()
+        self.updateConvertNameFile83()
 
 
 

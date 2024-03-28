@@ -10,4 +10,3 @@ def nfs_atime_status_windows_Enable():
     except WindowsError as e:
         print(f"Ошибка при чтении реестра: {e}")
         return None
-nfs_atime_status_windows_Enable()
