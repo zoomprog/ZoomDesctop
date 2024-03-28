@@ -22,6 +22,10 @@ from Functions.Twics.Search.SearchSvchost import check_svc_host_split_threshold_
 from Functions.Twics.Disable.DisableSvchost import svc_host_split_threshold_Disable
 from Functions.Twics.Enable.EnableSvchost import svc_host_split_threshold_Enable
 
+from Functions.Twics.Search.SearchUpdateLastNFS import nfs_atime_status_windows_Update
+from Functions.Twics.Disable.DisableUpdateLastNFS import nfs_atime_status_windows_Disable
+from Functions.Twics.Enable.EnableUpdateLastNFS import nfs_atime_status_windows_Enable
+
 from enum import Enum, auto
 
 
@@ -46,12 +50,14 @@ class TwicsWindows(QDialog, Ui_Twics):
         self.updateMeltdownSpectre()
         self.updateWindowsReservedStorage()
         self.updateSvchost()
+        self.updateUpdateLastNFS()
 
         self.pushSystemResponsiveness.clicked.connect(self.ButtonSearchSystemResponsiveness)
         self.pushWin32PrioritySeparation.clicked.connect(self.ButtonSearchWin32PrioritySeparation)
         self.pushSpectreMeltdown.clicked.connect(self.ButtonSearchMeltdownSpectre)
         self.pushStorageUpdate.clicked.connect(self.ButtonSearchStorageUpdate)
         self.pushsvchosts.clicked.connect(self.ButtonSearchSvchost)
+        self.pushUpdateNFS.clicked.connect(self.ButtonSearchUpdate)
 
     def updateSystemResponsiveness(self):
         result = SystemResponsivenessSearch()
@@ -136,7 +142,6 @@ class TwicsWindows(QDialog, Ui_Twics):
     def updateSvchost(self):
         result = check_svc_host_split_threshold_Search()
         if result == STATUS_ENABLED:
-            print(1)
             self.labelsvchosts.setText(STATUS_ENABLED)
             self.labelsvchosts.setStyleSheet('color: green;')
         else:
@@ -150,6 +155,24 @@ class TwicsWindows(QDialog, Ui_Twics):
         else:
             svc_host_split_threshold_Enable()
         self.updateSvchost()
+
+    def updateUpdateLastNFS(self):
+        result = nfs_atime_status_windows_Update()
+        if result == 1:
+            self.labelUpdateNFS.setText(STATUS_DISABLED)
+            self.labelUpdateNFS.setStyleSheet('color: green;')
+        else:
+            self.labelUpdateNFS.setText(STATUS_ENABLED)
+            self.labelUpdateNFS.setStyleSheet('color: red;')
+
+    def ButtonSearchUpdate(self):
+        result = nfs_atime_status_windows_Update()
+        if result == 1:
+            nfs_atime_status_windows_Disable()
+        else:
+            nfs_atime_status_windows_Enable()
+        self.updateUpdateLastNFS()
+
 
 
 if __name__ == "__main__":
