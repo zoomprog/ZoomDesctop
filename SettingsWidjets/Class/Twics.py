@@ -71,6 +71,41 @@ class TwicsWindows(QDialog, Ui_Twics):
         self.pushConvNameFile83.clicked.connect(self.ButtonSearchConvNameFile83)
         self.pushDiagnosricEvents.clicked.connect(self.ButtonSearchDiagnosricEvents)
 
+        self.PositionButton()
+        self.PositionLabel()
+
+    def PositionButton(self):
+        button_names = [
+            "pushSystemResponsiveness",
+            "pushWin32PrioritySeparation",
+            "pushSpectreMeltdown",
+            "pushStorageUpdate",
+            "pushsvchosts",
+            "pushUpdateNFS",
+            "pushConvNameFile83",
+            "pushDiagnosricEvents"
+        ]
+        x_position = 800
+        for button_name in button_names:
+            button = getattr(self, button_name)
+            button.move(x_position, 7)
+
+    def PositionLabel(self):
+        label_names = [
+            "labelSystemResponsiveness",
+            "labelWin32PrioritySeparation",
+            "labelSpectreMeltdown",
+            "labelStorageUpdate",
+            "labelsvchosts",
+            "labelUpdateNFS",
+            "labelConvNameFile83",
+            "labelDiagnosricEvents"
+        ]
+        x_position = 750
+        for button_name in label_names:
+            button = getattr(self, button_name)
+            button.move(x_position, 7)
+
     def updateSystemResponsiveness(self):
         result = SystemResponsivenessSearch()
         status = result.get("SystemResponsiveness", STATUS_ERROR)
@@ -209,7 +244,7 @@ class TwicsWindows(QDialog, Ui_Twics):
             "Microsoft-Windows-UserModePowerService/Diagnostic"
         ]
         result = check_logs_status(logs)
-        if all(status =='Disabled' for status in result):
+        if all(status == 'Disabled' for status in result):
             self.labelDiagnosricEvents.setText(STATUS_DISABLED)
             self.labelDiagnosricEvents.setStyleSheet('color:green')
         else:
@@ -223,13 +258,11 @@ class TwicsWindows(QDialog, Ui_Twics):
             "Microsoft-Windows-UserModePowerService/Diagnostic"
         ]
         result = check_logs_status(logs)
-        if all(status =='Disabled' for status in result):
+        if all(status == 'Disabled' for status in result):
             enable_event_viewer_logs(logs)
         else:
             disable_event_viewer_logs(logs)
         self.updateDiagnosricEvents()
-
-
 
 
 if __name__ == "__main__":
