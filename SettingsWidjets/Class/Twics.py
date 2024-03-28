@@ -30,6 +30,10 @@ from Functions.Twics.Search.SearchConvertNameFile83 import ConvertNameFile83_Upd
 from Functions.Twics.Disable.DisableConvertNameFile83 import ConvertNameFile83_Disable
 from Functions.Twics.Enable.EnableConvertNameFile83 import ConvertNameFile83_Enable
 
+from Functions.Twics.Search.SearchDiagnosricEvents import check_logs_status
+from Functions.Twics.Disable.DisableDiagnosricEvents import disable_event_viewer_logs
+from Functions.Twics.Enable.EnableDiagnosricEvents import enable_event_viewer_logs
+
 from enum import Enum, auto
 
 
@@ -56,6 +60,7 @@ class TwicsWindows(QDialog, Ui_Twics):
         self.updateSvchost()
         self.updateUpdateLastNFS()
         self.updateConvertNameFile83()
+        self.updateDiagnosricEvents()
 
         self.pushSystemResponsiveness.clicked.connect(self.ButtonSearchSystemResponsiveness)
         self.pushWin32PrioritySeparation.clicked.connect(self.ButtonSearchWin32PrioritySeparation)
@@ -64,6 +69,7 @@ class TwicsWindows(QDialog, Ui_Twics):
         self.pushsvchosts.clicked.connect(self.ButtonSearchSvchost)
         self.pushUpdateNFS.clicked.connect(self.ButtonSearchUpdate)
         self.pushConvNameFile83.clicked.connect(self.ButtonSearchConvNameFile83)
+        self.pushDiagnosricEvents.clicked.connect(self.ButtonSearchDiagnosricEvents)
 
     def updateSystemResponsiveness(self):
         result = SystemResponsivenessSearch()
@@ -195,6 +201,34 @@ class TwicsWindows(QDialog, Ui_Twics):
         else:
             ConvertNameFile83_Enable()
         self.updateConvertNameFile83()
+
+    def updateDiagnosricEvents(self):
+        logs = [
+            "Microsoft-Windows-SleepStudy/Diagnostic",
+            "Microsoft-Windows-Kernel-Processor-Power/Diagnostic",
+            "Microsoft-Windows-UserModePowerService/Diagnostic"
+        ]
+        result = check_logs_status(logs)
+        if all(status =='Disabled' for status in result):
+            self.labelDiagnosricEvents.setText(STATUS_DISABLED)
+            self.labelDiagnosricEvents.setStyleSheet('color:green')
+        else:
+            self.labelDiagnosricEvents.setText(STATUS_ENABLED)
+            self.labelDiagnosricEvents.setStyleSheet('color:red')
+
+    def ButtonSearchDiagnosricEvents(self):
+        logs = [
+            "Microsoft-Windows-SleepStudy/Diagnostic",
+            "Microsoft-Windows-Kernel-Processor-Power/Diagnostic",
+            "Microsoft-Windows-UserModePowerService/Diagnostic"
+        ]
+        result = check_logs_status(logs)
+        if all(status =='Disabled' for status in result):
+            enable_event_viewer_logs(logs)
+        else:
+            disable_event_viewer_logs(logs)
+        self.updateDiagnosricEvents()
+
 
 
 
