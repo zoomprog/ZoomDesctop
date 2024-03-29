@@ -155,6 +155,34 @@ class Ui_Settings(object):
 "    border-radius:25;\n"
 "}")
         self.pushButtonAutoLoad.setObjectName("pushButtonAutoLoad")
+        self.pushButtonPrivacy = QtWidgets.QPushButton(parent=self.frame_3)
+        self.pushButtonPrivacy.setGeometry(QtCore.QRect(10, 320, 191, 50))
+        self.pushButtonPrivacy.setMaximumSize(QtCore.QSize(200, 50))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButtonPrivacy.setFont(font)
+        self.pushButtonPrivacy.setStyleSheet("QPushButton#pushButtonPrivacy{\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: #161A1E;\n"
+"    border-radius:25;\n"
+"}")
+        self.pushButtonPrivacy.setObjectName("pushButtonPrivacy")
+        self.pushButtonTasks = QtWidgets.QPushButton(parent=self.frame_3)
+        self.pushButtonTasks.setGeometry(QtCore.QRect(10, 380, 191, 50))
+        self.pushButtonTasks.setMaximumSize(QtCore.QSize(200, 50))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButtonTasks.setFont(font)
+        self.pushButtonTasks.setStyleSheet("QPushButton#pushButtonTasks{\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: #161A1E;\n"
+"    border-radius:25;\n"
+"}")
+        self.pushButtonTasks.setObjectName("pushButtonTasks")
         self.horizontalLayout_2.addWidget(self.frame_3)
         self.MainBody = QtWidgets.QFrame(parent=self.frame_4)
         self.MainBody.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
@@ -175,6 +203,8 @@ class Ui_Settings(object):
         self.pushButtonServise.setText(_translate("Settings", "Службы"))
         self.pushButtonPowerSupply.setText(_translate("Settings", "Электропитание"))
         self.pushButtonAutoLoad.setText(_translate("Settings", "Автозагрузки"))
+        self.pushButtonPrivacy.setText(_translate("Settings", "Приватность"))
+        self.pushButtonTasks.setText(_translate("Settings", "Задачи"))
 
 
 if __name__ == "__main__":

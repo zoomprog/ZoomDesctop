@@ -369,6 +369,72 @@ qproperty-alignment: 'AlignCenter';</string>
            <string>Автозагрузки</string>
           </property>
          </widget>
+         <widget class="QPushButton" name="pushButtonPrivacy">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>320</y>
+            <width>191</width>
+            <height>50</height>
+           </rect>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#pushButtonPrivacy{
+	color: rgb(255, 255, 255);
+	background-color: #161A1E;
+	border-radius:25;
+}</string>
+          </property>
+          <property name="text">
+           <string>Приватность</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButtonTasks">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>380</y>
+            <width>191</width>
+            <height>50</height>
+           </rect>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton#pushButtonTasks{
+	color: rgb(255, 255, 255);
+	background-color: #161A1E;
+	border-radius:25;
+}</string>
+          </property>
+          <property name="text">
+           <string>Задачи</string>
+          </property>
+         </widget>
         </widget>
        </item>
        <item>
