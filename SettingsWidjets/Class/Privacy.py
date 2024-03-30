@@ -2,6 +2,23 @@ import sys
 from PyQt6.QtWidgets import QDialog, QApplication
 from SettingsWidjets.Privacy import Ui_WindowsPrivacy
 
+from Functions.Privacy.Telemetria.Telemetria import Start1On, Start1Off, Start2On, Start2Off, Start3On, Start3Off, Start4On, Start4Off, SearchStart1, SearchStart2, SearchStart3, SearchStart4
+from Functions.Privacy.TelemetriaWebCome.TelemetriaWebCome import *
+
+from enum import Enum, auto
+
+
+class SystemStatus(Enum):
+    DISABLED = auto()
+    ENABLED = auto()
+    ERROR = auto()
+
+
+# Constants for repeated strings
+STATUS_DISABLED = "Disabled"
+STATUS_ENABLED = "Enabled"
+STATUS_ERROR = "Error"
+
 
 class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
     def __init__(self):
@@ -9,6 +26,10 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.setupUi(self)
         self.positionButton()
         self.positionTextLabel()
+
+        self.updateTelemetria()
+        #self.updateTelemetriaWebCome()
+        self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
 
     def positionButton(self):
         frame_list = [
@@ -135,6 +156,38 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         for button_name in TextLabel_list:
             button = getattr(self, button_name)
             button.move(x_position, 7)
+
+    def updateTelemetria(self):
+        result1 = SearchStart1()
+        result2 = SearchStart2()
+        result3 = SearchStart3()
+        result4 = SearchStart4()
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED:
+            self.labelTelemetria.setText('Disabled')
+            self.labelTelemetria.setStyleSheet('color:green')
+        else:
+            self.labelTelemetria.setText('Enabled')
+            self.labelTelemetria.setStyleSheet('color:red')
+
+    def TelemetriaButtonClick(self):
+        result1 = SearchStart1()
+        result2 = SearchStart2()
+        result3 = SearchStart3()
+        result4 = SearchStart4()
+        print(result1, result2, result3, result4)
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED:
+            Start1On()
+            Start2On()
+            Start3On()
+            Start4On()
+        else:
+            Start1Off()
+            Start2Off()
+            Start3Off()
+            Start4Off()
+        self.updateTelemetria()
+
+
 
 
 if __name__ == "__main__":
