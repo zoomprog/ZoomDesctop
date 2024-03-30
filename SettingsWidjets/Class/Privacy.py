@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import QDialog, QApplication
 from SettingsWidjets.Privacy import Ui_WindowsPrivacy
 
 from Functions.Privacy.Telemetria.Telemetria import Start1On, Start1Off, Start2On, Start2Off, Start3On, Start3Off, Start4On, Start4Off, SearchStart1, SearchStart2, SearchStart3, SearchStart4
-from Functions.Privacy.TelemetriaWebCome.TelemetriaWebCome import *
+from Functions.Privacy.TelemetriaWebCome.TelemetriaWebCome import enable_task_schtasks, disable_task_schtasks, check_task_status, SetEmptyDebuggerOn, SetEmptyDebuggerOff, SearchSetEmptyDebugger
 
 from enum import Enum, auto
 
@@ -28,8 +28,9 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.positionTextLabel()
 
         self.updateTelemetria()
-        #self.updateTelemetriaWebCome()
+        self.updateTelemetriaWebCome()
         self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
+        self.pushTelemetriaWebCome.clicked.connect(self.TelemetriaButtonClick)
 
     def positionButton(self):
         frame_list = [
@@ -162,6 +163,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         result2 = SearchStart2()
         result3 = SearchStart3()
         result4 = SearchStart4()
+        print(SearchStart2())
         if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED:
             self.labelTelemetria.setText('Disabled')
             self.labelTelemetria.setStyleSheet('color:green')
@@ -174,7 +176,6 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         result2 = SearchStart2()
         result3 = SearchStart3()
         result4 = SearchStart4()
-        print(result1, result2, result3, result4)
         if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED:
             Start1On()
             Start2On()
@@ -186,8 +187,26 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             Start3Off()
             Start4Off()
         self.updateTelemetria()
+    def updateTelemetriaWebCome(self):
+        result1 = SearchSetEmptyDebugger()
+        result2 = check_task_status()
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED:
+            self.labelTelemetriaWebCome.setText(STATUS_DISABLED)
+            self.labelTelemetriaWebCome.setStyleSheet('color:green')
+        else:
+            self.labelTelemetriaWebCome.setText(STATUS_ENABLED)
+            self.labelTelemetriaWebCome.setStyleSheet('color:red')
 
-
+    def TelemetriaButtonClick(self):
+        result1 = SearchSetEmptyDebugger()
+        result2 = check_task_status()
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED:
+            enable_task_schtasks()
+            SetEmptyDebuggerOff()
+        else:
+            disable_task_schtasks()
+            SetEmptyDebuggerOn()
+        self.updateTelemetriaWebCome()
 
 
 if __name__ == "__main__":

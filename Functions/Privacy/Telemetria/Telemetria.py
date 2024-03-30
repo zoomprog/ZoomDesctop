@@ -109,7 +109,7 @@ def SearchStart1():
 def SearchStart2():
     try:
         # Открыть ключ реестра в режиме чтения
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SYSTEM\CurrentControlSet\Services\DiagTrack", 0, winreg.KEY_READ)
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SYSTEM\CurrentControlSet\Services\diagsvc", 0, winreg.KEY_READ)
         # Прочитать значение
         value, reg_type = winreg.QueryValueEx(key, "Start")
         # Закрыть ключ
@@ -123,13 +123,13 @@ def SearchStart2():
     except Exception as e:
         print(f"Ошибка при чтении значения: {e}")
 
-print(SearchStart2())
+
 
 
 def SearchStart3():
     try:
         # Открыть ключ реестра в режиме чтения
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SYSTEM\CurrentControlSet\Services\DiagTrack", 0, winreg.KEY_READ)
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SYSTEM\CurrentControlSet\Services\dmwappushservice", 0, winreg.KEY_READ)
         # Прочитать значение
         value, reg_type = winreg.QueryValueEx(key, "Start")
         # Закрыть ключ
@@ -146,7 +146,7 @@ def SearchStart3():
 def SearchStart4():
     try:
         # Открыть ключ реестра в режиме чтения
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SYSTEM\CurrentControlSet\Services\DiagTrack", 0, winreg.KEY_READ)
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", 0, winreg.KEY_READ)
         # Прочитать значение
         value, reg_type = winreg.QueryValueEx(key, "Start")
         # Закрыть ключ

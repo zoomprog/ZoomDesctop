@@ -4,10 +4,9 @@ import re
 import winreg
 
 
-def enable_task_schtasks(task_path):
+def enable_task_schtasks():
     try:
         subprocess.run(['schtasks', '/Change', '/TN', r'\Microsoft\Windows\Device Information\Device', '/ENABLE'], check=True)
-        print(f"Задача '{task_path}' успешно включена.")
     except subprocess.CalledProcessError as e:
         print(f"Ошибка при попытке включить задачу \Microsoft\Windows\Device Information\Device: {e}")
 
@@ -66,7 +65,7 @@ def SetEmptyDebuggerOff():
         print(f"Ошибка при установке значения: {e}")
 
 
-def SearchStart2():
+def SearchSetEmptyDebugger():
     try:
         # Открыть ключ реестра в режиме чтения
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\'DeviceCensus.exe'", 0, winreg.KEY_READ)
@@ -75,9 +74,9 @@ def SearchStart2():
         # Закрыть ключ
         winreg.CloseKey(key)
         if value == '':
-            return 'Disabled'
-        else:
             return 'Enabled'
+        else:
+            return 'Disabled'
     except FileNotFoundError:
         print("Ключ реестра не найден.")
     except Exception as e:
