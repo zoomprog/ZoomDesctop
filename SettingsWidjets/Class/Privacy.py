@@ -4,6 +4,8 @@ from SettingsWidjets.Privacy import Ui_WindowsPrivacy
 
 from Functions.Privacy.Telemetria.Telemetria import Start1On, Start1Off, Start2On, Start2Off, Start3On, Start3Off, Start4On, Start4Off, SearchStart1, SearchStart2, SearchStart3, SearchStart4
 from Functions.Privacy.TelemetriaWebCome.TelemetriaWebCome import enable_task_schtasks, disable_task_schtasks, check_task_status, SetEmptyDebuggerOn, SetEmptyDebuggerOff, SearchSetEmptyDebugger
+from Functions.Privacy.TaskMCA.TaskMCA import enable_TaskMCA_CompatibilityAppraiser, disable_TaskMCA_CompatibilityAppraiser, check_TaskMCA_status_CompatibilityAppraiser
+from Functions.Privacy.UpdateDateCEIP.UpdateDateCEIP import check_ProgramDataUpdater, enable_ProgramDataUpdater, disable_ProgramDataUpdater
 
 from enum import Enum, auto
 
@@ -29,8 +31,13 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
 
         self.updateTelemetria()
         self.updateTelemetriaWebCome()
+        self.uodateTaskMCA()
+        self.updateUpdateDateCEIP()
+
         self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
         self.pushTelemetriaWebCome.clicked.connect(self.TelemetriaButtonClick)
+        self.pushTaskMCA.clicked.connect(self.TaskMCAButtonClick)
+        self.pushUpdateDateCEIP.clicked.connect(self.UpdateDateCEIPButtonClick)
 
     def positionButton(self):
         frame_list = [
@@ -163,7 +170,6 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         result2 = SearchStart2()
         result3 = SearchStart3()
         result4 = SearchStart4()
-        print(SearchStart2())
         if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED:
             self.labelTelemetria.setText('Disabled')
             self.labelTelemetria.setStyleSheet('color:green')
@@ -187,6 +193,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             Start3Off()
             Start4Off()
         self.updateTelemetria()
+
     def updateTelemetriaWebCome(self):
         result1 = SearchSetEmptyDebugger()
         result2 = check_task_status()
@@ -207,6 +214,45 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             disable_task_schtasks()
             SetEmptyDebuggerOn()
         self.updateTelemetriaWebCome()
+
+    def uodateTaskMCA(self):
+        result1 = check_TaskMCA_status_CompatibilityAppraiser()
+        result2 = SearchSetEmptyDebugger()
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED:
+            self.labelClearTaskMCA.setText(STATUS_DISABLED)
+            self.labelClearTaskMCA.setStyleSheet('color:green')
+        else:
+            self.labelClearTaskMCA.setText(STATUS_ENABLED)
+            self.labelClearTaskMCA.setStyleSheet('color:red')
+
+    def TaskMCAButtonClick(self):
+        result1 = check_TaskMCA_status_CompatibilityAppraiser()
+        result2 = SearchSetEmptyDebugger()
+        print(result1, result2)
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED:
+            enable_TaskMCA_CompatibilityAppraiser()
+            SetEmptyDebuggerOff()
+        else:
+            disable_TaskMCA_CompatibilityAppraiser()
+            SetEmptyDebuggerOn()
+        self.uodateTaskMCA()
+
+    def updateUpdateDateCEIP(self):
+        result = check_ProgramDataUpdater()
+        if result == STATUS_DISABLED:
+            self.labelUpdateDateCEIP.setText(STATUS_DISABLED)
+            self.labelUpdateDateCEIP.setStyleSheet('color:green')
+        else:
+            self.labelUpdateDateCEIP.setText(STATUS_ENABLED)
+            self.labelUpdateDateCEIP.setStyleSheet('color:red')
+
+    def UpdateDateCEIPButtonClick(self):
+        result = check_ProgramDataUpdater()
+        if result == STATUS_DISABLED:
+            enable_ProgramDataUpdater()
+        else:
+            disable_ProgramDataUpdater()
+        self.updateUpdateDateCEIP()
 
 
 if __name__ == "__main__":
