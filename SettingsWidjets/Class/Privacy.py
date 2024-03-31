@@ -435,7 +435,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         result8 = SearchStartWER2()
         result9 = check_QueueReporting()
         print(result1, result2, result3, result4, result5,result6, result7,result8,result9)
-        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED and result6 == STATUS_DISABLED and result6 == STATUS_DISABLED and result7 == STATUS_DISABLED and result8 == STATUS_DISABLED:
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED and result6 == STATUS_DISABLED and result6 == STATUS_DISABLED and result7 == STATUS_DISABLED and result8 == STATUS_DISABLED and result9 == STATUS_DISABLED:
             self.labelWER.setText(STATUS_DISABLED)
             self.labelWER.setStyleSheet('color:green')
         else:
@@ -453,7 +453,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         result7 = SearchStartWER()
         result8 = SearchStartWER2()
         result9 = check_QueueReporting()
-        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED and result6 == STATUS_DISABLED and result7 == STATUS_DISABLED and result8 == STATUS_DISABLED:
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED and result6 == STATUS_DISABLED and result7 == STATUS_DISABLED and result8 == STATUS_DISABLED and result9 == STATUS_DISABLED:
             DisabledOn()
             Disabled2On()
             DefaultConsentOn()
