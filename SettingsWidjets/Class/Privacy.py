@@ -6,6 +6,7 @@ from Functions.Privacy.Telemetria.Telemetria import Start1On, Start1Off, Start2O
 from Functions.Privacy.TelemetriaWebCome.TelemetriaWebCome import enable_task_schtasks, disable_task_schtasks, check_task_status, SetEmptyDebuggerOn, SetEmptyDebuggerOff, SearchSetEmptyDebugger
 from Functions.Privacy.TaskMCA.TaskMCA import enable_TaskMCA_CompatibilityAppraiser, disable_TaskMCA_CompatibilityAppraiser, check_TaskMCA_status_CompatibilityAppraiser
 from Functions.Privacy.UpdateDateCEIP.UpdateDateCEIP import check_ProgramDataUpdater, enable_ProgramDataUpdater, disable_ProgramDataUpdater
+from Functions.Privacy.TaskApplicationImpactTelemetry.TaskApplicationImpactTelemetry import check_ait_agent_task,enable_ait_agent_task, disable_ait_agent_task
 
 from enum import Enum, auto
 
@@ -33,11 +34,13 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.updateTelemetriaWebCome()
         self.uodateTaskMCA()
         self.updateUpdateDateCEIP()
+        self.updateTaskApplicationImpactTelemetry()
 
         self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
         self.pushTelemetriaWebCome.clicked.connect(self.TelemetriaButtonClick)
         self.pushTaskMCA.clicked.connect(self.TaskMCAButtonClick)
         self.pushUpdateDateCEIP.clicked.connect(self.UpdateDateCEIPButtonClick)
+        self.pushTaskApplicationImpactTelemetry.clicked.connect(self.TaskApplicationImpactTelemetryButtonClick)
 
     def positionButton(self):
         frame_list = [
@@ -50,7 +53,6 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             "pushTaskCEIP",
             "pushCEIPSQM",
             "pushTaskCEIP",
-            "pushTaskApplicationImpactTelemetry",
             "pushProductivityAppReminder",
             "pushTaskCEIP",
             "pushTelemetrApplicationImpact",
@@ -253,6 +255,23 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         else:
             disable_ProgramDataUpdater()
         self.updateUpdateDateCEIP()
+
+    def updateTaskApplicationImpactTelemetry(self):
+        result = check_ait_agent_task()
+        if result == STATUS_DISABLED:
+            self.labelTaskApplicationImpactTelemetry.setText(STATUS_DISABLED)
+            self.labelTaskApplicationImpactTelemetry.setStyleSheet('color:green')
+        else:
+            self.labelTaskApplicationImpactTelemetry.setText(STATUS_ENABLED)
+            self.labelTaskApplicationImpactTelemetry.setStyleSheet('color:red')
+
+    def TaskApplicationImpactTelemetryButtonClick(self):
+        result = check_ait_agent_task()
+        if result == STATUS_DISABLED:
+            enable_ait_agent_task()
+        else:
+            disable_ait_agent_task()
+        self.updateTaskApplicationImpactTelemetry()
 
 
 if __name__ == "__main__":
