@@ -13,6 +13,7 @@ from Functions.Privacy.CEIPSQM.CEIPSQM import CEIPSQMOn, CEIPSQMOff, SearchCEIPS
 from Functions.Privacy.TelemetrApplicationImpact.TelemetrApplicationImpact import AITEnableOn, AITEnableOff, SearchAITEnable
 from Functions.Privacy.TelemetrNalogDate.TelemetrNalogDate import AllowTelemetryOn, AllowTelemetryOff, SearchAllowTelemetry, AllowTelemetry2On, AllowTelemetry2Off, SearchAllowTelemetry2, AllowTelemetry3On, AllowTelemetry3Off, SearchAllowTelemetry3, LimitEnhancedDiagnosticDataWindowsAnalyticsOn, LimitEnhancedDiagnosticDataWindowsAnalyticsOff, SearchLimitEnhancedDiagnosticDataWindowsAnalytics
 from Functions.Privacy.TelemetrLicense.TelemetrLicense import NoGenTicketOn, NoGenTicketOff, SearchNoGenTicket
+from Functions.Privacy.WER.WER import DisabledOn, DisabledOff, SearchDisabled, Disabled2On, Disabled2Off, SearchDisabled2, DefaultConsentOn, DefaultConsentOff, SearchDefaultConsent, DefaultOverrideBehaviorOn, DefaultOverrideBehaviorOff, SearchDefaultOverrideBehavior, DontSendAdditionalDataOn, DontSendAdditionalDataOff, SearchDontSendAdditionalData, LoggingDisabledOn, LoggingDisabledOff, SearchLoggingDisabled, StartWEROn, StartWEROff, SearchStartWER, StartWER2On, StartWER2Off, SearchStartWER2, check_QueueReporting, enable_QueueReporting, disable_QueueReporting
 
 from enum import Enum, auto
 
@@ -47,6 +48,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.updateTelemetrApplicationImpact()
         self.updateTelemetrNalogDate()
         self.updateTelemetrLicense()
+        self.updateWer()
 
         self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
         self.pushTelemetriaWebCome.clicked.connect(self.TelemetriaWebComeButtonClick)
@@ -59,6 +61,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.pushTelemetrApplicationImpact.clicked.connect(self.TelemetrApplicationImpactButtonClick)
         self.pushTelemetrNalogDate.clicked.connect(self.TelemetrNalogDateButtonClick)
         self.pushTelemetrLicense.clicked.connect(self.TelemetrLicenseButtonClick)
+        self.pushWER.clicked.connect(self.WERButtonClick)
 
     def positionButton(self):
         frame_list = [
@@ -420,6 +423,60 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         else:
             NoGenTicketOff()
         self.updateTelemetrLicense()
+
+    def updateWer(self):
+        result1 =SearchDisabled()
+        result2 = SearchDisabled2()
+        result3 = SearchDefaultConsent()
+        result4 = SearchDefaultOverrideBehavior()
+        result5 = SearchDontSendAdditionalData()
+        result6 = SearchLoggingDisabled()
+        result7 = SearchStartWER()
+        result8 = SearchStartWER2()
+        result9 = check_QueueReporting()
+        print(result1, result2, result3, result4, result5,result6, result7,result8,result9)
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED and result6 == STATUS_DISABLED and result6 == STATUS_DISABLED and result7 == STATUS_DISABLED and result8 == STATUS_DISABLED:
+            self.labelWER.setText(STATUS_DISABLED)
+            self.labelWER.setStyleSheet('color:green')
+        else:
+            self.labelWER.setText(STATUS_ENABLED)
+            self.labelWER.setStyleSheet('color:red')
+
+    def WERButtonClick(self):
+
+        result1 = SearchDisabled()
+        result2 = SearchDisabled2()
+        result3 = SearchDefaultConsent()
+        result4 = SearchDefaultOverrideBehavior()
+        result5 = SearchDontSendAdditionalData()
+        result6 = SearchLoggingDisabled()
+        result7 = SearchStartWER()
+        result8 = SearchStartWER2()
+        result9 = check_QueueReporting()
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED and result6 == STATUS_DISABLED and result7 == STATUS_DISABLED and result8 == STATUS_DISABLED:
+            DisabledOn()
+            Disabled2On()
+            DefaultConsentOn()
+            DefaultOverrideBehaviorOn()
+            DontSendAdditionalDataOn()
+            DontSendAdditionalDataOn()
+            LoggingDisabledOn()
+            StartWEROn()
+            StartWER2On()
+            enable_QueueReporting()
+        else:
+            DisabledOff()
+            Disabled2Off()
+            DefaultConsentOff()
+            DefaultOverrideBehaviorOff()
+            DefaultOverrideBehaviorOff()
+            DontSendAdditionalDataOff()
+            LoggingDisabledOff()
+            StartWEROff()
+            StartWER2Off()
+            disable_QueueReporting()
+        self.updateWer()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
