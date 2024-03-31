@@ -8,7 +8,11 @@ from Functions.Privacy.TaskMCA.TaskMCA import enable_TaskMCA_CompatibilityApprai
 from Functions.Privacy.UpdateDateCEIP.UpdateDateCEIP import check_ProgramDataUpdater, enable_ProgramDataUpdater, disable_ProgramDataUpdater
 from Functions.Privacy.TaskApplicationImpactTelemetry.TaskApplicationImpactTelemetry import check_ait_agent_task, enable_ait_agent_task, disable_ait_agent_task
 from Functions.Privacy.ProductivityAppReminder.ProductivityAppReminder import check_StartupAppTask, enable_StartupAppTask, disable_StartupAppTask
-from Functions.Privacy.TaskCEIP.TaskCEIP import check_Proxy,enable_Proxy, disable_Proxy, check_BthSQM, enable_BthSQM, disable_BthSQM, check_Consolidator, enable_Consolidator, disable_Consolidator, check_KernelCeipTask, enable_KernelCeipTask, disable_KernelCeipTask, check_UsbCeip, enable_UsbCeip, disable_UsbCeip
+from Functions.Privacy.TaskCEIP.TaskCEIP import check_Proxy, enable_Proxy, disable_Proxy, check_BthSQM, enable_BthSQM, disable_BthSQM, check_Consolidator, enable_Consolidator, disable_Consolidator, check_KernelCeipTask, enable_KernelCeipTask, disable_KernelCeipTask, check_UsbCeip, enable_UsbCeip, disable_UsbCeip
+from Functions.Privacy.CEIPSQM.CEIPSQM import CEIPSQMOn, CEIPSQMOff, SearchCEIPSQM
+from Functions.Privacy.TelemetrApplicationImpact.TelemetrApplicationImpact import AITEnableOn, AITEnableOff, SearchAITEnable
+from Functions.Privacy.TelemetrNalogDate.TelemetrNalogDate import AllowTelemetryOn, AllowTelemetryOff, SearchAllowTelemetry, AllowTelemetry2On, AllowTelemetry2Off, SearchAllowTelemetry2, AllowTelemetry3On, AllowTelemetry3Off, SearchAllowTelemetry3, LimitEnhancedDiagnosticDataWindowsAnalyticsOn, LimitEnhancedDiagnosticDataWindowsAnalyticsOff, SearchLimitEnhancedDiagnosticDataWindowsAnalytics
+from Functions.Privacy.TelemetrLicense.TelemetrLicense import NoGenTicketOn, NoGenTicketOff, SearchNoGenTicket
 
 from enum import Enum, auto
 
@@ -39,6 +43,10 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.updateTaskApplicationImpactTelemetry()
         self.uodateProductivityAppReminder()
         self.updateTaskCEIP()
+        self.updateCEIPSQM()
+        self.updateTelemetrApplicationImpact()
+        self.updateTelemetrNalogDate()
+        self.updateTelemetrLicense()
 
         self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
         self.pushTelemetriaWebCome.clicked.connect(self.TelemetriaWebComeButtonClick)
@@ -47,6 +55,10 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.pushTaskApplicationImpactTelemetry.clicked.connect(self.TaskApplicationImpactTelemetryButtonClick)
         self.pushProductivityAppReminder.clicked.connect(self.ProductivityAppReminderButtonClick)
         self.pushTaskCEIP.clicked.connect(self.TaskCEIPButtonClick)
+        self.pushCEIPSQM.clicked.connect(self.CEIPSQMButtonClick)
+        self.pushTelemetrApplicationImpact.clicked.connect(self.TelemetrApplicationImpactButtonClick)
+        self.pushTelemetrNalogDate.clicked.connect(self.TelemetrNalogDateButtonClick)
+        self.pushTelemetrLicense.clicked.connect(self.TelemetrLicenseButtonClick)
 
     def positionButton(self):
         frame_list = [
@@ -295,6 +307,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         else:
             disable_StartupAppTask()
         self.uodateProductivityAppReminder()
+
     def updateTaskCEIP(self):
         result1 = check_Proxy()
         result2 = check_BthSQM()
@@ -307,6 +320,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         else:
             self.labelTaskCEIP.setText(STATUS_ENABLED)
             self.labelTaskCEIP.setStyleSheet('color:red')
+
     def TaskCEIPButtonClick(self):
         result1 = check_Proxy()
         result2 = check_BthSQM()
@@ -327,7 +341,85 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             disable_UsbCeip()
         self.updateTaskCEIP()
 
+    def updateCEIPSQM(self):
+        result = SearchCEIPSQM()
+        if result == STATUS_DISABLED:
+            self.labelCEIPSQM.setText(STATUS_DISABLED)
+            self.labelCEIPSQM.setStyleSheet('color:green')
+        else:
+            self.labelCEIPSQM.setText(STATUS_ENABLED)
+            self.labelCEIPSQM.setStyleSheet('color:red')
 
+    def CEIPSQMButtonClick(self):
+        result = SearchCEIPSQM()
+        if result == STATUS_DISABLED:
+            CEIPSQMOn()
+        else:
+            CEIPSQMOff()
+        self.updateCEIPSQM()
+
+    def updateTelemetrApplicationImpact(self):
+        result = SearchAITEnable()
+        if result == STATUS_DISABLED:
+            self.labelTelemetrApplicationImpact.setText(STATUS_DISABLED)
+            self.labelTelemetrApplicationImpact.setStyleSheet('color:green')
+        else:
+            self.labelTelemetrApplicationImpact.setText(STATUS_ENABLED)
+            self.labelTelemetrApplicationImpact.setStyleSheet('color:red')
+
+    def TelemetrApplicationImpactButtonClick(self):
+        result = SearchAITEnable()
+        if result == STATUS_DISABLED:
+            AITEnableOn()
+        else:
+            AITEnableOff()
+        self.updateTelemetrApplicationImpact()
+
+    def updateTelemetrNalogDate(self):
+        result1 = SearchAllowTelemetry()
+        result2 = SearchAllowTelemetry2()
+        result3 = SearchAllowTelemetry3()
+        result4 = SearchLimitEnhancedDiagnosticDataWindowsAnalytics()
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED:
+            self.labelTelemetrNalogDate.setText(STATUS_DISABLED)
+            self.labelTelemetrNalogDate.setStyleSheet('color:green')
+        else:
+            self.labelTelemetrNalogDate.setText(STATUS_ENABLED)
+            self.labelTelemetrNalogDate.setStyleSheet('color:red')
+
+    def TelemetrNalogDateButtonClick(self):
+        result1 = SearchAllowTelemetry()
+        result2 = SearchAllowTelemetry2()
+        result3 = SearchAllowTelemetry3()
+        result4 = SearchLimitEnhancedDiagnosticDataWindowsAnalytics()
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED:
+            LimitEnhancedDiagnosticDataWindowsAnalyticsOn()
+            AllowTelemetry3On()
+            AllowTelemetry2On()
+            AllowTelemetryOn()
+        else:
+            LimitEnhancedDiagnosticDataWindowsAnalyticsOff()
+            AllowTelemetry3Off()
+            AllowTelemetry2Off()
+            AllowTelemetryOff()
+        self.updateTelemetrNalogDate()
+
+    def updateTelemetrLicense(self):
+        result = SearchNoGenTicket()
+        if result == STATUS_DISABLED:
+            self.labelTelemetrLicense.setText(STATUS_DISABLED)
+            self.labelTelemetrLicense.setStyleSheet('color:green')
+        else:
+            self.labelTelemetrLicense.setText(STATUS_ENABLED)
+            self.labelTelemetrLicense.setStyleSheet('color:red')
+
+    def TelemetrLicenseButtonClick(self):
+        result = SearchNoGenTicket()
+        if result == STATUS_DISABLED:
+            NoGenTicketOn()
+        else:
+            NoGenTicketOff()
+        self.updateTelemetrLicense()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
