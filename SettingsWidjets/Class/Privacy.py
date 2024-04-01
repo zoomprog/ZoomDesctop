@@ -22,7 +22,7 @@ from Functions.Privacy.WindowsLocationProvider.WindowsLocationProvider import Di
 from Functions.Privacy.AllowIndexingEncryptedStoresOrItems.AllowIndexingEncryptedStoresOrItems import DAllowIndexingEncryptedStoresOrItemsOn, AllowIndexingEncryptedStoresOrItemsOff, SearchAllowIndexingEncryptedStoresOrItems, AlwaysUseAutoLangDetectionOn, AlwaysUseAutoLangDetectionOff, SearchAlwaysUseAutoLangDetection, AllowSearchToUseLocationOn, AllowSearchToUseLocationOff, \
     SearchAllowSearchToUseLocation, DisableWebSearch1On, DisableWebSearch1Off, SearchDisableWebSearch1, ConnectedSearchUseWebOn, ConnectedSearchUseWebOff, SearchConnectedSearchUseWeb, BingSearchEnabledOn, BingSearchEnabledOff, SearchBingSearchEnabled
 from Functions.Privacy.TargetedAdverisingAndMarketing.TargetedAdverisingAndMarketing import SubscribedContent338393EnabledOn, SubscribedContent338393EnabledOff, SearchSubscribedContent338393Enabled, SubscribedContent353694EnabledOn, SubscribedContent353694EnabledOff, SearchSubscribedContent353694Enabled, SubscribedContent353696EnabledOn, SubscribedContent353696EnabledOff, SearchSubscribedContent353696Enabled, DisableSoftLandingOn, DisableSoftLandingOff, SearchDisableSoftLanding, DisableWindowsSpotlightFeaturesOn, DisableWindowsSpotlightFeaturesOff, SearchDisableWindowsSpotlightFeatures, DisableWindowsConsumerFeaturesOn, DisableWindowsConsumerFeaturesOff, SearchDisableWindowsConsumerFeatures
-
+from Functions.Privacy.CloudSaving.CloudSaving import DisableSettingSyncOn, DisableSettingSyncOff, SearchDisableSettingSync, DisableSettingSyncUserOverrideOn, DisableSettingSyncUserOverrideOff, SearchDisableSettingSyncUserOverride, DisableSyncOnPaidNetworkOn, DisableSyncOnPaidNetworkOff, SearchDisableSyncOnPaidNetwork, SyncPolicyOn, SyncPolicyOff, SearchSyncPolicy, DisableApplicationSettingSyncOn, DisableApplicationSettingSyncOff, SearchDisableApplicationSettingSync, DisableApplicationSettingSyncUserOverrideOn, DisableApplicationSettingSyncUserOverrideOff, SearchDisableApplicationSettingSyncUserOverride, DisableAppSyncSettingSyncOn, DisableAppSyncSettingSyncOff, SearchDisableAppSyncSettingSync, DisableAppSyncSettingSyncUserOverrideOn, DisableAppSyncSettingSyncUserOverrideOff, SearchDisableAppSyncSettingSyncUserOverride
 from enum import Enum, auto
 
 
@@ -62,6 +62,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.updateWindowsLocationProvider()
         self.updateAllowIndexingEncryptedStoresOrItems()
         self.updateTargetedAdverisingAndMarketing()
+        self.updateCloudSaving()
 
         self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
         self.pushTelemetriaWebCome.clicked.connect(self.TelemetriaWebComeButtonClick)
@@ -80,6 +81,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.pushWindowsLocationProvider.clicked.connect(self.WindowsLocationProviderButtonClick)
         self.pushWindowsSearchDateCollection.clicked.connect(self.WindowsSearchDateCollectionButtonClick)
         self.pushTargetedAdverisingAndMarketing.clicked.connect(self.TargetedAdverisingAndMarketingButtonClick)
+        self.pushCloudSaving.clicked.connect(self.CloudSavingButtonClick)
 
     def positionButton(self):
         frame_list = [
@@ -648,6 +650,54 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             DisableWindowsSpotlightFeaturesOff()
             DisableWindowsConsumerFeaturesOff()
         self.updateTargetedAdverisingAndMarketing()
+
+    def updateCloudSaving(self):
+        result1 = SearchDisableSettingSync()
+        result2 = SearchDisableSettingSyncUserOverride()
+        result3 = SearchDisableSyncOnPaidNetwork()
+        result4 = SearchSyncPolicy()
+        result5 = SearchDisableApplicationSettingSync()
+        result6 = SearchDisableApplicationSettingSyncUserOverride()
+        result7 = SearchDisableAppSyncSettingSync()
+        result8 = SearchDisableAppSyncSettingSyncUserOverride()
+        if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 == STATUS_DISABLED:
+            self.labelCloudSaving.setText(STATUS_DISABLED)
+            self.labelCloudSaving.setStyleSheet('color:green')
+        else:
+            self.labelCloudSaving.setText(STATUS_ENABLED)
+            self.labelCloudSaving.setStyleSheet('color:red')
+
+    def CloudSavingButtonClick(self):
+        result1 = SearchDisableSettingSync()
+        result2 = SearchDisableSettingSyncUserOverride()
+        result3 = SearchDisableSyncOnPaidNetwork()
+        result4 = SearchSyncPolicy()
+        result5 = SearchDisableApplicationSettingSync()
+        result6 = SearchDisableApplicationSettingSyncUserOverride()
+        result7 = SearchDisableAppSyncSettingSync()
+        result8 = SearchDisableAppSyncSettingSyncUserOverride()
+        if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 == STATUS_DISABLED:
+            DisableSettingSyncOn()
+            DisableSettingSyncUserOverrideOn()
+            DisableSyncOnPaidNetworkOn()
+            SyncPolicyOn()
+            DisableApplicationSettingSyncOn()
+            DisableApplicationSettingSyncUserOverrideOn()
+            DisableAppSyncSettingSyncOn()
+            DisableAppSyncSettingSyncUserOverrideOn()
+        else:
+            DisableSettingSyncOff()
+            DisableSettingSyncUserOverrideOff()
+            DisableSyncOnPaidNetworkOff()
+            SyncPolicyOff()
+            DisableApplicationSettingSyncOff()
+            DisableApplicationSettingSyncUserOverrideOff()
+            DisableAppSyncSettingSyncOff()
+            DisableAppSyncSettingSyncUserOverrideOff()
+        self.updateCloudSaving()
+
+
+
 
 
 
