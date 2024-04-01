@@ -20,11 +20,12 @@ def AllowIndexingEncryptedStoresOrItemsOff():
         # Открыть ключ реестра в режиме записи
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Policies\Microsoft\Windows\Windows Search", 0, winreg.KEY_WRITE)
         # Установить значение
-        winreg.SetValueEx(key, "AllowIndexingEncryptedStoresOrItems", 0, winreg.REG_DWORD, 1)
+        winreg.SetValueEx(key, "AllowIndexingEncryptedStoresOrItems", 0, winreg.REG_DWORD, 0)
         # Закрыть ключ
         winreg.CloseKey(key)
     except Exception as e:
         print(f"Ошибка при установке значения: {e}")
+
 
 
 
@@ -63,7 +64,7 @@ def AlwaysUseAutoLangDetectionOff():
         # Открыть ключ реестра в режиме записи
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Policies\Microsoft\Windows\Windows Search", 0, winreg.KEY_WRITE)
         # Установить значение
-        winreg.SetValueEx(key, "AlwaysUseAutoLangDetection", 0, winreg.REG_DWORD, 1)
+        winreg.SetValueEx(key, "AlwaysUseAutoLangDetection", 0, winreg.REG_DWORD, 0)
         # Закрыть ключ
         winreg.CloseKey(key)
     except Exception as e:
@@ -106,7 +107,7 @@ def AllowSearchToUseLocationOff():
         # Открыть ключ реестра в режиме записи
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Policies\Microsoft\Windows\Windows Search", 0, winreg.KEY_WRITE)
         # Установить значение
-        winreg.SetValueEx(key, "AllowSearchToUseLocation", 0, winreg.REG_DWORD, 1)
+        winreg.SetValueEx(key, "AllowSearchToUseLocation", 0, winreg.REG_DWORD, 0)
         # Закрыть ключ
         winreg.CloseKey(key)
     except Exception as e:
@@ -130,7 +131,7 @@ def SearchAllowSearchToUseLocation():
     except Exception as e:
         return f"Ошибка при чтении значения: {e}"
 
-def DisableWebSearchOn():
+def DisableWebSearch1On():
     try:
         # Открыть ключ реестра с правами на запись
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Policies\Microsoft\Windows\Windows Search", 0, winreg.KEY_WRITE)
@@ -144,7 +145,7 @@ def DisableWebSearchOn():
     except Exception as e:
         print(f"Ошибка при удалении значения: {e}")
 
-def DisableWebSearchOff():
+def DisableWebSearch1Off():
     try:
         # Открыть ключ реестра в режиме записи
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Policies\Microsoft\Windows\Windows Search", 0, winreg.KEY_WRITE)
@@ -157,7 +158,7 @@ def DisableWebSearchOff():
 
 
 
-def SearchDisableWebSearch():
+def SearchDisableWebSearch1():
     try:
         # Открыть ключ реестра в режиме чтения
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Policies\Microsoft\Windows\Windows Search", 0, winreg.KEY_READ)
@@ -193,7 +194,7 @@ def ConnectedSearchUseWebOff():
         # Открыть ключ реестра в режиме записи
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Policies\Microsoft\Windows\Windows Search", 0, winreg.KEY_WRITE)
         # Установить значение
-        winreg.SetValueEx(key, "ConnectedSearchUseWeb", 0, winreg.REG_DWORD, 1)
+        winreg.SetValueEx(key, "ConnectedSearchUseWeb", 0, winreg.REG_DWORD, 0)
         # Закрыть ключ
         winreg.CloseKey(key)
     except Exception as e:
@@ -236,7 +237,7 @@ def BingSearchEnabledOff():
         # Открыть ключ реестра в режиме записи
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\Windows\CurrentVersion\Search", 0, winreg.KEY_WRITE)
         # Установить значение
-        winreg.SetValueEx(key, "BingSearchEnabled", 0, winreg.REG_DWORD, 1)
+        winreg.SetValueEx(key, "BingSearchEnabled", 0, winreg.REG_DWORD, 0)
         # Закрыть ключ
         winreg.CloseKey(key)
     except Exception as e:

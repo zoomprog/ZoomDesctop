@@ -138,7 +138,6 @@ def SearchDefaultConsent():
         print("Ключ реестра не найден.")
     except Exception as e:
         print(f"Ошибка при чтении значения: {e}")
-print(SearchDefaultConsent())
 
 # DefaultOverrideBehavior
 

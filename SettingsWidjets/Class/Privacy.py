@@ -19,7 +19,8 @@ from Functions.Privacy.ActiveVoiceForCortan.ActiveVoiceForCortan import AgentAct
 from Functions.Privacy.ActiveVoiceForCortanBlockSystem.ActiveVoiceForCortanBlockSystem import AgentActivationOnLockScreenEnabledOn, AgentActivationOnLockScreenEnabledOff, SearchAgentActivationOnLockScreenEnabled, LetAppsActivateWithVoiceAboveLockOn, LetAppsActivateWithVoiceAboveLockOff, SearchLetAppsActivateWithVoiceAboveLock
 from Functions.Privacy.WindowsLocationProvider.WindowsLocationProvider import DisableWindowsLocationProviderOn, DisableWindowsLocationProviderOff, SearchDisableWindowsLocationProvider, DisableLocationScriptingOn, DisableLocationScriptingOff, SearchDisableLocationScripting, DisableLocationOn, DisableLocationOff, SearchDisableLocation, SensorPermissionStateOn, SensorPermissionStateOff, \
     SearchSensorPermissionState, SensorPermissionState2On, SensorPermissionState2Off, SearchSensorPermissionState2
-from Functions.Privacy.AllowIndexingEncryptedStoresOrItems.AllowIndexingEncryptedStoresOrItems import DAllowIndexingEncryptedStoresOrItemsOn, AllowIndexingEncryptedStoresOrItemsOff, SearchAllowIndexingEncryptedStoresOrItems, AlwaysUseAutoLangDetectionOn, AlwaysUseAutoLangDetectionOff, SearchAlwaysUseAutoLangDetection, AllowSearchToUseLocationOn, AllowSearchToUseLocationOff, SearchAllowSearchToUseLocation, DisableWebSearchOn, DisableWebSearchOff, SearchDisableWebSearch, ConnectedSearchUseWebOn, ConnectedSearchUseWebOff, SearchConnectedSearchUseWeb, BingSearchEnabledOn, BingSearchEnabledOff, SearchBingSearchEnabled
+from Functions.Privacy.AllowIndexingEncryptedStoresOrItems.AllowIndexingEncryptedStoresOrItems import DAllowIndexingEncryptedStoresOrItemsOn, AllowIndexingEncryptedStoresOrItemsOff, SearchAllowIndexingEncryptedStoresOrItems, AlwaysUseAutoLangDetectionOn, AlwaysUseAutoLangDetectionOff, SearchAlwaysUseAutoLangDetection, AllowSearchToUseLocationOn, AllowSearchToUseLocationOff, \
+    SearchAllowSearchToUseLocation, DisableWebSearch1On, DisableWebSearch1Off, SearchDisableWebSearch1, ConnectedSearchUseWebOn, ConnectedSearchUseWebOff, SearchConnectedSearchUseWeb, BingSearchEnabledOn, BingSearchEnabledOff, SearchBingSearchEnabled
 from enum import Enum, auto
 
 
@@ -567,15 +568,15 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             SensorPermissionStateOff()
             SensorPermissionState2Off()
         self.updateWindowsLocationProvider()
+
     def updateAllowIndexingEncryptedStoresOrItems(self):
         result1 = SearchAllowIndexingEncryptedStoresOrItems()
         result2 = SearchAlwaysUseAutoLangDetection()
         result3 = SearchAllowSearchToUseLocation()
-        result4 = SearchDisableWebSearch()
+        result4 = SearchDisableWebSearch1()
         result5 = SearchConnectedSearchUseWeb()
         result6 = SearchBingSearchEnabled()
-        print(result1, result2, result3, result4, result5, result6)
-        if result4 == STATUS_DISABLED and result2 == STATUS_DISABLED:
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED and result6 == STATUS_DISABLED:
             self.labelWindowsSearchDateCollection.setText(STATUS_DISABLED)
             self.labelWindowsSearchDateCollection.setStyleSheet('color:green')
         else:
@@ -586,27 +587,24 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         result1 = SearchAllowIndexingEncryptedStoresOrItems()
         result2 = SearchAlwaysUseAutoLangDetection()
         result3 = SearchAllowSearchToUseLocation()
-        result4 = SearchDisableWebSearch()
+        result4 = SearchDisableWebSearch1()
         result5 = SearchConnectedSearchUseWeb()
         result6 = SearchBingSearchEnabled()
-        #result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED and result6 == STATUS_DISABLED
-        if result4 and result2 == STATUS_DISABLED:
-            #DAllowIndexingEncryptedStoresOrItemsOn()
-            #AlwaysUseAutoLangDetectionOn()
-            #AllowSearchToUseLocationOn()
-            DisableWebSearchOn()
-            #ConnectedSearchUseWebOn()
-            #BingSearchEnabledOn()
-
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED and result6 == STATUS_DISABLED:
+            DAllowIndexingEncryptedStoresOrItemsOn()
+            AlwaysUseAutoLangDetectionOn()
+            AllowSearchToUseLocationOn()
+            DisableWebSearch1On()
+            ConnectedSearchUseWebOn()
+            BingSearchEnabledOn()
         else:
-            #AllowIndexingEncryptedStoresOrItemsOff()
-            #AlwaysUseAutoLangDetectionOff()
-            #AllowSearchToUseLocationOff()
-            DisableWebSearchOff()
-            #ConnectedSearchUseWebOff()
-            #BingSearchEnabledOff()
+            AllowIndexingEncryptedStoresOrItemsOff()
+            AlwaysUseAutoLangDetectionOff()
+            AllowSearchToUseLocationOff()
+            DisableWebSearch1Off()
+            ConnectedSearchUseWebOff()
+            BingSearchEnabledOff()
         self.updateAllowIndexingEncryptedStoresOrItems()
-
 
 
 if __name__ == "__main__":
