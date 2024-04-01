@@ -21,6 +21,8 @@ from Functions.Privacy.WindowsLocationProvider.WindowsLocationProvider import Di
     SearchSensorPermissionState, SensorPermissionState2On, SensorPermissionState2Off, SearchSensorPermissionState2
 from Functions.Privacy.AllowIndexingEncryptedStoresOrItems.AllowIndexingEncryptedStoresOrItems import DAllowIndexingEncryptedStoresOrItemsOn, AllowIndexingEncryptedStoresOrItemsOff, SearchAllowIndexingEncryptedStoresOrItems, AlwaysUseAutoLangDetectionOn, AlwaysUseAutoLangDetectionOff, SearchAlwaysUseAutoLangDetection, AllowSearchToUseLocationOn, AllowSearchToUseLocationOff, \
     SearchAllowSearchToUseLocation, DisableWebSearch1On, DisableWebSearch1Off, SearchDisableWebSearch1, ConnectedSearchUseWebOn, ConnectedSearchUseWebOff, SearchConnectedSearchUseWeb, BingSearchEnabledOn, BingSearchEnabledOff, SearchBingSearchEnabled
+from Functions.Privacy.TargetedAdverisingAndMarketing.TargetedAdverisingAndMarketing import SubscribedContent338393EnabledOn, SubscribedContent338393EnabledOff, SearchSubscribedContent338393Enabled, SubscribedContent353694EnabledOn, SubscribedContent353694EnabledOff, SearchSubscribedContent353694Enabled, SubscribedContent353696EnabledOn, SubscribedContent353696EnabledOff, SearchSubscribedContent353696Enabled, DisableSoftLandingOn, DisableSoftLandingOff, SearchDisableSoftLanding, DisableWindowsSpotlightFeaturesOn, DisableWindowsSpotlightFeaturesOff, SearchDisableWindowsSpotlightFeatures, DisableWindowsConsumerFeaturesOn, DisableWindowsConsumerFeaturesOff, SearchDisableWindowsConsumerFeatures
+
 from enum import Enum, auto
 
 
@@ -59,6 +61,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.updateActiveVoiceForCortanBlockSystem()
         self.updateWindowsLocationProvider()
         self.updateAllowIndexingEncryptedStoresOrItems()
+        self.updateTargetedAdverisingAndMarketing()
 
         self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
         self.pushTelemetriaWebCome.clicked.connect(self.TelemetriaWebComeButtonClick)
@@ -76,6 +79,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.pushActiveVoiceForCortanBlockSystem.clicked.connect(self.ActiveVoiceForCortanBlockSystemButtonClick)
         self.pushWindowsLocationProvider.clicked.connect(self.WindowsLocationProviderButtonClick)
         self.pushWindowsSearchDateCollection.clicked.connect(self.WindowsSearchDateCollectionButtonClick)
+        self.pushTargetedAdverisingAndMarketing.clicked.connect(self.TargetedAdverisingAndMarketingButtonClick)
 
     def positionButton(self):
         frame_list = [
@@ -605,6 +609,46 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             ConnectedSearchUseWebOff()
             BingSearchEnabledOff()
         self.updateAllowIndexingEncryptedStoresOrItems()
+
+    def updateTargetedAdverisingAndMarketing(self):
+        result1 = SearchSubscribedContent338393Enabled()
+        result2 = SearchSubscribedContent353694Enabled()
+        result3 = SearchSubscribedContent353696Enabled()
+        result4 = SearchDisableSoftLanding()
+        result5 = SearchDisableWindowsSpotlightFeatures()
+        result6 = SearchDisableWindowsConsumerFeatures()
+        print(result2)
+        if result1 and result2 and result3 and result4 and result5 and result6 == STATUS_DISABLED:
+            self.labelTargetedAdverisingAndMarketing.setText(STATUS_DISABLED)
+            self.labelTargetedAdverisingAndMarketing.setStyleSheet('color:green')
+        else:
+            self.labelTargetedAdverisingAndMarketing.setText(STATUS_ENABLED)
+            self.labelTargetedAdverisingAndMarketing.setStyleSheet('color:red')
+
+    def TargetedAdverisingAndMarketingButtonClick(self):
+        result1 = SearchSubscribedContent338393Enabled()
+        result2 = SearchSubscribedContent353694Enabled()
+        result3 = SearchSubscribedContent353696Enabled()
+        result4 = SearchDisableSoftLanding()
+        result5 = SearchDisableWindowsSpotlightFeatures()
+        result6 = SearchDisableWindowsConsumerFeatures()
+        print(result1, result2)
+        if result1 and result2 and result3 and result4 and result5 and result6 == STATUS_DISABLED:
+            SubscribedContent338393EnabledOn()
+            SubscribedContent353694EnabledOn()
+            SubscribedContent353696EnabledOn()
+            DisableSoftLandingOn()
+            DisableWindowsSpotlightFeaturesOn()
+            DisableWindowsConsumerFeaturesOn()
+        else:
+            SubscribedContent338393EnabledOff()
+            SubscribedContent353694EnabledOff()
+            SubscribedContent353696EnabledOff()
+            DisableSoftLandingOff()
+            DisableWindowsSpotlightFeaturesOff()
+            DisableWindowsConsumerFeaturesOff()
+        self.updateTargetedAdverisingAndMarketing()
+
 
 
 if __name__ == "__main__":
