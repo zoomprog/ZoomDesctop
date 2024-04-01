@@ -13,8 +13,13 @@ from Functions.Privacy.CEIPSQM.CEIPSQM import CEIPSQMOn, CEIPSQMOff, SearchCEIPS
 from Functions.Privacy.TelemetrApplicationImpact.TelemetrApplicationImpact import AITEnableOn, AITEnableOff, SearchAITEnable
 from Functions.Privacy.TelemetrNalogDate.TelemetrNalogDate import AllowTelemetryOn, AllowTelemetryOff, SearchAllowTelemetry, AllowTelemetry2On, AllowTelemetry2Off, SearchAllowTelemetry2, AllowTelemetry3On, AllowTelemetry3Off, SearchAllowTelemetry3, LimitEnhancedDiagnosticDataWindowsAnalyticsOn, LimitEnhancedDiagnosticDataWindowsAnalyticsOff, SearchLimitEnhancedDiagnosticDataWindowsAnalytics
 from Functions.Privacy.TelemetrLicense.TelemetrLicense import NoGenTicketOn, NoGenTicketOff, SearchNoGenTicket
-from Functions.Privacy.WER.WER import DisabledOn, DisabledOff, SearchDisabled, Disabled2On, Disabled2Off, SearchDisabled2, DefaultConsentOn, DefaultConsentOff, SearchDefaultConsent, DefaultOverrideBehaviorOn, DefaultOverrideBehaviorOff, SearchDefaultOverrideBehavior, DontSendAdditionalDataOn, DontSendAdditionalDataOff, SearchDontSendAdditionalData, LoggingDisabledOn, LoggingDisabledOff, SearchLoggingDisabled, StartWEROn, StartWEROff, SearchStartWER, StartWER2On, StartWER2Off, SearchStartWER2, check_QueueReporting, enable_QueueReporting, disable_QueueReporting
-
+from Functions.Privacy.WER.WER import DisabledOn, DisabledOff, SearchDisabled, Disabled2On, Disabled2Off, SearchDisabled2, DefaultConsentOn, DefaultConsentOff, SearchDefaultConsent, DefaultOverrideBehaviorOn, DefaultOverrideBehaviorOff, SearchDefaultOverrideBehavior, DontSendAdditionalDataOn, DontSendAdditionalDataOff, SearchDontSendAdditionalData, LoggingDisabledOn, LoggingDisabledOff, \
+    SearchLoggingDisabled, StartWEROn, StartWEROff, SearchStartWER, StartWER2On, StartWER2Off, SearchStartWER2, check_QueueReporting, enable_QueueReporting, disable_QueueReporting
+from Functions.Privacy.ActiveVoiceForCortan.ActiveVoiceForCortan import AgentActivationEnabledOn, AgentActivationEnabledOff, SearchAgentActivationEnabled, LetAppsActivateWithVoiceOn, LetAppsActivateWithVoiceOff, SearchLetAppsActivateWithVoice, check_ProgramDataUpdater, enable_ProgramDataUpdater, disable_ProgramDataUpdater
+from Functions.Privacy.ActiveVoiceForCortanBlockSystem.ActiveVoiceForCortanBlockSystem import AgentActivationOnLockScreenEnabledOn, AgentActivationOnLockScreenEnabledOff, SearchAgentActivationOnLockScreenEnabled, LetAppsActivateWithVoiceAboveLockOn, LetAppsActivateWithVoiceAboveLockOff, SearchLetAppsActivateWithVoiceAboveLock
+from Functions.Privacy.WindowsLocationProvider.WindowsLocationProvider import DisableWindowsLocationProviderOn, DisableWindowsLocationProviderOff, SearchDisableWindowsLocationProvider, DisableLocationScriptingOn, DisableLocationScriptingOff, SearchDisableLocationScripting, DisableLocationOn, DisableLocationOff, SearchDisableLocation, SensorPermissionStateOn, SensorPermissionStateOff, \
+    SearchSensorPermissionState, SensorPermissionState2On, SensorPermissionState2Off, SearchSensorPermissionState2
+from Functions.Privacy.AllowIndexingEncryptedStoresOrItems.AllowIndexingEncryptedStoresOrItems import DAllowIndexingEncryptedStoresOrItemsOn, AllowIndexingEncryptedStoresOrItemsOff, SearchAllowIndexingEncryptedStoresOrItems, AlwaysUseAutoLangDetectionOn, AlwaysUseAutoLangDetectionOff, SearchAlwaysUseAutoLangDetection, AllowSearchToUseLocationOn, AllowSearchToUseLocationOff, SearchAllowSearchToUseLocation, DisableWebSearchOn, DisableWebSearchOff, SearchDisableWebSearch, ConnectedSearchUseWebOn, ConnectedSearchUseWebOff, SearchConnectedSearchUseWeb, BingSearchEnabledOn, BingSearchEnabledOff, SearchBingSearchEnabled
 from enum import Enum, auto
 
 
@@ -49,6 +54,10 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.updateTelemetrNalogDate()
         self.updateTelemetrLicense()
         self.updateWer()
+        self.updateActiveVoiceForCortan()
+        self.updateActiveVoiceForCortanBlockSystem()
+        self.updateWindowsLocationProvider()
+        self.updateAllowIndexingEncryptedStoresOrItems()
 
         self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
         self.pushTelemetriaWebCome.clicked.connect(self.TelemetriaWebComeButtonClick)
@@ -62,6 +71,10 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.pushTelemetrNalogDate.clicked.connect(self.TelemetrNalogDateButtonClick)
         self.pushTelemetrLicense.clicked.connect(self.TelemetrLicenseButtonClick)
         self.pushWER.clicked.connect(self.WERButtonClick)
+        self.pushActiveVoiceForCortan.clicked.connect(self.ActiveVoiceForCortanButtonClick)
+        self.pushActiveVoiceForCortanBlockSystem.clicked.connect(self.ActiveVoiceForCortanBlockSystemButtonClick)
+        self.pushWindowsLocationProvider.clicked.connect(self.WindowsLocationProviderButtonClick)
+        self.pushWindowsSearchDateCollection.clicked.connect(self.WindowsSearchDateCollectionButtonClick)
 
     def positionButton(self):
         frame_list = [
@@ -251,7 +264,6 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
     def TaskMCAButtonClick(self):
         result1 = check_TaskMCA_status_CompatibilityAppraiser()
         result2 = SearchSetEmptyDebugger()
-        print(result1, result2)
         if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED:
             enable_TaskMCA_CompatibilityAppraiser()
             SetEmptyDebuggerOff()
@@ -425,7 +437,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.updateTelemetrLicense()
 
     def updateWer(self):
-        result1 =SearchDisabled()
+        result1 = SearchDisabled()
         result2 = SearchDisabled2()
         result3 = SearchDefaultConsent()
         result4 = SearchDefaultOverrideBehavior()
@@ -434,7 +446,6 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         result7 = SearchStartWER()
         result8 = SearchStartWER2()
         result9 = check_QueueReporting()
-        print(result1, result2, result3, result4, result5,result6, result7,result8,result9)
         if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED and result6 == STATUS_DISABLED and result6 == STATUS_DISABLED and result7 == STATUS_DISABLED and result8 == STATUS_DISABLED and result9 == STATUS_DISABLED:
             self.labelWER.setText(STATUS_DISABLED)
             self.labelWER.setStyleSheet('color:green')
@@ -476,6 +487,126 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             StartWER2Off()
             disable_QueueReporting()
         self.updateWer()
+
+    def updateActiveVoiceForCortan(self):
+        result1 = SearchAgentActivationEnabled()
+        result2 = SearchLetAppsActivateWithVoice()
+        result3 = check_ProgramDataUpdater()
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED:
+            self.labelActiveVoiceForCortan.setText(STATUS_DISABLED)
+            self.labelActiveVoiceForCortan.setStyleSheet('color:green')
+        else:
+            self.labelActiveVoiceForCortan.setText(STATUS_ENABLED)
+            self.labelActiveVoiceForCortan.setStyleSheet('color:red')
+
+    def ActiveVoiceForCortanButtonClick(self):
+        result1 = SearchAgentActivationEnabled()
+        result2 = SearchLetAppsActivateWithVoice()
+        result3 = check_ProgramDataUpdater()
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED:
+            AgentActivationEnabledOn()
+            LetAppsActivateWithVoiceOn()
+            enable_ProgramDataUpdater()
+        else:
+            AgentActivationEnabledOff()
+            LetAppsActivateWithVoiceOff()
+            disable_ProgramDataUpdater()
+        self.updateActiveVoiceForCortan()
+
+    def updateActiveVoiceForCortanBlockSystem(self):
+        result1 = SearchAgentActivationOnLockScreenEnabled()
+        result2 = SearchLetAppsActivateWithVoiceAboveLock()
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED:
+            self.labelActiveVoiceForCortanBlockSystem.setText(STATUS_DISABLED)
+            self.labelActiveVoiceForCortanBlockSystem.setStyleSheet('color:green')
+        else:
+            self.labelActiveVoiceForCortanBlockSystem.setText(STATUS_ENABLED)
+            self.labelActiveVoiceForCortanBlockSystem.setStyleSheet('color:red')
+
+    def ActiveVoiceForCortanBlockSystemButtonClick(self):
+        result1 = SearchAgentActivationOnLockScreenEnabled()
+        result2 = SearchLetAppsActivateWithVoiceAboveLock()
+        if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED:
+            AgentActivationOnLockScreenEnabledOn()
+            LetAppsActivateWithVoiceAboveLockOn()
+        else:
+            AgentActivationOnLockScreenEnabledOff()
+            LetAppsActivateWithVoiceAboveLockOff()
+        self.updateActiveVoiceForCortanBlockSystem()
+
+    def updateWindowsLocationProvider(self):
+        result1 = SearchDisableWindowsLocationProvider()
+        result2 = SearchDisableLocationScripting()
+        result3 = SearchDisableLocation()
+        result4 = SearchSensorPermissionState()
+        result5 = SearchSensorPermissionState2()
+        if result5 == STATUS_DISABLED and result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED:
+            self.labelWindowsLocationProvider.setText(STATUS_DISABLED)
+            self.labelWindowsLocationProvider.setStyleSheet('color:green')
+        else:
+            self.labelWindowsLocationProvider.setText(STATUS_ENABLED)
+            self.labelWindowsLocationProvider.setStyleSheet('color:red')
+
+    def WindowsLocationProviderButtonClick(self):
+        result1 = SearchDisableWindowsLocationProvider()
+        result2 = SearchDisableLocationScripting()
+        result3 = SearchDisableLocation()
+        result4 = SearchSensorPermissionState()
+        result5 = SearchSensorPermissionState2()
+        if result5 == STATUS_DISABLED and result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED:
+            DisableWindowsLocationProviderOn()
+            DisableLocationScriptingOn()
+            DisableLocationOn()
+            SensorPermissionStateOn()
+            SensorPermissionState2On()
+
+        else:
+            DisableWindowsLocationProviderOff()
+            DisableLocationScriptingOff()
+            DisableLocationOff()
+            SensorPermissionStateOff()
+            SensorPermissionState2Off()
+        self.updateWindowsLocationProvider()
+    def updateAllowIndexingEncryptedStoresOrItems(self):
+        result1 = SearchAllowIndexingEncryptedStoresOrItems()
+        result2 = SearchAlwaysUseAutoLangDetection()
+        result3 = SearchAllowSearchToUseLocation()
+        result4 = SearchDisableWebSearch()
+        result5 = SearchConnectedSearchUseWeb()
+        result6 = SearchBingSearchEnabled()
+        print(result1, result2, result3, result4, result5, result6)
+        if result4 == STATUS_DISABLED and result2 == STATUS_DISABLED:
+            self.labelWindowsSearchDateCollection.setText(STATUS_DISABLED)
+            self.labelWindowsSearchDateCollection.setStyleSheet('color:green')
+        else:
+            self.labelWindowsSearchDateCollection.setText(STATUS_ENABLED)
+            self.labelWindowsSearchDateCollection.setStyleSheet('color:red')
+
+    def WindowsSearchDateCollectionButtonClick(self):
+        result1 = SearchAllowIndexingEncryptedStoresOrItems()
+        result2 = SearchAlwaysUseAutoLangDetection()
+        result3 = SearchAllowSearchToUseLocation()
+        result4 = SearchDisableWebSearch()
+        result5 = SearchConnectedSearchUseWeb()
+        result6 = SearchBingSearchEnabled()
+        #result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED and result6 == STATUS_DISABLED
+        if result4 and result2 == STATUS_DISABLED:
+            #DAllowIndexingEncryptedStoresOrItemsOn()
+            #AlwaysUseAutoLangDetectionOn()
+            #AllowSearchToUseLocationOn()
+            DisableWebSearchOn()
+            #ConnectedSearchUseWebOn()
+            #BingSearchEnabledOn()
+
+        else:
+            #AllowIndexingEncryptedStoresOrItemsOff()
+            #AlwaysUseAutoLangDetectionOff()
+            #AllowSearchToUseLocationOff()
+            DisableWebSearchOff()
+            #ConnectedSearchUseWebOff()
+            #BingSearchEnabledOff()
+        self.updateAllowIndexingEncryptedStoresOrItems()
+
 
 
 if __name__ == "__main__":
