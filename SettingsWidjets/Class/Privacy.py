@@ -21,8 +21,20 @@ from Functions.Privacy.WindowsLocationProvider.WindowsLocationProvider import Di
     SearchSensorPermissionState, SensorPermissionState2On, SensorPermissionState2Off, SearchSensorPermissionState2
 from Functions.Privacy.AllowIndexingEncryptedStoresOrItems.AllowIndexingEncryptedStoresOrItems import DAllowIndexingEncryptedStoresOrItemsOn, AllowIndexingEncryptedStoresOrItemsOff, SearchAllowIndexingEncryptedStoresOrItems, AlwaysUseAutoLangDetectionOn, AlwaysUseAutoLangDetectionOff, SearchAlwaysUseAutoLangDetection, AllowSearchToUseLocationOn, AllowSearchToUseLocationOff, \
     SearchAllowSearchToUseLocation, DisableWebSearch1On, DisableWebSearch1Off, SearchDisableWebSearch1, ConnectedSearchUseWebOn, ConnectedSearchUseWebOff, SearchConnectedSearchUseWeb, BingSearchEnabledOn, BingSearchEnabledOff, SearchBingSearchEnabled
-from Functions.Privacy.TargetedAdverisingAndMarketing.TargetedAdverisingAndMarketing import SubscribedContent338393EnabledOn, SubscribedContent338393EnabledOff, SearchSubscribedContent338393Enabled, SubscribedContent353694EnabledOn, SubscribedContent353694EnabledOff, SearchSubscribedContent353694Enabled, SubscribedContent353696EnabledOn, SubscribedContent353696EnabledOff, SearchSubscribedContent353696Enabled, DisableSoftLandingOn, DisableSoftLandingOff, SearchDisableSoftLanding, DisableWindowsSpotlightFeaturesOn, DisableWindowsSpotlightFeaturesOff, SearchDisableWindowsSpotlightFeatures, DisableWindowsConsumerFeaturesOn, DisableWindowsConsumerFeaturesOff, SearchDisableWindowsConsumerFeatures
-from Functions.Privacy.CloudSaving.CloudSaving import DisableSettingSyncOn, DisableSettingSyncOff, SearchDisableSettingSync, DisableSettingSyncUserOverrideOn, DisableSettingSyncUserOverrideOff, SearchDisableSettingSyncUserOverride, DisableSyncOnPaidNetworkOn, DisableSyncOnPaidNetworkOff, SearchDisableSyncOnPaidNetwork, SyncPolicyOn, SyncPolicyOff, SearchSyncPolicy, DisableApplicationSettingSyncOn, DisableApplicationSettingSyncOff, SearchDisableApplicationSettingSync, DisableApplicationSettingSyncUserOverrideOn, DisableApplicationSettingSyncUserOverrideOff, SearchDisableApplicationSettingSyncUserOverride, DisableAppSyncSettingSyncOn, DisableAppSyncSettingSyncOff, SearchDisableAppSyncSettingSync, DisableAppSyncSettingSyncUserOverrideOn, DisableAppSyncSettingSyncUserOverrideOff, SearchDisableAppSyncSettingSyncUserOverride, DisableCredentialsSettingSyncOn, DisableCredentialsSettingSyncOff, SearchDisableCredentialsSettingSync, DisableCredentialsSettingSyncUserOverrideOn, DisableCredentialsSettingSyncUserOverrideOff, SearchDisableCredentialsSettingSyncUserOverride, EnabledCloudSavingOn, EnabledCloudSavingOff, SearchEnabledCloudSaving, DisableDesktopThemeSettingSyncOn, DisableDesktopThemeSettingSyncOff, SearchDisableDesktopThemeSettingSync, DisableDesktopThemeSettingSyncUserOverrideOn, DisableDesktopThemeSettingSyncUserOverrideOff, SearchDisableDesktopThemeSettingSyncUserOverride, DisablePersonalizationSettingSyncOn, DisablePersonalizationSettingSyncOff, SearchDisablePersonalizationSettingSync, DisablePersonalizationSettingSyncUserOverrideOn, DisablePersonalizationSettingSyncUserOverrideOff, SearchDisablePersonalizationSettingSyncUserOverride, DisableStartLayoutSettingSyncOn, DisableStartLayoutSettingSyncOff, SearchDisableStartLayoutSettingSync, DisableStartLayoutSettingSyncUserOverrideOn, DisableStartLayoutSettingSyncUserOverrideOff, SearchDisableStartLayoutSettingSyncUserOverride, DisableWebBrowserSettingSyncOn, DisableWebBrowserSettingSyncOff, SearchDisableWebBrowserSettingSync, DisableWebBrowserSettingSyncUserOverrideOn, DisableWebBrowserSettingSyncUserOverrideOff, SearchDisableWebBrowserSettingSyncUserOverride, DisableWindowsSettingSyncOn, DisableWindowsSettingSyncOff, SearchDisableWindowsSettingSync, DisableWindowsSettingSyncUserOverrideOn, DisableWindowsSettingSyncUserOverrideOff, SearchDisableWindowsSettingSyncUserOverride, SearchEnabledLanguage, EnabledLanguageOn, EnabledLanguageOff
+from Functions.Privacy.TargetedAdverisingAndMarketing.TargetedAdverisingAndMarketing import (SubscribedContent338393EnabledOn, SubscribedContent338393EnabledOff, SearchSubscribedContent338393Enabled, SubscribedContent353694EnabledOn, SubscribedContent353694EnabledOff, SearchSubscribedContent353694Enabled, SubscribedContent353696EnabledOn, SubscribedContent353696EnabledOff,
+                                                                                             SearchSubscribedContent353696Enabled, DisableSoftLandingOn, DisableSoftLandingOff, SearchDisableSoftLanding, DisableWindowsSpotlightFeaturesOn, DisableWindowsSpotlightFeaturesOff, SearchDisableWindowsSpotlightFeatures, DisableWindowsConsumerFeaturesOn, DisableWindowsConsumerFeaturesOff,
+                                                                                             SearchDisableWindowsConsumerFeatures)
+from Functions.Privacy.CloudSaving.CloudSaving import (DisableSettingSyncOn, DisableSettingSyncOff, SearchDisableSettingSync, DisableSettingSyncUserOverrideOn, DisableSettingSyncUserOverrideOff, SearchDisableSettingSyncUserOverride, DisableSyncOnPaidNetworkOn, DisableSyncOnPaidNetworkOff, SearchDisableSyncOnPaidNetwork, SyncPolicyOn, SyncPolicyOff, SearchSyncPolicy,
+                                                       DisableApplicationSettingSyncOn, DisableApplicationSettingSyncOff, SearchDisableApplicationSettingSync, DisableApplicationSettingSyncUserOverrideOn, DisableApplicationSettingSyncUserOverrideOff, SearchDisableApplicationSettingSyncUserOverride, DisableAppSyncSettingSyncOn, DisableAppSyncSettingSyncOff, SearchDisableAppSyncSettingSync,
+                                                       DisableAppSyncSettingSyncUserOverrideOn, DisableAppSyncSettingSyncUserOverrideOff, SearchDisableAppSyncSettingSyncUserOverride, DisableCredentialsSettingSyncOn, DisableCredentialsSettingSyncOff, SearchDisableCredentialsSettingSync, DisableCredentialsSettingSyncUserOverrideOn, DisableCredentialsSettingSyncUserOverrideOff,
+                                                       SearchDisableCredentialsSettingSyncUserOverride, EnabledCloudSavingOn, EnabledCloudSavingOff, SearchEnabledCloudSaving, DisableDesktopThemeSettingSyncOn, DisableDesktopThemeSettingSyncOff, SearchDisableDesktopThemeSettingSync, DisableDesktopThemeSettingSyncUserOverrideOn, DisableDesktopThemeSettingSyncUserOverrideOff,
+                                                       SearchDisableDesktopThemeSettingSyncUserOverride, DisablePersonalizationSettingSyncOn, DisablePersonalizationSettingSyncOff, SearchDisablePersonalizationSettingSync, DisablePersonalizationSettingSyncUserOverrideOn, DisablePersonalizationSettingSyncUserOverrideOff, SearchDisablePersonalizationSettingSyncUserOverride,
+                                                       DisableStartLayoutSettingSyncOn, DisableStartLayoutSettingSyncOff, SearchDisableStartLayoutSettingSync, DisableStartLayoutSettingSyncUserOverrideOn, DisableStartLayoutSettingSyncUserOverrideOff, SearchDisableStartLayoutSettingSyncUserOverride, DisableWebBrowserSettingSyncOn, DisableWebBrowserSettingSyncOff,
+                                                       SearchDisableWebBrowserSettingSync, DisableWebBrowserSettingSyncUserOverrideOn, DisableWebBrowserSettingSyncUserOverrideOff, SearchDisableWebBrowserSettingSyncUserOverride, DisableWindowsSettingSyncOn, DisableWindowsSettingSyncOff, SearchDisableWindowsSettingSync, DisableWindowsSettingSyncUserOverrideOn,
+                                                       DisableWindowsSettingSyncUserOverrideOff, SearchDisableWindowsSettingSyncUserOverride, SearchEnabledLanguage, EnabledLanguageOn, EnabledLanguageOff)
+from Functions.Privacy.CloudVoice.CloudVoice import HasAcceptedOn, HasAcceptedOff, SearchHasAccepted
+from Functions.Privacy.WindowsPrivacyConsentDisclaimer.WindowsPrivacyConsentDisclaimer import AcceptedPrivacyPolicyOn, AcceptedPrivacyPolicyOff, SearchAcceptedPrivacyPolicy
+
 from enum import Enum, auto
 
 
@@ -63,6 +75,8 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.updateAllowIndexingEncryptedStoresOrItems()
         self.updateTargetedAdverisingAndMarketing()
         self.updateCloudSaving()
+        self.updateCloudVoice()
+        self.updateWindowsSearchDateCollection()
 
         self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
         self.pushTelemetriaWebCome.clicked.connect(self.TelemetriaWebComeButtonClick)
@@ -82,6 +96,8 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.pushWindowsSearchDateCollection.clicked.connect(self.WindowsSearchDateCollectionButtonClick)
         self.pushTargetedAdverisingAndMarketing.clicked.connect(self.TargetedAdverisingAndMarketingButtonClick)
         self.pushCloudSaving.clicked.connect(self.CloudSavingButtonClick)
+        self.pushCloudVoice.clicked.connect(self.CloudVoiceButtonClick)
+        self.pushWindowsPrivacyConsentDisclaimer.clicked.connect(self.WindowsPrivacyConsentDisclaimerButtonClick)
 
     def positionButton(self):
         frame_list = [
@@ -619,7 +635,6 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         result4 = SearchDisableSoftLanding()
         result5 = SearchDisableWindowsSpotlightFeatures()
         result6 = SearchDisableWindowsConsumerFeatures()
-        print(result2)
         if result1 and result2 and result3 and result4 and result5 and result6 == STATUS_DISABLED:
             self.labelTargetedAdverisingAndMarketing.setText(STATUS_DISABLED)
             self.labelTargetedAdverisingAndMarketing.setStyleSheet('color:green')
@@ -634,7 +649,6 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         result4 = SearchDisableSoftLanding()
         result5 = SearchDisableWindowsSpotlightFeatures()
         result6 = SearchDisableWindowsConsumerFeatures()
-        print(result1, result2)
         if result1 and result2 and result3 and result4 and result5 and result6 == STATUS_DISABLED:
             SubscribedContent338393EnabledOn()
             SubscribedContent353694EnabledOn()
@@ -751,6 +765,40 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             DisableWindowsSettingSyncUserOverrideOff()
             EnabledLanguageOff()
         self.updateCloudSaving()
+
+    def updateCloudVoice(self):
+        result = SearchHasAccepted()
+        if result == STATUS_DISABLED:
+            self.labelCloudVoice.setText(STATUS_DISABLED)
+            self.labelCloudVoice.setStyleSheet('color:green')
+        else:
+            self.labelCloudVoice.setText(STATUS_ENABLED)
+            self.labelCloudVoice.setStyleSheet('color:red')
+
+    def CloudVoiceButtonClick(self):
+        result = SearchHasAccepted()
+        if result == STATUS_DISABLED:
+            HasAcceptedOn()
+        else:
+            HasAcceptedOff()
+        self.updateCloudVoice()
+
+    def updateWindowsSearchDateCollection(self):
+        result = SearchAcceptedPrivacyPolicy()
+        if result == STATUS_DISABLED:
+            self.labelWindowsPrivacyConsentDisclaimer.setText(STATUS_DISABLED)
+            self.labelWindowsPrivacyConsentDisclaimer.setStyleSheet('color:green')
+        else:
+            self.labelWindowsPrivacyConsentDisclaimer.setText(STATUS_ENABLED)
+            self.labelWindowsPrivacyConsentDisclaimer.setStyleSheet('color:red')
+
+    def WindowsPrivacyConsentDisclaimerButtonClick(self):
+        result = SearchAcceptedPrivacyPolicy()
+        if result == STATUS_DISABLED:
+            AcceptedPrivacyPolicyOn()
+        else:
+            AcceptedPrivacyPolicyOff()
+        self.updateWindowsSearchDateCollection()
 
 
 
