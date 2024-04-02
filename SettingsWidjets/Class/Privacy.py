@@ -22,7 +22,7 @@ from Functions.Privacy.WindowsLocationProvider.WindowsLocationProvider import Di
 from Functions.Privacy.AllowIndexingEncryptedStoresOrItems.AllowIndexingEncryptedStoresOrItems import DAllowIndexingEncryptedStoresOrItemsOn, AllowIndexingEncryptedStoresOrItemsOff, SearchAllowIndexingEncryptedStoresOrItems, AlwaysUseAutoLangDetectionOn, AlwaysUseAutoLangDetectionOff, SearchAlwaysUseAutoLangDetection, AllowSearchToUseLocationOn, AllowSearchToUseLocationOff, \
     SearchAllowSearchToUseLocation, DisableWebSearch1On, DisableWebSearch1Off, SearchDisableWebSearch1, ConnectedSearchUseWebOn, ConnectedSearchUseWebOff, SearchConnectedSearchUseWeb, BingSearchEnabledOn, BingSearchEnabledOff, SearchBingSearchEnabled
 from Functions.Privacy.TargetedAdverisingAndMarketing.TargetedAdverisingAndMarketing import SubscribedContent338393EnabledOn, SubscribedContent338393EnabledOff, SearchSubscribedContent338393Enabled, SubscribedContent353694EnabledOn, SubscribedContent353694EnabledOff, SearchSubscribedContent353694Enabled, SubscribedContent353696EnabledOn, SubscribedContent353696EnabledOff, SearchSubscribedContent353696Enabled, DisableSoftLandingOn, DisableSoftLandingOff, SearchDisableSoftLanding, DisableWindowsSpotlightFeaturesOn, DisableWindowsSpotlightFeaturesOff, SearchDisableWindowsSpotlightFeatures, DisableWindowsConsumerFeaturesOn, DisableWindowsConsumerFeaturesOff, SearchDisableWindowsConsumerFeatures
-from Functions.Privacy.CloudSaving.CloudSaving import DisableSettingSyncOn, DisableSettingSyncOff, SearchDisableSettingSync, DisableSettingSyncUserOverrideOn, DisableSettingSyncUserOverrideOff, SearchDisableSettingSyncUserOverride, DisableSyncOnPaidNetworkOn, DisableSyncOnPaidNetworkOff, SearchDisableSyncOnPaidNetwork, SyncPolicyOn, SyncPolicyOff, SearchSyncPolicy, DisableApplicationSettingSyncOn, DisableApplicationSettingSyncOff, SearchDisableApplicationSettingSync, DisableApplicationSettingSyncUserOverrideOn, DisableApplicationSettingSyncUserOverrideOff, SearchDisableApplicationSettingSyncUserOverride, DisableAppSyncSettingSyncOn, DisableAppSyncSettingSyncOff, SearchDisableAppSyncSettingSync, DisableAppSyncSettingSyncUserOverrideOn, DisableAppSyncSettingSyncUserOverrideOff, SearchDisableAppSyncSettingSyncUserOverride, DisableCredentialsSettingSyncOn, DisableCredentialsSettingSyncOff, SearchDisableCredentialsSettingSync, DisableCredentialsSettingSyncUserOverrideOn, DisableCredentialsSettingSyncUserOverrideOff, SearchDisableCredentialsSettingSyncUserOverride
+from Functions.Privacy.CloudSaving.CloudSaving import DisableSettingSyncOn, DisableSettingSyncOff, SearchDisableSettingSync, DisableSettingSyncUserOverrideOn, DisableSettingSyncUserOverrideOff, SearchDisableSettingSyncUserOverride, DisableSyncOnPaidNetworkOn, DisableSyncOnPaidNetworkOff, SearchDisableSyncOnPaidNetwork, SyncPolicyOn, SyncPolicyOff, SearchSyncPolicy, DisableApplicationSettingSyncOn, DisableApplicationSettingSyncOff, SearchDisableApplicationSettingSync, DisableApplicationSettingSyncUserOverrideOn, DisableApplicationSettingSyncUserOverrideOff, SearchDisableApplicationSettingSyncUserOverride, DisableAppSyncSettingSyncOn, DisableAppSyncSettingSyncOff, SearchDisableAppSyncSettingSync, DisableAppSyncSettingSyncUserOverrideOn, DisableAppSyncSettingSyncUserOverrideOff, SearchDisableAppSyncSettingSyncUserOverride, DisableCredentialsSettingSyncOn, DisableCredentialsSettingSyncOff, SearchDisableCredentialsSettingSync, DisableCredentialsSettingSyncUserOverrideOn, DisableCredentialsSettingSyncUserOverrideOff, SearchDisableCredentialsSettingSyncUserOverride, EnabledCloudSavingOn, EnabledCloudSavingOff, SearchEnabledCloudSaving, DisableDesktopThemeSettingSyncOn, DisableDesktopThemeSettingSyncOff, SearchDisableDesktopThemeSettingSync, DisableDesktopThemeSettingSyncUserOverrideOn, DisableDesktopThemeSettingSyncUserOverrideOff, SearchDisableDesktopThemeSettingSyncUserOverride, DisablePersonalizationSettingSyncOn, DisablePersonalizationSettingSyncOff, SearchDisablePersonalizationSettingSync, DisablePersonalizationSettingSyncUserOverrideOn, DisablePersonalizationSettingSyncUserOverrideOff, SearchDisablePersonalizationSettingSyncUserOverride, DisableStartLayoutSettingSyncOn, DisableStartLayoutSettingSyncOff, SearchDisableStartLayoutSettingSync, DisableStartLayoutSettingSyncUserOverrideOn, DisableStartLayoutSettingSyncUserOverrideOff, SearchDisableStartLayoutSettingSyncUserOverride, DisableWebBrowserSettingSyncOn, DisableWebBrowserSettingSyncOff, SearchDisableWebBrowserSettingSync, DisableWebBrowserSettingSyncUserOverrideOn, DisableWebBrowserSettingSyncUserOverrideOff, SearchDisableWebBrowserSettingSyncUserOverride, DisableWindowsSettingSyncOn, DisableWindowsSettingSyncOff, SearchDisableWindowsSettingSync, DisableWindowsSettingSyncUserOverrideOn, DisableWindowsSettingSyncUserOverrideOff, SearchDisableWindowsSettingSyncUserOverride, SearchEnabledLanguage, EnabledLanguageOn, EnabledLanguageOff
 from enum import Enum, auto
 
 
@@ -662,7 +662,19 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         result8 = SearchDisableAppSyncSettingSyncUserOverride()
         result9 = SearchDisableCredentialsSettingSync()
         result10 = SearchDisableCredentialsSettingSyncUserOverride()
-        if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 and result10 == STATUS_DISABLED:
+        result11 = SearchEnabledCloudSaving()
+        result12 = SearchDisableDesktopThemeSettingSync()
+        result13 = SearchDisableDesktopThemeSettingSyncUserOverride()
+        result14 = SearchDisablePersonalizationSettingSync()
+        result15 = SearchDisablePersonalizationSettingSyncUserOverride()
+        result16 = SearchDisableStartLayoutSettingSync()
+        result17 = SearchDisableStartLayoutSettingSyncUserOverride()
+        result18 = SearchDisableWebBrowserSettingSync()
+        result19 = SearchDisableWebBrowserSettingSyncUserOverride()
+        result20 = SearchDisableWindowsSettingSync()
+        result21 = SearchDisableWindowsSettingSyncUserOverride()
+        result22 = SearchEnabledLanguage()
+        if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 and result10 and result11 and result12 and result13 and result14 and result15 and result16 and result17 and result18 and result19 and result20 and result21 and result22 == STATUS_DISABLED:
             self.labelCloudSaving.setText(STATUS_DISABLED)
             self.labelCloudSaving.setStyleSheet('color:green')
         else:
@@ -680,7 +692,19 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         result8 = SearchDisableAppSyncSettingSyncUserOverride()
         result9 = SearchDisableCredentialsSettingSync()
         result10 = SearchDisableCredentialsSettingSyncUserOverride()
-        if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 and result10 == STATUS_DISABLED:
+        result11 = SearchEnabledCloudSaving()
+        result12 = SearchDisableDesktopThemeSettingSync()
+        result13 = SearchDisableDesktopThemeSettingSyncUserOverride()
+        result14 = SearchDisablePersonalizationSettingSync()
+        result15 = SearchDisablePersonalizationSettingSyncUserOverride()
+        result16 = SearchDisableStartLayoutSettingSync()
+        result17 = SearchDisableStartLayoutSettingSyncUserOverride()
+        result18 = SearchDisableWebBrowserSettingSync()
+        result19 = SearchDisableWebBrowserSettingSyncUserOverride()
+        result20 = SearchDisableWindowsSettingSync()
+        result21 = SearchDisableWindowsSettingSyncUserOverride()
+        result22 = SearchEnabledLanguage()
+        if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 and result10 and result11 and result12 and result13 and result14 and result15 and result16 and result17 and result18 and result19 and result20 and result21 and result22 == STATUS_DISABLED:
             DisableSettingSyncOn()
             DisableSettingSyncUserOverrideOn()
             DisableSyncOnPaidNetworkOn()
@@ -691,6 +715,18 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             DisableAppSyncSettingSyncUserOverrideOn()
             DisableCredentialsSettingSyncOn()
             DisableCredentialsSettingSyncUserOverrideOn()
+            EnabledCloudSavingOn()
+            DisableDesktopThemeSettingSyncOn()
+            DisableDesktopThemeSettingSyncUserOverrideOn()
+            DisablePersonalizationSettingSyncOn()
+            DisablePersonalizationSettingSyncUserOverrideOn()
+            DisableStartLayoutSettingSyncOn()
+            DisableStartLayoutSettingSyncUserOverrideOn()
+            DisableWebBrowserSettingSyncOn()
+            DisableWebBrowserSettingSyncUserOverrideOn()
+            DisableWindowsSettingSyncOn()
+            DisableWindowsSettingSyncUserOverrideOn()
+            EnabledLanguageOn()
         else:
             DisableSettingSyncOff()
             DisableSettingSyncUserOverrideOff()
@@ -702,6 +738,18 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             DisableAppSyncSettingSyncUserOverrideOff()
             DisableCredentialsSettingSyncOff()
             DisableCredentialsSettingSyncUserOverrideOff()
+            EnabledCloudSavingOff()
+            DisableDesktopThemeSettingSyncOff()
+            DisableDesktopThemeSettingSyncUserOverrideOff()
+            DisablePersonalizationSettingSyncOff()
+            DisablePersonalizationSettingSyncUserOverrideOff()
+            DisableStartLayoutSettingSyncOff()
+            DisableStartLayoutSettingSyncUserOverrideOff()
+            DisableWebBrowserSettingSyncOff()
+            DisableWebBrowserSettingSyncUserOverrideOff()
+            DisableWindowsSettingSyncOff()
+            DisableWindowsSettingSyncUserOverrideOff()
+            EnabledLanguageOff()
         self.updateCloudSaving()
 
 
