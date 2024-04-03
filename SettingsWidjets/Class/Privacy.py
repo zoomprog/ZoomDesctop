@@ -37,6 +37,9 @@ from Functions.Privacy.WindowsPrivacyConsentDisclaimer.WindowsPrivacyConsentDisc
 from Functions.Privacy.WindowsFeedbackandDiagnostics.WindowsFeedbackandDiagnostics import (NumberOfSIUFInPeriodOn, NumberOfSIUFInPeriodOff, SearchNumberOfSIUFInPeriod, PeriodInNanoSecondsOn, PeriodInNanoSecondsOff, SearchPeriodInNanoSeconds, DoNotShowFeedbackNotificationsOn, DoNotShowFeedbackNotificationsOff, SearchDoNotShowFeedbackNotifications, DmClientOn, DmClientOff, SearchDmClient,
                                                                                            SearchDmClientOnScenarioDownload, DmClientOnScenarioDownloadOn, DmClientOnScenarioDownloadOff)
 from Functions.Privacy.CollectTextMessagesandHandwritingInput.CollectTextMessagesandHandwritingInput import RestrictImplicitInkCollectionOn, RestrictImplicitInkCollectionOff, SearchRestrictImplicitInkCollection, RestrictImplicitTextCollectionOn, RestrictImplicitTextCollectionOff, SearchRestrictImplicitTextCollection, HarvestContactsOn, HarvestContactsOff, SearchHarvestContacts
+from Functions.Privacy.Sensor.Sensor import DisableSensorsOn, DisableSensorsOff, SearchDisableSensors
+from Functions.Privacy.WiFiSense.WiFiSense import value1On, value1Off, Searchvalue1, value2On, value2Off, Searchvalue2, AutoConnectAllowedOEMOn, AutoConnectAllowedOEMOff, SearchAutoConnectAllowedOEM
+from Functions.Privacy.HideMostUsedApps.HideMostUsedApps import HideMostUsedAppsOn, HideMostUsedAppsOff, SearchHideMostUsedApps
 
 from enum import Enum, auto
 
@@ -82,6 +85,9 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.updateWindowsSearchDateCollection()
         self.updateWindowsPrivacyConsentDisclaimer()
         self.updateCollectTextMessagesandHandwritingInput()
+        self.updateSensor()
+        self.updateWiFiSense()
+        self.updateHideMostUsedApps()
 
         self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
         self.pushTelemetriaWebCome.clicked.connect(self.TelemetriaWebComeButtonClick)
@@ -105,6 +111,9 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.pushWindowsPrivacyConsentDisclaimer.clicked.connect(self.WindowsPrivacyConsentDisclaimerButtonClick)
         self.pushWindowsFeedbackandDiagnostics.clicked.connect(self.WindowsFeedbackandDiagnosticsButtonClick)
         self.pushCollectTextMessagesandHandwritingInput.clicked.connect(self.CollectTextMessages)
+        self.pushSensor.clicked.connect(self.SensorButtonClick)
+        self.pushWiFiSense.clicked.connect(self.WiFiSenseButtonClick)
+        self.pushHideMostUsedApps.clicked.connect(self.HideMostUsedAppsButtonClick)
 
     def positionButton(self):
         frame_list = [
@@ -866,7 +875,64 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             HarvestContactsOff()
         self.updateCollectTextMessagesandHandwritingInput()
 
+    def updateSensor(self):
+        result = SearchDisableSensors()
+        if result == STATUS_DISABLED:
+            self.labelSensor.setText(STATUS_DISABLED)
+            self.labelSensor.setStyleSheet('color:green')
+        else:
+            self.labelSensor.setText(STATUS_ENABLED)
+            self.labelSensor.setStyleSheet('color:red')
 
+    def SensorButtonClick(self):
+        result = SearchDisableSensors()
+        if result == STATUS_DISABLED:
+            DisableSensorsOn()
+        else:
+            DisableSensorsOff()
+        self.updateSensor()
+
+    def updateWiFiSense(self):
+        result1 = Searchvalue1()
+        result2 = Searchvalue2()
+        result3 = SearchAutoConnectAllowedOEM()
+        if result1 and result2 and result3 == STATUS_DISABLED:
+            self.labelWiFiSense.setText(STATUS_DISABLED)
+            self.labelWiFiSense.setStyleSheet('color:green')
+        else:
+            self.labelWiFiSense.setText(STATUS_ENABLED)
+            self.labelWiFiSense.setStyleSheet('color:red')
+
+    def WiFiSenseButtonClick(self):
+        result1 = Searchvalue1()
+        result2 = Searchvalue2()
+        result3 = SearchAutoConnectAllowedOEM()
+        if result1 and result2 and result3 == STATUS_DISABLED:
+            value1On()
+            value2On()
+            AutoConnectAllowedOEMOn()
+        else:
+            value1Off()
+            value2Off()
+            AutoConnectAllowedOEMOff()
+        self.updateWiFiSense()
+
+    def updateHideMostUsedApps(self):
+        result1 = SearchHideMostUsedApps()
+        if result1 == STATUS_DISABLED:
+            self.labelHideMostUsedApps.setText(STATUS_ENABLED)
+            self.labelHideMostUsedApps.setStyleSheet('color:green')
+        else:
+            self.labelHideMostUsedApps.setText(STATUS_DISABLED)
+            self.labelHideMostUsedApps.setStyleSheet('color:red')
+
+    def HideMostUsedAppsButtonClick(self):
+        result1 = SearchHideMostUsedApps()
+        if result1 == STATUS_DISABLED:
+            HideMostUsedAppsOn()
+        else:
+            HideMostUsedAppsOff()
+        self.updateHideMostUsedApps()
 
 
 

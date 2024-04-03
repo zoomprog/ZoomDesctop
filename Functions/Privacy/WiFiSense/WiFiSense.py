@@ -1,12 +1,12 @@
 import winreg
 
 
-def RestrictImplicitInkCollectionOn():
+def value1On():
     try:
         # Открыть ключ реестра с правами на запись
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\InputPersonalization", 0, winreg.KEY_WRITE)
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\PolicyManager\default\Wifi\AllowWiFiHotSpotReporting", 0, winreg.KEY_WRITE)
         # Удалить значение
-        winreg.DeleteValue(key, "RestrictImplicitInkCollection")
+        winreg.DeleteValue(key, "value")
         # Закрыть ключ
         winreg.CloseKey(key)
         print("Значение успешно удалено.")
@@ -16,27 +16,27 @@ def RestrictImplicitInkCollectionOn():
         print(f"Ошибка при удалении значения: {e}")
 
 
-def RestrictImplicitInkCollectionOff():
+def value1Off():
     try:
         # Открыть ключ реестра в режиме записи
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\InputPersonalization", 0, winreg.KEY_WRITE)
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\PolicyManager\default\Wifi\AllowWiFiHotSpotReporting", 0, winreg.KEY_WRITE)
         # Установить значение
-        winreg.SetValueEx(key, "RestrictImplicitInkCollection", 0, winreg.REG_DWORD, 1)
+        winreg.SetValueEx(key, "value", 0, winreg.REG_DWORD, 0)
         # Закрыть ключ
         winreg.CloseKey(key)
     except Exception as e:
         print(f"Ошибка при установке значения: {e}")
 
 
-def SearchRestrictImplicitInkCollection():
+def Searchvalue1():
     try:
         # Открыть ключ реестра в режиме чтения
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\InputPersonalization", 0, winreg.KEY_READ)
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\PolicyManager\default\Wifi\AllowWiFiHotSpotReporting", 0, winreg.KEY_READ)
         # Прочитать значение
-        value, reg_type = winreg.QueryValueEx(key, "RestrictImplicitInkCollection")
+        value, reg_type = winreg.QueryValueEx(key, "value")
         # Закрыть ключ
         winreg.CloseKey(key)
-        if value == 1:
+        if value == 0:
             return 'Disabled'
         else:
             return 'Enabled'
@@ -45,12 +45,12 @@ def SearchRestrictImplicitInkCollection():
     except Exception as e:
         print(f"Ошибка при чтении значения: {e}")
 
-def RestrictImplicitTextCollectionOn():
+def value2On():
     try:
         # Открыть ключ реестра с правами на запись
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\InputPersonalization", 0, winreg.KEY_WRITE)
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\PolicyManager\default\Wifi\AllowAutoConnectToWiFiSenseHotspots", 0, winreg.KEY_WRITE)
         # Удалить значение
-        winreg.DeleteValue(key, "RestrictImplicitTextCollection")
+        winreg.DeleteValue(key, "value")
         # Закрыть ключ
         winreg.CloseKey(key)
         print("Значение успешно удалено.")
@@ -60,27 +60,27 @@ def RestrictImplicitTextCollectionOn():
         print(f"Ошибка при удалении значения: {e}")
 
 
-def RestrictImplicitTextCollectionOff():
+def value2Off():
     try:
         # Открыть ключ реестра в режиме записи
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\InputPersonalization", 0, winreg.KEY_WRITE)
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\PolicyManager\default\Wifi\AllowAutoConnectToWiFiSenseHotspots", 0, winreg.KEY_WRITE)
         # Установить значение
-        winreg.SetValueEx(key, "RestrictImplicitTextCollection", 0, winreg.REG_DWORD, 1)
+        winreg.SetValueEx(key, "value", 0, winreg.REG_DWORD, 0)
         # Закрыть ключ
         winreg.CloseKey(key)
     except Exception as e:
         print(f"Ошибка при установке значения: {e}")
 
 
-def SearchRestrictImplicitTextCollection():
+def Searchvalue2():
     try:
         # Открыть ключ реестра в режиме чтения
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\InputPersonalization", 0, winreg.KEY_READ)
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\PolicyManager\default\Wifi\AllowAutoConnectToWiFiSenseHotspots", 0, winreg.KEY_READ)
         # Прочитать значение
-        value, reg_type = winreg.QueryValueEx(key, "RestrictImplicitTextCollection")
+        value, reg_type = winreg.QueryValueEx(key, "value")
         # Закрыть ключ
         winreg.CloseKey(key)
-        if value == 1:
+        if value == 0:
             return 'Disabled'
         else:
             return 'Enabled'
@@ -89,12 +89,13 @@ def SearchRestrictImplicitTextCollection():
     except Exception as e:
         print(f"Ошибка при чтении значения: {e}")
 
-def HarvestContactsOn():
+
+def AutoConnectAllowedOEMOn():
     try:
         # Открыть ключ реестра с правами на запись
-        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Software\Microsoft\InputPersonalization\TrainedDataStore", 0, winreg.KEY_WRITE)
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config", 0, winreg.KEY_WRITE)
         # Удалить значение
-        winreg.DeleteValue(key, "HarvestContacts")
+        winreg.DeleteValue(key, "AutoConnectAllowedOEM")
         # Закрыть ключ
         winreg.CloseKey(key)
         print("Значение успешно удалено.")
@@ -104,27 +105,27 @@ def HarvestContactsOn():
         print(f"Ошибка при удалении значения: {e}")
 
 
-def HarvestContactsOff():
+def AutoConnectAllowedOEMOff():
     try:
         # Открыть ключ реестра в режиме записи
-        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Software\Microsoft\InputPersonalization\TrainedDataStore", 0, winreg.KEY_WRITE)
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config", 0, winreg.KEY_WRITE)
         # Установить значение
-        winreg.SetValueEx(key, "HarvestContacts", 0, winreg.REG_DWORD, 1)
+        winreg.SetValueEx(key, "AutoConnectAllowedOEM", 0, winreg.REG_DWORD, 0)
         # Закрыть ключ
         winreg.CloseKey(key)
     except Exception as e:
         print(f"Ошибка при установке значения: {e}")
 
 
-def SearchHarvestContacts():
+def SearchAutoConnectAllowedOEM():
     try:
         # Открыть ключ реестра в режиме чтения
-        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Software\Microsoft\InputPersonalization\TrainedDataStore", 0, winreg.KEY_READ)
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config", 0, winreg.KEY_READ)
         # Прочитать значение
-        value, reg_type = winreg.QueryValueEx(key, "HarvestContacts")
+        value, reg_type = winreg.QueryValueEx(key, "AutoConnectAllowedOEM")
         # Закрыть ключ
         winreg.CloseKey(key)
-        if value == 1:
+        if value == 0:
             return 'Disabled'
         else:
             return 'Enabled'
