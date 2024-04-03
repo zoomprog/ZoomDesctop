@@ -11,7 +11,7 @@ import subprocess
 from Functions.BaseSettings.MouseAcceleration.MouseAcceleration import MouseSpeedOn, MouseSpeedOff, SearchMouseSpeed, MouseThreshold1On, MouseThreshold1Off, SearchMouseThreshold1, MouseThreshold2On, MouseThreshold2Off, SearchMouseThreshold2
 from Functions.BaseSettings.ProtectionNotifications.ProtectionNotifications import NotificationEnable1On, NotificationEnable1Off, SearchNotificationEnable1, NotificationEnable2On, NotificationEnable2Off, SearchNotificationEnable2, DisableNotifications1On, DisableNotifications1Off, SearchDisableNotifications1
 from Functions.BaseSettings.AutoUpdateDriversatSystemstartup.AutoUpdateDriversatSystemstartup import ExcludeWUDriversInQualityUpdateOn, ExcludeWUDriversInQualityUpdateOff, SearchExcludeWUDriversInQualityUpdate, SearchOrderConfigOn, SearchOrderConfigOff, SearchSearchOrderConfig
-from Functions.BaseSettings.UWP.UWP import GlobalUserDisabledOn, GlobalUserDisabledOff, SearchGlobalUserDisabled
+from Functions.BaseSettings.UWP.UWP import GlobalUserDisabledOn, GlobalUserDisabledOff, SearchGlobalUserDisabled, BackgroundAppGlobalToggleOn, BackgroundAppGlobalToggleOff, SearchBackgroundAppGlobalToggle, BackgroundAppGlobalToggleStartOn, GBackgroundAppGlobalToggleStartOff, SearchBackgroundAppGlobalToggleStart
 
 from enum import Enum, auto
 
@@ -40,9 +40,12 @@ class BaseSet(QDialog, Ui_BaseSettings):
         self.updateProtectionNotifications()
         self.updateAutoUpdateDriversatSystemstartup()
         self.AutoUpdateDriversatSystemstartup()
+        self.updateUWP()
+
         self.pushMouseAcceleration.clicked.connect(self.MouseAccelerationButton_clicked)
         self.pushProtectionNotifications.clicked.connect(self.ProtectionNotificationsButton_clicked)
         self.pushAutoUpdateDriversatSystemstartup.clicked.connect(self.AutoUpdateDriversatSystemstartup_clicked)
+        self.pushUWP.clicked.connect(self.UWP_clicked)
 
     def positionTextLabel(self):
         TextLabel_list = [
@@ -163,6 +166,30 @@ class BaseSet(QDialog, Ui_BaseSettings):
             SearchOrderConfigOff()
         self.AutoUpdateDriversatSystemstartup()
 
+    def updateUWP(self):
+        result1 = SearchGlobalUserDisabled()
+        result2 = SearchBackgroundAppGlobalToggleStart()
+        result3 = SearchBackgroundAppGlobalToggle()
+        if result1 == STATUS_DISABLED:
+            self.labelUWP.setText(STATUS_DISABLED)
+            self.labelUWP.setStyleSheet('color:green')
+        else:
+            self.labelUWP.setText(STATUS_ENABLED)
+            self.labelUWP.setStyleSheet('color:red')
+
+    def UWP_clicked(self):
+        result1 = SearchGlobalUserDisabled()
+        result2 = SearchBackgroundAppGlobalToggleStart()
+        result3 = SearchBackgroundAppGlobalToggle()
+        if result1 == STATUS_DISABLED:
+            GlobalUserDisabledOn()
+            BackgroundAppGlobalToggleStartOn()
+            BackgroundAppGlobalToggleOn()
+        else:
+            GlobalUserDisabledOff()
+            GBackgroundAppGlobalToggleStartOff()
+            BackgroundAppGlobalToggleOff()
+        self.updateUWP()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
