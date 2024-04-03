@@ -12,6 +12,9 @@ from Functions.BaseSettings.MouseAcceleration.MouseAcceleration import MouseSpee
 from Functions.BaseSettings.ProtectionNotifications.ProtectionNotifications import NotificationEnable1On, NotificationEnable1Off, SearchNotificationEnable1, NotificationEnable2On, NotificationEnable2Off, SearchNotificationEnable2, DisableNotifications1On, DisableNotifications1Off, SearchDisableNotifications1
 from Functions.BaseSettings.AutoUpdateDriversatSystemstartup.AutoUpdateDriversatSystemstartup import ExcludeWUDriversInQualityUpdateOn, ExcludeWUDriversInQualityUpdateOff, SearchExcludeWUDriversInQualityUpdate, SearchOrderConfigOn, SearchOrderConfigOff, SearchSearchOrderConfig
 from Functions.BaseSettings.UWP.UWP import GlobalUserDisabledOn, GlobalUserDisabledOff, SearchGlobalUserDisabled, BackgroundAppGlobalToggleOn, BackgroundAppGlobalToggleOff, SearchBackgroundAppGlobalToggle, BackgroundAppGlobalToggleStartOn, GBackgroundAppGlobalToggleStartOff, SearchBackgroundAppGlobalToggleStart
+from Functions.BaseSettings.AutoUpdatingAppsStore.AutoUpdatingAppsStore import AutoDownloadOn, AutoDownloadOff, SearchAutoDownload
+from Functions.BaseSettings.Appearance.Appearance import (TaskbarAnimationsOn, TaskbarAnimationsOff, SearchTaskbarAnimations, IconsOnlyOn, IconsOnlyOff, SearchIconsOnly, ListviewShadowOn, ListviewShadowOff, SearchListviewShadow, ListviewAlphaSelectOn, ListviewAlphaSelectOff, SearchListviewAlphaSelect, MinAnimateOn, MinAnimateOff, SearchMinAnimate, DragFullWindowsOn, DragFullWindowsOff,
+                                                          SearchDragFullWindows)
 
 from enum import Enum, auto
 
@@ -41,11 +44,15 @@ class BaseSet(QDialog, Ui_BaseSettings):
         self.updateAutoUpdateDriversatSystemstartup()
         self.AutoUpdateDriversatSystemstartup()
         self.updateUWP()
+        self.updateAutoUpdatingAppsStore()
+        self.updateAppearance()
 
         self.pushMouseAcceleration.clicked.connect(self.MouseAccelerationButton_clicked)
         self.pushProtectionNotifications.clicked.connect(self.ProtectionNotificationsButton_clicked)
         self.pushAutoUpdateDriversatSystemstartup.clicked.connect(self.AutoUpdateDriversatSystemstartup_clicked)
         self.pushUWP.clicked.connect(self.UWP_clicked)
+        self.pushAutoUpdatingAppsStore.clicked.connect(self.AutoUpdatingAppsStore_clicked)
+        self.pushAppearance.clicked.connect(self.Appearance_clicked)
 
     def positionTextLabel(self):
         TextLabel_list = [
@@ -170,7 +177,7 @@ class BaseSet(QDialog, Ui_BaseSettings):
         result1 = SearchGlobalUserDisabled()
         result2 = SearchBackgroundAppGlobalToggleStart()
         result3 = SearchBackgroundAppGlobalToggle()
-        if result1 == STATUS_DISABLED:
+        if result1 and result2 and result3== STATUS_DISABLED:
             self.labelUWP.setText(STATUS_DISABLED)
             self.labelUWP.setStyleSheet('color:green')
         else:
@@ -181,7 +188,7 @@ class BaseSet(QDialog, Ui_BaseSettings):
         result1 = SearchGlobalUserDisabled()
         result2 = SearchBackgroundAppGlobalToggleStart()
         result3 = SearchBackgroundAppGlobalToggle()
-        if result1 == STATUS_DISABLED:
+        if result1 and result2 and result3 == STATUS_DISABLED:
             GlobalUserDisabledOn()
             BackgroundAppGlobalToggleStartOn()
             BackgroundAppGlobalToggleOn()
@@ -190,6 +197,62 @@ class BaseSet(QDialog, Ui_BaseSettings):
             GBackgroundAppGlobalToggleStartOff()
             BackgroundAppGlobalToggleOff()
         self.updateUWP()
+
+    def updateAutoUpdatingAppsStore(self):
+        result = SearchAutoDownload()
+        if result == STATUS_DISABLED:
+            self.labelAutoUpdatingAppsStore.setText(STATUS_DISABLED)
+            self.labelAutoUpdatingAppsStore.setStyleSheet('color:green')
+        else:
+            self.labelAutoUpdatingAppsStore.setText(STATUS_ENABLED)
+            self.labelAutoUpdatingAppsStore.setStyleSheet('color:red')
+
+    def AutoUpdatingAppsStore_clicked(self):
+        result = SearchAutoDownload()
+        if result == STATUS_DISABLED:
+            AutoDownloadOn()
+        else:
+            AutoDownloadOff()
+        self.updateAutoUpdatingAppsStore()
+
+    def updateAppearance(self):
+        result1 = SearchTaskbarAnimations()
+        result2 = SearchIconsOnly()
+        result3 = SearchListviewShadow()
+        result4 = SearchListviewAlphaSelect()
+        result5 = SearchMinAnimate()
+        result6 = SearchDragFullWindows()
+        if result1 and result2 and result3 and result4 and result5 == STATUS_DISABLED:
+            self.labelAppearance.setText(STATUS_DISABLED)
+            self.labelAppearance.setStyleSheet('color:green')
+        else:
+            self.labelAppearance.setText(STATUS_ENABLED)
+            self.labelAppearance.setStyleSheet('color:red')
+
+    def Appearance_clicked(self):
+        result1 = SearchTaskbarAnimations()
+        result2 = SearchIconsOnly()
+        result3 = SearchListviewShadow()
+        result4 = SearchListviewAlphaSelect()
+        result5 = SearchMinAnimate()
+        result6 = SearchDragFullWindows()
+        if result1 and result2 and result3 and result4 and result5 and result6 == STATUS_DISABLED:
+            TaskbarAnimationsOn()
+            IconsOnlyOn()
+            ListviewShadowOn()
+            ListviewAlphaSelectOn()
+            MinAnimateOn()
+            DragFullWindowsOn()
+        else:
+            TaskbarAnimationsOff()
+            IconsOnlyOff()
+            ListviewShadowOff()
+            ListviewAlphaSelectOff()
+            MinAnimateOff()
+            DragFullWindowsOff()
+        self.updateAppearance()
+
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
