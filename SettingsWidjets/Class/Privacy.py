@@ -36,6 +36,7 @@ from Functions.Privacy.CloudVoice.CloudVoice import HasAcceptedOn, HasAcceptedOf
 from Functions.Privacy.WindowsPrivacyConsentDisclaimer.WindowsPrivacyConsentDisclaimer import AcceptedPrivacyPolicyOn, AcceptedPrivacyPolicyOff, SearchAcceptedPrivacyPolicy
 from Functions.Privacy.WindowsFeedbackandDiagnostics.WindowsFeedbackandDiagnostics import (NumberOfSIUFInPeriodOn, NumberOfSIUFInPeriodOff, SearchNumberOfSIUFInPeriod, PeriodInNanoSecondsOn, PeriodInNanoSecondsOff, SearchPeriodInNanoSeconds, DoNotShowFeedbackNotificationsOn, DoNotShowFeedbackNotificationsOff, SearchDoNotShowFeedbackNotifications, DmClientOn, DmClientOff, SearchDmClient,
                                                                                            SearchDmClientOnScenarioDownload, DmClientOnScenarioDownloadOn, DmClientOnScenarioDownloadOff)
+from Functions.Privacy.CollectTextMessagesandHandwritingInput.CollectTextMessagesandHandwritingInput import RestrictImplicitInkCollectionOn, RestrictImplicitInkCollectionOff, SearchRestrictImplicitInkCollection, RestrictImplicitTextCollectionOn, RestrictImplicitTextCollectionOff, SearchRestrictImplicitTextCollection, HarvestContactsOn, HarvestContactsOff, SearchHarvestContacts
 
 from enum import Enum, auto
 
@@ -80,6 +81,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.updateCloudVoice()
         self.updateWindowsSearchDateCollection()
         self.updateWindowsPrivacyConsentDisclaimer()
+        self.updateCollectTextMessagesandHandwritingInput()
 
         self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
         self.pushTelemetriaWebCome.clicked.connect(self.TelemetriaWebComeButtonClick)
@@ -102,6 +104,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.pushCloudVoice.clicked.connect(self.CloudVoiceButtonClick)
         self.pushWindowsPrivacyConsentDisclaimer.clicked.connect(self.WindowsPrivacyConsentDisclaimerButtonClick)
         self.pushWindowsFeedbackandDiagnostics.clicked.connect(self.WindowsFeedbackandDiagnosticsButtonClick)
+        self.pushCollectTextMessagesandHandwritingInput.clicked.connect(self.CollectTextMessages)
 
     def positionButton(self):
         frame_list = [
@@ -837,6 +840,31 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             DmClientOff()
             DmClientOnScenarioDownloadOff()
         self.updateWindowsPrivacyConsentDisclaimer()
+
+    def updateCollectTextMessagesandHandwritingInput(self):
+        result1 = SearchRestrictImplicitInkCollection()
+        result2 = SearchRestrictImplicitTextCollection()
+        result3 = SearchHarvestContacts()
+        if result1 and result2 and result3 == STATUS_DISABLED:
+            self.labelCollectTextMessagesandHandwritingInput.setText(STATUS_DISABLED)
+            self.labelCollectTextMessagesandHandwritingInput.setStyleSheet('color:green')
+        else:
+            self.labelCollectTextMessagesandHandwritingInput.setText(STATUS_ENABLED)
+            self.labelCollectTextMessagesandHandwritingInput.setStyleSheet('color:red')
+
+    def CollectTextMessages(self):
+        result1 = SearchRestrictImplicitInkCollection()
+        result2 = SearchRestrictImplicitTextCollection()
+        result3 = SearchHarvestContacts()
+        if result1 and result2 and result3 == STATUS_DISABLED:
+            RestrictImplicitInkCollectionOn()
+            RestrictImplicitTextCollectionOn()
+            HarvestContactsOn()
+        else:
+            RestrictImplicitInkCollectionOff()
+            RestrictImplicitTextCollectionOff()
+            HarvestContactsOff()
+        self.updateCollectTextMessagesandHandwritingInput()
 
 
 
