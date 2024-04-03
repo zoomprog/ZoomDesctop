@@ -204,3 +204,143 @@ def SearchDragFullWindows():
     except OSError as e:
         print(f"Ошибка при чтении значения: {e}")
         return 'Error'
+
+def EnableAeroPeekOn():
+    try:
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Software\Microsoft\Windows\DWM", 0, winreg.KEY_WRITE)
+        winreg.SetValueEx(key, "EnableAeroPeek", 0, winreg.REG_DWORD, 1)
+        winreg.CloseKey(key)
+    except OSError as e:
+        print(f"Ошибка при установке значения: {e}")
+
+def EnableAeroPeekOff():
+    try:
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Software\Microsoft\Windows\DWM", 0, winreg.KEY_WRITE)
+        winreg.SetValueEx(key, "EnableAeroPeek", 0, winreg.REG_DWORD, 0)
+        winreg.CloseKey(key)
+    except OSError as e:
+        print(f"Ошибка при установке значения: {e}")
+
+
+
+def SearchEnableAeroPeek():
+    try:
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Software\Microsoft\Windows\DWM", 0, winreg.KEY_READ)
+        value, reg_type = winreg.QueryValueEx(key, "EnableAeroPeek")
+        winreg.CloseKey(key)
+        if value == 0:
+            return 'Disabled'
+        else:
+            return 'Enabled'
+    except FileNotFoundError:
+        print("Ключ реестра не найден.")
+        return 'Key not found'
+    except OSError as e:
+        print(f"Ошибка при чтении значения: {e}")
+        return 'Error'
+
+def FontSmoothingOn():
+    try:
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Control Panel\Desktop", 0, winreg.KEY_WRITE)
+        winreg.SetValueEx(key, "FontSmoothing", 0, winreg.REG_DWORD, 2)
+        winreg.CloseKey(key)
+    except OSError as e:
+        print(f"Ошибка при установке значения: {e}")
+
+def FontSmoothingOff():
+    try:
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Control Panel\Desktop", 0, winreg.KEY_WRITE)
+        winreg.SetValueEx(key, "FontSmoothing", 0, winreg.REG_DWORD, 0)
+        winreg.CloseKey(key)
+    except OSError as e:
+        print(f"Ошибка при установке значения: {e}")
+
+
+
+def SearchFontSmoothing():
+    try:
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Control Panel\Desktop", 0, winreg.KEY_READ)
+        value, reg_type = winreg.QueryValueEx(key, "FontSmoothing")
+        winreg.CloseKey(key)
+        if value == 0:
+            return 'Disabled'
+        else:
+            return 'Enabled'
+    except FileNotFoundError:
+        print("Ключ реестра не найден.")
+        return 'Key not found'
+    except OSError as e:
+        print(f"Ошибка при чтении значения: {e}")
+        return 'Error'
+
+def VisualFXSettingOn():
+    # Определите путь и имя ключа реестра
+    path = r"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer"
+    value_name = "ShellState"
+
+    # Значение, которое вы хотите установить
+    new_value = bytes.fromhex("240000003EA8000000000000000000000000000001000000130000000000000063000000")
+
+    try:
+        # Откройте ключ реестра с правами на запись
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, path, 0, winreg.KEY_WRITE)
+
+        # Установите значение
+        winreg.SetValueEx(key, value_name, 0, winreg.REG_BINARY, new_value)
+
+        # Закройте ключ реестра
+        winreg.CloseKey(key)
+
+        print("Значение успешно установлено.")
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+
+def VisualFXSettingOff():
+    # Определите путь и имя ключа реестра
+    path = r"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer"
+    value_name = "ShellState"
+
+    # Значение, которое вы хотите установить
+    new_value = bytes.fromhex("240000003EA8000000000000000000000000000001000000130000000000000073000000")
+
+    try:
+        # Откройте ключ реестра с правами на запись
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, path, 0, winreg.KEY_WRITE)
+
+        # Установите значение
+        winreg.SetValueEx(key, value_name, 0, winreg.REG_BINARY, new_value)
+
+        # Закройте ключ реестра
+        winreg.CloseKey(key)
+
+        print("Значение успешно установлено.")
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+
+
+
+def SearchVisualFXSetting():
+    # Определите путь и имя ключа реестра
+    path = r"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer"
+    value_name = "ShellState"
+
+    # Значение для проверки
+    check_value = bytes.fromhex("240000003EA8000000000000000000000000000001000000130000000000000073000000")
+
+    try:
+        # Откройте ключ реестра с правами на чтение
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, path, 0, winreg.KEY_READ)
+
+        # Прочитайте значение
+        value, _ = winreg.QueryValueEx(key, value_name)
+
+        # Закройте ключ реестра
+        winreg.CloseKey(key)
+
+        # Сравните значение
+        if value == check_value:
+            return 'Disabled'
+        else:
+            return 'Enable'
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")

@@ -14,7 +14,7 @@ from Functions.BaseSettings.AutoUpdateDriversatSystemstartup.AutoUpdateDriversat
 from Functions.BaseSettings.UWP.UWP import GlobalUserDisabledOn, GlobalUserDisabledOff, SearchGlobalUserDisabled, BackgroundAppGlobalToggleOn, BackgroundAppGlobalToggleOff, SearchBackgroundAppGlobalToggle, BackgroundAppGlobalToggleStartOn, GBackgroundAppGlobalToggleStartOff, SearchBackgroundAppGlobalToggleStart
 from Functions.BaseSettings.AutoUpdatingAppsStore.AutoUpdatingAppsStore import AutoDownloadOn, AutoDownloadOff, SearchAutoDownload
 from Functions.BaseSettings.Appearance.Appearance import (TaskbarAnimationsOn, TaskbarAnimationsOff, SearchTaskbarAnimations, IconsOnlyOn, IconsOnlyOff, SearchIconsOnly, ListviewShadowOn, ListviewShadowOff, SearchListviewShadow, ListviewAlphaSelectOn, ListviewAlphaSelectOff, SearchListviewAlphaSelect, MinAnimateOn, MinAnimateOff, SearchMinAnimate, DragFullWindowsOn, DragFullWindowsOff,
-                                                          SearchDragFullWindows)
+                                                          SearchDragFullWindows, EnableAeroPeekOn, EnableAeroPeekOff, SearchEnableAeroPeek, FontSmoothingOn, FontSmoothingOff, SearchFontSmoothing, VisualFXSettingOn, VisualFXSettingOff, SearchVisualFXSetting)
 
 from enum import Enum, auto
 
@@ -222,7 +222,10 @@ class BaseSet(QDialog, Ui_BaseSettings):
         result4 = SearchListviewAlphaSelect()
         result5 = SearchMinAnimate()
         result6 = SearchDragFullWindows()
-        if result1 and result2 and result3 and result4 and result5 == STATUS_DISABLED:
+        result7 = SearchEnableAeroPeek()
+        result8 = SearchFontSmoothing()
+        result9 = SearchVisualFXSetting()
+        if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 == STATUS_DISABLED:
             self.labelAppearance.setText(STATUS_DISABLED)
             self.labelAppearance.setStyleSheet('color:green')
         else:
@@ -236,13 +239,19 @@ class BaseSet(QDialog, Ui_BaseSettings):
         result4 = SearchListviewAlphaSelect()
         result5 = SearchMinAnimate()
         result6 = SearchDragFullWindows()
-        if result1 and result2 and result3 and result4 and result5 and result6 == STATUS_DISABLED:
+        result7 = SearchEnableAeroPeek()
+        result8 = SearchFontSmoothing()
+        result9 = SearchVisualFXSetting()
+        if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 == STATUS_DISABLED:
             TaskbarAnimationsOn()
             IconsOnlyOn()
             ListviewShadowOn()
             ListviewAlphaSelectOn()
             MinAnimateOn()
             DragFullWindowsOn()
+            EnableAeroPeekOn()
+            FontSmoothingOn()
+            VisualFXSettingOn()
         else:
             TaskbarAnimationsOff()
             IconsOnlyOff()
@@ -250,6 +259,9 @@ class BaseSet(QDialog, Ui_BaseSettings):
             ListviewAlphaSelectOff()
             MinAnimateOff()
             DragFullWindowsOff()
+            EnableAeroPeekOff()
+            FontSmoothingOff()
+            VisualFXSettingOff()
         self.updateAppearance()
 
 
