@@ -46,6 +46,15 @@ from Functions.Privacy.RecordingActions.RecordingActions import HttpAcceptLangua
 from Functions.Privacy.FeedbackAsYouType.FeedbackAsYouType import EnabledFAYTOn, EnabledFAYTOff, SearchEnabledFAYT
 from Functions.Privacy.ActivityFeed.ActivityFeed import EnableActivityFeedOn, EnableActivityFeedOff, SearchEnableActivityFeed
 from Functions.Privacy.ApplicationAccessToLocation.ApplicationAccessToLocation import ValueAATLOn, ValueAATLOff, SearchValueAATL, StatusAATLOn, StatusAATLOff, SearchStatusAATL, LetAppsAccessLocationOn, LetAppsAccessLocationOff, SearchLetAppsAccessLocation
+from Functions.Privacy.ApplicationAccessToAccountInformation.ApplicationAccessToAccountInformation import ValueAATIOn, ValueAATIOff, SearchValueAATI, LetAppsAccessAccountInfoOn, LetAppsAccessAccountInfoOff, SearchLetAppsAccessAccountInfo
+from Functions.Privacy.ApplicationAccessToMotionData.ApplicationAccessToMotionData import ValueAATMDOn, ValueAATMDOff, SearchValueAATMD, LetAppsAccessMotionOn, LetAppsAccessMotionOff, SearchLetAppsAccessMotion
+from Functions.Privacy.AppAccessToPhone.AppAccessToPhone import LetAppsAccessPhoneOn, LetAppsAccessPhoneOff, SearchLetAppsAccessPhone
+from Functions.Privacy.ApplicationAccessToTrustedDevices.ApplicationAccessToTrustedDevices import LetAppsAccessTrustedDevicesOn, LetAppsAccessTrustedDevicesOff, SearchLetAppsAccessTrustedDevices
+from Functions.Privacy.AppAccessToDeviceSynchronization.AppAccessToDeviceSynchronization import LetAppsSyncWithDevicesOn, LetAppsSyncWithDevicesOff, SearchLetAppsSyncWithDevices
+from Functions.Privacy.ApplicationsAccessDiagnosticInformationAboutOtherApplications.ApplicationsAccessDiagnosticInformationAboutOtherApplications import ValueAADAOAOn, ValueAADAOAOff, SearchValueAADAOA, LetAppsAccessMotionOn, LetAppsAccessMotionOff, SearchLetAppsAccessMotion
+from Functions.Privacy.ApplicationAccessToContacts.ApplicationAccessToContacts import ValueContactOn, ValueContactOff, SearchalueContact, LetAppsAccessContactsOn, LetAppsAccessContactsOff, SearchLetAppsAccessContacts
+from Functions.Privacy.ApplicationAccessToCalendar.ApplicationAccessToCalendar import ValueCalendar1On, ValueCalendar1Off, SearchValueCalendar1, LetAppsAccessCalendarOn, LetAppsAccessCalendarOff, SearchLetAppsAccessCalendar
+from Functions.Privacy.ApplicationAccessToCallLog.ApplicationAccessToCallLog import ValueCallAccessOn, ValueCallAccessOff, SearchValueCallAccess, LetAppsAccessCallHistoryOn, LetAppsAccessCallHistoryOff, SearchLetAppsAccessCallHistory
 
 from enum import Enum, auto
 
@@ -100,6 +109,15 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.updateFeedbackAsYouType()
         self.updateActivityFeed()
         self.updateApplicationAccessToLocation()
+        self.updateApplicationAccessToAccountInformation()
+        self.updateApplicationAccessToMotionData()
+        self.updateAppAccessToPhone()
+        self.updateApplicationAccessToTrustedDevices()
+        self.updateApplicationAccessToDeviceSynchronization()
+        self.updateApplicationsAccessDiagnosticInformationAboutOtherApplications()
+        self.updateApplicationAccessToContacts()
+        self.updateApplicationAccessToCalendar()
+        self.updateApplicationAccessToCallLog()
 
         self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
         self.pushTelemetriaWebCome.clicked.connect(self.TelemetriaWebComeButtonClick)
@@ -132,6 +150,15 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.pushFeedbackAsYouType.clicked.connect(self.FeedbackAsYouTypeButtonClick)
         self.pushActivityFeed.clicked.connect(self.ActivityFeedButtonClick)
         self.pushApplicationAccessToLocation.clicked.connect(self.ApplicationAccessToLocationButtonClick)
+        self.pushApplicationAccessToAccountInformation.clicked.connect(self.ApplicationAccessToAccountInformationButtonClick)
+        self.pushApplicationAccessToMotionData.clicked.connect(self.ApplicationAccessToMotionDataButtonClick)
+        self.pushAppAccessToPhone.clicked.connect(self.AppAccessToPhoneButtonClick)
+        self.pushApplicationAccessToTrustedDevices.clicked.connect(self.ApplicationAccessToTrustedDevicesButtonClick)
+        self.pushAppAccessToDeviceSynchronization.clicked.connect(self.AppAccessToDeviceSynchron)
+        self.pushApplicationsAccessDiagnosticInformationAboutOtherApplications.clicked.connect(self.ApplicationsAccessDiagnosticInformationAboutOtherApplicationsButtonClick)
+        self.pushApplicationAccessToContacts.clicked.connect(self.ApplicationAccessToContactsButtonClick)
+        self.pushApplicationAccessToCalendar.clicked.connect(self.ApplicationAccessToCalendarButtonClick)
+        self.pushApplicationAccessToCallLog.clicked.connect(self.ApplicationAccessToCallLogButtonClick)
 
     def positionButton(self):
         frame_list = [
@@ -1069,6 +1096,190 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             StatusAATLOff()
             LetAppsAccessLocationOff()
         self.updateApplicationAccessToLocation()
+
+    def updateApplicationAccessToAccountInformation(self):
+        result1 = SearchValueAATI()
+        result2 = SearchLetAppsAccessAccountInfo()
+        if result1 and result2 == STATUS_DISABLED:
+            self.labelApplicationAccessToAccountInformation.setText(STATUS_DISABLED)
+            self.labelApplicationAccessToAccountInformation.setStyleSheet('color:green')
+        else:
+            self.labelApplicationAccessToAccountInformation.setText(STATUS_ENABLED)
+            self.labelApplicationAccessToAccountInformation.setStyleSheet('color:red')
+
+    def ApplicationAccessToAccountInformationButtonClick(self):
+        result1 = SearchValueAATI()
+        result2 = SearchLetAppsAccessAccountInfo()
+        if result1 and result2 == STATUS_DISABLED:
+            ValueAATIOn()
+            LetAppsAccessAccountInfoOn()
+        else:
+            ValueAATIOff()
+            LetAppsAccessAccountInfoOff()
+        self.updateApplicationAccessToAccountInformation()
+
+    def updateApplicationAccessToMotionData(self):
+        result1 = SearchValueAATMD()
+        result2 = SearchLetAppsAccessMotion()
+        if result1 and result2 == STATUS_DISABLED:
+            self.labelApplicationAccessToMotionData.setText(STATUS_DISABLED)
+            self.labelApplicationAccessToMotionData.setStyleSheet('color:green')
+        else:
+            self.labelApplicationAccessToMotionData.setText(STATUS_ENABLED)
+            self.labelApplicationAccessToMotionData.setStyleSheet('color:red')
+
+    def ApplicationAccessToMotionDataButtonClick(self):
+        result1 = SearchValueAATMD()
+        result2 = SearchLetAppsAccessMotion()
+        if result1 and result2 == STATUS_DISABLED:
+            ValueAATMDOn()
+            LetAppsAccessMotionOn()
+        else:
+            LetAppsAccessMotionOff()
+            ValueAATMDOff()
+        self.updateApplicationAccessToMotionData()
+
+    def updateAppAccessToPhone(self):
+        result = SearchLetAppsAccessPhone()
+        if result == STATUS_DISABLED:
+            self.labelAppAccessToPhone.setText(STATUS_DISABLED)
+            self.labelAppAccessToPhone.setStyleSheet('color:green')
+        else:
+            self.labelAppAccessToPhone.setText(STATUS_ENABLED)
+            self.labelAppAccessToPhone.setStyleSheet('color:red')
+
+    def AppAccessToPhoneButtonClick(self):
+        result = SearchLetAppsAccessPhone()
+        if result == STATUS_DISABLED:
+            LetAppsAccessPhoneOn()
+        else:
+            LetAppsAccessPhoneOff()
+        self.updateAppAccessToPhone()
+
+    def updateApplicationAccessToTrustedDevices(self):
+        result = SearchLetAppsAccessTrustedDevices()
+        if result == STATUS_DISABLED:
+            self.labelApplicationAccessToTrustedDevices.setText(STATUS_DISABLED)
+            self.labelApplicationAccessToTrustedDevices.setStyleSheet('color:green')
+        else:
+            self.labelApplicationAccessToTrustedDevices.setText(STATUS_ENABLED)
+            self.labelApplicationAccessToTrustedDevices.setStyleSheet('color:red')
+
+    def ApplicationAccessToTrustedDevicesButtonClick(self):
+        result = SearchLetAppsAccessTrustedDevices()
+        if result == STATUS_DISABLED:
+            LetAppsAccessTrustedDevicesOn()
+        else:
+            LetAppsAccessTrustedDevicesOff()
+        self.updateApplicationAccessToTrustedDevices()
+
+    def updateApplicationAccessToDeviceSynchronization(self):
+        result = SearchLetAppsSyncWithDevices()
+        if result == STATUS_DISABLED:
+            self.labelAppAccessToDeviceSynchronization.setText(STATUS_DISABLED)
+            self.labelAppAccessToDeviceSynchronization.setStyleSheet('color:green')
+        else:
+            self.labelAppAccessToDeviceSynchronization.setText(STATUS_ENABLED)
+            self.labelAppAccessToDeviceSynchronization.setStyleSheet('color:red')
+
+    def AppAccessToDeviceSynchron(self):
+        result = SearchLetAppsSyncWithDevices()
+        if result == STATUS_DISABLED:
+            LetAppsSyncWithDevicesOn()
+        else:
+            LetAppsSyncWithDevicesOff()
+        self.updateApplicationAccessToDeviceSynchronization()
+
+    def updateApplicationsAccessDiagnosticInformationAboutOtherApplications(self):
+        result1 = SearchValueAADAOA()
+        result2 = SearchLetAppsAccessMotion()
+        if result1 and result2 == STATUS_DISABLED:
+            self.labelApplicationsAccessDiagnosticInformationAboutOtherApplications.setText(STATUS_DISABLED)
+            self.labelApplicationsAccessDiagnosticInformationAboutOtherApplications.setStyleSheet('color:green')
+        else:
+            self.labelApplicationsAccessDiagnosticInformationAboutOtherApplications.setText(STATUS_ENABLED)
+            self.labelApplicationsAccessDiagnosticInformationAboutOtherApplications.setStyleSheet('color:red')
+
+    def ApplicationsAccessDiagnosticInformationAboutOtherApplicationsButtonClick(self):
+        result1 = SearchValueAADAOA()
+        result2 = SearchLetAppsAccessMotion()
+        if result1 and result2 == STATUS_DISABLED:
+            ValueAADAOAOn()
+            LetAppsAccessMotionOn()
+        else:
+            ValueAADAOAOff()
+            LetAppsAccessMotionOff()
+        self.updateApplicationsAccessDiagnosticInformationAboutOtherApplications()
+
+    def updateApplicationAccessToContacts(self):
+        result1 = SearchalueContact()
+        result2 = SearchLetAppsAccessContacts()
+        if result1 and result2 == STATUS_DISABLED:
+            self.labelApplicationAccessToContacts.setText(STATUS_DISABLED)
+            self.labelApplicationAccessToContacts.setStyleSheet('color:green')
+        else:
+            self.labelApplicationAccessToContacts.setText(STATUS_ENABLED)
+            self.labelApplicationAccessToContacts.setStyleSheet('color:red')
+
+    def ApplicationAccessToContactsButtonClick(self):
+        result1 = SearchalueContact()
+        result2 = SearchLetAppsAccessContacts()
+        if result1 and result2 == STATUS_DISABLED:
+            ValueContactOn()
+            LetAppsAccessContactsOn()
+        else:
+            ValueContactOff()
+            LetAppsAccessContactsOff()
+        self.updateApplicationAccessToContacts()
+
+    def updateApplicationAccessToCalendar(self):
+        result1 = SearchValueCalendar1()
+        result2 = SearchLetAppsAccessCalendar()
+        if result1 and result2 == STATUS_DISABLED:
+            self.labelApplicationAccessToCalendar.setText(STATUS_DISABLED)
+            self.labelApplicationAccessToCalendar.setStyleSheet('color:green')
+        else:
+            self.labelApplicationAccessToCalendar.setText(STATUS_ENABLED)
+            self.labelApplicationAccessToCalendar.setStyleSheet('color:red')
+
+    def ApplicationAccessToCalendarButtonClick(self):
+        result1 = SearchValueCalendar1()
+        result2 = SearchLetAppsAccessCalendar()
+        if result1 and result2 == STATUS_DISABLED:
+            ValueCalendar1On()
+            LetAppsAccessCalendarOn()
+        else:
+            ValueCalendar1Off()
+            LetAppsAccessCalendarOff()
+        self.updateApplicationAccessToCalendar()
+
+    def updateApplicationAccessToCallLog(self):
+        result1 = SearchValueCallAccess()
+        result2 = SearchLetAppsAccessCallHistory()
+        if result1 and result2 == STATUS_DISABLED:
+            self.labelApplicationAccessToCallLog.setText(STATUS_DISABLED)
+            self.labelApplicationAccessToCallLog.setStyleSheet('color:green')
+        else:
+            self.labelApplicationAccessToCallLog.setText(STATUS_ENABLED)
+            self.labelApplicationAccessToCallLog.setStyleSheet('color:red')
+
+    def ApplicationAccessToCallLogButtonClick(self):
+        result1 = SearchValueCallAccess()
+        result2 = SearchLetAppsAccessCallHistory()
+        if result1 and result2 == STATUS_DISABLED:
+            ValueCallAccessOn()
+            LetAppsAccessCallHistoryOn()
+        else:
+            ValueCallAccessOff()
+            LetAppsAccessCallHistoryOff()
+        self.updateApplicationAccessToCallLog()
+
+
+
+
+
+
+
 
 
 
