@@ -34,6 +34,8 @@ from Functions.Privacy.CloudSaving.CloudSaving import (DisableSettingSyncOn, Dis
                                                        DisableWindowsSettingSyncUserOverrideOff, SearchDisableWindowsSettingSyncUserOverride, SearchEnabledLanguage, EnabledLanguageOn, EnabledLanguageOff)
 from Functions.Privacy.CloudVoice.CloudVoice import HasAcceptedOn, HasAcceptedOff, SearchHasAccepted
 from Functions.Privacy.WindowsPrivacyConsentDisclaimer.WindowsPrivacyConsentDisclaimer import AcceptedPrivacyPolicyOn, AcceptedPrivacyPolicyOff, SearchAcceptedPrivacyPolicy
+from Functions.Privacy.WindowsFeedbackandDiagnostics.WindowsFeedbackandDiagnostics import (NumberOfSIUFInPeriodOn, NumberOfSIUFInPeriodOff, SearchNumberOfSIUFInPeriod, PeriodInNanoSecondsOn, PeriodInNanoSecondsOff, SearchPeriodInNanoSeconds, DoNotShowFeedbackNotificationsOn, DoNotShowFeedbackNotificationsOff, SearchDoNotShowFeedbackNotifications, DmClientOn, DmClientOff, SearchDmClient,
+                                                                                           SearchDmClientOnScenarioDownload, DmClientOnScenarioDownloadOn, DmClientOnScenarioDownloadOff)
 
 from enum import Enum, auto
 
@@ -77,6 +79,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.updateCloudSaving()
         self.updateCloudVoice()
         self.updateWindowsSearchDateCollection()
+        self.updateWindowsPrivacyConsentDisclaimer()
 
         self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
         self.pushTelemetriaWebCome.clicked.connect(self.TelemetriaWebComeButtonClick)
@@ -98,6 +101,7 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.pushCloudSaving.clicked.connect(self.CloudSavingButtonClick)
         self.pushCloudVoice.clicked.connect(self.CloudVoiceButtonClick)
         self.pushWindowsPrivacyConsentDisclaimer.clicked.connect(self.WindowsPrivacyConsentDisclaimerButtonClick)
+        self.pushWindowsFeedbackandDiagnostics.clicked.connect(self.WindowsFeedbackandDiagnosticsButtonClick)
 
     def positionButton(self):
         frame_list = [
@@ -799,6 +803,40 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         else:
             AcceptedPrivacyPolicyOff()
         self.updateWindowsSearchDateCollection()
+
+    def updateWindowsPrivacyConsentDisclaimer(self):
+        result1 = SearchNumberOfSIUFInPeriod()
+        result2 = SearchPeriodInNanoSeconds()
+        result3 = SearchDoNotShowFeedbackNotifications()
+        result4 = SearchDmClient()
+        result5 = SearchDmClientOnScenarioDownload()
+        if result1 and result2 and result3 and result4 and result5 == STATUS_DISABLED:
+            self.labelWindowsFeedbackandDiagnostics.setText(STATUS_DISABLED)
+            self.labelWindowsFeedbackandDiagnostics.setStyleSheet('color:green')
+        else:
+            self.labelWindowsFeedbackandDiagnostics.setText(STATUS_ENABLED)
+            self.labelWindowsFeedbackandDiagnostics.setStyleSheet('color:red')
+
+
+    def WindowsFeedbackandDiagnosticsButtonClick(self):
+        result1 = SearchNumberOfSIUFInPeriod()
+        result2 = SearchPeriodInNanoSeconds()
+        result3 = SearchDoNotShowFeedbackNotifications()
+        result4 = SearchDmClient()
+        result5 = SearchDmClientOnScenarioDownload()
+        if result1 and result2 and result3 and result4 and result5 == STATUS_DISABLED:
+            NumberOfSIUFInPeriodOn()
+            PeriodInNanoSecondsOn()
+            DoNotShowFeedbackNotificationsOn()
+            DmClientOn()
+            DmClientOnScenarioDownloadOn()
+        else:
+            NumberOfSIUFInPeriodOff()
+            PeriodInNanoSecondsOff()
+            DoNotShowFeedbackNotificationsOff()
+            DmClientOff()
+            DmClientOnScenarioDownloadOff()
+        self.updateWindowsPrivacyConsentDisclaimer()
 
 
 
