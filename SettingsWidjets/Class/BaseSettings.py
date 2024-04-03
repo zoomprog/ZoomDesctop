@@ -4,155 +4,168 @@ from PyQt6.QtCore import QEvent
 from PyQt6.QtWidgets import QDialog
 import main
 from main import *
-from Functions.FuncBaseSettings.BraundMaurWindows import disableBraundMaurWindows, EnableBraundMaurWindows
-from Functions.FuncBaseSettings.WindowsDefender import DefenderOn, DefenderOff
-from Functions.FuncBaseSettings.WindowsUpdate import WindowsUpdateOff, WindowsUpdateOn
-from Functions.FuncBaseSettings.MapsAutoUpdate import disable_location_services, enable_location_services
-from Functions.FuncBaseSettings.SmartScreenStateActivateAndDisable import SmartScreenActivate,SmartScreenDisable
-
 from SettingsWidjets.BaseSettings import Ui_BaseSettings
 from Settings import Ui_Settings
 import subprocess
+
+from Functions.BaseSettings.MouseAcceleration.MouseAcceleration import MouseSpeedOn, MouseSpeedOff, SearchMouseSpeed, MouseThreshold1On, MouseThreshold1Off, SearchMouseThreshold1, MouseThreshold2On, MouseThreshold2Off, SearchMouseThreshold2
+from Functions.BaseSettings.ProtectionNotifications.ProtectionNotifications import NotificationEnable1On, NotificationEnable1Off, SearchNotificationEnable1, NotificationEnable2On, NotificationEnable2Off, SearchNotificationEnable2, DisableNotifications1On, DisableNotifications1Off, SearchDisableNotifications1
+from Functions.BaseSettings.AutoUpdateDriversatSystemstartup.AutoUpdateDriversatSystemstartup import ExcludeWUDriversInQualityUpdateOn, ExcludeWUDriversInQualityUpdateOff, SearchExcludeWUDriversInQualityUpdate, SearchOrderConfigOn, SearchOrderConfigOff, SearchSearchOrderConfig
+from Functions.BaseSettings.UWP.UWP import GlobalUserDisabledOn, GlobalUserDisabledOff, SearchGlobalUserDisabled
+
+from enum import Enum, auto
+
+
+class SystemStatus(Enum):
+    DISABLED = auto()
+    ENABLED = auto()
+    ERROR = auto()
+
+
+# Constants for repeated strings
+STATUS_DISABLED = "Disabled"
+STATUS_ENABLED = "Enabled"
+STATUS_ERROR = "Error"
+
 
 class BaseSet(QDialog, Ui_BaseSettings):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.pushButton.clicked.connect(self.accept_button_clicked)
 
+        self.positionButton()
+        self.positionTextLabel()
 
+        self.updateMouseAcceleration()
+        self.updateProtectionNotifications()
+        self.updateAutoUpdateDriversatSystemstartup()
+        self.AutoUpdateDriversatSystemstartup()
+        self.pushMouseAcceleration.clicked.connect(self.MouseAccelerationButton_clicked)
+        self.pushProtectionNotifications.clicked.connect(self.ProtectionNotificationsButton_clicked)
+        self.pushAutoUpdateDriversatSystemstartup.clicked.connect(self.AutoUpdateDriversatSystemstartup_clicked)
 
-        self.listWidget_BraundMaurWindows.setWordWrap(True)
-        self.listWidget_BraundMaurWindows.setWordWrap(True)
-        self.listWidget_DefNotifications.setWordWrap(True)
-        self.IncreaseFrame = 361
-        self.DefolfSizeFrame = 311
-        self.pushButtonAntivitusWindowsInfo.enterEvent = self.AntivitusWindowsInfo
-        self.pushButtonAntivitusWindowsInfo.leaveEvent = self.ResetAntivitusWindowsInfo
-        self.pushButtonBraundMaurWindows.enterEvent = self.BraundMaurWindowsInfo
-        self.pushButtonBraundMaurWindows.leaveEvent = self.ResetBraundMaurWindowsInfo
-        self.pushButtonWindowsUpdate.enterEvent = self.WindowsUpdateInfo
-        self.pushButtonWindowsUpdate.leaveEvent = self.ResetWindowsUpdateInfo
-        self.pushButtonAcsMouse.enterEvent = self.AcsMouseInfo
-        self.pushButtonAcsMouse.leaveEvent = self.ResetAcsMouseInfo
-        self.pushButtonUAC.enterEvent = self.UACInfo
-        self.pushButtonUAC.leaveEvent = self.ResetUACInfo
-        self.pushButtonDefNotifications.enterEvent = self.DefNotificationsInf
-        self.pushButtonDefNotifications.leaveEvent = self.ResetDefNotificationsInf
-        self.pushButtonAutoUpdateDriversStartWindows.enterEvent = self.AutoUpdateDriversStartWindowsInfo
-        self.pushButtonAutoUpdateDriversStartWindows.leaveEvent = self.ResetAutoUpdateDriversStartWindowsInfo
-        self.pushButtonSmartScreen.enterEvent = self.SmartScreenInfo
-        self.pushButtonSmartScreen.leaveEvent = self.ResetSmartScreenInfo
-        self.pushButtonUWP.enterEvent = self.UWPINFO
-        self.pushButtonUWP.leaveEvent = self.ResetUWPINFO
-        self.pushButtonAutoUpdateMaps.enterEvent = self.AutoUpdateMapsInfo
-        self.pushButtonAutoUpdateMaps.leaveEvent = self.ResetAutoUpdateMapsInfo
+    def positionTextLabel(self):
+        TextLabel_list = [
+            "labelMouseAcceleration",
+            "labelProtectionNotifications",
+            "labelAutoUpdateDriversatSystemstartup",
+            "labelUWP",
+            "labelAutoUpdatingAppsStore",
+            "labelAppearance",
+            "labelGameBar",
+            "labelMultyPlanOverplay",
+            "labelWindowsFirewall",
+            "labelWindowsUAC"
+        ]
+        x_position = 600
+        # Loop through button names and set their position
+        for button_name in TextLabel_list:
+            button = getattr(self, button_name)
+            button.move(x_position, 7)
 
-        #Проверки на настройку Windows
-        if self.is_firewall_enabled():
-            print("Брандмауэр Windows включен.")
-            self.toggelBraundMaurWindows.setChecked(False)
+    def positionButton(self):
+        frame_list = [
+            "pushMouseAcceleration",
+            "pushProtectionNotifications",
+            "pushAutoUpdateDriversatSystemstartup",
+            "pushUWP",
+            "pushAutoUpdatingAppsStore",
+            "pushAppearance",
+            "pushGameBar",
+            "pushMultyPlanOverplay",
+            "pushWindowsFirewall",
+            "pushWindowsUAC"
+
+        ]
+        x_position = 780
+        for button_name in frame_list:
+            button = getattr(self, button_name)
+            button.move(x_position, 7)
+
+    def updateMouseAcceleration(self):
+        result1 = SearchMouseSpeed()
+        result2 = SearchMouseThreshold1()
+        result3 = SearchMouseThreshold2()
+        if result1 and result2 and result3 == STATUS_DISABLED:
+            self.labelMouseAcceleration.setText(STATUS_DISABLED)
+            self.labelMouseAcceleration.setStyleSheet('color:green')
         else:
-            print("Брандмауэр Windows выключен.")
-            self.toggelBraundMaurWindows.setChecked(True)
-        if self.SmartScreenState():
-            print('SmartScreen отключен')
-            self.toggelSmartScreen.setChecked(True)
+            self.labelMouseAcceleration.setText(STATUS_ENABLED)
+            self.labelMouseAcceleration.setStyleSheet('color:red')
+
+    def MouseAccelerationButton_clicked(self):
+        result1 = SearchMouseSpeed()
+        result2 = SearchMouseThreshold1()
+        result3 = SearchMouseThreshold2()
+        if result1 and result2 and result3 == STATUS_DISABLED:
+            MouseSpeedOn()
+            MouseThreshold1On()
+            MouseThreshold2On()
         else:
-            print('SmartScreen включен')
-            self.toggelSmartScreen.setChecked(False)
+            MouseSpeedOff()
+            MouseThreshold1Off()
+            MouseThreshold2Off()
+        self.updateMouseAcceleration()
 
-    def set_widget_height(self, frame, list_widget, frame_height, list_widget_height, main_frame_height):
-        frame.setFixedHeight(frame_height)
-        list_widget.setFixedHeight(list_widget_height)
-        self.frame.setFixedHeight(main_frame_height)
-    def AntivitusWindowsInfo(self, event):
-        self.set_widget_height(self.frame_AntivirusWindows, self.listWidget_AntivirusWindows, 49, 49, self.IncreaseFrame)
-    def ResetAntivitusWindowsInfo(self, event):
-        self.set_widget_height(self.frame_AntivirusWindows, self.listWidget_AntivirusWindows, 32, 25, self.DefolfSizeFrame)
-    def BraundMaurWindowsInfo(self, event):
-        self.set_widget_height(self.frame_BraundMaurWindows, self.listWidget_BraundMaurWindows, 55, 55, self.IncreaseFrame)
-    def ResetBraundMaurWindowsInfo(self, event):
-        self.set_widget_height(self.frame_BraundMaurWindows, self.listWidget_BraundMaurWindows, 32, 25, self.DefolfSizeFrame)
-    def WindowsUpdateInfo(self, event):
-        self.set_widget_height(self.frame_WindowsUpdate, self.listWidget_WindowsUpdate, 49, 49, self.IncreaseFrame)
-    def ResetWindowsUpdateInfo(self, event):
-        self.set_widget_height(self.frame_WindowsUpdate, self.listWidget_WindowsUpdate, 32, 25, self.DefolfSizeFrame)
-    def AcsMouseInfo(self, event):
-        self.set_widget_height(self.frame_AcsMouse, self.listWidget_AcsMouse, 60, 60, self.IncreaseFrame)
-    def ResetAcsMouseInfo(self, event):
-        self.set_widget_height(self.frame_AcsMouse, self.listWidget_AcsMouse, 32, 25, self.DefolfSizeFrame)
-    def UACInfo(self, event):
-        self.set_widget_height(self.frame_UAC, self.listWidget_UAC, 60, 60, self.IncreaseFrame)
-    def ResetUACInfo(self, event):
-        self.set_widget_height(self.frame_UAC, self.listWidget_UAC, 32, 25, self.DefolfSizeFrame)
-    def DefNotificationsInf(self, event):
-        self.set_widget_height(self.frame_DefNotifications,self.listWidget_DefNotifications, 60, 60, self.IncreaseFrame)
-    def ResetDefNotificationsInf(self, event):
-        self.set_widget_height(self.frame_DefNotifications,self.listWidget_DefNotifications, 32, 25, self.DefolfSizeFrame)
-    def AutoUpdateDriversStartWindowsInfo(self, event):
-        self.set_widget_height(self.frame_AutoUpdateDriversStartWindows, self.listWidget_AutoUpdateDriversStartWindows, 60, 60, self.IncreaseFrame)
-    def ResetAutoUpdateDriversStartWindowsInfo(self, event):
-        self.set_widget_height(self.frame_AutoUpdateDriversStartWindows, self.listWidget_AutoUpdateDriversStartWindows, 32, 25, self.DefolfSizeFrame)
-    def SmartScreenInfo(self, event):
-        self.set_widget_height(self.frame_SmartScreen, self.listWidget_SmartScreen, 60,60 ,self.IncreaseFrame)
-    def ResetSmartScreenInfo(self, event):
-        self.set_widget_height(self.frame_SmartScreen, self.listWidget_SmartScreen, 32, 25, self.DefolfSizeFrame)
-    def UWPINFO(self, event):
-        self.set_widget_height(self.frame_UWP, self.listWidget_UWP, 60, 60, self.IncreaseFrame)
-    def ResetUWPINFO(self, event):
-        self.set_widget_height(self.frame_UWP, self.listWidget_UWP, 32, 25, self.DefolfSizeFrame)
-    def AutoUpdateMapsInfo(self, event):
-        self.set_widget_height(self.frame_AutoUpdateMaps, self.listWidget_AutoUpdateMaps, 60, 60, self.IncreaseFrame)
-
-    def ResetAutoUpdateMapsInfo(self, event):
-        self.set_widget_height(self.frame_AutoUpdateMaps, self.listWidget_AutoUpdateMaps, 32, 25, self.IncreaseFrame)
-
-
-
-    #Функции для проверки настройку windows
-    def is_firewall_enabled(self):#Проверка состояния BraundMaur
-        command = 'netsh advfirewall show allprofiles'
-        output = subprocess.check_output(command, shell=True, encoding='cp866')
-        if 'Состояние                             ВКЛЮЧИТЬ' in output:
-            return True
+    def updateProtectionNotifications(self):
+        result1 = SearchNotificationEnable1()
+        result2 = SearchNotificationEnable2()
+        result3 = SearchDisableNotifications1()
+        if result1 and result2 and result3 == STATUS_DISABLED:
+            self.labelProtectionNotifications.setText(STATUS_DISABLED)
+            self.labelProtectionNotifications.setStyleSheet('color:green')
         else:
-            return False
-    def SmartScreenState(self):
-        key_path = r"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer"
-        key_name = "SmartScreenEnabled"
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path)
-        value, _ = winreg.QueryValueEx(key, key_name)
-        if value == "Off":
-            return True
+            self.labelProtectionNotifications.setText(STATUS_ENABLED)
+            self.labelProtectionNotifications.setStyleSheet('color:red')
+
+    def ProtectionNotificationsButton_clicked(self):
+        result1 = SearchNotificationEnable1()
+        result2 = SearchNotificationEnable2()
+        result3 = SearchDisableNotifications1()
+        if result1 and result2 and result3 == STATUS_DISABLED:
+            NotificationEnable1On()
+            NotificationEnable2On()
+            DisableNotifications1On()
         else:
-            return False
+            NotificationEnable1Off()
+            NotificationEnable2Off()
+            DisableNotifications1Off()
+        self.updateProtectionNotifications()
 
-
-    #Отключение функций  Windows
-    def accept_button_clicked(self):
-        if self.toggelBraundMaurWindows.isChecked():
-            disableBraundMaurWindows(self)
+    def updateAutoUpdateDriversatSystemstartup(self):
+        result1 = SearchExcludeWUDriversInQualityUpdate()
+        result2 = SearchSearchOrderConfig()
+        if result1 and result2 == STATUS_DISABLED:
+            self.labelAutoUpdateDriversatSystemstartup.setText(STATUS_DISABLED)
+            self.labelAutoUpdateDriversatSystemstartup.setStyleSheet('color:green')
         else:
-            EnableBraundMaurWindows(self)
+            self.labelAutoUpdateDriversatSystemstartup.setText(STATUS_ENABLED)
+            self.labelAutoUpdateDriversatSystemstartup.setStyleSheet('color:red')
 
-        if self.toggelAntivirusWindows.isChecked():
-            DefenderOff(self)
+    def AutoUpdateDriversatSystemstartup(self):
+        result1 = SearchExcludeWUDriversInQualityUpdate()
+        result2 = SearchSearchOrderConfig()
+        if result1 and result2 == STATUS_DISABLED:
+            self.labelAutoUpdateDriversatSystemstartup.setText(STATUS_DISABLED)
+            self.labelAutoUpdateDriversatSystemstartup.setStyleSheet('color:green')
         else:
-            DefenderOn(self)
+            self.labelAutoUpdateDriversatSystemstartup.setText(STATUS_ENABLED)
+            self.labelAutoUpdateDriversatSystemstartup.setStyleSheet('color:red')
 
-        if self.toggelWindowsUpdate.isChecked():
-            WindowsUpdateOff(self)
+    def AutoUpdateDriversatSystemstartup_clicked(self):
+        result1 = SearchExcludeWUDriversInQualityUpdate()
+        result2 = SearchSearchOrderConfig()
+        if result1 and result2 == STATUS_DISABLED:
+            ExcludeWUDriversInQualityUpdateOn()
+            SearchOrderConfigOn()
         else:
-            WindowsUpdateOn(self)
-
-        if self.toggelAutoUpdateMaps.isChecked():
-            disable_location_services(self)
-        else:
-            enable_location_services(self)
-        if self.toggelSmartScreen.isChecked():
-            SmartScreenDisable(self)
-        else:
-            SmartScreenActivate(self)
+            ExcludeWUDriversInQualityUpdateOff()
+            SearchOrderConfigOff()
+        self.AutoUpdateDriversatSystemstartup()
 
 
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    energy_window = BaseSet()
+    energy_window.show()
+    sys.exit(app.exec())
