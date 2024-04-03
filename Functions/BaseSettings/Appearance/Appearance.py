@@ -344,3 +344,37 @@ def SearchVisualFXSetting():
             return 'Enable'
     except Exception as e:
         print(f"Произошла ошибка: {e}")
+
+def VisualFXSettingOn2():
+    try:
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects", 0, winreg.KEY_WRITE)
+        winreg.SetValueEx(key, "VisualFXSetting", 0, winreg.REG_DWORD, 0)
+        winreg.CloseKey(key)
+    except OSError as e:
+        print(f"Ошибка при установке значения: {e}")
+
+def VisualFXSettingOff2():
+    try:
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects", 0, winreg.KEY_WRITE)
+        winreg.SetValueEx(key, "VisualFXSetting", 0, winreg.REG_DWORD, 2)
+        winreg.CloseKey(key)
+    except OSError as e:
+        print(f"Ошибка при установке значения: {e}")
+
+
+
+def SearchVisualFXSetting2():
+    try:
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects", 0, winreg.KEY_READ)
+        value, reg_type = winreg.QueryValueEx(key, "VisualFXSetting")
+        winreg.CloseKey(key)
+        if value == 2:
+            return 'Disabled'
+        else:
+            return 'Enabled'
+    except FileNotFoundError:
+        print("Ключ реестра не найден.")
+        return 'Key not found'
+    except OSError as e:
+        print(f"Ошибка при чтении значения: {e}")
+        return 'Error'

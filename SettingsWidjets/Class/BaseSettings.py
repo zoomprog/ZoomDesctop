@@ -14,8 +14,12 @@ from Functions.BaseSettings.AutoUpdateDriversatSystemstartup.AutoUpdateDriversat
 from Functions.BaseSettings.UWP.UWP import GlobalUserDisabledOn, GlobalUserDisabledOff, SearchGlobalUserDisabled, BackgroundAppGlobalToggleOn, BackgroundAppGlobalToggleOff, SearchBackgroundAppGlobalToggle, BackgroundAppGlobalToggleStartOn, GBackgroundAppGlobalToggleStartOff, SearchBackgroundAppGlobalToggleStart
 from Functions.BaseSettings.AutoUpdatingAppsStore.AutoUpdatingAppsStore import AutoDownloadOn, AutoDownloadOff, SearchAutoDownload
 from Functions.BaseSettings.Appearance.Appearance import (TaskbarAnimationsOn, TaskbarAnimationsOff, SearchTaskbarAnimations, IconsOnlyOn, IconsOnlyOff, SearchIconsOnly, ListviewShadowOn, ListviewShadowOff, SearchListviewShadow, ListviewAlphaSelectOn, ListviewAlphaSelectOff, SearchListviewAlphaSelect, MinAnimateOn, MinAnimateOff, SearchMinAnimate, DragFullWindowsOn, DragFullWindowsOff,
-                                                          SearchDragFullWindows, EnableAeroPeekOn, EnableAeroPeekOff, SearchEnableAeroPeek, FontSmoothingOn, FontSmoothingOff, SearchFontSmoothing, VisualFXSettingOn, VisualFXSettingOff, SearchVisualFXSetting)
-
+                                                          SearchDragFullWindows, EnableAeroPeekOn, EnableAeroPeekOff, SearchEnableAeroPeek, FontSmoothingOn, FontSmoothingOff, SearchFontSmoothing, VisualFXSettingOn, VisualFXSettingOff, SearchVisualFXSetting, VisualFXSettingOn2, VisualFXSettingOff2, SearchVisualFXSetting2)
+from Functions.BaseSettings.GameBar.GameBar import (AutoGameModeEnabledOn, AutoGameModeEnabledOff, SearchAutoGameModeEnabled, GamePanelStartupTipIndexOn, GamePanelStartupTipIndexOff, SearchGamePanelStartupTipIndex, ShowStartupPanelOn, ShowStartupPanelOff, SearchShowStartupPanel, UseNexusForGameBarEnabledOn, UseNexusForGameBarEnabledOff, SearchUseNexusForGameBarEnabled, AllowAutoGameModeOn,
+                                                    AllowAutoGameModeOff, SearchAllowAutoGameMode, AllowGameDVROn, AllowGameDVROff, SearchAllowGameDVR, AppCaptureEnabledOff, AppCaptureEnabledOn, SearchAppCaptureEnabled, ValueGameBarOn, ValueGameBarOff, SearchValueGameBar)
+from Functions.BaseSettings.MultyPlanOverplay.MultyPlanOverplay import OverlayTestModeOn, OverlayTestModeOff, SearchOverlayTestMode
+from Functions.BaseSettings.WindowsFirewall.WindowsFirewall import EnableFirewallOn, EnableFirewallOff, SearchEnableFirewall, EnableFirewall2On, EnableFirewall2Off, SearchEnableFirewall2
+from Functions.BaseSettings.UAC.UAC import PromptOnSecureDesktopOn, PromptOnSecureDesktopOff, SearchPromptOnSecureDesktop, ConsentPromptBehaviorAdminOn, ConsentPromptBehaviorAdminOff, SearchConsentPromptBehaviorAdmin
 from enum import Enum, auto
 
 
@@ -46,6 +50,10 @@ class BaseSet(QDialog, Ui_BaseSettings):
         self.updateUWP()
         self.updateAutoUpdatingAppsStore()
         self.updateAppearance()
+        self.updateGameBar()
+        self.updateMultyPlanOverplay()
+        self.updateWindowsFirewall()
+        self.updateWindowsUAC()
 
         self.pushMouseAcceleration.clicked.connect(self.MouseAccelerationButton_clicked)
         self.pushProtectionNotifications.clicked.connect(self.ProtectionNotificationsButton_clicked)
@@ -53,6 +61,10 @@ class BaseSet(QDialog, Ui_BaseSettings):
         self.pushUWP.clicked.connect(self.UWP_clicked)
         self.pushAutoUpdatingAppsStore.clicked.connect(self.AutoUpdatingAppsStore_clicked)
         self.pushAppearance.clicked.connect(self.Appearance_clicked)
+        self.pushGameBar.clicked.connect(self.GameBar_clicked)
+        self.pushMultyPlanOverplay.clicked.connect(self.MultyPlanOverplay_clicked)
+        self.pushWindowsFirewall.clicked.connect(self.WindowsFirewall_clicked)
+        self.pushWindowsUAC.clicked.connect(self.WindowsUAC_clicked)
 
     def positionTextLabel(self):
         TextLabel_list = [
@@ -225,7 +237,8 @@ class BaseSet(QDialog, Ui_BaseSettings):
         result7 = SearchEnableAeroPeek()
         result8 = SearchFontSmoothing()
         result9 = SearchVisualFXSetting()
-        if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 == STATUS_DISABLED:
+        result10 = SearchVisualFXSetting2()
+        if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 and result10 == STATUS_DISABLED:
             self.labelAppearance.setText(STATUS_DISABLED)
             self.labelAppearance.setStyleSheet('color:green')
         else:
@@ -242,7 +255,8 @@ class BaseSet(QDialog, Ui_BaseSettings):
         result7 = SearchEnableAeroPeek()
         result8 = SearchFontSmoothing()
         result9 = SearchVisualFXSetting()
-        if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 == STATUS_DISABLED:
+        result10 = SearchVisualFXSetting2()
+        if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 and result10 == STATUS_DISABLED:
             TaskbarAnimationsOn()
             IconsOnlyOn()
             ListviewShadowOn()
@@ -252,6 +266,7 @@ class BaseSet(QDialog, Ui_BaseSettings):
             EnableAeroPeekOn()
             FontSmoothingOn()
             VisualFXSettingOn()
+            VisualFXSettingOn2()
         else:
             TaskbarAnimationsOff()
             IconsOnlyOff()
@@ -262,9 +277,111 @@ class BaseSet(QDialog, Ui_BaseSettings):
             EnableAeroPeekOff()
             FontSmoothingOff()
             VisualFXSettingOff()
+            VisualFXSettingOff2()
         self.updateAppearance()
+    def updateGameBar(self):
+        result1 = SearchAutoGameModeEnabled()
+        result2 = SearchGamePanelStartupTipIndex()
+        result3 = SearchShowStartupPanel()
+        result4 = SearchUseNexusForGameBarEnabled()
+        result5 = SearchAllowAutoGameMode()
+        result6 = SearchAllowGameDVR()
+        result7 = SearchAppCaptureEnabled()
+        result8 = SearchValueGameBar()
+        if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 == STATUS_DISABLED:
+            self.labelGameBar.setText(STATUS_DISABLED)
+            self.labelGameBar.setStyleSheet('color:green')
+        else:
+            self.labelGameBar.setText(STATUS_ENABLED)
+            self.labelGameBar.setStyleSheet('color:red')
 
+    def GameBar_clicked(self):
+        result1 = SearchAutoGameModeEnabled()
+        result2 = SearchGamePanelStartupTipIndex()
+        result3 = SearchShowStartupPanel()
+        result4 = SearchUseNexusForGameBarEnabled()
+        result5 = SearchAllowAutoGameMode()
+        result6 = SearchAllowGameDVR()
+        result7 = SearchAppCaptureEnabled()
+        result8 = SearchValueGameBar()
+        if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 == STATUS_DISABLED:
+            AutoGameModeEnabledOn()
+            GamePanelStartupTipIndexOn()
+            ShowStartupPanelOn()
+            UseNexusForGameBarEnabledOn()
+            AllowAutoGameModeOn()
+            AllowGameDVROn()
+            AppCaptureEnabledOn()
+            ValueGameBarOn()
+        else:
+            AutoGameModeEnabledOff()
+            GamePanelStartupTipIndexOff()
+            ShowStartupPanelOff()
+            UseNexusForGameBarEnabledOff()
+            AllowAutoGameModeOff()
+            AllowGameDVROff()
+            AppCaptureEnabledOff()
+            ValueGameBarOff()
+        self.updateGameBar()
 
+    def updateMultyPlanOverplay(self):
+        result = SearchOverlayTestMode()
+        if result == STATUS_DISABLED:
+            self.labelMultyPlanOverplay.setText(STATUS_DISABLED)
+            self.labelMultyPlanOverplay.setStyleSheet('color:green')
+        else:
+            self.labelMultyPlanOverplay.setText(STATUS_ENABLED)
+            self.labelMultyPlanOverplay.setStyleSheet('color:red')
+
+    def MultyPlanOverplay_clicked(self):
+        result = SearchOverlayTestMode()
+        if result == STATUS_DISABLED:
+            OverlayTestModeOn()
+        else:
+            OverlayTestModeOff()
+        self.updateMultyPlanOverplay()
+
+    def updateWindowsFirewall(self):
+        result1 = SearchEnableFirewall()
+        result2 = SearchEnableFirewall2()
+        if result1 and result2 == STATUS_DISABLED:
+            self.labelWindowsFirewall.setText(STATUS_DISABLED)
+            self.labelWindowsFirewall.setStyleSheet('color:green')
+        else:
+            self.labelWindowsFirewall.setText(STATUS_ENABLED)
+            self.labelWindowsFirewall.setStyleSheet('color:red')
+
+    def WindowsFirewall_clicked(self):
+        result1 = SearchEnableFirewall()
+        result2 = SearchEnableFirewall2()
+        if result1 and result2 == STATUS_DISABLED:
+            EnableFirewallOn()
+            EnableFirewall2On()
+        else:
+            EnableFirewallOff()
+            EnableFirewall2Off()
+        self.updateWindowsFirewall()
+
+    def updateWindowsUAC(self):
+        result1 = SearchPromptOnSecureDesktop()
+        result2 = SearchConsentPromptBehaviorAdmin()
+        if result1 and result2 == STATUS_DISABLED:
+            self.labelWindowsUAC.setText(STATUS_DISABLED)
+            self.labelWindowsUAC.setStyleSheet('color:green')
+        else:
+            self.labelWindowsUAC.setText(STATUS_ENABLED)
+            self.labelWindowsUAC.setStyleSheet('color:red')
+
+    def WindowsUAC_clicked(self):
+        result1 = SearchPromptOnSecureDesktop()
+        result2 = SearchConsentPromptBehaviorAdmin()
+        if result1 and result2 == STATUS_DISABLED:
+            PromptOnSecureDesktopOn()
+            ConsentPromptBehaviorAdminOn()
+        else:
+            PromptOnSecureDesktopOff()
+            ConsentPromptBehaviorAdminOff()
+        self.updateWindowsUAC()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
