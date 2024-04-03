@@ -40,6 +40,12 @@ from Functions.Privacy.CollectTextMessagesandHandwritingInput.CollectTextMessage
 from Functions.Privacy.Sensor.Sensor import DisableSensorsOn, DisableSensorsOff, SearchDisableSensors
 from Functions.Privacy.WiFiSense.WiFiSense import value1On, value1Off, Searchvalue1, value2On, value2Off, Searchvalue2, AutoConnectAllowedOEMOn, AutoConnectAllowedOEMOff, SearchAutoConnectAllowedOEM
 from Functions.Privacy.HideMostUsedApps.HideMostUsedApps import HideMostUsedAppsOn, HideMostUsedAppsOff, SearchHideMostUsedApps
+from Functions.Privacy.InventoryCollector.InvenoryCollector import DisableInventoryOn, DisableInventoryOff, SearchDisableInventory, ICDeviceSearch, ICDeviceOn, ICDeviceOff, DeviceUserSearch, DeviceUserOn, DeviceUserOff
+from Functions.Privacy.SiteAccessToTheListOfLanguages.SiteAccessToTheListOfLanguages import HttpAcceptLanguageOptOutOn, HttpAcceptLanguageOptOutOff, SearchHttpAcceptLanguageOptOut
+from Functions.Privacy.RecordingActions.RecordingActions import HttpAcceptLanguageOptOutRAOn, HttpAcceptLanguageOptOutRAOff, SearchHttpAcceptLanguageOptOutRAOut
+from Functions.Privacy.FeedbackAsYouType.FeedbackAsYouType import EnabledFAYTOn, EnabledFAYTOff, SearchEnabledFAYT
+from Functions.Privacy.ActivityFeed.ActivityFeed import EnableActivityFeedOn, EnableActivityFeedOff, SearchEnableActivityFeed
+from Functions.Privacy.ApplicationAccessToLocation.ApplicationAccessToLocation import ValueAATLOn, ValueAATLOff, SearchValueAATL, StatusAATLOn, StatusAATLOff, SearchStatusAATL, LetAppsAccessLocationOn, LetAppsAccessLocationOff, SearchLetAppsAccessLocation
 
 from enum import Enum, auto
 
@@ -88,6 +94,12 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.updateSensor()
         self.updateWiFiSense()
         self.updateHideMostUsedApps()
+        self.updateInventoryCollector()
+        self.updateSiteAccessToTheListOfLanguages()
+        self.updateRecordingActions()
+        self.updateFeedbackAsYouType()
+        self.updateActivityFeed()
+        self.updateApplicationAccessToLocation()
 
         self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
         self.pushTelemetriaWebCome.clicked.connect(self.TelemetriaWebComeButtonClick)
@@ -114,6 +126,12 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.pushSensor.clicked.connect(self.SensorButtonClick)
         self.pushWiFiSense.clicked.connect(self.WiFiSenseButtonClick)
         self.pushHideMostUsedApps.clicked.connect(self.HideMostUsedAppsButtonClick)
+        self.pushHideInventoryCollector.clicked.connect(self.HideInventoryCollectorButtonClick)
+        self.pushSiteAccessToTheListOfLanguages.clicked.connect(self.SiteAccessToTheListOfLanguagesButtonClick)
+        self.pushRecordingActions.clicked.connect(self.RecordingActionsButtonClick)
+        self.pushFeedbackAsYouType.clicked.connect(self.FeedbackAsYouTypeButtonClick)
+        self.pushActivityFeed.clicked.connect(self.ActivityFeedButtonClick)
+        self.pushApplicationAccessToLocation.clicked.connect(self.ApplicationAccessToLocationButtonClick)
 
     def positionButton(self):
         frame_list = [
@@ -933,6 +951,126 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         else:
             HideMostUsedAppsOff()
         self.updateHideMostUsedApps()
+
+    def updateInventoryCollector(self):
+        result1 = SearchDisableInventory()
+        result2 = ICDeviceSearch()
+        result3 = DeviceUserSearch()
+        if result1 and result2 and result3 == STATUS_DISABLED:
+            self.labelInventoryCollector.setText(STATUS_DISABLED)
+            self.labelInventoryCollector.setStyleSheet('color:green')
+        else:
+            self.labelInventoryCollector.setText(STATUS_ENABLED)
+            self.labelInventoryCollector.setStyleSheet('color:red')
+
+    def HideInventoryCollectorButtonClick(self):
+        result1 = SearchDisableInventory()
+        result2 = ICDeviceSearch()
+        result3 = DeviceUserSearch()
+        if result1 and result2 and result3 == STATUS_DISABLED:
+            DisableInventoryOn()
+            ICDeviceOn()
+            DeviceUserOn()
+        else:
+            DisableInventoryOff()
+            ICDeviceOff()
+            DeviceUserOff()
+        self.updateInventoryCollector()
+
+    def updateSiteAccessToTheListOfLanguages(self):
+        result = SearchHttpAcceptLanguageOptOut()
+        if result == STATUS_DISABLED:
+            self.labelSiteAccessToTheListOfLanguages.setText(STATUS_DISABLED)
+            self.labelSiteAccessToTheListOfLanguages.setStyleSheet('color:green')
+        else:
+            self.labelSiteAccessToTheListOfLanguages.setText(STATUS_ENABLED)
+            self.labelSiteAccessToTheListOfLanguages.setStyleSheet('color:red')
+
+    def SiteAccessToTheListOfLanguagesButtonClick(self):
+        result = SearchHttpAcceptLanguageOptOut()
+        if result == STATUS_DISABLED:
+            HttpAcceptLanguageOptOutOn()
+        else:
+            HttpAcceptLanguageOptOutOff()
+        self.updateSiteAccessToTheListOfLanguages()
+
+    def updateRecordingActions(self):
+        result = SearchHttpAcceptLanguageOptOutRAOut()
+        if result == STATUS_DISABLED:
+            self.labelRecordingActions.setText(STATUS_DISABLED)
+            self.labelRecordingActions.setStyleSheet('color:green')
+        else:
+            self.labelRecordingActions.setText(STATUS_ENABLED)
+            self.labelRecordingActions.setStyleSheet('color:red')
+
+    def RecordingActionsButtonClick(self):
+        result = SearchHttpAcceptLanguageOptOutRAOut()
+        if result == STATUS_DISABLED:
+            HttpAcceptLanguageOptOutRAOn()
+        else:
+            HttpAcceptLanguageOptOutRAOff()
+        self.updateRecordingActions()
+
+    def updateFeedbackAsYouType(self):
+        result = SearchEnabledFAYT()
+        if result == STATUS_DISABLED:
+            self.labelFeedbackAsYouType.setText(STATUS_DISABLED)
+            self.labelFeedbackAsYouType.setStyleSheet('color:green')
+        else:
+            self.labelFeedbackAsYouType.setText(STATUS_ENABLED)
+            self.labelFeedbackAsYouType.setStyleSheet('color:red')
+
+    def FeedbackAsYouTypeButtonClick(self):
+        result = SearchEnabledFAYT()
+        if result == STATUS_DISABLED:
+            EnabledFAYTOn()
+        else:
+            EnabledFAYTOff()
+        self.updateFeedbackAsYouType()
+
+    def updateActivityFeed(self):
+        result = SearchEnableActivityFeed()
+        if result == STATUS_DISABLED:
+            self.labelActivityFeed.setText(STATUS_DISABLED)
+            self.labelActivityFeed.setStyleSheet('color:green')
+        else:
+            self.labelActivityFeed.setText(STATUS_ENABLED)
+            self.labelActivityFeed.setStyleSheet('color:red')
+
+    def ActivityFeedButtonClick(self):
+        result = SearchEnableActivityFeed()
+        if result == STATUS_DISABLED:
+            EnableActivityFeedOn()
+        else:
+            EnableActivityFeedOff()
+        self.updateActivityFeed()
+
+    def updateApplicationAccessToLocation(self):
+        result1 = SearchValueAATL()
+        result2 = SearchStatusAATL()
+        result3 = SearchLetAppsAccessLocation()
+        if result1 and result2 and result3 == STATUS_DISABLED:
+            self.labelApplicationAccessToLocation.setText(STATUS_DISABLED)
+            self.labelApplicationAccessToLocation.setStyleSheet('color:green')
+        else:
+            self.labelApplicationAccessToLocation.setText(STATUS_ENABLED)
+            self.labelApplicationAccessToLocation.setStyleSheet('color:red')
+
+    def ApplicationAccessToLocationButtonClick(self):
+        result1 = SearchValueAATL()
+        result2 = SearchStatusAATL()
+        result3 = SearchLetAppsAccessLocation()
+        if result1 and result2 and result3 == STATUS_DISABLED:
+            ValueAATLOn()
+            StatusAATLOn()
+            LetAppsAccessLocationOn()
+        else:
+            ValueAATLOff()
+            StatusAATLOff()
+            LetAppsAccessLocationOff()
+        self.updateApplicationAccessToLocation()
+
+
 
 
 
