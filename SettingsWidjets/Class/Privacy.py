@@ -55,7 +55,15 @@ from Functions.Privacy.ApplicationsAccessDiagnosticInformationAboutOtherApplicat
 from Functions.Privacy.ApplicationAccessToContacts.ApplicationAccessToContacts import ValueContactOn, ValueContactOff, SearchalueContact, LetAppsAccessContactsOn, LetAppsAccessContactsOff, SearchLetAppsAccessContacts
 from Functions.Privacy.ApplicationAccessToCalendar.ApplicationAccessToCalendar import ValueCalendar1On, ValueCalendar1Off, SearchValueCalendar1, LetAppsAccessCalendarOn, LetAppsAccessCalendarOff, SearchLetAppsAccessCalendar
 from Functions.Privacy.ApplicationAccessToCallLog.ApplicationAccessToCallLog import ValueCallAccessOn, ValueCallAccessOff, SearchValueCallAccess, LetAppsAccessCallHistoryOn, LetAppsAccessCallHistoryOff, SearchLetAppsAccessCallHistory
-
+from Functions.Privacy.ApplicationAccessToEmail.ApplicationAccessToEmail import ValueEmailOn, ValueEmailOff, SearchValueEmail, LetAppsAccessEmailOn, LetAppsAccessEmailOff, SearchLetAppsAccessEmail
+from Functions.Privacy.ApplicationAccessToTasks.ApplicationAccessToTasks import ValueTaskOn, ValueTaskOff, SearchValueTask, LetAppsAccessTasksOn, LetAppsAccessTasksOff, SearchLetAppsAccessTasks
+from Functions.Privacy.ApplicationAccessToMessages.ApplicationAccessToMessages import ValueMessageOn, ValueMessageOff, SearchValueMessage, LetAppsAccessCalendar2On, LetAppsAccessCalendar2Off, SearchLetAppsAccessCalendar2
+from Functions.Privacy.ApplicationAccessToRadio.ApplicationAccessToRadio import ValueRadioOn, ValueRadioOff, SearchValueRadio, LetAppsAccessRadiosOn, LetAppsAccessRadiosOff, SearchLetAppsAccessRadios
+from Functions.Privacy.AppAccessToBluetoothDevices.AppAccessToBluetoothDevices import ValueBluetoothOn, ValueBluetoothOff, SearchValueBluetooth
+from Functions.Privacy.ApplicationAccessToTheDocumentsFolder.ApplicationAccessToTheDocumentsFolder import ValueDocsOn, ValueDocsOff,SearchValueDocs
+from Functions.Privacy.ApplicationAccessToThePicturesFolder.pushApplicationAccessToThePicturesFolder import ValuePicturesLibraryOn, ValuePicturesLibraryOff, SearchValuePicturesLibrary
+from Functions.Privacy.ApplicationAccessToTheVideosFolder.ApplicationAccessToTheVideosFolder import VideosLibraryOn, VideosLibraryOff, SearchVideosLibrary
+from Functions.Privacy.ApplicationAccessToAnotherFileSystem.ApplicationAccessToAnotherFileSystem import AccessFileSystemOn, AccessFileSystemOff, SearchAccessFileSystem
 from enum import Enum, auto
 
 
@@ -118,6 +126,15 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.updateApplicationAccessToContacts()
         self.updateApplicationAccessToCalendar()
         self.updateApplicationAccessToCallLog()
+        self.updateApplicationAccessToEmail()
+        self.updateApplicationAccessToTasks()
+        self.updateApplicationAccessToMessages()
+        self.updateApplicationAccessToRadio()
+        self.updateAppAccessToBluetoothDevices()
+        self.updateApplicationAccessToTheDocumentsFolder()
+        self.updateApplicationAccessToThePicturesFolder()
+        self.updateApplicationAccessToTheVideosFolder()
+        self.updateApplicationAccessToAnotherFileSystem()
 
         self.pushTelemetria.clicked.connect(self.TelemetriaButtonClick)
         self.pushTelemetriaWebCome.clicked.connect(self.TelemetriaWebComeButtonClick)
@@ -159,6 +176,15 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
         self.pushApplicationAccessToContacts.clicked.connect(self.ApplicationAccessToContactsButtonClick)
         self.pushApplicationAccessToCalendar.clicked.connect(self.ApplicationAccessToCalendarButtonClick)
         self.pushApplicationAccessToCallLog.clicked.connect(self.ApplicationAccessToCallLogButtonClick)
+        self.pushApplicationAccessToEmail.clicked.connect(self.ApplicationAccessToEmailButtonClick)
+        self.pushApplicationAccessToTasks.clicked.connect(self.ApplicationAccessToTasksButtonClick)
+        self.pushApplicationAccessToMessages.clicked.connect(self.ApplicationAccessToMessagesButtonClick)
+        self.pushApplicationAccessToRadio.clicked.connect(self.ApplicationAccessToRadioButtonClick)
+        self.pushAppAccessToBluetoothDevices.clicked.connect(self.AppAccessToBluetoothDevicesButtonClick)
+        self.pushApplicationAccessToTheDocumentsFolder.clicked.connect(self.ApplicationAccessToTheDocumentsFolderButtonClick)
+        self.pushApplicationAccessToThePicturesFolder.clicked.connect(self.ApplicationAccessToThePicturesFolderButtonClick)
+        self.pushApplicationAccessToTheVideosFolder.clicked.connect(self.ApplicationAccessToTheVideosFolderButtonClick)
+        self.pushApplicationAccessToAnotherFileSystem.clicked.connect(self.ApplicationAccessToAnotherFileSystemButtonClick)
 
     def positionButton(self):
         frame_list = [
@@ -1274,17 +1300,174 @@ class WindowsPrivacy(QDialog, Ui_WindowsPrivacy):
             LetAppsAccessCallHistoryOff()
         self.updateApplicationAccessToCallLog()
 
+    def updateApplicationAccessToEmail(self):
+        result1 = SearchValueEmail()
+        result2 = SearchLetAppsAccessEmail()
+        if result1 and result2 == STATUS_DISABLED:
+            self.labelApplicationAccessToEmail.setText(STATUS_DISABLED)
+            self.labelApplicationAccessToEmail.setStyleSheet('color:green')
+        else:
+            self.labelApplicationAccessToEmail.setText(STATUS_ENABLED)
+            self.labelApplicationAccessToEmail.setStyleSheet('color:red')
 
+    def ApplicationAccessToEmailButtonClick(self):
+        result1 = SearchValueEmail()
+        result2 = SearchLetAppsAccessEmail()
+        if result1 and result2 == STATUS_DISABLED:
+            ValueEmailOn()
+            LetAppsAccessEmailOn()
+        else:
+            ValueEmailOff()
+            LetAppsAccessEmailOff()
+        self.updateApplicationAccessToEmail()
 
+    def updateApplicationAccessToTasks(self):
+        result1 = SearchValueTask()
+        result2 = SearchLetAppsAccessTasks()
+        if result1 and result2 == STATUS_DISABLED:
+            self.labelApplicationAccessToTasks.setText(STATUS_DISABLED)
+            self.labelApplicationAccessToTasks.setStyleSheet('color:green')
+        else:
+            self.labelApplicationAccessToTasks.setText(STATUS_ENABLED)
+            self.labelApplicationAccessToTasks.setStyleSheet('color:red')
 
+    def ApplicationAccessToTasksButtonClick(self):
+        result1 = SearchValueTask()
+        result2 = SearchLetAppsAccessTasks()
+        if result1 and result2 == STATUS_DISABLED:
+            ValueTaskOn()
+            LetAppsAccessTasksOn()
+        else:
+            ValueTaskOff()
+            LetAppsAccessTasksOff()
+        self.updateApplicationAccessToTasks()
 
+    def updateApplicationAccessToMessages(self):
+        result1 = SearchValueMessage()
+        result2 = SearchLetAppsAccessCalendar2()
+        if result1 and result2 == STATUS_DISABLED:
+            self.labelApplicationAccessToMessages.setText(STATUS_DISABLED)
+            self.labelApplicationAccessToMessages.setStyleSheet('color:green')
+        else:
+            self.labelApplicationAccessToMessages.setText(STATUS_ENABLED)
+            self.labelApplicationAccessToMessages.setStyleSheet('color:red')
 
+    def ApplicationAccessToMessagesButtonClick(self):
+        result1 = SearchValueMessage()
+        result2 = SearchLetAppsAccessCalendar2()
+        if result1 and result2 == STATUS_DISABLED:
+            ValueMessageOn()
+            LetAppsAccessCalendar2On()
+        else:
+            ValueMessageOff()
+            LetAppsAccessCalendar2Off()
+        self.updateApplicationAccessToMessages()
 
+    def updateApplicationAccessToRadio(self):
+        result1 = SearchValueRadio()
+        result2 = SearchLetAppsAccessRadios()
+        if result1 and result2 == STATUS_DISABLED:
+            self.labelApplicationAccessToRadio.setText(STATUS_DISABLED)
+            self.labelApplicationAccessToRadio.setStyleSheet('color:green')
+        else:
+            self.labelApplicationAccessToRadio.setText(STATUS_ENABLED)
+            self.labelApplicationAccessToRadio.setStyleSheet('color:red')
 
+    def ApplicationAccessToRadioButtonClick(self):
+        result1 = SearchValueRadio()
+        result2 = SearchLetAppsAccessRadios()
+        if result1 and result2 == STATUS_DISABLED:
+            ValueRadioOn()
+            LetAppsAccessRadiosOn()
+        else:
+            ValueRadioOff()
+            LetAppsAccessRadiosOff()
+        self.updateApplicationAccessToRadio()
 
+    def updateAppAccessToBluetoothDevices(self):
+        result = SearchValueBluetooth()
+        if result == STATUS_DISABLED:
+            self.labelAppAccessToBluetoothDevices.setText(STATUS_DISABLED)
+            self.labelAppAccessToBluetoothDevices.setStyleSheet('color:green')
+        else:
+            self.labelAppAccessToBluetoothDevices.setText(STATUS_ENABLED)
+            self.labelAppAccessToBluetoothDevices.setStyleSheet('color:red')
 
+    def AppAccessToBluetoothDevicesButtonClick(self):
+        result = SearchValueBluetooth()
+        if result == STATUS_DISABLED:
+            ValueBluetoothOn()
+        else:
+            ValueBluetoothOff()
+        self.updateAppAccessToBluetoothDevices()
 
+    def updateApplicationAccessToTheDocumentsFolder(self):
+        result = SearchValueDocs()
+        if result == STATUS_DISABLED:
+            self.labelApplicationAccessToTheDocumentsFolder.setText(STATUS_DISABLED)
+            self.labelApplicationAccessToTheDocumentsFolder.setStyleSheet('color:green')
+        else:
+            self.labelApplicationAccessToTheDocumentsFolder.setText(STATUS_ENABLED)
+            self.labelApplicationAccessToTheDocumentsFolder.setStyleSheet('color:red')
 
+    def ApplicationAccessToTheDocumentsFolderButtonClick(self):
+        result = SearchValueDocs()
+        if result == STATUS_DISABLED:
+            ValueDocsOn()
+        else:
+            ValueDocsOff()
+        self.updateApplicationAccessToTheDocumentsFolder()
+
+    def updateApplicationAccessToThePicturesFolder(self):
+        result = SearchValuePicturesLibrary()
+        if result == STATUS_DISABLED:
+            self.labelApplicationAccessToThePicturesFolder.setText(STATUS_DISABLED)
+            self.labelApplicationAccessToThePicturesFolder.setStyleSheet('color:green')
+        else:
+            self.labelApplicationAccessToThePicturesFolder.setText(STATUS_ENABLED)
+            self.labelApplicationAccessToThePicturesFolder.setStyleSheet('color:red')
+
+    def ApplicationAccessToThePicturesFolderButtonClick(self):
+        result = SearchValuePicturesLibrary()
+        if result == STATUS_DISABLED:
+            ValuePicturesLibraryOn()
+        else:
+            ValuePicturesLibraryOff()
+        self.updateApplicationAccessToThePicturesFolder()
+
+    def updateApplicationAccessToTheVideosFolder(self):
+        result = SearchVideosLibrary()
+        if result == STATUS_DISABLED:
+            self.labelApplicationAccessToTheVideosFolder.setText(STATUS_DISABLED)
+            self.labelApplicationAccessToTheVideosFolder.setStyleSheet('color:green')
+        else:
+            self.labelApplicationAccessToTheVideosFolder.setText(STATUS_ENABLED)
+            self.labelApplicationAccessToTheVideosFolder.setStyleSheet('color:red')
+
+    def ApplicationAccessToTheVideosFolderButtonClick(self):
+        result = SearchVideosLibrary()
+        if result == STATUS_DISABLED:
+            VideosLibraryOn()
+        else:
+            VideosLibraryOff()
+        self.updateApplicationAccessToTheVideosFolder()
+
+    def updateApplicationAccessToAnotherFileSystem(self):
+        result = SearchAccessFileSystem()
+        if result == STATUS_DISABLED:
+            self.labelApplicationAccessToAnotherFileSystem.setText(STATUS_DISABLED)
+            self.labelApplicationAccessToAnotherFileSystem.setStyleSheet('color:green')
+        else:
+            self.labelApplicationAccessToAnotherFileSystem.setText(STATUS_ENABLED)
+            self.labelApplicationAccessToAnotherFileSystem.setStyleSheet('color:red')
+
+    def ApplicationAccessToAnotherFileSystemButtonClick(self):
+        result = SearchAccessFileSystem()
+        if result == STATUS_DISABLED:
+            AccessFileSystemOn()
+        else:
+            AccessFileSystemOff()
+        self.updateApplicationAccessToAnotherFileSystem()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
