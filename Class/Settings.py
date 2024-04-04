@@ -11,6 +11,7 @@ import SettingsWidjets.Class.Energy
 import SettingsWidjets.Class.AutoLoading
 import SettingsWidjets.Class.Twics
 import SettingsWidjets.Class.Privacy
+import SettingsWidjets.Class.Task
 import main
 from main import *
 # from main import MainWindows
@@ -46,6 +47,7 @@ class Setings(QDialog, Ui_Settings):
         self.pushButtonAutoLoad.clicked.connect(self.AutoLoad)
         self.pushButtonServise.clicked.connect(self.Twics)
         self.pushButtonPrivacy.clicked.connect(self.Privacy)
+        self.pushButtonTasks.clicked.connect(self.Tasks)
 
     def DefoltSettings(self):
         self.update_menu(SettingsWidjets.Class.BaseSettings.BaseSet())
@@ -62,6 +64,9 @@ class Setings(QDialog, Ui_Settings):
         self.update_menu(SettingsWidjets.Class.Twics.TwicsWindows())
     def Privacy(self):
         self.update_menu(SettingsWidjets.Class.Privacy.WindowsPrivacy())
+
+    def Tasks(self):
+        self.update_menu(SettingsWidjets.Class.Task.Task())
 
 
     def update_menu(self, new_menu):
