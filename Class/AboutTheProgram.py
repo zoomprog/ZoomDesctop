@@ -15,6 +15,7 @@ from PyQt6.QtCore import QSettings
 from PyQt6.QtWidgets import QVBoxLayout
 from Widget.Disk.DiskVisual import DiskUsageWidget
 
+
 class AboutTheProgram(QDialog, Ui_AboutTheProgram):
     def __init__(self, id_Profile, settings):
         super().__init__()
@@ -42,13 +43,11 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
             print("File doesn't exists!")
 
         #Импорт основных методов передвижение окна windows и убарать windows элементы из виджета.
-        self.pushClose.clicked.connect(self.importmainclass.CloseWindow)#кнопка завершение программы
-        self.pushCollapse.clicked.connect(self.showMinimized)#Сворачивание окна
-        self.pushExit.clicked.connect(self.PushBack)#кнопка для выхода с аккаунта
+        self.pushClose.clicked.connect(self.importmainclass.CloseWindow)  #кнопка завершение программы
+        self.pushCollapse.clicked.connect(self.showMinimized)  #Сворачивание окна
+        self.pushExit.clicked.connect(self.PushBack)  #кнопка для выхода с аккаунта
         self.pushDownload.clicked.connect(self.download)
         self.pushSetting.clicked.connect(self.ButtonSettings)
-
-
 
         #Достаем логин и email из бд для Profile
         Profile = coll.find_one({"_id": self.id_Profile})
@@ -75,9 +74,9 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
 
         self.is_expanded = False
 
-
         # Создаем layout для frame_Disk
         self.diskLayout = QVBoxLayout(self.frame_Disk)
+        self.diskLayout.setContentsMargins(0, 0, 0, 10)
 
         # Определение доступных дисков и создание виджетов для каждого
         for disk in self.get_available_disks():
@@ -86,7 +85,6 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
 
         # Устанавливаем layout в frame_Disk
         self.frame_Disk.setLayout(self.diskLayout)
-
 
     @staticmethod
     def get_available_disks():
@@ -98,36 +96,31 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
                     disks.append(part.device.rstrip('\\'))
         return disks
 
-
-
     def on_button_clicked(self):
-            if self.animation.state() == QAbstractAnimation.State.Stopped:
-                if not self.is_expanded:
-                    # Увеличение кнопки при нажатии
-                    self.animation.setStartValue(QSize(self.pushButtonProfile.width(), 51))
-                    self.animation.setEndValue(QSize(self.pushButtonProfile.width(), 115))
-                    self.animation.start()
+        if self.animation.state() == QAbstractAnimation.State.Stopped:
+            if not self.is_expanded:
+                # Увеличение кнопки при нажатии
+                self.animation.setStartValue(QSize(self.pushButtonProfile.width(), 51))
+                self.animation.setEndValue(QSize(self.pushButtonProfile.width(), 115))
+                self.animation.start()
 
-                    self.pushButtonProfile.setText("")
-                    timer = QTimer()
-                    timer.singleShot(500, self.AppealProfileLabelVisibility)
-                    print('Увеличилась')
-                    self.is_expanded = True
-                else:
-                    # Уменьшение кнопки при нажатии
-                    self.animation.setStartValue(QSize(self.pushButtonProfile.width(), 115))
-                    self.animation.setEndValue(QSize(self.pushButtonProfile.width(), 51))
-                    self.animation.start()
+                self.pushButtonProfile.setText("")
+                timer = QTimer()
+                timer.singleShot(500, self.AppealProfileLabelVisibility)
+                print('Увеличилась')
+                self.is_expanded = True
+            else:
+                # Уменьшение кнопки при нажатии
+                self.animation.setStartValue(QSize(self.pushButtonProfile.width(), 115))
+                self.animation.setEndValue(QSize(self.pushButtonProfile.width(), 51))
+                self.animation.start()
 
-                    # Добавление контента внутри кнопки
-                    timer = QTimer()
-                    timer.singleShot(0, self.AppealProfileLabelHide)
+                # Добавление контента внутри кнопки
+                timer = QTimer()
+                timer.singleShot(0, self.AppealProfileLabelHide)
 
-                    print('Уменьшилась')
-                    self.is_expanded = False
-
-
-
+                print('Уменьшилась')
+                self.is_expanded = False
 
     def AppealProfileLabelVisibility(self):
         self.label_ProfileLogo.setStyleSheet('background-color:transparent;color:white;')
@@ -155,7 +148,6 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.label_EnterProfileEmail.setStyleSheet('background-color:transparent;color:transparent;')
         self.pushButtonSubPrmium.setStyleSheet('background-color:transparent;color:transparent;')
 
-
     def download(self):
         self.ui = Class.download.Download(self.id_Profile, self.settings)
         self.ui.show()
@@ -168,7 +160,6 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.ui.show()
         self.close()
         self.deleteLater()
-
 
     def mousePressEvent(self, event: QMouseEvent) -> None:
         if event.button() == Qt.MouseButton.LeftButton and self.header_frame.underMouse():
