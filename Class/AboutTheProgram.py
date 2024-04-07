@@ -1,3 +1,4 @@
+import psutil
 
 import main
 import Class.MainWindows
@@ -11,7 +12,8 @@ from PyQt6.QtGui import QMouseEvent
 from database.DB import db, coll, collLoggedIn
 from database import *
 from PyQt6.QtCore import QSettings
-
+from PyQt6.QtWidgets import QVBoxLayout
+from Widget.Disk.DiskVisual import DiskUsageWidget
 
 class AboutTheProgram(QDialog, Ui_AboutTheProgram):
     def __init__(self, id_Profile, settings):
@@ -74,6 +76,27 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.is_expanded = False
 
 
+        # Создаем layout для frame_Disk
+        self.diskLayout = QVBoxLayout(self.frame_Disk)
+
+        # Определение доступных дисков и создание виджетов для каждого
+        for disk in self.get_available_disks():
+            disk_widget = DiskUsageWidget(disk)
+            self.diskLayout.addWidget(disk_widget)
+
+        # Устанавливаем layout в frame_Disk
+        self.frame_Disk.setLayout(self.diskLayout)
+
+
+    @staticmethod
+    def get_available_disks():
+        # Получаем список всех дисков
+        disks = []
+        for part in psutil.disk_partitions(all=False):
+            if os.name == 'nt':  # Для Windows
+                if 'fixed' in part.opts or 'removable' in part.opts:
+                    disks.append(part.device.rstrip('\\'))
+        return disks
 
 
 
