@@ -275,6 +275,19 @@ QPushButton:hover {
                 <string>ACTIVATE</string>
                </property>
               </widget>
+              <widget class="QWidget" name="widget_CircularProgressBar" native="true">
+               <property name="geometry">
+                <rect>
+                 <x>30</x>
+                 <y>490</y>
+                 <width>101</width>
+                 <height>101</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+              </widget>
              </widget>
             </item>
            </layout>
@@ -676,10 +689,10 @@ span {
               <widget class="QWidget" name="widget" native="true">
                <property name="geometry">
                 <rect>
-                 <x>10</x>
-                 <y>10</y>
-                 <width>501</width>
-                 <height>281</height>
+                 <x>0</x>
+                 <y>-10</y>
+                 <width>461</width>
+                 <height>141</height>
                 </rect>
                </property>
                <property name="styleSheet">
@@ -718,53 +731,6 @@ color:silver;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt; font-weight:600; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;ZoomApp - оптимизирует и активрует твой пк, а также и установит нужный софт. Безопасно, можно и быстро. Повышает быстродействие и ФПС во всех играх и уменьшает системную задержку до минимально возможной!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                </property>
-               </widget>
-               <widget class="QLabel" name="label_2">
-                <property name="geometry">
-                 <rect>
-                  <x>20</x>
-                  <y>190</y>
-                  <width>261</width>
-                  <height>31</height>
-                 </rect>
-                </property>
-                <property name="font">
-                 <font>
-                  <pointsize>18</pointsize>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">*{
-color:rgb(85, 255, 255);
-
-}</string>
-                </property>
-                <property name="text">
-                 <string>Доступные обновления</string>
-                </property>
-               </widget>
-               <widget class="QPushButton" name="pushDownloadUpdate">
-                <property name="geometry">
-                 <rect>
-                  <x>310</x>
-                  <y>192</y>
-                  <width>111</width>
-                  <height>31</height>
-                 </rect>
-                </property>
-                <property name="font">
-                 <font>
-                  <pointsize>12</pointsize>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">border-radius:15;</string>
-                </property>
-                <property name="text">
-                 <string>Скачать</string>
                 </property>
                </widget>
               </widget>

@@ -1,72 +1,58 @@
 import sys
-import shutil
-import os
-import psutil
-from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout
+from PyQt6.QtWidgets import QApplication, QWidget
 from PyQt6.QtGui import QPainter, QPen, QFont, QColor
-from PyQt6.QtCore import QRect, Qt, QPoint
+from PyQt6.QtCore import Qt, QRectF, QRect
 
-class DiskUsageWidget(QWidget):
-    def __init__(self, disk_label):
-        super().__init__()
-        self.disk_label = disk_label  # Надпись диска
-        self.disk_usage = self.get_disk_usage()
-        self.setWindowTitle(f"Disk Usage for {disk_label}")
-        self.setGeometry(100, 100, 300, 50)
+class CircularProgressBar(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setMinimumSize(200, 200)
+        self.value = 0
 
-    def get_disk_usage(self):
-        # Получаем информацию о использовании диска
-        total, used, free = shutil.disk_usage(f"{self.disk_label}/")
-        return (used / total) * 100
+    def setValue(self, value):
+        self.value = value
+        self.repaint()
 
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
 
-        # Рисуем надпись диска
-        painter.setPen(QColor("red"))
-        disk_label_font_size = 14
-        painter.setFont(QFont("Arial", disk_label_font_size))
-        painter.drawText(QRect(10, 10, 50, 30), Qt.AlignmentFlag.AlignLeft, self.disk_label + ":")
+        # Определение размеров для кругового прогрессбара
+        rect = QRectF(10, 10, self.width() - 20, self.height() - 20)
+        startAngle = 90 * 16  # Начальный угол в 1/16 градуса
+        spanAngle = -360 * 16 * self.value / 100  # Длина дуги в 1/16 градуса
 
-        # Рисуем серую линию (100%)
-        painter.setPen(QPen(QColor("#E6E6E6"), 10))
-        painter.drawLine(QPoint(60, 25), QPoint(280, 25))
+        # Настройка пера для рисования контура
+        pen = QPen()
+        pen.setWidth(15)
+        pen.setColor(Qt.GlobalColor.black)
+        painter.setPen(pen)
 
-        # Рисуем синюю линию (использование диска)
-        painter.setPen(QPen(QColor("#26A0DA"), 10))
-        usage_length = 220 * (self.disk_usage / 100)  # Длина синей линии в зависимости от использования
-        painter.drawLine(QPoint(60, 25), QPoint(60 + usage_length, 25))
+        # Рисование контура кругового прогрессбара
+        painter.drawArc(rect, startAngle, 360 * 16)
 
-        # Добавляем текст с процентом использования
-        usage_label_font_size = 10
-        painter.setFont(QFont("Arial", usage_label_font_size))
-        painter.setPen(QColor("#26A0DA"))
-        painter.drawText(QRect(60, 30, 220, 20), Qt.AlignmentFlag.AlignRight, f"{self.disk_usage:.2f}%")
+        # Настройка пера для рисования заполнения
+        pen.setColor(Qt.GlobalColor.green)
+        painter.setPen(pen)
 
-class MainWindow(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.setWindowTitle("Disk Usage for All Drives")
-        self.setGeometry(100, 100, 320, 200)
-        layout = QVBoxLayout(self)
+        # Рисование заполнения кругового прогрессбара
+        painter.drawArc(rect, startAngle, spanAngle)
 
-        # Определение доступных дисков и создание виджетов для каждого
-        for disk in self.get_available_disks():
-            disk_widget = DiskUsageWidget(disk)
-            layout.addWidget(disk_widget)
+        # Настройка шрифта для текста
+        font = QFont()
+        font.setFamily("Arial")
+        font.setPointSize(48)  # Изменение размера шрифта на 24
+        painter.setFont(font)
+        painter.setPen(QColor(0, 0, 0))
 
-    def get_available_disks(self):
-        # Получаем список всех дисков
-        disks = []
-        for part in psutil.disk_partitions(all=False):
-            if os.name == 'nt':  # Для Windows
-                if 'fixed' in part.opts or 'removable' in part.opts:
-                    disks.append(part.device.rstrip('\\'))
-        return disks
+        # Расчет позиции текста
+        text = f"{self.value}%"
+        textRect = QRectF(rect)
+        painter.drawText(textRect, Qt.AlignmentFlag.AlignCenter, text)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = MainWindow()
+    window = CircularProgressBar()
+    window.setValue(75)  # Установка значения прогресса
     window.show()
     sys.exit(app.exec())

@@ -14,6 +14,7 @@ from database import *
 from PyQt6.QtCore import QSettings
 from PyQt6.QtWidgets import QVBoxLayout
 from Widget.Disk.DiskVisual import DiskUsageWidget
+from Widget.CircularProgressBar.CircularProgressBar import CircularProgressBar
 
 
 class AboutTheProgram(QDialog, Ui_AboutTheProgram):
@@ -68,22 +69,27 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.layout.addWidget(self.pushButtonProfile)
         self.setLayout(self.layout)
         self.pushButtonProfile.clicked.connect(self.on_button_clicked)
-
         self.animation = QPropertyAnimation(self.pushButtonProfile, b"size")
         self.animation.setDuration(600)
-
         self.is_expanded = False
 
-        # Создаем layout для frame_Disk
+        #Вывод CircularProgressBar
+
+
+        # Создание и настройка CircularProgressBar
+        self.circularProgressBar = CircularProgressBar()
+        self.CircularProgressBarLayout = QVBoxLayout(self.widget_CircularProgressBar)
+        self.CircularProgressBarLayout.addWidget(self.circularProgressBar)
+        self.CircularProgressBarLayout.setContentsMargins(0, 0, 0, 0)
+        # Установка значения для CircularProgressBar, если необходимо
+        self.circularProgressBar.setValue(50)
+
+        # Вывод дисков Windows
         self.diskLayout = QVBoxLayout(self.frame_Disk)
         self.diskLayout.setContentsMargins(0, 0, 0, 10)
-
-        # Определение доступных дисков и создание виджетов для каждого
         for disk in self.get_available_disks():
             disk_widget = DiskUsageWidget(disk)
             self.diskLayout.addWidget(disk_widget)
-
-        # Устанавливаем layout в frame_Disk
         self.frame_Disk.setLayout(self.diskLayout)
 
     @staticmethod
@@ -190,5 +196,3 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.pushActivate.setText("ACTIVATE")
         self.pushButtonProfile.setFont(font)
         self.pushButtonProfile.setText("Profile")
-        self.pushDownloadUpdate.setFont(font)
-        self.pushDownloadUpdate.setText("Скачать")
