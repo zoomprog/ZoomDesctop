@@ -15,6 +15,7 @@ from PyQt6.QtCore import QSettings
 from PyQt6.QtWidgets import QVBoxLayout
 from Widget.Disk.DiskVisual import DiskUsageWidget
 from Widget.CircularProgressBar.CircularProgressBar import CircularProgressBar
+from Widget.CircularProgressBar.CircularProgressBarSearh import Bar
 
 
 class AboutTheProgram(QDialog, Ui_AboutTheProgram):
@@ -82,7 +83,7 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.CircularProgressBarLayout.addWidget(self.circularProgressBar)
         self.CircularProgressBarLayout.setContentsMargins(0, 0, 0, 0)
         # Установка значения для CircularProgressBar, если необходимо
-        self.circularProgressBar.setValue(50)
+        self.circularProgressBar.setValue(Bar)
 
         # Вывод дисков Windows
         self.diskLayout = QVBoxLayout(self.frame_Disk)
