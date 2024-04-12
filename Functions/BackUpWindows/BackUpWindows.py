@@ -1,3 +1,4 @@
+import json
 import winreg
 
 from PyQt6.QtCore import QEvent
@@ -107,10 +108,9 @@ def updateMouseAcceleration():
     result2 = SearchMouseThreshold1()
     result3 = SearchMouseThreshold2()
     if result1 and result2 and result3 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
-
+        return STATUS_ENABLED
 
 def updateProtectionNotifications():
     global Bar
@@ -118,9 +118,9 @@ def updateProtectionNotifications():
     result2 = SearchNotificationEnable2()
     result3 = SearchDisableNotifications1()
     if result1 and result2 and result3 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateAutoUpdateDriversatSystemstartup():
@@ -128,9 +128,9 @@ def updateAutoUpdateDriversatSystemstartup():
     result1 = SearchExcludeWUDriversInQualityUpdate()
     result2 = SearchSearchOrderConfig()
     if result1 and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateUWP():
@@ -139,18 +139,18 @@ def updateUWP():
     result2 = SearchBackgroundAppGlobalToggleStart()
     result3 = SearchBackgroundAppGlobalToggle()
     if result1 and result2 and result3 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateAutoUpdatingAppsStore():
     global Bar
     result = SearchAutoDownload()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateAppearance():
@@ -166,9 +166,9 @@ def updateAppearance():
     result9 = SearchVisualFXSetting()
     result10 = SearchVisualFXSetting2()
     if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 and result10 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateGameBar():
@@ -182,18 +182,18 @@ def updateGameBar():
     result7 = SearchAppCaptureEnabled()
     result8 = SearchValueGameBar()
     if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateMultyPlanOverplay():
     global Bar
     result = SearchOverlayTestMode()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateWindowsFirewall():
@@ -201,9 +201,9 @@ def updateWindowsFirewall():
     result1 = SearchEnableFirewall()
     result2 = SearchEnableFirewall2()
     if result1 and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateWindowsUAC():
@@ -211,9 +211,9 @@ def updateWindowsUAC():
     result1 = SearchPromptOnSecureDesktop()
     result2 = SearchConsentPromptBehaviorAdmin()
     if result1 and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateSystemResponsiveness():
@@ -221,9 +221,9 @@ def updateSystemResponsiveness():
     result = SystemResponsivenessSearch()
     status = result.get("SystemResponsiveness", STATUS_ERROR)
     if status == "Disable":
-        pass
+        return STATUS_DISABLED
     else:
-        Bar += 1
+        return STATUS_ENABLED
 
 
 def updateWin32_priority_separation():
@@ -231,9 +231,9 @@ def updateWin32_priority_separation():
     result = get_win32_priority_separation_Search()
     if result is not None:
         if result == 26:
-            Bar += 1
+            return STATUS_DISABLED
         elif result == 2:
-            pass
+            return STATUS_ENABLED
         else:
             print(f"{result}")
     else:
@@ -244,45 +244,44 @@ def updateMeltdownSpectre():
     global Bar
     result = MeltdownSpectre_Search()
     if result == STATUS_DISABLED:
-        pass
+        return STATUS_DISABLED
     else:
-        Bar += 1
+        return STATUS_ENABLED
 
 
 def updateWindowsReservedStorage():
     global Bar
     result = check_reserved_storage_Search()
     if result == STATUS_ENABLED:
-        pass
+        return STATUS_ENABLED
     else:
-        Bar += 1
-
+        return STATUS_DISABLED
 
 def updateSvchost():
     global Bar
     result = check_svc_host_split_threshold_Search()
     if result == STATUS_ENABLED:
-        Bar += 1
+        return STATUS_ENABLED
     else:
-        pass
+        return STATUS_DISABLED
 
 
 def updateUpdateLastNFS():
     global Bar
     result = nfs_atime_status_windows_Update()
     if result == 1:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateConvertNameFile83():
     global Bar
     result = ConvertNameFile83_Update()
     if result == 1:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateDiagnosricEvents():
@@ -294,9 +293,9 @@ def updateDiagnosricEvents():
     ]
     result = check_logs_status(logs)
     if all(status == 'Disabled' for status in result):
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateTasksForAnalysis():
@@ -304,9 +303,9 @@ def updateTasksForAnalysis():
     result1 = SearchAnalyzeSystem()
     result2 = SearchBackup()
     if result1 and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateDiagnosticTasks():
@@ -326,9 +325,9 @@ def updateDiagnosticTasks():
     result13 = SearchUsageDataReporting()
     result14 = SearchCalibrationLoader()
     if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 and result10 and result11 and result12 and result13 and result14 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateNetPrecompilation():
@@ -338,18 +337,18 @@ def updateNetPrecompilation():
     result3 = SearchNETFrameworkNGENv403031964Critical()
     result4 = SearchNETFrameworkNGENv4030319Critical()
     if result1 and result2 and result3 and result4 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateAutoProxyDetection():
     global Bar
     result = SearchProxy()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateInstallingAndRemovingLanguages():
@@ -360,18 +359,18 @@ def updateInstallingAndRemovingLanguages():
     result4 = SearchUninstallation()
     result5 = SearchLPRemove()
     if result1 and result2 and result3 and result4 and result5 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateAutoPerformanceCheck():
     global Bar
     result = SearchWinSAT()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateMapsLocation():
@@ -381,18 +380,18 @@ def updateMapsLocation():
     result3 = SearchNotifications()
     result4 = SearchWindowsActionDialog()
     if result1 and result2 and result3 and result4 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateRemoteControl():
     global Bar
     result = SearchRemoteAssistanceTask()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateCleaningTasks():
@@ -403,9 +402,9 @@ def updateCleaningTasks():
     result4 = SearchCleanupOfflineContent()
     result5 = SearchCacheTask()
     if result1 and result2 and result3 and result4 and result5 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateMicrosoftStore():
@@ -413,18 +412,18 @@ def updateMicrosoftStore():
     result = check_microsoft_store_status()
     result2 = check_microsoft_store_status2()
     if result and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateWindowsXBOX():
     global Bar
     result = check_xbox_status()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateTelemetria():
@@ -434,9 +433,9 @@ def updateTelemetria():
     result3 = SearchStart3()
     result4 = SearchStart4()
     if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
     else:
-        pass
+        return STATUS_ENABLED
 
 
 def updateTelemetriaWebCome():
@@ -444,7 +443,9 @@ def updateTelemetriaWebCome():
     result1 = SearchSetEmptyDebugger()
     result2 = check_task_status()
     if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def uodateTaskMCA():
@@ -452,28 +453,36 @@ def uodateTaskMCA():
     result1 = check_TaskMCA_status_CompatibilityAppraiser()
     result2 = SearchSetEmptyDebugger()
     if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateUpdateDateCEIP():
     global Bar
     result = check_ProgramDataUpdater()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateTaskApplicationImpactTelemetry():
     global Bar
     result = check_ait_agent_task()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def uodateProductivityAppReminder():
     global Bar
     result = check_StartupAppTask()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateTaskCEIP():
@@ -484,21 +493,27 @@ def updateTaskCEIP():
     result4 = check_KernelCeipTask()
     result5 = check_UsbCeip()
     if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateCEIPSQM():
     global Bar
     result = SearchCEIPSQM()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateTelemetrApplicationImpact():
     global Bar
     result = SearchAITEnable()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateTelemetrNalogDate():
@@ -508,14 +523,18 @@ def updateTelemetrNalogDate():
     result3 = SearchAllowTelemetry3()
     result4 = SearchLimitEnhancedDiagnosticDataWindowsAnalytics()
     if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateTelemetrLicense():
     global Bar
     result = SearchNoGenTicket()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateWer():
@@ -530,7 +549,9 @@ def updateWer():
     result8 = SearchStartWER2()
     result9 = check_QueueReporting()
     if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED and result6 == STATUS_DISABLED and result6 == STATUS_DISABLED and result7 == STATUS_DISABLED and result8 == STATUS_DISABLED and result9 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateActiveVoiceForCortan():
@@ -539,7 +560,9 @@ def updateActiveVoiceForCortan():
     result2 = SearchLetAppsActivateWithVoice()
     result3 = check_ProgramDataUpdater()
     if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateActiveVoiceForCortanBlockSystem():
@@ -547,7 +570,9 @@ def updateActiveVoiceForCortanBlockSystem():
     result1 = SearchAgentActivationOnLockScreenEnabled()
     result2 = SearchLetAppsActivateWithVoiceAboveLock()
     if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateWindowsLocationProvider():
@@ -558,7 +583,9 @@ def updateWindowsLocationProvider():
     result4 = SearchSensorPermissionState()
     result5 = SearchSensorPermissionState2()
     if result5 == STATUS_DISABLED and result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateAllowIndexingEncryptedStoresOrItems():
@@ -570,7 +597,9 @@ def updateAllowIndexingEncryptedStoresOrItems():
     result5 = SearchConnectedSearchUseWeb()
     result6 = SearchBingSearchEnabled()
     if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED and result6 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateTargetedAdverisingAndMarketing():
@@ -582,7 +611,9 @@ def updateTargetedAdverisingAndMarketing():
     result5 = SearchDisableWindowsSpotlightFeatures()
     result6 = SearchDisableWindowsConsumerFeatures()
     if result1 and result2 and result3 and result4 and result5 and result6 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateCloudSaving():
@@ -610,21 +641,27 @@ def updateCloudSaving():
     result21 = SearchDisableWindowsSettingSyncUserOverride()
     result22 = SearchEnabledLanguage()
     if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 and result10 and result11 and result12 and result13 and result14 and result15 and result16 and result17 and result18 and result19 and result20 and result21 and result22 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateCloudVoice():
     global Bar
     result = SearchHasAccepted()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateWindowsSearchDateCollection():
     global Bar
     result = SearchAcceptedPrivacyPolicy()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateWindowsPrivacyConsentDisclaimer():
@@ -635,7 +672,9 @@ def updateWindowsPrivacyConsentDisclaimer():
     result4 = SearchDmClient()
     result5 = SearchDmClientOnScenarioDownload()
     if result1 and result2 and result3 and result4 and result5 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateCollectTextMessagesandHandwritingInput():
@@ -644,14 +683,18 @@ def updateCollectTextMessagesandHandwritingInput():
     result2 = SearchRestrictImplicitTextCollection()
     result3 = SearchHarvestContacts()
     if result1 and result2 and result3 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateSensor():
     global Bar
     result = SearchDisableSensors()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateWiFiSense():
@@ -660,14 +703,18 @@ def updateWiFiSense():
     result2 = Searchvalue2()
     result3 = SearchAutoConnectAllowedOEM()
     if result1 and result2 and result3 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateHideMostUsedApps():
     global Bar
     result1 = SearchHideMostUsedApps()
     if result1 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateInventoryCollector():
@@ -676,35 +723,45 @@ def updateInventoryCollector():
     result2 = ICDeviceSearch()
     result3 = DeviceUserSearch()
     if result1 and result2 and result3 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateSiteAccessToTheListOfLanguages():
     global Bar
     result = SearchHttpAcceptLanguageOptOut()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateRecordingActions():
     global Bar
     result = SearchHttpAcceptLanguageOptOutRAOut()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateFeedbackAsYouType():
     global Bar
     result = SearchEnabledFAYT()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateActivityFeed():
     global Bar
     result = SearchEnableActivityFeed()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToLocation():
@@ -713,7 +770,9 @@ def updateApplicationAccessToLocation():
     result2 = SearchStatusAATL()
     result3 = SearchLetAppsAccessLocation()
     if result1 and result2 and result3 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToAccountInformation():
@@ -721,7 +780,9 @@ def updateApplicationAccessToAccountInformation():
     result1 = SearchValueAATI()
     result2 = SearchLetAppsAccessAccountInfo()
     if result1 and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToMotionData():
@@ -729,28 +790,36 @@ def updateApplicationAccessToMotionData():
     result1 = SearchValueAATMD()
     result2 = SearchLetAppsAccessMotion()
     if result1 and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateAppAccessToPhone():
     global Bar
     result = SearchLetAppsAccessPhone()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToTrustedDevices():
     global Bar
     result = SearchLetAppsAccessTrustedDevices()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToDeviceSynchronization():
     global Bar
     result = SearchLetAppsSyncWithDevices()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationsAccessDiagnosticInformationAboutOtherApplications():
@@ -758,7 +827,9 @@ def updateApplicationsAccessDiagnosticInformationAboutOtherApplications():
     result1 = SearchValueAADAOA()
     result2 = SearchLetAppsAccessMotion()
     if result1 and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToContacts():
@@ -766,7 +837,9 @@ def updateApplicationAccessToContacts():
     result1 = SearchalueContact()
     result2 = SearchLetAppsAccessContacts()
     if result1 and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToCalendar():
@@ -774,7 +847,9 @@ def updateApplicationAccessToCalendar():
     result1 = SearchValueCalendar1()
     result2 = SearchLetAppsAccessCalendar()
     if result1 and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToCallLog():
@@ -782,7 +857,9 @@ def updateApplicationAccessToCallLog():
     result1 = SearchValueCallAccess()
     result2 = SearchLetAppsAccessCallHistory()
     if result1 and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToEmail():
@@ -790,7 +867,9 @@ def updateApplicationAccessToEmail():
     result1 = SearchValueEmail()
     result2 = SearchLetAppsAccessEmail()
     if result1 and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToTasks():
@@ -798,7 +877,9 @@ def updateApplicationAccessToTasks():
     result1 = SearchValueTask()
     result2 = SearchLetAppsAccessTasks()
     if result1 and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToMessages():
@@ -806,7 +887,9 @@ def updateApplicationAccessToMessages():
     result1 = SearchValueMessage()
     result2 = SearchLetAppsAccessCalendar2()
     if result1 and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToRadio():
@@ -814,119 +897,137 @@ def updateApplicationAccessToRadio():
     result1 = SearchValueRadio()
     result2 = SearchLetAppsAccessRadios()
     if result1 and result2 == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateAppAccessToBluetoothDevices():
     global Bar
     result = SearchValueBluetooth()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToTheDocumentsFolder():
     global Bar
     result = SearchValueDocs()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToThePicturesFolder():
     global Bar
     result = SearchValuePicturesLibrary()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToTheVideosFolder():
     global Bar
     result = SearchVideosLibrary()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
 def updateApplicationAccessToAnotherFileSystem():
     global Bar
     result = SearchAccessFileSystem()
     if result == STATUS_DISABLED:
-        Bar += 1
+        return STATUS_DISABLED
+    else:
+        return STATUS_ENABLED
 
 
-updateApplicationAccessToAnotherFileSystem()
-updateApplicationAccessToThePicturesFolder()
-updateApplicationAccessToTheDocumentsFolder()
-updateAppAccessToBluetoothDevices()
-updateApplicationAccessToRadio()
-updateApplicationAccessToMessages()
-updateApplicationAccessToTasks()
-updateApplicationAccessToEmail()
-updateApplicationAccessToCallLog()
-updateApplicationAccessToCalendar()
-updateApplicationAccessToContacts()
-updateApplicationsAccessDiagnosticInformationAboutOtherApplications()
-updateApplicationAccessToDeviceSynchronization()
-updateApplicationAccessToTrustedDevices()
-updateAppAccessToPhone()
-updateApplicationAccessToMotionData()
-updateApplicationAccessToAccountInformation()
-updateApplicationAccessToLocation()
-updateActivityFeed()
-updateFeedbackAsYouType()
-updateRecordingActions()
-updateSiteAccessToTheListOfLanguages()
-updateInventoryCollector()
-updateHideMostUsedApps()
-updateWiFiSense()
-updateSensor()
-updateCollectTextMessagesandHandwritingInput()
-updateWindowsPrivacyConsentDisclaimer()
-updateWindowsSearchDateCollection()
-updateCloudVoice()
-updateCloudSaving()
-updateTargetedAdverisingAndMarketing()
-updateAllowIndexingEncryptedStoresOrItems()
-updateWindowsLocationProvider()
-updateActiveVoiceForCortanBlockSystem()
-updateWer()
-updateActiveVoiceForCortan()
-updateTelemetrLicense()
-updateTelemetrNalogDate()
-updateTelemetrApplicationImpact()
-updateCEIPSQM()
-updateTaskCEIP()
-uodateProductivityAppReminder()
-updateTaskApplicationImpactTelemetry()
-updateUpdateDateCEIP()
-uodateTaskMCA()
-updateTelemetriaWebCome()
-updateTelemetria()
-updateWindowsXBOX()
-updateMicrosoftStore()
-updateCleaningTasks()
-updateRemoteControl()
-updateMapsLocation()
-updateAutoPerformanceCheck()
-updateInstallingAndRemovingLanguages()
-updateAutoProxyDetection()
-updateNetPrecompilation()
-updateDiagnosticTasks()
-updateTasksForAnalysis()
-updateSystemResponsiveness()
-updateWin32_priority_separation()
-updateMeltdownSpectre()
-updateWindowsReservedStorage()
-updateSvchost()
-updateUpdateLastNFS()
-updateConvertNameFile83()
-updateDiagnosricEvents()
-updateWindowsUAC()
-updateWindowsFirewall()
-updateMouseAcceleration()
-updateProtectionNotifications()
-updateAutoUpdateDriversatSystemstartup()
-updateUWP()
-updateAutoUpdatingAppsStore()
-updateAppearance()
-updateGameBar()
-updateMultyPlanOverplay()
-print(Bar)
+
+
+data = {
+    'updateMouseAcceleration': str(updateMouseAcceleration()),
+    'updateProtectionNotifications': str(updateProtectionNotifications()),
+    'updateAutoUpdateDriversatSystemstartup': str(updateAutoUpdateDriversatSystemstartup()),
+    'updateUWP': str(updateUWP()),
+    'updateAutoUpdatingAppsStore': str(updateAutoUpdatingAppsStore()),
+    'updateAppearance': str(updateAppearance()),
+    'updateGameBar': str(updateGameBar()),
+    'updateMultyPlanOverplay': str(updateMultyPlanOverplay()),
+    'updateWindowsFirewall': str(updateWindowsFirewall()),
+    'updateWindowsUAC': str(updateWindowsUAC()),
+    'updateDiagnosricEvents': str(updateDiagnosricEvents()),
+    'updateConvertNameFile83': str(updateConvertNameFile83()),
+    'updateUpdateLastNFS': str(updateUpdateLastNFS()),
+    'updateSvchost': str(updateSvchost()),
+    'updateWindowsReservedStorage': str(updateWindowsReservedStorage()),
+    'updateMeltdownSpectre': str(updateMeltdownSpectre()),
+    'updateWin32_priority_separation': str(updateWin32_priority_separation()),
+    'updateSystemResponsiveness': str(updateSystemResponsiveness()),
+    'updateTasksForAnalysis': str(updateTasksForAnalysis()),
+    'updateDiagnosticTasks': str(updateDiagnosticTasks()),
+    'updateNetPrecompilation': str(updateNetPrecompilation()),
+    'updateAutoProxyDetection': str(updateAutoProxyDetection()),
+    'updateInstallingAndRemovingLanguages': str(updateInstallingAndRemovingLanguages()),
+    'updateAutoPerformanceCheck': str(updateAutoPerformanceCheck()),
+    'updateMapsLocation': str(updateMapsLocation()),
+    'updateRemoteControl': str(updateRemoteControl()),
+    'updateCleaningTasks': str(updateCleaningTasks()),
+    'updateMicrosoftStore': str(updateMicrosoftStore()),
+    'updateWindowsXBOX': str(updateWindowsXBOX()),
+    'updateTelemetria': str(updateTelemetria()),
+    'updateTelemetriaWebCome': str(updateTelemetriaWebCome()),
+    'uodateTaskMCA': str(uodateTaskMCA()),
+    'updateUpdateDateCEIP': str(updateUpdateDateCEIP()),
+    'updateTaskApplicationImpactTelemetry': str(updateTaskApplicationImpactTelemetry()),
+    'uodateProductivityAppReminder': str(uodateProductivityAppReminder()),
+    'updateTaskCEIP': str(updateTaskCEIP()),
+    'updateCEIPSQM': str(updateCEIPSQM()),
+    'updateTelemetrApplicationImpact': str(updateTelemetrApplicationImpact()),
+    'updateTelemetrNalogDate': str(updateTelemetrNalogDate()),
+    'updateTelemetrLicense': str(updateTelemetrLicense()),
+    'updateActiveVoiceForCortan': str(updateActiveVoiceForCortan()),
+    'updateWer': str(updateWer()),
+    'updateActiveVoiceForCortanBlockSystem': str(updateActiveVoiceForCortanBlockSystem()),
+    'updateWindowsLocationProvider': str(updateWindowsLocationProvider()),
+    'updateAllowIndexingEncryptedStoresOrItems': str(updateAllowIndexingEncryptedStoresOrItems()),
+    'updateTargetedAdverisingAndMarketing': str(updateTargetedAdverisingAndMarketing()),
+    'updateCloudSaving': str(updateCloudSaving()),
+    'updateCloudVoice': str(updateCloudVoice()),
+    'updateWindowsSearchDateCollection': str(updateWindowsSearchDateCollection()),
+    'updateWindowsPrivacyConsentDisclaimer': str(updateWindowsPrivacyConsentDisclaimer()),
+    'updateCollectTextMessagesandHandwritingInput': str(updateCollectTextMessagesandHandwritingInput()),
+    'updateSensor': str(updateSensor()),
+    'updateWiFiSense': str(updateWiFiSense()),
+    'updateHideMostUsedApps': str(updateHideMostUsedApps()),
+    'updateInventoryCollector': str(updateInventoryCollector()),
+    'updateSiteAccessToTheListOfLanguages': str(updateSiteAccessToTheListOfLanguages()),
+    'updateRecordingActions': str(updateRecordingActions()),
+    'updateFeedbackAsYouType': str(updateFeedbackAsYouType()),
+    'updateActivityFeed': str(updateActivityFeed()),
+    'updateApplicationAccessToLocation': str(updateApplicationAccessToLocation()),
+    'updateApplicationAccessToAccountInformation': str(updateApplicationAccessToAccountInformation()),
+    'updateApplicationAccessToMotionData': str(updateApplicationAccessToMotionData()),
+    'updateAppAccessToPhone': str(updateAppAccessToPhone()),
+    'updateApplicationAccessToTrustedDevices': str(updateApplicationAccessToTrustedDevices()),
+    'updateApplicationAccessToDeviceSynchronization': str(updateApplicationAccessToDeviceSynchronization()),
+    'updateApplicationsAccessDiagnosticInformationAboutOtherApplications': str(updateApplicationsAccessDiagnosticInformationAboutOtherApplications()),
+    'updateApplicationAccessToContacts': str(updateApplicationAccessToContacts()),
+    'updateApplicationAccessToCalendar': str(updateApplicationAccessToCalendar()),
+    'updateApplicationAccessToCallLog': str(updateApplicationAccessToCallLog()),
+    'updateApplicationAccessToEmail': str(updateApplicationAccessToEmail()),
+    'updateApplicationAccessToTasks': str(updateApplicationAccessToTasks()),
+    'updateApplicationAccessToMessages': str(updateApplicationAccessToMessages()),
+    'updateApplicationAccessToRadio': str(updateApplicationAccessToRadio()),
+    'updateAppAccessToBluetoothDevices': str(updateAppAccessToBluetoothDevices()),
+    'updateApplicationAccessToTheDocumentsFolder': str(updateApplicationAccessToTheDocumentsFolder()),
+    'updateApplicationAccessToThePicturesFolder': str(updateApplicationAccessToThePicturesFolder()),
+    'updateApplicationAccessToAnotherFileSystem': str(updateApplicationAccessToAnotherFileSystem())
+}
+# Сериализуем данные в строку в формате JSON и записываем в файл
+with open('BakUpFile\BKFILE.json', 'w', encoding='utf-8') as file:
+    json.dump(data, file, ensure_ascii=False, indent=4)
