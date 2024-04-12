@@ -1,99 +1,147 @@
-import json
+import os
 import winreg
-
+import json
 from PyQt6.QtCore import QEvent
 from PyQt6.QtWidgets import QDialog
 import subprocess
 from enum import Enum, auto
 
-from Functions.BaseSettings.MouseAcceleration.MouseAcceleration import SearchMouseSpeed, SearchMouseThreshold1, SearchMouseThreshold2
-from Functions.BaseSettings.ProtectionNotifications.ProtectionNotifications import SearchNotificationEnable1, SearchNotificationEnable2, SearchDisableNotifications1
-from Functions.BaseSettings.AutoUpdateDriversatSystemstartup.AutoUpdateDriversatSystemstartup import SearchExcludeWUDriversInQualityUpdate, SearchSearchOrderConfig
-from Functions.BaseSettings.UWP.UWP import SearchGlobalUserDisabled, SearchBackgroundAppGlobalToggle, SearchBackgroundAppGlobalToggleStart
-from Functions.BaseSettings.AutoUpdatingAppsStore.AutoUpdatingAppsStore import SearchAutoDownload
-from Functions.BaseSettings.Appearance.Appearance import (SearchTaskbarAnimations, SearchIconsOnly, SearchListviewShadow, SearchListviewAlphaSelect, SearchMinAnimate, SearchDragFullWindows, SearchEnableAeroPeek, SearchFontSmoothing, SearchVisualFXSetting, SearchVisualFXSetting2)
-from Functions.BaseSettings.GameBar.GameBar import (SearchAutoGameModeEnabled, SearchGamePanelStartupTipIndex, SearchShowStartupPanel, SearchUseNexusForGameBarEnabled, SearchAllowAutoGameMode, SearchAllowGameDVR, SearchAppCaptureEnabled, SearchValueGameBar)
-from Functions.BaseSettings.MultyPlanOverplay.MultyPlanOverplay import SearchOverlayTestMode
-from Functions.BaseSettings.WindowsFirewall.WindowsFirewall import SearchEnableFirewall, SearchEnableFirewall2
-from Functions.BaseSettings.UAC.UAC import SearchPromptOnSecureDesktop, SearchConsentPromptBehaviorAdmin
+from Functions.BaseSettings.MouseAcceleration.MouseAcceleration import MouseSpeedOn, MouseSpeedOff, SearchMouseSpeed, MouseThreshold1On, MouseThreshold1Off, SearchMouseThreshold1, MouseThreshold2On, MouseThreshold2Off, SearchMouseThreshold2
+from Functions.BaseSettings.ProtectionNotifications.ProtectionNotifications import NotificationEnable1On, NotificationEnable1Off, SearchNotificationEnable1, NotificationEnable2On, NotificationEnable2Off, SearchNotificationEnable2, DisableNotifications1On, DisableNotifications1Off, SearchDisableNotifications1
+from Functions.BaseSettings.AutoUpdateDriversatSystemstartup.AutoUpdateDriversatSystemstartup import ExcludeWUDriversInQualityUpdateOn, ExcludeWUDriversInQualityUpdateOff, SearchExcludeWUDriversInQualityUpdate, SearchOrderConfigOn, SearchOrderConfigOff, SearchSearchOrderConfig
+from Functions.BaseSettings.UWP.UWP import GlobalUserDisabledOn, GlobalUserDisabledOff, SearchGlobalUserDisabled, BackgroundAppGlobalToggleOn, BackgroundAppGlobalToggleOff, SearchBackgroundAppGlobalToggle, BackgroundAppGlobalToggleStartOn, GBackgroundAppGlobalToggleStartOff, SearchBackgroundAppGlobalToggleStart
+from Functions.BaseSettings.AutoUpdatingAppsStore.AutoUpdatingAppsStore import AutoDownloadOn, AutoDownloadOff, SearchAutoDownload
+from Functions.BaseSettings.Appearance.Appearance import (TaskbarAnimationsOn, TaskbarAnimationsOff, SearchTaskbarAnimations, IconsOnlyOn, IconsOnlyOff, SearchIconsOnly, ListviewShadowOn, ListviewShadowOff, SearchListviewShadow, ListviewAlphaSelectOn, ListviewAlphaSelectOff, SearchListviewAlphaSelect, MinAnimateOn, MinAnimateOff, SearchMinAnimate, DragFullWindowsOn, DragFullWindowsOff,
+                                                          SearchDragFullWindows, EnableAeroPeekOn, EnableAeroPeekOff, SearchEnableAeroPeek, FontSmoothingOn, FontSmoothingOff, SearchFontSmoothing, VisualFXSettingOn, VisualFXSettingOff, SearchVisualFXSetting, VisualFXSettingOn2, VisualFXSettingOff2, SearchVisualFXSetting2)
+from Functions.BaseSettings.GameBar.GameBar import (AutoGameModeEnabledOn, AutoGameModeEnabledOff, SearchAutoGameModeEnabled, GamePanelStartupTipIndexOn, GamePanelStartupTipIndexOff, SearchGamePanelStartupTipIndex, ShowStartupPanelOn, ShowStartupPanelOff, SearchShowStartupPanel, UseNexusForGameBarEnabledOn, UseNexusForGameBarEnabledOff, SearchUseNexusForGameBarEnabled, AllowAutoGameModeOn,
+                                                    AllowAutoGameModeOff, SearchAllowAutoGameMode, AllowGameDVROn, AllowGameDVROff, SearchAllowGameDVR, AppCaptureEnabledOff, AppCaptureEnabledOn, SearchAppCaptureEnabled, ValueGameBarOn, ValueGameBarOff, SearchValueGameBar)
+from Functions.BaseSettings.MultyPlanOverplay.MultyPlanOverplay import OverlayTestModeOn, OverlayTestModeOff, SearchOverlayTestMode
+from Functions.BaseSettings.WindowsFirewall.WindowsFirewall import EnableFirewallOn, EnableFirewallOff, SearchEnableFirewall, EnableFirewall2On, EnableFirewall2Off, SearchEnableFirewall2
+from Functions.BaseSettings.UAC.UAC import PromptOnSecureDesktopOn, PromptOnSecureDesktopOff, SearchPromptOnSecureDesktop, ConsentPromptBehaviorAdminOn, ConsentPromptBehaviorAdminOff, SearchConsentPromptBehaviorAdmin
+
 from Functions.Twics.Search.SearchSystemResponsiveness import SystemResponsivenessSearch
+from Functions.Twics.Disable.DisableSystemResponsiveness import SystemResponsivenessDisable
+from Functions.Twics.Enable.EnableSystemResponsiveness import SystemResponsivenessEnable
+
 from Functions.Twics.Search.SearchWin32PrioritySeparation import get_win32_priority_separation_Search
+from Functions.Twics.Disable.DisableWin32PrioritySeparation import set_win32_priority_separation_Disable
+from Functions.Twics.Enable.EnableWin32PrioritySeparation import set_win32_priority_separation_Enable
+
 from Functions.Twics.Search.SearchMeltdownSpectre import MeltdownSpectre_Search
+from Functions.Twics.Disable.DisableMeltdownSpectre import MeltdownSpectre_Disable
+from Functions.Twics.Enable.EnableMeltdownSpectre import MeltdownSpectre_Enable
+
 from Functions.Twics.Search.SearchWindowsReservedStorage import check_reserved_storage_Search
+from Functions.Twics.Disable.DisableWindowsReservedStorage import disable_reserved_storage
+from Functions.Twics.Enable.EnableWindowsReservedStorage import enable_reserved_storage
+
 from Functions.Twics.Search.SearchSvchost import check_svc_host_split_threshold_Search
+from Functions.Twics.Disable.DisableSvchost import svc_host_split_threshold_Disable
+from Functions.Twics.Enable.EnableSvchost import svc_host_split_threshold_Enable
+
 from Functions.Twics.Search.SearchUpdateLastNFS import nfs_atime_status_windows_Update
+from Functions.Twics.Disable.DisableUpdateLastNFS import nfs_atime_status_windows_Disable
+from Functions.Twics.Enable.EnableUpdateLastNFS import nfs_atime_status_windows_Enable
+
 from Functions.Twics.Search.SearchConvertNameFile83 import ConvertNameFile83_Update
+from Functions.Twics.Disable.DisableConvertNameFile83 import ConvertNameFile83_Disable
+from Functions.Twics.Enable.EnableConvertNameFile83 import ConvertNameFile83_Enable
+
 from Functions.Twics.Search.SearchDiagnosricEvents import check_logs_status
-from Functions.Task.TasksForAnalysis.TasksForAnalysis import SearchAnalyzeSystem, SearchBackup
-from Functions.Task.DiagnosticTasks.DiagnosticTasks import SearchProactiveScan
-from Functions.Task.DiagnosticTasks.DiagnosticTasks import (SearchRecommendedTroubleshootingScanner, SearchMicrosoftWindowsDiskDiagnosticDataCollector, SearchScheduled, SearchMicrosoftWindowsDiskDiagnosticResolver, SearchDiagnostics, SearchStorageSense, SearchRunFullMemoryDiagnostic, SearchProcessMemoryDiagnosticEvents, SearchAnalyzeSystemTask, SearchBgTaskRegistrationMaintenanceTask,
-                                                            Searchappuriverifierdaily, SearchUsageDataReporting, SearchCalibrationLoader)
-from Functions.Task.NetPrecompilation.NetPrecompilation import (SearchNETFrameworkNGENv4030319, SearchNETFrameworkNGENv403031964, SearchNETFrameworkNGENv403031964Critical, NETFrameworkNGENv403031964CriticalOn, NETFrameworkNGENv403031964Criticaloff,
-                                                                SearchNETFrameworkNGENv4030319Critical)
-from Functions.Task.AutoProxyDetection.AutoProxyDetection import SearchProxy
-from Functions.Task.InstallingAndRemovingLanguages.InstallingAndRemovingLanguages import (SearchSynchronizLanguageSettings, SearchInstallation, SearchReconcileLanguageResources, SearchUninstallation, SearchLPRemove)
-from Functions.Task.AutoPerformanceCheck.AutoPerformanceCheck import SearchWinSAT
-from Functions.Task.MapsLocation.MapsLocation import SearchMapsToastTask, SearchMapsUpdateTask, SearchNotifications, SearchWindowsActionDialog
-from Functions.Task.RemoteControl.RemoteControl import SearchRemoteAssistanceTask
-from Functions.Task.CleaningTasks.CleaningTasks import SearchCleanupTemporaryState, SearchDsSvcCleanup, SearchSilentCleanup, SearchCleanupOfflineContent, SearchCacheTask
-from Functions.Task.OnOffMicrosoftStore.MicrosoftStore import check_microsoft_store_status, check_microsoft_store_status2
-from Functions.Task.Xbox.Xbox import check_xbox_status
-from Functions.Privacy.Telemetria.Telemetria import SearchStart1, SearchStart2, SearchStart3, SearchStart4
-from Functions.Privacy.TelemetriaWebCome.TelemetriaWebCome import check_task_status, SearchSetEmptyDebugger
-from Functions.Privacy.TaskMCA.TaskMCA import check_TaskMCA_status_CompatibilityAppraiser
-from Functions.Privacy.UpdateDateCEIP.UpdateDateCEIP import check_ProgramDataUpdater
-from Functions.Privacy.TaskApplicationImpactTelemetry.TaskApplicationImpactTelemetry import check_ait_agent_task
-from Functions.Privacy.ProductivityAppReminder.ProductivityAppReminder import check_StartupAppTask
-from Functions.Privacy.TaskCEIP.TaskCEIP import check_Proxy, check_BthSQM, check_Consolidator, check_KernelCeipTask, check_UsbCeip
-from Functions.Privacy.CEIPSQM.CEIPSQM import SearchCEIPSQM
-from Functions.Privacy.TelemetrApplicationImpact.TelemetrApplicationImpact import SearchAITEnable
-from Functions.Privacy.TelemetrNalogDate.TelemetrNalogDate import SearchAllowTelemetry, SearchAllowTelemetry2, SearchAllowTelemetry3, SearchLimitEnhancedDiagnosticDataWindowsAnalytics
-from Functions.Privacy.TelemetrLicense.TelemetrLicense import SearchNoGenTicket
-from Functions.Privacy.WER.WER import SearchDisabled, SearchDisabled2, SearchDefaultConsent, SearchDefaultOverrideBehavior, SearchDontSendAdditionalData, SearchLoggingDisabled, SearchStartWER, SearchStartWER2, check_QueueReporting
-from Functions.Privacy.ActiveVoiceForCortan.ActiveVoiceForCortan import SearchAgentActivationEnabled, SearchLetAppsActivateWithVoice, check_ProgramDataUpdater
-from Functions.Privacy.ActiveVoiceForCortanBlockSystem.ActiveVoiceForCortanBlockSystem import SearchAgentActivationOnLockScreenEnabled, SearchLetAppsActivateWithVoiceAboveLock
-from Functions.Privacy.WindowsLocationProvider.WindowsLocationProvider import SearchDisableWindowsLocationProvider, SearchDisableLocationScripting, SearchDisableLocation, SearchSensorPermissionState, SearchSensorPermissionState2
-from Functions.Privacy.AllowIndexingEncryptedStoresOrItems.AllowIndexingEncryptedStoresOrItems import SearchAllowIndexingEncryptedStoresOrItems, SearchAlwaysUseAutoLangDetection, SearchAllowSearchToUseLocation, SearchDisableWebSearch1, SearchConnectedSearchUseWeb, SearchBingSearchEnabled
-from Functions.Privacy.TargetedAdverisingAndMarketing.TargetedAdverisingAndMarketing import (SearchSubscribedContent338393Enabled, SearchSubscribedContent353694Enabled, SearchSubscribedContent353696Enabled, SearchDisableSoftLanding, SearchDisableWindowsSpotlightFeatures, SearchDisableWindowsConsumerFeatures)
-from Functions.Privacy.CloudSaving.CloudSaving import (SearchDisableSettingSync, SearchDisableSettingSyncUserOverride, SearchDisableSyncOnPaidNetwork, SearchSyncPolicy, SearchDisableApplicationSettingSync, SearchDisableApplicationSettingSyncUserOverride, SearchDisableAppSyncSettingSync, SearchDisableAppSyncSettingSyncUserOverride, SearchDisableCredentialsSettingSync,
-                                                       SearchDisableCredentialsSettingSyncUserOverride, SearchEnabledCloudSaving, SearchDisableDesktopThemeSettingSync, SearchDisableDesktopThemeSettingSyncUserOverride, SearchDisablePersonalizationSettingSync, SearchDisablePersonalizationSettingSyncUserOverride, SearchDisableStartLayoutSettingSync, SearchDisableStartLayoutSettingSyncUserOverride,
-                                                       SearchDisableWebBrowserSettingSync, SearchDisableWebBrowserSettingSyncUserOverride, SearchDisableWindowsSettingSync, SearchDisableWindowsSettingSyncUserOverride, SearchEnabledLanguage)
-from Functions.Privacy.CloudVoice.CloudVoice import SearchHasAccepted
-from Functions.Privacy.WindowsPrivacyConsentDisclaimer.WindowsPrivacyConsentDisclaimer import SearchAcceptedPrivacyPolicy
-from Functions.Privacy.WindowsFeedbackandDiagnostics.WindowsFeedbackandDiagnostics import (SearchNumberOfSIUFInPeriod, SearchPeriodInNanoSeconds, SearchDoNotShowFeedbackNotifications, SearchDmClient, SearchDmClientOnScenarioDownload)
-from Functions.Privacy.CollectTextMessagesandHandwritingInput.CollectTextMessagesandHandwritingInput import SearchRestrictImplicitInkCollection, SearchRestrictImplicitTextCollection, SearchHarvestContacts
-from Functions.Privacy.Sensor.Sensor import SearchDisableSensors
-from Functions.Privacy.WiFiSense.WiFiSense import Searchvalue1, Searchvalue2, SearchAutoConnectAllowedOEM
-from Functions.Privacy.HideMostUsedApps.HideMostUsedApps import SearchHideMostUsedApps
-from Functions.Privacy.InventoryCollector.InvenoryCollector import SearchDisableInventory, ICDeviceSearch, DeviceUserSearch
-from Functions.Privacy.SiteAccessToTheListOfLanguages.SiteAccessToTheListOfLanguages import SearchHttpAcceptLanguageOptOut
-from Functions.Privacy.RecordingActions.RecordingActions import SearchHttpAcceptLanguageOptOutRAOut
-from Functions.Privacy.FeedbackAsYouType.FeedbackAsYouType import SearchEnabledFAYT
-from Functions.Privacy.ActivityFeed.ActivityFeed import SearchEnableActivityFeed
-from Functions.Privacy.ApplicationAccessToLocation.ApplicationAccessToLocation import SearchValueAATL, SearchStatusAATL, SearchLetAppsAccessLocation
-from Functions.Privacy.ApplicationAccessToAccountInformation.ApplicationAccessToAccountInformation import SearchValueAATI, SearchLetAppsAccessAccountInfo
-from Functions.Privacy.ApplicationAccessToMotionData.ApplicationAccessToMotionData import SearchValueAATMD, SearchLetAppsAccessMotion
-from Functions.Privacy.AppAccessToPhone.AppAccessToPhone import SearchLetAppsAccessPhone
-from Functions.Privacy.ApplicationAccessToTrustedDevices.ApplicationAccessToTrustedDevices import SearchLetAppsAccessTrustedDevices
-from Functions.Privacy.AppAccessToDeviceSynchronization.AppAccessToDeviceSynchronization import SearchLetAppsSyncWithDevices
-from Functions.Privacy.ApplicationsAccessDiagnosticInformationAboutOtherApplications.ApplicationsAccessDiagnosticInformationAboutOtherApplications import SearchValueAADAOA, SearchLetAppsAccessMotion
-from Functions.Privacy.ApplicationAccessToContacts.ApplicationAccessToContacts import SearchalueContact, SearchLetAppsAccessContacts
-from Functions.Privacy.ApplicationAccessToCalendar.ApplicationAccessToCalendar import SearchValueCalendar1, SearchLetAppsAccessCalendar
-from Functions.Privacy.ApplicationAccessToCallLog.ApplicationAccessToCallLog import SearchValueCallAccess, SearchLetAppsAccessCallHistory
-from Functions.Privacy.ApplicationAccessToEmail.ApplicationAccessToEmail import SearchValueEmail, SearchLetAppsAccessEmail
-from Functions.Privacy.ApplicationAccessToTasks.ApplicationAccessToTasks import SearchValueTask, SearchLetAppsAccessTasks
-from Functions.Privacy.ApplicationAccessToMessages.ApplicationAccessToMessages import SearchValueMessage, SearchLetAppsAccessCalendar2
-from Functions.Privacy.ApplicationAccessToRadio.ApplicationAccessToRadio import SearchValueRadio, SearchLetAppsAccessRadios
-from Functions.Privacy.AppAccessToBluetoothDevices.AppAccessToBluetoothDevices import SearchValueBluetooth
-from Functions.Privacy.ApplicationAccessToTheDocumentsFolder.ApplicationAccessToTheDocumentsFolder import SearchValueDocs
-from Functions.Privacy.ApplicationAccessToThePicturesFolder.pushApplicationAccessToThePicturesFolder import SearchValuePicturesLibrary
-from Functions.Privacy.ApplicationAccessToTheVideosFolder.ApplicationAccessToTheVideosFolder import SearchVideosLibrary
-from Functions.Privacy.ApplicationAccessToAnotherFileSystem.ApplicationAccessToAnotherFileSystem import SearchAccessFileSystem
+from Functions.Twics.Disable.DisableDiagnosricEvents import disable_event_viewer_logs
+from Functions.Twics.Enable.EnableDiagnosricEvents import enable_event_viewer_logs
+
+from Functions.Task.TasksForAnalysis.TasksForAnalysis import SearchAnalyzeSystem, AnalyzeSystemOn, AnalyzeSystemOff, SearchBackup, BackupOn, BackupOff
+from Functions.Task.DiagnosticTasks.DiagnosticTasks import SearchProactiveScan, ProactiveScanOn, ProactiveScanOff
+from Functions.Task.DiagnosticTasks.DiagnosticTasks import (SearchRecommendedTroubleshootingScanner, RecommendedTroubleshootingScannerOn, RecommendedTroubleshootingScannerOff, SearchMicrosoftWindowsDiskDiagnosticDataCollector, MicrosoftWindowsDiskDiagnosticDataCollectorOn, MicrosoftWindowsDiskDiagnosticDataCollectorOff, SearchScheduled, ScheduledOn, ScheduledOff,
+                                                            SearchMicrosoftWindowsDiskDiagnosticResolver, MicrosoftWindowsDiskDiagnosticResolverOn, MicrosoftWindowsDiskDiagnosticResolverOff, SearchDiagnostics, DiagnosticsOn, DiagnosticsOff, SearchStorageSense, StorageSenseOn, StorageSenseOff, SearchRunFullMemoryDiagnostic, RunFullMemoryDiagnosticOn, RunFullMemoryDiagnosticOff,
+                                                            SearchProcessMemoryDiagnosticEvents, ProcessMemoryDiagnosticEventsOn, ProcessMemoryDiagnosticEventsOff, SearchAnalyzeSystemTask, AnalyzeSystemTaskOn, AnalyzeSystemTaskOff, SearchBgTaskRegistrationMaintenanceTask, BgTaskRegistrationMaintenanceTaskOn, BgTaskRegistrationMaintenanceTaskOff, Searchappuriverifierdaily, appuriverifierdailyOn,
+                                                            appuriverifierdailyOff, SearchUsageDataReporting, UsageDataReportingOn, UsageDataReportingOff, SearchCalibrationLoader, CalibrationLoaderOn, CalibrationLoaderOff)
+from Functions.Task.NetPrecompilation.NetPrecompilation import (SearchNETFrameworkNGENv4030319, NETFrameworkNGENv4030319On, NETFrameworkNGENv4030319Off, SearchNETFrameworkNGENv403031964, NETFrameworkNGENv403031964On, NETFrameworkNGENv403031964off, SearchNETFrameworkNGENv403031964Critical, NETFrameworkNGENv403031964CriticalOn, NETFrameworkNGENv403031964Criticaloff,
+                                                                SearchNETFrameworkNGENv4030319Critical, NETFrameworkNGENv4030319CriticalOn, NETFrameworkNGENv4030319Criticaloff)
+from Functions.Task.AutoProxyDetection.AutoProxyDetection import SearchProxy, ProxyOn, ProxyOff
+from Functions.Task.InstallingAndRemovingLanguages.InstallingAndRemovingLanguages import (SearchSynchronizLanguageSettings, SynchronizLanguageSettingsOn, SynchronizLanguageSettingsOff, SearchInstallation, InstallationOn, InstallationOff, SearchReconcileLanguageResources, ReconcileLanguageResourcesOn, ReconcileLanguageResourcesOff, SearchUninstallation, UninstallationOn, UninstallationOff,
+                                                                                          SearchLPRemove, LPRemoveOn, LPRemoveOff)
+from Functions.Task.AutoPerformanceCheck.AutoPerformanceCheck import SearchWinSAT, WinSATOn, WinSATOff
+from Functions.Task.MapsLocation.MapsLocation import SearchMapsToastTask, MapsToastTaskOn, MapsToastTaskOff, SearchMapsUpdateTask, MapsUpdateTaskOn, MapsUpdateTaskOff, SearchNotifications, NotificationsOff, NotificationsOn, SearchWindowsActionDialog, WindowsActionDialogOff, WindowsActionDialogOn
+from Functions.Task.RemoteControl.RemoteControl import SearchRemoteAssistanceTask, RemoteAssistanceTaskOn, RemoteAssistanceTaskOff
+from Functions.Task.CleaningTasks.CleaningTasks import SearchCleanupTemporaryState, CleanupTemporaryStateOn, CleanupTemporaryStateOff, SearchDsSvcCleanup, DsSvcCleanupOn, DsSvcCleanupOff, SearchSilentCleanup, SilentCleanupOn, SilentCleanupOff, SearchCleanupOfflineContent, CleanupOfflineContentOn, CleanupOfflineContentOff, SearchCacheTask, CacheTaskOn, CacheTaskOff
+from Functions.Task.OnOffMicrosoftStore.MicrosoftStore import disable_microsoft_store, enable_microsoft_store, check_microsoft_store_status, check_microsoft_store_status2, enable_microsoft_store2, disable_microsoft_store2
+from Functions.Task.Xbox.Xbox import check_xbox_status, enable_xbox, disable_xbox
+
+from Functions.Privacy.Telemetria.Telemetria import Start1On, Start1Off, Start2On, Start2Off, Start3On, Start3Off, Start4On, Start4Off, SearchStart1, SearchStart2, SearchStart3, SearchStart4
+from Functions.Privacy.TelemetriaWebCome.TelemetriaWebCome import enable_task_schtasks, disable_task_schtasks, check_task_status, SetEmptyDebuggerOn, SetEmptyDebuggerOff, SearchSetEmptyDebugger
+from Functions.Privacy.TaskMCA.TaskMCA import enable_TaskMCA_CompatibilityAppraiser, disable_TaskMCA_CompatibilityAppraiser, check_TaskMCA_status_CompatibilityAppraiser
+from Functions.Privacy.UpdateDateCEIP.UpdateDateCEIP import check_ProgramDataUpdater, enable_ProgramDataUpdater, disable_ProgramDataUpdater
+from Functions.Privacy.TaskApplicationImpactTelemetry.TaskApplicationImpactTelemetry import check_ait_agent_task, enable_ait_agent_task, disable_ait_agent_task
+from Functions.Privacy.ProductivityAppReminder.ProductivityAppReminder import check_StartupAppTask, enable_StartupAppTask, disable_StartupAppTask
+from Functions.Privacy.TaskCEIP.TaskCEIP import check_Proxy, enable_Proxy, disable_Proxy, check_BthSQM, enable_BthSQM, disable_BthSQM, check_Consolidator, enable_Consolidator, disable_Consolidator, check_KernelCeipTask, enable_KernelCeipTask, disable_KernelCeipTask, check_UsbCeip, enable_UsbCeip, disable_UsbCeip
+from Functions.Privacy.CEIPSQM.CEIPSQM import CEIPSQMOn, CEIPSQMOff, SearchCEIPSQM
+from Functions.Privacy.TelemetrApplicationImpact.TelemetrApplicationImpact import AITEnableOn, AITEnableOff, SearchAITEnable
+from Functions.Privacy.TelemetrNalogDate.TelemetrNalogDate import AllowTelemetryOn, AllowTelemetryOff, SearchAllowTelemetry, AllowTelemetry2On, AllowTelemetry2Off, SearchAllowTelemetry2, AllowTelemetry3On, AllowTelemetry3Off, SearchAllowTelemetry3, LimitEnhancedDiagnosticDataWindowsAnalyticsOn, LimitEnhancedDiagnosticDataWindowsAnalyticsOff, SearchLimitEnhancedDiagnosticDataWindowsAnalytics
+from Functions.Privacy.TelemetrLicense.TelemetrLicense import NoGenTicketOn, NoGenTicketOff, SearchNoGenTicket
+from Functions.Privacy.WER.WER import DisabledOn, DisabledOff, SearchDisabled, Disabled2On, Disabled2Off, SearchDisabled2, DefaultConsentOn, DefaultConsentOff, SearchDefaultConsent, DefaultOverrideBehaviorOn, DefaultOverrideBehaviorOff, SearchDefaultOverrideBehavior, DontSendAdditionalDataOn, DontSendAdditionalDataOff, SearchDontSendAdditionalData, LoggingDisabledOn, LoggingDisabledOff, \
+    SearchLoggingDisabled, StartWEROn, StartWEROff, SearchStartWER, StartWER2On, StartWER2Off, SearchStartWER2, check_QueueReporting, enable_QueueReporting, disable_QueueReporting
+from Functions.Privacy.ActiveVoiceForCortan.ActiveVoiceForCortan import AgentActivationEnabledOn, AgentActivationEnabledOff, SearchAgentActivationEnabled, LetAppsActivateWithVoiceOn, LetAppsActivateWithVoiceOff, SearchLetAppsActivateWithVoice, check_ProgramDataUpdater, enable_ProgramDataUpdater, disable_ProgramDataUpdater
+from Functions.Privacy.ActiveVoiceForCortanBlockSystem.ActiveVoiceForCortanBlockSystem import AgentActivationOnLockScreenEnabledOn, AgentActivationOnLockScreenEnabledOff, SearchAgentActivationOnLockScreenEnabled, LetAppsActivateWithVoiceAboveLockOn, LetAppsActivateWithVoiceAboveLockOff, SearchLetAppsActivateWithVoiceAboveLock
+from Functions.Privacy.WindowsLocationProvider.WindowsLocationProvider import DisableWindowsLocationProviderOn, DisableWindowsLocationProviderOff, SearchDisableWindowsLocationProvider, DisableLocationScriptingOn, DisableLocationScriptingOff, SearchDisableLocationScripting, DisableLocationOn, DisableLocationOff, SearchDisableLocation, SensorPermissionStateOn, SensorPermissionStateOff, \
+    SearchSensorPermissionState, SensorPermissionState2On, SensorPermissionState2Off, SearchSensorPermissionState2
+from Functions.Privacy.AllowIndexingEncryptedStoresOrItems.AllowIndexingEncryptedStoresOrItems import DAllowIndexingEncryptedStoresOrItemsOn, AllowIndexingEncryptedStoresOrItemsOff, SearchAllowIndexingEncryptedStoresOrItems, AlwaysUseAutoLangDetectionOn, AlwaysUseAutoLangDetectionOff, SearchAlwaysUseAutoLangDetection, AllowSearchToUseLocationOn, AllowSearchToUseLocationOff, \
+    SearchAllowSearchToUseLocation, DisableWebSearch1On, DisableWebSearch1Off, SearchDisableWebSearch1, ConnectedSearchUseWebOn, ConnectedSearchUseWebOff, SearchConnectedSearchUseWeb, BingSearchEnabledOn, BingSearchEnabledOff, SearchBingSearchEnabled
+from Functions.Privacy.TargetedAdverisingAndMarketing.TargetedAdverisingAndMarketing import (SubscribedContent338393EnabledOn, SubscribedContent338393EnabledOff, SearchSubscribedContent338393Enabled, SubscribedContent353694EnabledOn, SubscribedContent353694EnabledOff, SearchSubscribedContent353694Enabled, SubscribedContent353696EnabledOn, SubscribedContent353696EnabledOff,
+                                                                                             SearchSubscribedContent353696Enabled, DisableSoftLandingOn, DisableSoftLandingOff, SearchDisableSoftLanding, DisableWindowsSpotlightFeaturesOn, DisableWindowsSpotlightFeaturesOff, SearchDisableWindowsSpotlightFeatures, DisableWindowsConsumerFeaturesOn, DisableWindowsConsumerFeaturesOff,
+                                                                                             SearchDisableWindowsConsumerFeatures)
+from Functions.Privacy.CloudSaving.CloudSaving import (DisableSettingSyncOn, DisableSettingSyncOff, SearchDisableSettingSync, DisableSettingSyncUserOverrideOn, DisableSettingSyncUserOverrideOff, SearchDisableSettingSyncUserOverride, DisableSyncOnPaidNetworkOn, DisableSyncOnPaidNetworkOff, SearchDisableSyncOnPaidNetwork, SyncPolicyOn, SyncPolicyOff, SearchSyncPolicy,
+                                                       DisableApplicationSettingSyncOn, DisableApplicationSettingSyncOff, SearchDisableApplicationSettingSync, DisableApplicationSettingSyncUserOverrideOn, DisableApplicationSettingSyncUserOverrideOff, SearchDisableApplicationSettingSyncUserOverride, DisableAppSyncSettingSyncOn, DisableAppSyncSettingSyncOff, SearchDisableAppSyncSettingSync,
+                                                       DisableAppSyncSettingSyncUserOverrideOn, DisableAppSyncSettingSyncUserOverrideOff, SearchDisableAppSyncSettingSyncUserOverride, DisableCredentialsSettingSyncOn, DisableCredentialsSettingSyncOff, SearchDisableCredentialsSettingSync, DisableCredentialsSettingSyncUserOverrideOn, DisableCredentialsSettingSyncUserOverrideOff,
+                                                       SearchDisableCredentialsSettingSyncUserOverride, EnabledCloudSavingOn, EnabledCloudSavingOff, SearchEnabledCloudSaving, DisableDesktopThemeSettingSyncOn, DisableDesktopThemeSettingSyncOff, SearchDisableDesktopThemeSettingSync, DisableDesktopThemeSettingSyncUserOverrideOn, DisableDesktopThemeSettingSyncUserOverrideOff,
+                                                       SearchDisableDesktopThemeSettingSyncUserOverride, DisablePersonalizationSettingSyncOn, DisablePersonalizationSettingSyncOff, SearchDisablePersonalizationSettingSync, DisablePersonalizationSettingSyncUserOverrideOn, DisablePersonalizationSettingSyncUserOverrideOff, SearchDisablePersonalizationSettingSyncUserOverride,
+                                                       DisableStartLayoutSettingSyncOn, DisableStartLayoutSettingSyncOff, SearchDisableStartLayoutSettingSync, DisableStartLayoutSettingSyncUserOverrideOn, DisableStartLayoutSettingSyncUserOverrideOff, SearchDisableStartLayoutSettingSyncUserOverride, DisableWebBrowserSettingSyncOn, DisableWebBrowserSettingSyncOff,
+                                                       SearchDisableWebBrowserSettingSync, DisableWebBrowserSettingSyncUserOverrideOn, DisableWebBrowserSettingSyncUserOverrideOff, SearchDisableWebBrowserSettingSyncUserOverride, DisableWindowsSettingSyncOn, DisableWindowsSettingSyncOff, SearchDisableWindowsSettingSync, DisableWindowsSettingSyncUserOverrideOn,
+                                                       DisableWindowsSettingSyncUserOverrideOff, SearchDisableWindowsSettingSyncUserOverride, SearchEnabledLanguage, EnabledLanguageOn, EnabledLanguageOff)
+from Functions.Privacy.CloudVoice.CloudVoice import HasAcceptedOn, HasAcceptedOff, SearchHasAccepted
+from Functions.Privacy.WindowsPrivacyConsentDisclaimer.WindowsPrivacyConsentDisclaimer import AcceptedPrivacyPolicyOn, AcceptedPrivacyPolicyOff, SearchAcceptedPrivacyPolicy
+from Functions.Privacy.WindowsFeedbackandDiagnostics.WindowsFeedbackandDiagnostics import (NumberOfSIUFInPeriodOn, NumberOfSIUFInPeriodOff, SearchNumberOfSIUFInPeriod, PeriodInNanoSecondsOn, PeriodInNanoSecondsOff, SearchPeriodInNanoSeconds, DoNotShowFeedbackNotificationsOn, DoNotShowFeedbackNotificationsOff, SearchDoNotShowFeedbackNotifications, DmClientOn, DmClientOff, SearchDmClient,
+                                                                                           SearchDmClientOnScenarioDownload, DmClientOnScenarioDownloadOn, DmClientOnScenarioDownloadOff)
+from Functions.Privacy.CollectTextMessagesandHandwritingInput.CollectTextMessagesandHandwritingInput import RestrictImplicitInkCollectionOn, RestrictImplicitInkCollectionOff, SearchRestrictImplicitInkCollection, RestrictImplicitTextCollectionOn, RestrictImplicitTextCollectionOff, SearchRestrictImplicitTextCollection, HarvestContactsOn, HarvestContactsOff, SearchHarvestContacts
+from Functions.Privacy.Sensor.Sensor import DisableSensorsOn, DisableSensorsOff, SearchDisableSensors
+from Functions.Privacy.WiFiSense.WiFiSense import value1On, value1Off, Searchvalue1, value2On, value2Off, Searchvalue2, AutoConnectAllowedOEMOn, AutoConnectAllowedOEMOff, SearchAutoConnectAllowedOEM
+from Functions.Privacy.HideMostUsedApps.HideMostUsedApps import HideMostUsedAppsOn, HideMostUsedAppsOff, SearchHideMostUsedApps
+from Functions.Privacy.InventoryCollector.InvenoryCollector import DisableInventoryOn, DisableInventoryOff, SearchDisableInventory, ICDeviceSearch, ICDeviceOn, ICDeviceOff, DeviceUserSearch, DeviceUserOn, DeviceUserOff
+from Functions.Privacy.SiteAccessToTheListOfLanguages.SiteAccessToTheListOfLanguages import HttpAcceptLanguageOptOutOn, HttpAcceptLanguageOptOutOff, SearchHttpAcceptLanguageOptOut
+from Functions.Privacy.RecordingActions.RecordingActions import HttpAcceptLanguageOptOutRAOn, HttpAcceptLanguageOptOutRAOff, SearchHttpAcceptLanguageOptOutRAOut
+from Functions.Privacy.FeedbackAsYouType.FeedbackAsYouType import EnabledFAYTOn, EnabledFAYTOff, SearchEnabledFAYT
+from Functions.Privacy.ActivityFeed.ActivityFeed import EnableActivityFeedOn, EnableActivityFeedOff, SearchEnableActivityFeed
+from Functions.Privacy.ApplicationAccessToLocation.ApplicationAccessToLocation import ValueAATLOn, ValueAATLOff, SearchValueAATL, StatusAATLOn, StatusAATLOff, SearchStatusAATL, LetAppsAccessLocationOn, LetAppsAccessLocationOff, SearchLetAppsAccessLocation
+from Functions.Privacy.ApplicationAccessToAccountInformation.ApplicationAccessToAccountInformation import ValueAATIOn, ValueAATIOff, SearchValueAATI, LetAppsAccessAccountInfoOn, LetAppsAccessAccountInfoOff, SearchLetAppsAccessAccountInfo
+from Functions.Privacy.ApplicationAccessToMotionData.ApplicationAccessToMotionData import ValueAATMDOn, ValueAATMDOff, SearchValueAATMD, LetAppsAccessMotionOn, LetAppsAccessMotionOff, SearchLetAppsAccessMotion
+from Functions.Privacy.AppAccessToPhone.AppAccessToPhone import LetAppsAccessPhoneOn, LetAppsAccessPhoneOff, SearchLetAppsAccessPhone
+from Functions.Privacy.ApplicationAccessToTrustedDevices.ApplicationAccessToTrustedDevices import LetAppsAccessTrustedDevicesOn, LetAppsAccessTrustedDevicesOff, SearchLetAppsAccessTrustedDevices
+from Functions.Privacy.AppAccessToDeviceSynchronization.AppAccessToDeviceSynchronization import LetAppsSyncWithDevicesOn, LetAppsSyncWithDevicesOff, SearchLetAppsSyncWithDevices
+from Functions.Privacy.ApplicationsAccessDiagnosticInformationAboutOtherApplications.ApplicationsAccessDiagnosticInformationAboutOtherApplications import ValueAADAOAOn, ValueAADAOAOff, SearchValueAADAOA, LetAppsAccessMotionOn, LetAppsAccessMotionOff, SearchLetAppsAccessMotion
+from Functions.Privacy.ApplicationAccessToContacts.ApplicationAccessToContacts import ValueContactOn, ValueContactOff, SearchalueContact, LetAppsAccessContactsOn, LetAppsAccessContactsOff, SearchLetAppsAccessContacts
+from Functions.Privacy.ApplicationAccessToCalendar.ApplicationAccessToCalendar import ValueCalendar1On, ValueCalendar1Off, SearchValueCalendar1, LetAppsAccessCalendarOn, LetAppsAccessCalendarOff, SearchLetAppsAccessCalendar
+from Functions.Privacy.ApplicationAccessToCallLog.ApplicationAccessToCallLog import ValueCallAccessOn, ValueCallAccessOff, SearchValueCallAccess, LetAppsAccessCallHistoryOn, LetAppsAccessCallHistoryOff, SearchLetAppsAccessCallHistory
+from Functions.Privacy.ApplicationAccessToEmail.ApplicationAccessToEmail import ValueEmailOn, ValueEmailOff, SearchValueEmail, LetAppsAccessEmailOn, LetAppsAccessEmailOff, SearchLetAppsAccessEmail
+from Functions.Privacy.ApplicationAccessToTasks.ApplicationAccessToTasks import ValueTaskOn, ValueTaskOff, SearchValueTask, LetAppsAccessTasksOn, LetAppsAccessTasksOff, SearchLetAppsAccessTasks
+from Functions.Privacy.ApplicationAccessToMessages.ApplicationAccessToMessages import ValueMessageOn, ValueMessageOff, SearchValueMessage, LetAppsAccessCalendar2On, LetAppsAccessCalendar2Off, SearchLetAppsAccessCalendar2
+from Functions.Privacy.ApplicationAccessToRadio.ApplicationAccessToRadio import ValueRadioOn, ValueRadioOff, SearchValueRadio, LetAppsAccessRadiosOn, LetAppsAccessRadiosOff, SearchLetAppsAccessRadios
+from Functions.Privacy.AppAccessToBluetoothDevices.AppAccessToBluetoothDevices import ValueBluetoothOn, ValueBluetoothOff, SearchValueBluetooth
+from Functions.Privacy.ApplicationAccessToTheDocumentsFolder.ApplicationAccessToTheDocumentsFolder import ValueDocsOn, ValueDocsOff,SearchValueDocs
+from Functions.Privacy.ApplicationAccessToThePicturesFolder.pushApplicationAccessToThePicturesFolder import ValuePicturesLibraryOn, ValuePicturesLibraryOff, SearchValuePicturesLibrary
+from Functions.Privacy.ApplicationAccessToTheVideosFolder.ApplicationAccessToTheVideosFolder import VideosLibraryOn, VideosLibraryOff, SearchVideosLibrary
+from Functions.Privacy.ApplicationAccessToAnotherFileSystem.ApplicationAccessToAnotherFileSystem import AccessFileSystemOn, AccessFileSystemOff, SearchAccessFileSystem
+
+
 
 STATUS_DISABLED = "Disabled"
 STATUS_ENABLED = "Enabled"
 STATUS_ERROR = "Error"
 Bar = 0
+
+with open('BakUpFile/BKFILE.json', 'r', encoding='utf-8') as file:
+    funct = json.load(file)
+
 
 
 class SystemStatus(Enum):
@@ -103,931 +151,938 @@ class SystemStatus(Enum):
 
 
 def updateMouseAcceleration():
-    global Bar
-    result1 = SearchMouseSpeed()
-    result2 = SearchMouseThreshold1()
-    result3 = SearchMouseThreshold2()
-    if result1 and result2 and result3 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateMouseAcceleration'] == STATUS_DISABLED:
+        MouseSpeedOn()
+        MouseThreshold1On()
+        MouseThreshold2On()
     else:
-        return STATUS_ENABLED
+        print('2')
+        MouseSpeedOff()
+        MouseThreshold1Off()
+        MouseThreshold2Off()
+
 
 def updateProtectionNotifications():
-    global Bar
-    result1 = SearchNotificationEnable1()
-    result2 = SearchNotificationEnable2()
-    result3 = SearchDisableNotifications1()
-    if result1 and result2 and result3 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateProtectionNotifications'] == STATUS_DISABLED:
+        NotificationEnable1On()
+        NotificationEnable2On()
+        DisableNotifications1On()
     else:
-        return STATUS_ENABLED
+        NotificationEnable1Off()
+        NotificationEnable2Off()
+        DisableNotifications1Off()
 
 
 def updateAutoUpdateDriversatSystemstartup():
-    global Bar
-    result1 = SearchExcludeWUDriversInQualityUpdate()
-    result2 = SearchSearchOrderConfig()
-    if result1 and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateAutoUpdateDriversatSystemstartup'] == STATUS_DISABLED:
+        ExcludeWUDriversInQualityUpdateOn()
+        SearchOrderConfigOn()
     else:
-        return STATUS_ENABLED
+        ExcludeWUDriversInQualityUpdateOff()
+        SearchOrderConfigOff()
+
 
 
 def updateUWP():
-    global Bar
-    result1 = SearchGlobalUserDisabled()
-    result2 = SearchBackgroundAppGlobalToggleStart()
-    result3 = SearchBackgroundAppGlobalToggle()
-    if result1 and result2 and result3 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateUWP'] == STATUS_DISABLED:
+        GlobalUserDisabledOn()
+        BackgroundAppGlobalToggleStartOn()
+        BackgroundAppGlobalToggleOn()
     else:
-        return STATUS_ENABLED
+        GlobalUserDisabledOff()
+        GBackgroundAppGlobalToggleStartOff()
+        BackgroundAppGlobalToggleOff()
+
 
 
 def updateAutoUpdatingAppsStore():
-    global Bar
-    result = SearchAutoDownload()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateAutoUpdatingAppsStore'] == STATUS_DISABLED:
+        AutoDownloadOn()
     else:
-        return STATUS_ENABLED
+        AutoDownloadOff()
 
 
 def updateAppearance():
-    global Bar
-    result1 = SearchTaskbarAnimations()
-    result2 = SearchIconsOnly()
-    result3 = SearchListviewShadow()
-    result4 = SearchListviewAlphaSelect()
-    result5 = SearchMinAnimate()
-    result6 = SearchDragFullWindows()
-    result7 = SearchEnableAeroPeek()
-    result8 = SearchFontSmoothing()
-    result9 = SearchVisualFXSetting()
-    result10 = SearchVisualFXSetting2()
-    if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 and result10 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateAppearance'] == STATUS_DISABLED:
+        TaskbarAnimationsOn()
+        IconsOnlyOn()
+        ListviewShadowOn()
+        ListviewAlphaSelectOn()
+        MinAnimateOn()
+        DragFullWindowsOn()
+        EnableAeroPeekOn()
+        FontSmoothingOn()
+        VisualFXSettingOn()
+        VisualFXSettingOn2()
     else:
-        return STATUS_ENABLED
+        TaskbarAnimationsOff()
+        IconsOnlyOff()
+        ListviewShadowOff()
+        ListviewAlphaSelectOff()
+        MinAnimateOff()
+        DragFullWindowsOff()
+        EnableAeroPeekOff()
+        FontSmoothingOff()
+        VisualFXSettingOff()
+        VisualFXSettingOff2()
 
 
 def updateGameBar():
-    global Bar
-    result1 = SearchAutoGameModeEnabled()
-    result2 = SearchGamePanelStartupTipIndex()
-    result3 = SearchShowStartupPanel()
-    result4 = SearchUseNexusForGameBarEnabled()
-    result5 = SearchAllowAutoGameMode()
-    result6 = SearchAllowGameDVR()
-    result7 = SearchAppCaptureEnabled()
-    result8 = SearchValueGameBar()
-    if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateGameBar'] == STATUS_DISABLED:
+        AutoGameModeEnabledOn()
+        GamePanelStartupTipIndexOn()
+        ShowStartupPanelOn()
+        UseNexusForGameBarEnabledOn()
+        AllowAutoGameModeOn()
+        AllowGameDVROn()
+        AppCaptureEnabledOn()
+        ValueGameBarOn()
     else:
-        return STATUS_ENABLED
+        AutoGameModeEnabledOff()
+        GamePanelStartupTipIndexOff()
+        ShowStartupPanelOff()
+        UseNexusForGameBarEnabledOff()
+        AllowAutoGameModeOff()
+        AllowGameDVROff()
+        AppCaptureEnabledOff()
+        ValueGameBarOff()
 
 
 def updateMultyPlanOverplay():
-    global Bar
-    result = SearchOverlayTestMode()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateMultyPlanOverplay'] == STATUS_DISABLED:
+        OverlayTestModeOn()
     else:
-        return STATUS_ENABLED
+        OverlayTestModeOff()
+
 
 
 def updateWindowsFirewall():
-    global Bar
-    result1 = SearchEnableFirewall()
-    result2 = SearchEnableFirewall2()
-    if result1 and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateWindowsFirewall'] == STATUS_DISABLED:
+        EnableFirewallOn()
+        EnableFirewall2On()
     else:
-        return STATUS_ENABLED
-
+        EnableFirewallOff()
+        EnableFirewall2Off()
 
 def updateWindowsUAC():
-    global Bar
-    result1 = SearchPromptOnSecureDesktop()
-    result2 = SearchConsentPromptBehaviorAdmin()
-    if result1 and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateWindowsUAC'] == STATUS_DISABLED:
+        PromptOnSecureDesktopOn()
+        ConsentPromptBehaviorAdminOn()
     else:
-        return STATUS_ENABLED
+        PromptOnSecureDesktopOff()
+        ConsentPromptBehaviorAdminOff()
 
 
 def updateSystemResponsiveness():
-    global Bar
-    result = SystemResponsivenessSearch()
-    status = result.get("SystemResponsiveness", STATUS_ERROR)
-    if status == "Disable":
-        return STATUS_DISABLED
+    if funct['updateSystemResponsiveness'] == STATUS_DISABLED:
+        SystemResponsivenessEnable()
     else:
-        return STATUS_ENABLED
+        SystemResponsivenessDisable()
+
 
 
 def updateWin32_priority_separation():
-    global Bar
-    result = get_win32_priority_separation_Search()
-    if result is not None:
-        if result == 26:
-            return STATUS_DISABLED
-        elif result == 2:
-            return STATUS_ENABLED
-        else:
-            print(f"{result}")
+    if funct['updateWin32_priority_separation'] == STATUS_DISABLED:
+        set_win32_priority_separation_Disable(2)
     else:
-        print('Не удалось получитьзначения Win32')
+        set_win32_priority_separation_Enable(26)
+
 
 
 def updateMeltdownSpectre():
-    global Bar
-    result = MeltdownSpectre_Search()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateMeltdownSpectre'] == STATUS_DISABLED:
+        MeltdownSpectre_Enable()
     else:
-        return STATUS_ENABLED
+        MeltdownSpectre_Disable()
+
 
 
 def updateWindowsReservedStorage():
-    global Bar
-    result = check_reserved_storage_Search()
-    if result == STATUS_ENABLED:
-        return STATUS_ENABLED
+    if funct['updateWindowsReservedStorage'] == STATUS_DISABLED:
+        disable_reserved_storage()
     else:
-        return STATUS_DISABLED
+        enable_reserved_storage()
+
+
 
 def updateSvchost():
-    global Bar
-    result = check_svc_host_split_threshold_Search()
-    if result == STATUS_ENABLED:
-        return STATUS_ENABLED
+    if funct['updateSvchost'] == STATUS_DISABLED:
+        svc_host_split_threshold_Disable()
     else:
-        return STATUS_DISABLED
+        svc_host_split_threshold_Enable()
 
 
 def updateUpdateLastNFS():
-    global Bar
-    result = nfs_atime_status_windows_Update()
-    if result == 1:
-        return STATUS_DISABLED
+    if funct['updateUpdateLastNFS'] == STATUS_DISABLED:
+        nfs_atime_status_windows_Disable()
     else:
-        return STATUS_ENABLED
+        nfs_atime_status_windows_Enable()
+
 
 
 def updateConvertNameFile83():
-    global Bar
-    result = ConvertNameFile83_Update()
-    if result == 1:
-        return STATUS_DISABLED
+    if funct['updateConvertNameFile83'] == STATUS_DISABLED:
+        ConvertNameFile83_Disable()
     else:
-        return STATUS_ENABLED
+        ConvertNameFile83_Enable()
+
 
 
 def updateDiagnosricEvents():
-    global Bar
     logs = [
         "Microsoft-Windows-SleepStudy/Diagnostic",
         "Microsoft-Windows-Kernel-Processor-Power/Diagnostic",
         "Microsoft-Windows-UserModePowerService/Diagnostic"
     ]
-    result = check_logs_status(logs)
-    if all(status == 'Disabled' for status in result):
-        return STATUS_DISABLED
+    if funct['updateDiagnosricEvents'] == STATUS_DISABLED:
+        enable_event_viewer_logs(logs)
     else:
-        return STATUS_ENABLED
+        disable_event_viewer_logs(logs)
 
 
 def updateTasksForAnalysis():
-    global Bar
-    result1 = SearchAnalyzeSystem()
-    result2 = SearchBackup()
-    if result1 and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateTasksForAnalysis'] == STATUS_DISABLED:
+        AnalyzeSystemOn()
+        BackupOn()
     else:
-        return STATUS_ENABLED
+        AnalyzeSystemOff()
+        BackupOff()
+
 
 
 def updateDiagnosticTasks():
-    global Bar
-    result1 = SearchProactiveScan()
-    result2 = SearchRecommendedTroubleshootingScanner()
-    result3 = SearchMicrosoftWindowsDiskDiagnosticDataCollector()
-    result4 = SearchScheduled()
-    result5 = SearchMicrosoftWindowsDiskDiagnosticResolver()
-    result6 = SearchDiagnostics()
-    result7 = SearchStorageSense()
-    result8 = SearchRunFullMemoryDiagnostic()
-    result9 = SearchProcessMemoryDiagnosticEvents()
-    result10 = SearchAnalyzeSystemTask()
-    result11 = SearchBgTaskRegistrationMaintenanceTask()
-    result12 = Searchappuriverifierdaily()
-    result13 = SearchUsageDataReporting()
-    result14 = SearchCalibrationLoader()
-    if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 and result10 and result11 and result12 and result13 and result14 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateDiagnosticTasks'] == STATUS_DISABLED:
+        ProactiveScanOn()
+        RecommendedTroubleshootingScannerOn()
+        MicrosoftWindowsDiskDiagnosticDataCollectorOn()
+        ScheduledOn()
+        MicrosoftWindowsDiskDiagnosticResolverOn()
+        DiagnosticsOn()
+        StorageSenseOn()
+        RunFullMemoryDiagnosticOn()
+        ProcessMemoryDiagnosticEventsOn()
+        AnalyzeSystemTaskOn()
+        BgTaskRegistrationMaintenanceTaskOn()
+        appuriverifierdailyOn()
+        UsageDataReportingOn()
+        CalibrationLoaderOn()
     else:
-        return STATUS_ENABLED
+        ProactiveScanOff()
+        RecommendedTroubleshootingScannerOff()
+        MicrosoftWindowsDiskDiagnosticDataCollectorOff()
+        ScheduledOff()
+        MicrosoftWindowsDiskDiagnosticResolverOff()
+        DiagnosticsOff()
+        StorageSenseOff()
+        RunFullMemoryDiagnosticOff()
+        ProcessMemoryDiagnosticEventsOff()
+        AnalyzeSystemTaskOff()
+        BgTaskRegistrationMaintenanceTaskOff()
+        appuriverifierdailyOff()
+        UsageDataReportingOff()
+        CalibrationLoaderOff()
+
 
 
 def updateNetPrecompilation():
-    global Bar
-    result1 = SearchNETFrameworkNGENv4030319()
-    result2 = SearchNETFrameworkNGENv403031964()
-    result3 = SearchNETFrameworkNGENv403031964Critical()
-    result4 = SearchNETFrameworkNGENv4030319Critical()
-    if result1 and result2 and result3 and result4 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateNetPrecompilation'] == STATUS_DISABLED:
+        NETFrameworkNGENv4030319On()
+        NETFrameworkNGENv403031964On()
+        NETFrameworkNGENv403031964CriticalOn()
+        NETFrameworkNGENv4030319CriticalOn()
     else:
-        return STATUS_ENABLED
+        NETFrameworkNGENv4030319Off()
+        NETFrameworkNGENv403031964off()
+        NETFrameworkNGENv403031964Criticaloff()
+        NETFrameworkNGENv4030319Criticaloff()
+
 
 
 def updateAutoProxyDetection():
-    global Bar
-    result = SearchProxy()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateAutoProxyDetection'] == STATUS_DISABLED:
+        ProxyOn()
     else:
-        return STATUS_ENABLED
+        ProxyOff()
 
 
 def updateInstallingAndRemovingLanguages():
-    global Bar
-    result1 = SearchSynchronizLanguageSettings()
-    result2 = SearchInstallation()
-    result3 = SearchReconcileLanguageResources()
-    result4 = SearchUninstallation()
-    result5 = SearchLPRemove()
-    if result1 and result2 and result3 and result4 and result5 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateInstallingAndRemovingLanguages'] == STATUS_DISABLED:
+        SynchronizLanguageSettingsOn()
+        InstallationOn()
+        ReconcileLanguageResourcesOn()
+        UninstallationOn()
+        LPRemoveOn()
     else:
-        return STATUS_ENABLED
+        SynchronizLanguageSettingsOff()
+        InstallationOff()
+        ReconcileLanguageResourcesOff()
+        UninstallationOff()
+        LPRemoveOff()
 
 
 def updateAutoPerformanceCheck():
-    global Bar
-    result = SearchWinSAT()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateAutoPerformanceCheck'] == STATUS_DISABLED:
+        WinSATOn()
     else:
-        return STATUS_ENABLED
+        WinSATOff()
 
 
 def updateMapsLocation():
-    global Bar
-    result1 = SearchMapsToastTask()
-    result2 = SearchMapsUpdateTask()
-    result3 = SearchNotifications()
-    result4 = SearchWindowsActionDialog()
-    if result1 and result2 and result3 and result4 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateMapsLocation'] == STATUS_DISABLED:
+        MapsToastTaskOn()
+        MapsUpdateTaskOn()
+        NotificationsOn()
+        WindowsActionDialogOn()
     else:
-        return STATUS_ENABLED
+        MapsToastTaskOff()
+        MapsUpdateTaskOff()
+        NotificationsOff()
+        WindowsActionDialogOff()
 
 
 def updateRemoteControl():
-    global Bar
-    result = SearchRemoteAssistanceTask()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateRemoteControl'] == STATUS_DISABLED:
+        RemoteAssistanceTaskOn()
     else:
-        return STATUS_ENABLED
+        RemoteAssistanceTaskOff()
 
 
 def updateCleaningTasks():
-    global Bar
-    result1 = SearchCleanupTemporaryState()
-    result2 = SearchDsSvcCleanup()
-    result3 = SearchSilentCleanup()
-    result4 = SearchCleanupOfflineContent()
-    result5 = SearchCacheTask()
-    if result1 and result2 and result3 and result4 and result5 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateCleaningTasks'] == STATUS_DISABLED:
+        CleanupTemporaryStateOn()
+        DsSvcCleanupOn()
+        SilentCleanupOn()
+        CleanupOfflineContentOn()
+        CacheTaskOn()
     else:
-        return STATUS_ENABLED
+        CleanupTemporaryStateOff()
+        DsSvcCleanupOff()
+        SilentCleanupOff()
+        CleanupOfflineContentOff()
+        CacheTaskOff()
 
 
 def updateMicrosoftStore():
-    global Bar
-    result = check_microsoft_store_status()
-    result2 = check_microsoft_store_status2()
-    if result and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateMicrosoftStore'] == STATUS_DISABLED:
+        enable_microsoft_store()
+        enable_microsoft_store2()
     else:
-        return STATUS_ENABLED
+        disable_microsoft_store()
+        disable_microsoft_store2()
+
 
 
 def updateWindowsXBOX():
-    global Bar
-    result = check_xbox_status()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateWindowsXBOX'] == STATUS_DISABLED:
+        enable_xbox()
     else:
-        return STATUS_ENABLED
+        disable_xbox()
+
 
 
 def updateTelemetria():
-    global Bar
-    result1 = SearchStart1()
-    result2 = SearchStart2()
-    result3 = SearchStart3()
-    result4 = SearchStart4()
-    if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateTelemetria'] == STATUS_DISABLED:
+        Start1On()
+        Start2On()
+        Start3On()
+        Start4On()
     else:
-        return STATUS_ENABLED
+        Start1Off()
+        Start2Off()
+        Start3Off()
+        Start4Off()
+
 
 
 def updateTelemetriaWebCome():
-    global Bar
-    result1 = SearchSetEmptyDebugger()
-    result2 = check_task_status()
-    if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateTelemetriaWebCome'] == STATUS_DISABLED:
+        enable_task_schtasks()
+        SetEmptyDebuggerOff()
     else:
-        return STATUS_ENABLED
+        disable_task_schtasks()
+        SetEmptyDebuggerOn()
 
 
 def uodateTaskMCA():
-    global Bar
-    result1 = check_TaskMCA_status_CompatibilityAppraiser()
-    result2 = SearchSetEmptyDebugger()
-    if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['uodateTaskMCA'] == STATUS_DISABLED:
+        enable_TaskMCA_CompatibilityAppraiser()
+        SetEmptyDebuggerOff()
     else:
-        return STATUS_ENABLED
+        disable_TaskMCA_CompatibilityAppraiser()
+        SetEmptyDebuggerOn()
 
 
 def updateUpdateDateCEIP():
-    global Bar
-    result = check_ProgramDataUpdater()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateUpdateDateCEIP'] == STATUS_DISABLED:
+        enable_ProgramDataUpdater()
     else:
-        return STATUS_ENABLED
+        disable_ProgramDataUpdater()
 
 
 def updateTaskApplicationImpactTelemetry():
-    global Bar
-    result = check_ait_agent_task()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateTaskApplicationImpactTelemetry'] == STATUS_DISABLED:
+        enable_ait_agent_task()
     else:
-        return STATUS_ENABLED
+        disable_ait_agent_task()
+
 
 
 def uodateProductivityAppReminder():
-    global Bar
-    result = check_StartupAppTask()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['uodateProductivityAppReminder'] == STATUS_DISABLED:
+        enable_StartupAppTask()
     else:
-        return STATUS_ENABLED
+        disable_StartupAppTask()
+
 
 
 def updateTaskCEIP():
-    global Bar
-    result1 = check_Proxy()
-    result2 = check_BthSQM()
-    result3 = check_Consolidator()
-    result4 = check_KernelCeipTask()
-    result5 = check_UsbCeip()
-    if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateTaskCEIP'] == STATUS_DISABLED:
+        enable_Proxy()
+        enable_BthSQM()
+        enable_Consolidator()
+        enable_KernelCeipTask()
+        enable_UsbCeip()
     else:
-        return STATUS_ENABLED
+        disable_Proxy()
+        disable_BthSQM()
+        disable_Consolidator()
+        disable_KernelCeipTask()
+        disable_UsbCeip()
 
 
 def updateCEIPSQM():
-    global Bar
-    result = SearchCEIPSQM()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateCEIPSQM'] == STATUS_DISABLED:
+        CEIPSQMOn()
     else:
-        return STATUS_ENABLED
+        CEIPSQMOff()
+
 
 
 def updateTelemetrApplicationImpact():
-    global Bar
-    result = SearchAITEnable()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateTelemetrApplicationImpact'] == STATUS_DISABLED:
+        AITEnableOn()
     else:
-        return STATUS_ENABLED
+        AITEnableOff()
+
 
 
 def updateTelemetrNalogDate():
-    global Bar
-    result1 = SearchAllowTelemetry()
-    result2 = SearchAllowTelemetry2()
-    result3 = SearchAllowTelemetry3()
-    result4 = SearchLimitEnhancedDiagnosticDataWindowsAnalytics()
-    if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateTelemetrNalogDate'] ==  STATUS_DISABLED:
+        LimitEnhancedDiagnosticDataWindowsAnalyticsOn()
+        AllowTelemetry3On()
+        AllowTelemetry2On()
+        AllowTelemetryOn()
     else:
-        return STATUS_ENABLED
+        LimitEnhancedDiagnosticDataWindowsAnalyticsOff()
+        AllowTelemetry3Off()
+        AllowTelemetry2Off()
+        AllowTelemetryOff()
+
 
 
 def updateTelemetrLicense():
-    global Bar
-    result = SearchNoGenTicket()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateTelemetrLicense'] == STATUS_DISABLED:
+        NoGenTicketOn()
     else:
-        return STATUS_ENABLED
+        NoGenTicketOff()
+
 
 
 def updateWer():
-    global Bar
-    result1 = SearchDisabled()
-    result2 = SearchDisabled2()
-    result3 = SearchDefaultConsent()
-    result4 = SearchDefaultOverrideBehavior()
-    result5 = SearchDontSendAdditionalData()
-    result6 = SearchLoggingDisabled()
-    result7 = SearchStartWER()
-    result8 = SearchStartWER2()
-    result9 = check_QueueReporting()
-    if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED and result6 == STATUS_DISABLED and result6 == STATUS_DISABLED and result7 == STATUS_DISABLED and result8 == STATUS_DISABLED and result9 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateWer'] == STATUS_DISABLED:
+        DisabledOn()
+        Disabled2On()
+        DefaultConsentOn()
+        DefaultOverrideBehaviorOn()
+        DontSendAdditionalDataOn()
+        DontSendAdditionalDataOn()
+        LoggingDisabledOn()
+        StartWEROn()
+        StartWER2On()
+        enable_QueueReporting()
     else:
-        return STATUS_ENABLED
+        DisabledOff()
+        Disabled2Off()
+        DefaultConsentOff()
+        DefaultOverrideBehaviorOff()
+        DefaultOverrideBehaviorOff()
+        DontSendAdditionalDataOff()
+        LoggingDisabledOff()
+        StartWEROff()
+        StartWER2Off()
+        disable_QueueReporting()
+
 
 
 def updateActiveVoiceForCortan():
-    global Bar
-    result1 = SearchAgentActivationEnabled()
-    result2 = SearchLetAppsActivateWithVoice()
-    result3 = check_ProgramDataUpdater()
-    if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateActiveVoiceForCortan'] == STATUS_DISABLED:
+        AgentActivationEnabledOn()
+        LetAppsActivateWithVoiceOn()
+        enable_ProgramDataUpdater()
     else:
-        return STATUS_ENABLED
+        AgentActivationEnabledOff()
+        LetAppsActivateWithVoiceOff()
+        disable_ProgramDataUpdater()
+
 
 
 def updateActiveVoiceForCortanBlockSystem():
-    global Bar
-    result1 = SearchAgentActivationOnLockScreenEnabled()
-    result2 = SearchLetAppsActivateWithVoiceAboveLock()
-    if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateActiveVoiceForCortanBlockSystem'] == STATUS_DISABLED:
+        AgentActivationOnLockScreenEnabledOn()
+        LetAppsActivateWithVoiceAboveLockOn()
     else:
-        return STATUS_ENABLED
+        AgentActivationOnLockScreenEnabledOff()
+        LetAppsActivateWithVoiceAboveLockOff()
+
 
 
 def updateWindowsLocationProvider():
-    global Bar
-    result1 = SearchDisableWindowsLocationProvider()
-    result2 = SearchDisableLocationScripting()
-    result3 = SearchDisableLocation()
-    result4 = SearchSensorPermissionState()
-    result5 = SearchSensorPermissionState2()
-    if result5 == STATUS_DISABLED and result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateWindowsLocationProvider'] == STATUS_DISABLED:
+        DisableWindowsLocationProviderOn()
+        DisableLocationScriptingOn()
+        DisableLocationOn()
+        SensorPermissionStateOn()
+        SensorPermissionState2On()
     else:
-        return STATUS_ENABLED
-
+        DisableWindowsLocationProviderOff()
+        DisableLocationScriptingOff()
+        DisableLocationOff()
+        SensorPermissionStateOff()
+        SensorPermissionState2Off()
 
 def updateAllowIndexingEncryptedStoresOrItems():
-    global Bar
-    result1 = SearchAllowIndexingEncryptedStoresOrItems()
-    result2 = SearchAlwaysUseAutoLangDetection()
-    result3 = SearchAllowSearchToUseLocation()
-    result4 = SearchDisableWebSearch1()
-    result5 = SearchConnectedSearchUseWeb()
-    result6 = SearchBingSearchEnabled()
-    if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED and result4 == STATUS_DISABLED and result5 == STATUS_DISABLED and result6 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateAllowIndexingEncryptedStoresOrItems'] == STATUS_DISABLED:
+        DAllowIndexingEncryptedStoresOrItemsOn()
+        AlwaysUseAutoLangDetectionOn()
+        AllowSearchToUseLocationOn()
+        DisableWebSearch1On()
+        ConnectedSearchUseWebOn()
+        BingSearchEnabledOn()
     else:
-        return STATUS_ENABLED
+        AllowIndexingEncryptedStoresOrItemsOff()
+        AlwaysUseAutoLangDetectionOff()
+        AllowSearchToUseLocationOff()
+        DisableWebSearch1Off()
+        ConnectedSearchUseWebOff()
+        BingSearchEnabledOff()
+
 
 
 def updateTargetedAdverisingAndMarketing():
-    global Bar
-    result1 = SearchSubscribedContent338393Enabled()
-    result2 = SearchSubscribedContent353694Enabled()
-    result3 = SearchSubscribedContent353696Enabled()
-    result4 = SearchDisableSoftLanding()
-    result5 = SearchDisableWindowsSpotlightFeatures()
-    result6 = SearchDisableWindowsConsumerFeatures()
-    if result1 and result2 and result3 and result4 and result5 and result6 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateTargetedAdverisingAndMarketing'] == STATUS_DISABLED:
+        SubscribedContent338393EnabledOn()
+        SubscribedContent353694EnabledOn()
+        SubscribedContent353696EnabledOn()
+        DisableSoftLandingOn()
+        DisableWindowsSpotlightFeaturesOn()
+        DisableWindowsConsumerFeaturesOn()
     else:
-        return STATUS_ENABLED
+        SubscribedContent338393EnabledOff()
+        SubscribedContent353694EnabledOff()
+        SubscribedContent353696EnabledOff()
+        DisableSoftLandingOff()
+        DisableWindowsSpotlightFeaturesOff()
+        DisableWindowsConsumerFeaturesOff()
 
 
 def updateCloudSaving():
-    global Bar
-    result1 = SearchDisableSettingSync()
-    result2 = SearchDisableSettingSyncUserOverride()
-    result3 = SearchDisableSyncOnPaidNetwork()
-    result4 = SearchSyncPolicy()
-    result5 = SearchDisableApplicationSettingSync()
-    result6 = SearchDisableApplicationSettingSyncUserOverride()
-    result7 = SearchDisableAppSyncSettingSync()
-    result8 = SearchDisableAppSyncSettingSyncUserOverride()
-    result9 = SearchDisableCredentialsSettingSync()
-    result10 = SearchDisableCredentialsSettingSyncUserOverride()
-    result11 = SearchEnabledCloudSaving()
-    result12 = SearchDisableDesktopThemeSettingSync()
-    result13 = SearchDisableDesktopThemeSettingSyncUserOverride()
-    result14 = SearchDisablePersonalizationSettingSync()
-    result15 = SearchDisablePersonalizationSettingSyncUserOverride()
-    result16 = SearchDisableStartLayoutSettingSync()
-    result17 = SearchDisableStartLayoutSettingSyncUserOverride()
-    result18 = SearchDisableWebBrowserSettingSync()
-    result19 = SearchDisableWebBrowserSettingSyncUserOverride()
-    result20 = SearchDisableWindowsSettingSync()
-    result21 = SearchDisableWindowsSettingSyncUserOverride()
-    result22 = SearchEnabledLanguage()
-    if result1 and result2 and result3 and result4 and result5 and result6 and result7 and result8 and result9 and result10 and result11 and result12 and result13 and result14 and result15 and result16 and result17 and result18 and result19 and result20 and result21 and result22 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateCloudSaving'] == STATUS_DISABLED:
+        DisableSettingSyncOn()
+        DisableSettingSyncUserOverrideOn()
+        DisableSyncOnPaidNetworkOn()
+        SyncPolicyOn()
+        DisableApplicationSettingSyncOn()
+        DisableApplicationSettingSyncUserOverrideOn()
+        DisableAppSyncSettingSyncOn()
+        DisableAppSyncSettingSyncUserOverrideOn()
+        DisableCredentialsSettingSyncOn()
+        DisableCredentialsSettingSyncUserOverrideOn()
+        EnabledCloudSavingOn()
+        DisableDesktopThemeSettingSyncOn()
+        DisableDesktopThemeSettingSyncUserOverrideOn()
+        DisablePersonalizationSettingSyncOn()
+        DisablePersonalizationSettingSyncUserOverrideOn()
+        DisableStartLayoutSettingSyncOn()
+        DisableStartLayoutSettingSyncUserOverrideOn()
+        DisableWebBrowserSettingSyncOn()
+        DisableWebBrowserSettingSyncUserOverrideOn()
+        DisableWindowsSettingSyncOn()
+        DisableWindowsSettingSyncUserOverrideOn()
+        EnabledLanguageOn()
     else:
-        return STATUS_ENABLED
+        DisableSettingSyncOff()
+        DisableSettingSyncUserOverrideOff()
+        DisableSyncOnPaidNetworkOff()
+        SyncPolicyOff()
+        DisableApplicationSettingSyncOff()
+        DisableApplicationSettingSyncUserOverrideOff()
+        DisableAppSyncSettingSyncOff()
+        DisableAppSyncSettingSyncUserOverrideOff()
+        DisableCredentialsSettingSyncOff()
+        DisableCredentialsSettingSyncUserOverrideOff()
+        EnabledCloudSavingOff()
+        DisableDesktopThemeSettingSyncOff()
+        DisableDesktopThemeSettingSyncUserOverrideOff()
+        DisablePersonalizationSettingSyncOff()
+        DisablePersonalizationSettingSyncUserOverrideOff()
+        DisableStartLayoutSettingSyncOff()
+        DisableStartLayoutSettingSyncUserOverrideOff()
+        DisableWebBrowserSettingSyncOff()
+        DisableWebBrowserSettingSyncUserOverrideOff()
+        DisableWindowsSettingSyncOff()
+        DisableWindowsSettingSyncUserOverrideOff()
+        EnabledLanguageOff()
+
 
 
 def updateCloudVoice():
-    global Bar
-    result = SearchHasAccepted()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateCloudVoice'] == STATUS_DISABLED:
+        HasAcceptedOn()
     else:
-        return STATUS_ENABLED
+        HasAcceptedOff()
 
 
 def updateWindowsSearchDateCollection():
-    global Bar
-    result = SearchAcceptedPrivacyPolicy()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateWindowsSearchDateCollection'] == STATUS_DISABLED:
+        AcceptedPrivacyPolicyOn()
     else:
-        return STATUS_ENABLED
+        AcceptedPrivacyPolicyOff()
+
 
 
 def updateWindowsPrivacyConsentDisclaimer():
-    global Bar
-    result1 = SearchNumberOfSIUFInPeriod()
-    result2 = SearchPeriodInNanoSeconds()
-    result3 = SearchDoNotShowFeedbackNotifications()
-    result4 = SearchDmClient()
-    result5 = SearchDmClientOnScenarioDownload()
-    if result1 and result2 and result3 and result4 and result5 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateWindowsPrivacyConsentDisclaimer'] == STATUS_DISABLED:
+        NumberOfSIUFInPeriodOn()
+        PeriodInNanoSecondsOn()
+        DoNotShowFeedbackNotificationsOn()
+        DmClientOn()
+        DmClientOnScenarioDownloadOn()
     else:
-        return STATUS_ENABLED
+        NumberOfSIUFInPeriodOff()
+        PeriodInNanoSecondsOff()
+        DoNotShowFeedbackNotificationsOff()
+        DmClientOff()
+        DmClientOnScenarioDownloadOff()
+
+
 
 
 def updateCollectTextMessagesandHandwritingInput():
-    global Bar
-    result1 = SearchRestrictImplicitInkCollection()
-    result2 = SearchRestrictImplicitTextCollection()
-    result3 = SearchHarvestContacts()
-    if result1 and result2 and result3 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateCollectTextMessagesandHandwritingInput'] == STATUS_DISABLED:
+        RestrictImplicitInkCollectionOn()
+        RestrictImplicitTextCollectionOn()
+        HarvestContactsOn()
     else:
-        return STATUS_ENABLED
+        RestrictImplicitInkCollectionOff()
+        RestrictImplicitTextCollectionOff()
+        HarvestContactsOff()
 
 
 def updateSensor():
-    global Bar
-    result = SearchDisableSensors()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateSensor'] == STATUS_DISABLED:
+        DisableSensorsOn()
     else:
-        return STATUS_ENABLED
+        DisableSensorsOff()
 
 
 def updateWiFiSense():
-    global Bar
-    result1 = Searchvalue1()
-    result2 = Searchvalue2()
-    result3 = SearchAutoConnectAllowedOEM()
-    if result1 and result2 and result3 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateWiFiSense'] == STATUS_DISABLED:
+        value1On()
+        value2On()
+        AutoConnectAllowedOEMOn()
     else:
-        return STATUS_ENABLED
+        value1Off()
+        value2Off()
+        AutoConnectAllowedOEMOff()
 
 
 def updateHideMostUsedApps():
-    global Bar
-    result1 = SearchHideMostUsedApps()
-    if result1 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateHideMostUsedApps'] == STATUS_DISABLED:
+        HideMostUsedAppsOn()
     else:
-        return STATUS_ENABLED
+        HideMostUsedAppsOff()
 
 
 def updateInventoryCollector():
-    global Bar
-    result1 = SearchDisableInventory()
-    result2 = ICDeviceSearch()
-    result3 = DeviceUserSearch()
-    if result1 and result2 and result3 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateInventoryCollector'] == STATUS_DISABLED:
+        DisableInventoryOn()
+        ICDeviceOn()
+        DeviceUserOn()
     else:
-        return STATUS_ENABLED
+        DisableInventoryOff()
+        ICDeviceOff()
+        DeviceUserOff()
+
+
 
 
 def updateSiteAccessToTheListOfLanguages():
-    global Bar
-    result = SearchHttpAcceptLanguageOptOut()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateSiteAccessToTheListOfLanguages'] == STATUS_DISABLED:
+        HttpAcceptLanguageOptOutOn()
     else:
-        return STATUS_ENABLED
+        HttpAcceptLanguageOptOutOff()
 
 
 def updateRecordingActions():
-    global Bar
-    result = SearchHttpAcceptLanguageOptOutRAOut()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateRecordingActions'] == STATUS_DISABLED:
+        HttpAcceptLanguageOptOutRAOn()
     else:
-        return STATUS_ENABLED
+        HttpAcceptLanguageOptOutRAOff()
 
 
 def updateFeedbackAsYouType():
-    global Bar
-    result = SearchEnabledFAYT()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateFeedbackAsYouType'] == STATUS_DISABLED:
+        EnabledFAYTOn()
     else:
-        return STATUS_ENABLED
+        EnabledFAYTOff()
 
 
 def updateActivityFeed():
-    global Bar
-    result = SearchEnableActivityFeed()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateActivityFeed'] == STATUS_DISABLED:
+        EnableActivityFeedOn()
     else:
-        return STATUS_ENABLED
+        EnableActivityFeedOff()
 
 
 def updateApplicationAccessToLocation():
-    global Bar
-    result1 = SearchValueAATL()
-    result2 = SearchStatusAATL()
-    result3 = SearchLetAppsAccessLocation()
-    if result1 and result2 and result3 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToLocation'] == STATUS_DISABLED:
+        ValueAATLOn()
+        StatusAATLOn()
+        LetAppsAccessLocationOn()
     else:
-        return STATUS_ENABLED
+        ValueAATLOff()
+        StatusAATLOff()
+        LetAppsAccessLocationOff()
+
 
 
 def updateApplicationAccessToAccountInformation():
-    global Bar
-    result1 = SearchValueAATI()
-    result2 = SearchLetAppsAccessAccountInfo()
-    if result1 and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToAccountInformation'] == STATUS_DISABLED:
+        ValueAATIOn()
+        LetAppsAccessAccountInfoOn()
     else:
-        return STATUS_ENABLED
+        ValueAATIOff()
+        LetAppsAccessAccountInfoOff()
 
 
 def updateApplicationAccessToMotionData():
-    global Bar
-    result1 = SearchValueAATMD()
-    result2 = SearchLetAppsAccessMotion()
-    if result1 and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToMotionData'] == STATUS_DISABLED:
+        ValueAATMDOn()
+        LetAppsAccessMotionOn()
     else:
-        return STATUS_ENABLED
+        LetAppsAccessMotionOff()
+        ValueAATMDOff()
 
 
 def updateAppAccessToPhone():
-    global Bar
-    result = SearchLetAppsAccessPhone()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateAppAccessToPhone'] == STATUS_DISABLED:
+        LetAppsAccessPhoneOn()
     else:
-        return STATUS_ENABLED
+        LetAppsAccessPhoneOff()
+
 
 
 def updateApplicationAccessToTrustedDevices():
-    global Bar
-    result = SearchLetAppsAccessTrustedDevices()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToTrustedDevices'] == STATUS_DISABLED:
+        LetAppsAccessTrustedDevicesOn()
     else:
-        return STATUS_ENABLED
+        LetAppsAccessTrustedDevicesOff()
+
 
 
 def updateApplicationAccessToDeviceSynchronization():
-    global Bar
-    result = SearchLetAppsSyncWithDevices()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToDeviceSynchronization'] == STATUS_DISABLED:
+        LetAppsSyncWithDevicesOn()
     else:
-        return STATUS_ENABLED
+        LetAppsSyncWithDevicesOff()
 
 
 def updateApplicationsAccessDiagnosticInformationAboutOtherApplications():
-    global Bar
-    result1 = SearchValueAADAOA()
-    result2 = SearchLetAppsAccessMotion()
-    if result1 and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationsAccessDiagnosticInformationAboutOtherApplications'] == STATUS_DISABLED:
+        ValueAADAOAOn()
+        LetAppsAccessMotionOn()
     else:
-        return STATUS_ENABLED
+        ValueAADAOAOff()
+        LetAppsAccessMotionOff()
 
 
 def updateApplicationAccessToContacts():
-    global Bar
-    result1 = SearchalueContact()
-    result2 = SearchLetAppsAccessContacts()
-    if result1 and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToContacts'] == STATUS_DISABLED:
+        ValueContactOn()
+        LetAppsAccessContactsOn()
     else:
-        return STATUS_ENABLED
+        ValueContactOff()
+        LetAppsAccessContactsOff()
 
 
 def updateApplicationAccessToCalendar():
-    global Bar
-    result1 = SearchValueCalendar1()
-    result2 = SearchLetAppsAccessCalendar()
-    if result1 and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToCalendar'] == STATUS_DISABLED:
+        ValueCalendar1On()
+        LetAppsAccessCalendarOn()
     else:
-        return STATUS_ENABLED
+        ValueCalendar1Off()
+        LetAppsAccessCalendarOff()
+
 
 
 def updateApplicationAccessToCallLog():
-    global Bar
-    result1 = SearchValueCallAccess()
-    result2 = SearchLetAppsAccessCallHistory()
-    if result1 and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToCallLog'] == STATUS_DISABLED:
+        ValueCallAccessOn()
+        LetAppsAccessCallHistoryOn()
     else:
-        return STATUS_ENABLED
+        ValueCallAccessOff()
+        LetAppsAccessCallHistoryOff()
 
 
 def updateApplicationAccessToEmail():
-    global Bar
-    result1 = SearchValueEmail()
-    result2 = SearchLetAppsAccessEmail()
-    if result1 and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToEmail'] == STATUS_DISABLED:
+        ValueEmailOn()
+        LetAppsAccessEmailOn()
     else:
-        return STATUS_ENABLED
+        ValueEmailOff()
+        LetAppsAccessEmailOff()
 
 
 def updateApplicationAccessToTasks():
-    global Bar
-    result1 = SearchValueTask()
-    result2 = SearchLetAppsAccessTasks()
-    if result1 and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToTasks'] == STATUS_DISABLED:
+        ValueTaskOn()
+        LetAppsAccessTasksOn()
     else:
-        return STATUS_ENABLED
+        ValueTaskOff()
+        LetAppsAccessTasksOff()
 
 
 def updateApplicationAccessToMessages():
-    global Bar
-    result1 = SearchValueMessage()
-    result2 = SearchLetAppsAccessCalendar2()
-    if result1 and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToMessages'] == STATUS_DISABLED:
+        ValueMessageOn()
+        LetAppsAccessCalendar2On()
     else:
-        return STATUS_ENABLED
+        ValueMessageOff()
+        LetAppsAccessCalendar2Off()
+
 
 
 def updateApplicationAccessToRadio():
-    global Bar
-    result1 = SearchValueRadio()
-    result2 = SearchLetAppsAccessRadios()
-    if result1 and result2 == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToRadio'] == STATUS_DISABLED:
+        ValueRadioOn()
+        LetAppsAccessRadiosOn()
     else:
-        return STATUS_ENABLED
+        ValueRadioOff()
+        LetAppsAccessRadiosOff()
 
 
 def updateAppAccessToBluetoothDevices():
-    global Bar
-    result = SearchValueBluetooth()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateAppAccessToBluetoothDevices'] == STATUS_DISABLED:
+        ValueBluetoothOn()
     else:
-        return STATUS_ENABLED
+        ValueBluetoothOff()
 
 
 def updateApplicationAccessToTheDocumentsFolder():
-    global Bar
-    result = SearchValueDocs()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToTheDocumentsFolder'] == STATUS_DISABLED:
+        ValueDocsOn()
     else:
-        return STATUS_ENABLED
+        ValueDocsOff()
 
 
 def updateApplicationAccessToThePicturesFolder():
-    global Bar
-    result = SearchValuePicturesLibrary()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToThePicturesFolder'] == STATUS_DISABLED:
+        ValuePicturesLibraryOn()
     else:
-        return STATUS_ENABLED
+        ValuePicturesLibraryOff()
 
 
 def updateApplicationAccessToTheVideosFolder():
-    global Bar
-    result = SearchVideosLibrary()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToTheVideosFolder'] == STATUS_DISABLED:
+        VideosLibraryOn()
     else:
-        return STATUS_ENABLED
+        VideosLibraryOff()
 
 
 def updateApplicationAccessToAnotherFileSystem():
-    global Bar
-    result = SearchAccessFileSystem()
-    if result == STATUS_DISABLED:
-        return STATUS_DISABLED
+    if funct['updateApplicationAccessToAnotherFileSystem'] == STATUS_DISABLED:
+        AccessFileSystemOn()
     else:
-        return STATUS_ENABLED
+        AccessFileSystemOff()
 
+updateApplicationAccessToAnotherFileSystem()
+updateApplicationAccessToThePicturesFolder()
+updateApplicationAccessToTheDocumentsFolder()
+updateAppAccessToBluetoothDevices()
+updateApplicationAccessToRadio()
+updateApplicationAccessToMessages()
+updateApplicationAccessToTasks()
+updateApplicationAccessToEmail()
+updateApplicationAccessToCallLog()
+updateApplicationAccessToCalendar()
+updateApplicationAccessToContacts()
+updateApplicationsAccessDiagnosticInformationAboutOtherApplications()
+updateApplicationAccessToDeviceSynchronization()
+updateApplicationAccessToTrustedDevices()
+updateAppAccessToPhone()
+updateApplicationAccessToMotionData()
+updateApplicationAccessToAccountInformation()
+updateApplicationAccessToLocation()
+updateActivityFeed()
+updateFeedbackAsYouType()
+updateRecordingActions()
+updateSiteAccessToTheListOfLanguages()
+updateInventoryCollector()
+updateHideMostUsedApps()
+updateWiFiSense()
+updateSensor()
+updateCollectTextMessagesandHandwritingInput()
+updateWindowsPrivacyConsentDisclaimer()
+updateWindowsSearchDateCollection()
+updateCloudVoice()
+updateCloudSaving()
+updateTargetedAdverisingAndMarketing()
+updateAllowIndexingEncryptedStoresOrItems()
+updateWindowsLocationProvider()
+updateActiveVoiceForCortanBlockSystem()
+updateWer()
+updateActiveVoiceForCortan()
+updateTelemetrLicense()
+updateTelemetrNalogDate()
+updateTelemetrApplicationImpact()
+updateCEIPSQM()
+updateTaskCEIP()
+uodateProductivityAppReminder()
+updateTaskApplicationImpactTelemetry()
+updateUpdateDateCEIP()
+uodateTaskMCA()
+updateTelemetriaWebCome()
+updateTelemetria()
+updateWindowsXBOX()
+updateMicrosoftStore()
+updateCleaningTasks()
+updateRemoteControl()
+updateMapsLocation()
+updateAutoPerformanceCheck()
+updateInstallingAndRemovingLanguages()
+updateAutoProxyDetection()
+updateNetPrecompilation()
+updateDiagnosticTasks()
+updateTasksForAnalysis()
+updateSystemResponsiveness()
+updateWin32_priority_separation()
+updateMeltdownSpectre()
+updateWindowsReservedStorage()
+updateSvchost()
+updateUpdateLastNFS()
+updateConvertNameFile83()
+updateDiagnosricEvents()
+updateWindowsUAC()
+updateWindowsFirewall()
+updateMouseAcceleration()
+updateProtectionNotifications()
+updateAutoUpdateDriversatSystemstartup()
+updateUWP()
+updateAutoUpdatingAppsStore()
+updateAppearance()
+updateGameBar()
+updateMultyPlanOverplay()
+#удаляем json файл
+if os.path.exists('BakUpFile\BKFILE.json'):
+    os.remove('BakUpFile\BKFILE.json')
 
-
-
-data = {
-    'updateMouseAcceleration': str(updateMouseAcceleration()),
-    'updateProtectionNotifications': str(updateProtectionNotifications()),
-    'updateAutoUpdateDriversatSystemstartup': str(updateAutoUpdateDriversatSystemstartup()),
-    'updateUWP': str(updateUWP()),
-    'updateAutoUpdatingAppsStore': str(updateAutoUpdatingAppsStore()),
-    'updateAppearance': str(updateAppearance()),
-    'updateGameBar': str(updateGameBar()),
-    'updateMultyPlanOverplay': str(updateMultyPlanOverplay()),
-    'updateWindowsFirewall': str(updateWindowsFirewall()),
-    'updateWindowsUAC': str(updateWindowsUAC()),
-    'updateDiagnosricEvents': str(updateDiagnosricEvents()),
-    'updateConvertNameFile83': str(updateConvertNameFile83()),
-    'updateUpdateLastNFS': str(updateUpdateLastNFS()),
-    'updateSvchost': str(updateSvchost()),
-    'updateWindowsReservedStorage': str(updateWindowsReservedStorage()),
-    'updateMeltdownSpectre': str(updateMeltdownSpectre()),
-    'updateWin32_priority_separation': str(updateWin32_priority_separation()),
-    'updateSystemResponsiveness': str(updateSystemResponsiveness()),
-    'updateTasksForAnalysis': str(updateTasksForAnalysis()),
-    'updateDiagnosticTasks': str(updateDiagnosticTasks()),
-    'updateNetPrecompilation': str(updateNetPrecompilation()),
-    'updateAutoProxyDetection': str(updateAutoProxyDetection()),
-    'updateInstallingAndRemovingLanguages': str(updateInstallingAndRemovingLanguages()),
-    'updateAutoPerformanceCheck': str(updateAutoPerformanceCheck()),
-    'updateMapsLocation': str(updateMapsLocation()),
-    'updateRemoteControl': str(updateRemoteControl()),
-    'updateCleaningTasks': str(updateCleaningTasks()),
-    'updateMicrosoftStore': str(updateMicrosoftStore()),
-    'updateWindowsXBOX': str(updateWindowsXBOX()),
-    'updateTelemetria': str(updateTelemetria()),
-    'updateTelemetriaWebCome': str(updateTelemetriaWebCome()),
-    'uodateTaskMCA': str(uodateTaskMCA()),
-    'updateUpdateDateCEIP': str(updateUpdateDateCEIP()),
-    'updateTaskApplicationImpactTelemetry': str(updateTaskApplicationImpactTelemetry()),
-    'uodateProductivityAppReminder': str(uodateProductivityAppReminder()),
-    'updateTaskCEIP': str(updateTaskCEIP()),
-    'updateCEIPSQM': str(updateCEIPSQM()),
-    'updateTelemetrApplicationImpact': str(updateTelemetrApplicationImpact()),
-    'updateTelemetrNalogDate': str(updateTelemetrNalogDate()),
-    'updateTelemetrLicense': str(updateTelemetrLicense()),
-    'updateActiveVoiceForCortan': str(updateActiveVoiceForCortan()),
-    'updateWer': str(updateWer()),
-    'updateActiveVoiceForCortanBlockSystem': str(updateActiveVoiceForCortanBlockSystem()),
-    'updateWindowsLocationProvider': str(updateWindowsLocationProvider()),
-    'updateAllowIndexingEncryptedStoresOrItems': str(updateAllowIndexingEncryptedStoresOrItems()),
-    'updateTargetedAdverisingAndMarketing': str(updateTargetedAdverisingAndMarketing()),
-    'updateCloudSaving': str(updateCloudSaving()),
-    'updateCloudVoice': str(updateCloudVoice()),
-    'updateWindowsSearchDateCollection': str(updateWindowsSearchDateCollection()),
-    'updateWindowsPrivacyConsentDisclaimer': str(updateWindowsPrivacyConsentDisclaimer()),
-    'updateCollectTextMessagesandHandwritingInput': str(updateCollectTextMessagesandHandwritingInput()),
-    'updateSensor': str(updateSensor()),
-    'updateWiFiSense': str(updateWiFiSense()),
-    'updateHideMostUsedApps': str(updateHideMostUsedApps()),
-    'updateInventoryCollector': str(updateInventoryCollector()),
-    'updateSiteAccessToTheListOfLanguages': str(updateSiteAccessToTheListOfLanguages()),
-    'updateRecordingActions': str(updateRecordingActions()),
-    'updateFeedbackAsYouType': str(updateFeedbackAsYouType()),
-    'updateActivityFeed': str(updateActivityFeed()),
-    'updateApplicationAccessToLocation': str(updateApplicationAccessToLocation()),
-    'updateApplicationAccessToAccountInformation': str(updateApplicationAccessToAccountInformation()),
-    'updateApplicationAccessToMotionData': str(updateApplicationAccessToMotionData()),
-    'updateAppAccessToPhone': str(updateAppAccessToPhone()),
-    'updateApplicationAccessToTrustedDevices': str(updateApplicationAccessToTrustedDevices()),
-    'updateApplicationAccessToDeviceSynchronization': str(updateApplicationAccessToDeviceSynchronization()),
-    'updateApplicationsAccessDiagnosticInformationAboutOtherApplications': str(updateApplicationsAccessDiagnosticInformationAboutOtherApplications()),
-    'updateApplicationAccessToContacts': str(updateApplicationAccessToContacts()),
-    'updateApplicationAccessToCalendar': str(updateApplicationAccessToCalendar()),
-    'updateApplicationAccessToCallLog': str(updateApplicationAccessToCallLog()),
-    'updateApplicationAccessToEmail': str(updateApplicationAccessToEmail()),
-    'updateApplicationAccessToTasks': str(updateApplicationAccessToTasks()),
-    'updateApplicationAccessToMessages': str(updateApplicationAccessToMessages()),
-    'updateApplicationAccessToRadio': str(updateApplicationAccessToRadio()),
-    'updateAppAccessToBluetoothDevices': str(updateAppAccessToBluetoothDevices()),
-    'updateApplicationAccessToTheDocumentsFolder': str(updateApplicationAccessToTheDocumentsFolder()),
-    'updateApplicationAccessToThePicturesFolder': str(updateApplicationAccessToThePicturesFolder()),
-    'updateApplicationAccessToAnotherFileSystem': str(updateApplicationAccessToAnotherFileSystem())
-}
-# Сериализуем данные в строку в формате JSON и записываем в файл
-with open('BakUpFile\BKFILE.json', 'w', encoding='utf-8') as file:
-    json.dump(data, file, ensure_ascii=False, indent=4)

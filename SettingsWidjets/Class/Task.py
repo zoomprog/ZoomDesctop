@@ -410,12 +410,6 @@ class Task(QDialog, Ui_Task):
             disable_xbox()
         self.updateWindowsXBOX()
 
-
-
-
-
-
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     energy_window = Task()
