@@ -15,13 +15,15 @@ from PyQt6.QtCore import QSettings
 from PyQt6.QtWidgets import QVBoxLayout
 from Widget.Disk.DiskVisual import DiskUsageWidget
 from Widget.CircularProgressBar.CircularProgressBar import CircularProgressBar
+from Widget.CircularProgressBar.CPU.CPUProgressBar import CircularProgressBarCPU
 from Widget.CircularProgressBar.CircularProgressBarSearh import Bar
+from Widget.CircularProgressBar.CPU.CPUCircular import cpu_Bar
 
 
 class AboutTheProgram(QDialog, Ui_AboutTheProgram):
     def __init__(self, id_Profile, settings):
         super().__init__()
-
+        cpu_Bar()
         self.dialog = None
         self.offset = None
         self.oldPos = None
@@ -77,6 +79,12 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         #Вывод CircularProgressBar
 
 
+        CPU_BAR = cpu_Bar()
+        self.CPUProgressBar = CircularProgressBarCPU()
+        self.CPUProgressBarLayout = QVBoxLayout(self.widget_CPUBar)
+        self.CPUProgressBarLayout.addWidget(self.CPUProgressBar)
+        self.CPUProgressBarLayout.setContentsMargins(0, 0, 0, 0)
+        self.CPUProgressBar.setValue(CPU_BAR)
         # Создание и настройка CircularProgressBar
         self.circularProgressBar = CircularProgressBar()
         self.CircularProgressBarLayout = QVBoxLayout(self.widget_CircularProgressBar)

@@ -1085,4 +1085,3 @@ updateMultyPlanOverplay()
 #удаляем json файл
 if os.path.exists('BakUpFile\BKFILE.json'):
     os.remove('BakUpFile\BKFILE.json')
-

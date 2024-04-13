@@ -180,12 +180,12 @@
     background-color: #161A1E;
     color: white;
     border-radius: 65px; /* Уточним единицы измерения для радиуса */
-    border: 4px solid #363538;
+
 }
 
 QPushButton:hover {
     color: rgba(115, 128, 142, 255);
-    border: 4px solid white;
+    border: 4px solid #00BFFF;
 }
 </string>
                </property>
@@ -221,12 +221,12 @@ QPushButton:hover {
     background-color: #161A1E;
     color: white;
     border-radius: 65px; /* Уточним единицы измерения для радиуса */
-    border: 4px solid #363538;
+
 }
 
 QPushButton:hover {
     color: rgba(115, 128, 142, 255);
-    border: 4px solid white;
+    border: 4px solid #00BFFF;
 }
 </string>
                </property>
@@ -262,12 +262,12 @@ QPushButton:hover {
     background-color: #161A1E;
     color: white;
     border-radius: 65px; /* Уточним единицы измерения для радиуса */
-    border: 4px solid #363538;
+
 }
 
 QPushButton:hover {
     color: rgba(115, 128, 142, 255);
-    border: 4px solid white;
+    border: 4px solid #00BFFF;
 }
 </string>
                </property>
@@ -1499,6 +1499,209 @@ border-radius: 20px;
                </property>
                <property name="frameShadow">
                 <enum>QFrame::Raised</enum>
+               </property>
+              </widget>
+              <widget class="QFrame" name="frame_people">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>150</y>
+                 <width>151</width>
+                 <height>131</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">*{	
+	color:silver;
+	background-color:#161A1E;
+}</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <widget class="QLabel" name="label_2">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>50</y>
+                  <width>111</width>
+                  <height>16</height>
+                 </rect>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QLabel {
+    font-family: 'Arial'; /* Замените на нужное семейство шрифтов */
+    font-size: 16px; /* Замените на нужный размер шрифта */
+    color: rgb(85, 255, 255); /* Замените на нужный цвет текста */
+    font-weight: bold; /* Для жирного текста */
+}</string>
+                </property>
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_4">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>80</y>
+                  <width>131</width>
+                  <height>16</height>
+                 </rect>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QLabel {
+    font-family: 'Arial'; /* Замените на нужное семейство шрифтов */
+    font-size: 14px; /* Замените на нужный размер шрифта */
+    color: white; /* Замените на нужный цвет текста */
+    font-weight: bold; /* Для жирного текста */
+}</string>
+                </property>
+                <property name="text">
+                 <string>Пользователей</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="pushButton">
+                <property name="geometry">
+                 <rect>
+                  <x>50</x>
+                  <y>10</y>
+                  <width>41</width>
+                  <height>41</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="menu.qrc">
+                  <normaloff>:/icon/image/icon/kisspng-computer-icons-user-profile-clip-art-person-icon-user-person-man-icon-5ab04a2bed2dd1.5439408315215027639715.png</normaloff>:/icon/image/icon/kisspng-computer-icons-user-profile-clip-art-person-icon-user-person-man-icon-5ab04a2bed2dd1.5439408315215027639715.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>60</width>
+                  <height>60</height>
+                 </size>
+                </property>
+               </widget>
+              </widget>
+              <widget class="QFrame" name="frame_Optimization">
+               <property name="geometry">
+                <rect>
+                 <x>170</x>
+                 <y>150</y>
+                 <width>141</width>
+                 <height>131</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">*{	
+	color:silver;
+	background-color:#161A1E;
+}</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <widget class="QLabel" name="label_optimiz_2">
+                <property name="geometry">
+                 <rect>
+                  <x>50</x>
+                  <y>10</y>
+                  <width>41</width>
+                  <height>20</height>
+                 </rect>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QLabel {
+    font-family: 'Arial'; /* Замените на нужное семейство шрифтов */
+    font-size: 16px; /* Замените на нужный размер шрифта */
+    color: white; /* Замените на нужный цвет текста */
+    font-weight: bold; /* Для жирного текста */
+}</string>
+                </property>
+                <property name="text">
+                 <string>GPU</string>
+                </property>
+               </widget>
+               <widget class="QWidget" name="widget_GPUBar" native="true">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>40</y>
+                  <width>111</width>
+                  <height>71</height>
+                 </rect>
+                </property>
+               </widget>
+              </widget>
+              <widget class="QFrame" name="frame_Optimization_2">
+               <property name="geometry">
+                <rect>
+                 <x>320</x>
+                 <y>140</y>
+                 <width>151</width>
+                 <height>141</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">*{	
+	color:silver;
+	background-color:#161A1E;
+}</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <widget class="QLabel" name="label_optimiz_3">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>20</y>
+                  <width>41</width>
+                  <height>20</height>
+                 </rect>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QLabel {
+    font-family: 'Arial'; /* Замените на нужное семейство шрифтов */
+    font-size: 16px; /* Замените на нужный размер шрифта */
+    color: white; /* Замените на нужный цвет текста */
+    font-weight: bold; /* Для жирного текста */
+}</string>
+                </property>
+                <property name="text">
+                 <string>CPU</string>
+                </property>
+               </widget>
+               <widget class="QWidget" name="widget_CPUBar" native="true">
+                <property name="geometry">
+                 <rect>
+                  <x>40</x>
+                  <y>50</y>
+                  <width>91</width>
+                  <height>71</height>
+                 </rect>
+                </property>
+               </widget>
+              </widget>
+              <widget class="QWidget" name="widget_4" native="true">
+               <property name="geometry">
+                <rect>
+                 <x>420</x>
+                 <y>320</y>
+                 <width>51</width>
+                 <height>41</height>
+                </rect>
                </property>
               </widget>
              </widget>
