@@ -15,3 +15,5 @@ db = client.AppWise
 coll = db.users
 collLoggedIn = db.LoggedIn
 # ... rest of your code
+# Подсчет и вывод количества аккаунтов в коллекции users
+accounts_count = coll.count_documents({})

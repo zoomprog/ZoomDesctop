@@ -18,6 +18,10 @@ from Widget.CircularProgressBar.CircularProgressBar import CircularProgressBar
 from Widget.CircularProgressBar.CPU.CPUProgressBar import CircularProgressBarCPU
 from Widget.CircularProgressBar.CircularProgressBarSearh import Bar
 from Widget.CircularProgressBar.CPU.CPUCircular import cpu_Bar
+from Widget.CircularProgressBar.Memorry.MemorryBar import CircularProgressMemorryBar
+from Widget.CircularProgressBar.Memorry.MemorySearch import memorry_search
+from Widget.CircularProgressBar.Memorry.MemoryClear import clean_memory
+from database.DB import accounts_count
 
 
 class AboutTheProgram(QDialog, Ui_AboutTheProgram):
@@ -33,6 +37,7 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.setupUi(self)
         RemoveWindowsMenu(self)  # Убирает windows форму
         self.connect_signals_text()
+        self.label_2.setText(str(accounts_count))
 
         self.id_Profile = id_Profile
         self.settings = settings
@@ -52,6 +57,7 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.pushExit.clicked.connect(self.PushBack)  #кнопка для выхода с аккаунта
         self.pushDownload.clicked.connect(self.download)
         self.pushSetting.clicked.connect(self.ButtonSettings)
+        self.push_ClearMemorry.clicked.connect(self.ClearMemorry)
 
         #Достаем логин и email из бд для Profile
         Profile = coll.find_one({"_id": self.id_Profile})
@@ -79,6 +85,14 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         #Вывод CircularProgressBar
 
 
+        #Вывод memorry bar
+        MemorryBar = memorry_search()
+        self.MemorryProgressBar = CircularProgressMemorryBar()
+        self.MemorryProgressBarLayout = QVBoxLayout(self.widget_Memorry)
+        self.MemorryProgressBarLayout.addWidget(self.MemorryProgressBar)
+        self.MemorryProgressBarLayout.setContentsMargins(0, 0, 0, 0)
+        self.MemorryProgressBar.setValue(MemorryBar)
+        #Вывод CPU BAR
         CPU_BAR = cpu_Bar()
         self.CPUProgressBar = CircularProgressBarCPU()
         self.CPUProgressBarLayout = QVBoxLayout(self.widget_CPUBar)
@@ -90,7 +104,6 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.CircularProgressBarLayout = QVBoxLayout(self.widget_CircularProgressBar)
         self.CircularProgressBarLayout.addWidget(self.circularProgressBar)
         self.CircularProgressBarLayout.setContentsMargins(0, 0, 0, 0)
-        # Установка значения для CircularProgressBar, если необходимо
         self.circularProgressBar.setValue(Bar)
 
         # Вывод дисков Windows
@@ -205,3 +218,8 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.pushActivate.setText("ACTIVATE")
         self.pushButtonProfile.setFont(font)
         self.pushButtonProfile.setText("Profile")
+
+    def ClearMemorry(self):
+        clean_memory()
+        self.widget_Memorry.update()
+

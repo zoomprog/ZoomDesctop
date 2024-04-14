@@ -1588,7 +1588,7 @@ border-radius: 20px;
                 </property>
                </widget>
               </widget>
-              <widget class="QFrame" name="frame_Optimization">
+              <widget class="QFrame" name="frame_Memorry">
                <property name="geometry">
                 <rect>
                  <x>170</x>
@@ -1609,12 +1609,12 @@ border-radius: 20px;
                <property name="frameShadow">
                 <enum>QFrame::Raised</enum>
                </property>
-               <widget class="QLabel" name="label_optimiz_2">
+               <widget class="QLabel" name="label_Memmory">
                 <property name="geometry">
                  <rect>
-                  <x>50</x>
+                  <x>30</x>
                   <y>10</y>
-                  <width>41</width>
+                  <width>81</width>
                   <height>20</height>
                  </rect>
                 </property>
@@ -1627,16 +1627,16 @@ border-radius: 20px;
 }</string>
                 </property>
                 <property name="text">
-                 <string>GPU</string>
+                 <string>Memorry</string>
                 </property>
                </widget>
-               <widget class="QWidget" name="widget_GPUBar" native="true">
+               <widget class="QWidget" name="widget_Memorry" native="true">
                 <property name="geometry">
                  <rect>
-                  <x>10</x>
+                  <x>30</x>
                   <y>40</y>
-                  <width>111</width>
-                  <height>71</height>
+                  <width>101</width>
+                  <height>81</height>
                  </rect>
                 </property>
                </widget>
@@ -1689,7 +1689,7 @@ border-radius: 20px;
                   <x>40</x>
                   <y>50</y>
                   <width>91</width>
-                  <height>71</height>
+                  <height>81</height>
                  </rect>
                 </property>
                </widget>
@@ -1702,6 +1702,53 @@ border-radius: 20px;
                  <width>51</width>
                  <height>41</height>
                 </rect>
+               </property>
+              </widget>
+              <widget class="QPushButton" name="push_ClearMemorry">
+               <property name="geometry">
+                <rect>
+                 <x>190</x>
+                 <y>290</y>
+                 <width>100</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+background-color: #161A1E;
+color:white;
+border-radius:12;
+}
+QPushButton:hover {
+color:rgba(115,128,142,255);
+}</string>
+               </property>
+               <property name="text">
+                <string>Clear</string>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>30</width>
+                 <height>30</height>
+                </size>
                </property>
               </widget>
              </widget>

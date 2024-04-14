@@ -18,8 +18,3 @@ def clean_memory():  # Определяем функцию для очистки
                     ctypes.windll.kernel32.CloseHandle(handle)
     except Exception as e:
         print(f"Произошла ошибка: {e}")
-
-
-if __name__ == "__main__":
-    clean_memory()
-    print("Очистка оперативной памяти выполнена.")
