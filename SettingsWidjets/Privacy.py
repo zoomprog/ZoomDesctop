@@ -71,11 +71,11 @@ class Ui_WindowsPrivacy(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 955, 3000))
-        self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 3000))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 955, 4000))
+        self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 4000))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.frame = QtWidgets.QFrame(parent=self.scrollAreaWidgetContents)
-        self.frame.setGeometry(QtCore.QRect(10, 20, 971, 2971))
+        self.frame.setGeometry(QtCore.QRect(10, 40, 971, 2971))
         self.frame.setMinimumSize(QtCore.QSize(971, 2971))
         self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
@@ -3811,6 +3811,15 @@ class Ui_WindowsPrivacy(object):
 "")
         self.labelTextApplicationAccessToAnotherFileSystem.setObjectName("labelTextApplicationAccessToAnotherFileSystem")
         self.horizontalLayout_55.addWidget(self.frame_54)
+        self.label = QtWidgets.QLabel(parent=self.scrollAreaWidgetContents)
+        self.label.setGeometry(QtCore.QRect(370, 10, 201, 21))
+        self.label.setStyleSheet("QLabel {\n"
+"    font-family: \'Arial\'; /* Замените на нужное семейство шрифтов */\n"
+"    font-size: 20px; /* Замените на нужный размер шрифта */\n"
+"    color: white; /* Замените на нужный цвет текста */\n"
+"    font-weight: bold; /* Для жирного текста */\n"
+"}")
+        self.label.setObjectName("label")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
         self.retranslateUi(WindowsPrivacy)
@@ -3919,6 +3928,7 @@ class Ui_WindowsPrivacy(object):
         self.labelTextApplicationAccessToTheVideosFolder.setText(_translate("WindowsPrivacy", "Доступ приложений к папке \"Видео\""))
         self.pushApplicationAccessToAnotherFileSystem.setText(_translate("WindowsPrivacy", "Очистка"))
         self.labelTextApplicationAccessToAnotherFileSystem.setText(_translate("WindowsPrivacy", "Доступ приложений к другой файловой системе"))
+        self.label.setText(_translate("WindowsPrivacy", "Приватность"))
 
 
 if __name__ == "__main__":

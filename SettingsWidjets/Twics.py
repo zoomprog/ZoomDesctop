@@ -82,7 +82,7 @@ class Ui_Twics(object):
         self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 200))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.frame = QtWidgets.QFrame(parent=self.scrollAreaWidgetContents)
-        self.frame.setGeometry(QtCore.QRect(10, 20, 931, 541))
+        self.frame.setGeometry(QtCore.QRect(10, 60, 931, 501))
         self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame.setObjectName("frame")
@@ -678,6 +678,15 @@ class Ui_Twics(object):
 "")
         self.labelTextDiagnosricEvents.setObjectName("labelTextDiagnosricEvents")
         self.horizontalLayout_8.addWidget(self.frame_DiagnosricEvents_2)
+        self.label = QtWidgets.QLabel(parent=self.scrollAreaWidgetContents)
+        self.label.setGeometry(QtCore.QRect(430, 20, 81, 21))
+        self.label.setStyleSheet("QLabel {\n"
+"    font-family: \'Arial\'; /* Замените на нужное семейство шрифтов */\n"
+"    font-size: 20px; /* Замените на нужный размер шрифта */\n"
+"    color: white; /* Замените на нужный цвет текста */\n"
+"    font-weight: bold; /* Для жирного текста */\n"
+"}")
+        self.label.setObjectName("label")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
         self.retranslateUi(Twics)
@@ -702,6 +711,7 @@ class Ui_Twics(object):
         self.labelTextConvNameFile83.setText(_translate("Twics", "Ковертация  имен файлов 8.3"))
         self.pushDiagnosricEvents.setText(_translate("Twics", "Выбрать"))
         self.labelTextDiagnosricEvents.setText(_translate("Twics", "Диагностические события"))
+        self.label.setText(_translate("Twics", "Твики"))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BackUp</class>
+ <widget class="QWidget" name="BackUp">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1511</width>
+    <height>836</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1280</width>
+    <height>720</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+	color:white;
+	
+}</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QFrame" name="frame_12">
+     <property name="maximumSize">
+      <size>
+       <width>1280</width>
+       <height>720</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">*
+{
+	border: none;
+ 	background-color:black;
+	border-radius:30;
+	color:black
+	
+
+}</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_11">
+      <item>
+       <widget class="QFrame" name="frame_2">
+        <property name="styleSheet">
+         <string notr="true">background:black;</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QScrollArea" name="scrollArea">
+           <property name="styleSheet">
+            <string notr="true">/* VERTICAL SCROLLBAR */
+ QScrollBar:vertical {
+	border: none;
+    background: black;
+    width: 14px;
+    margin: 15px 0 15px 0;
+	border-radius: 0px;
+ }
+QScrollBar::handle:vertical {	
+	background-color: #34373b;
+	min-height: 30px;
+	border-radius: 7px;
+}
+QScrollBar::handle:vertical:hover{	
+	background-color: rgb(119, 122, 126);
+}
+QScrollBar::handle:vertical:pressed {	
+	background-color: rgb(119, 122, 126);
+}
+QScrollBar::sub-line:vertical {
+	border: none;
+	background-color:black;
+	height: 15px;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+	subcontrol-position: top;
+	subcontrol-origin: margin;
+}
+QScrollBar::add-line:vertical {
+	border: none;
+	background-color: black;
+	height: 15px;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+	subcontrol-position: bottom;
+	subcontrol-origin: margin;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+	background: none;
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+	background: none;
+}</string>
+           </property>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="scrollAreaWidgetContents">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>1244</width>
+              <height>684</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>1000</width>
+              <height>0</height>
+             </size>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QFrame" name="frame_4">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>110</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <widget class="QPushButton" name="pushBackMenu">
+                <property name="geometry">
+                 <rect>
+                  <x>1130</x>
+                  <y>40</y>
+                  <width>61</width>
+                  <height>61</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton#pushBackMenu
+{
+background-color:#161A1E;
+}
+QPushButton#pushBackMenu:hover
+{
+background-color:white;
+}
+</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>image/icon/back-left-arrow-circular-button-outline.png</normaloff>image/icon/back-left-arrow-circular-button-outline.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>63</width>
+                  <height>63</height>
+                 </size>
+                </property>
+               </widget>
+               <widget class="QFrame" name="frame">
+                <property name="geometry">
+                 <rect>
+                  <x>1070</x>
+                  <y>-10</y>
+                  <width>140</width>
+                  <height>50</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>140</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>140</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">*
+{
+	margin-left:6px;
+}
+QPushButton#pushClose{
+	background-color:rgba(0,0,0,0);
+	color:rgba(85,98,112,255);
+}
+QPushButton#pushClose:hover{
+	color:rgba(155,168,182,220);
+}
+QPushButton#pushClose:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	color:rgba(115,128,142,255)
+}
+QPushButton#pushCollapse{
+	background-color:rgba(0,0,0,0);
+	color:rgba(85,98,112,255);
+}
+QPushButton#pushCollapse:hover{
+	color:rgba(155,168,182,220);
+}
+QPushButton#pushCollapse:pressed{
+	padding-left:3px;
+	padding-top:3px;
+	color:rgba(115,128,142,255)
+}
+QPushButton#pushUnwrap{
+	background-color:rgba(0,0,0,0);
+	color:rgba(85,98,112,255);
+}
+QPushButton#pushUnwrap:hover{
+	color:rgba(155,168,182,220);
+}
+QPushButton#pushUnwrap:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	color:rgba(115,128,142,255)
+}</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_8">
+                 <item>
+                  <widget class="QPushButton" name="pushCollapse">
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="DownloadSoft.qrc">
+                     <normaloff>:/icon/image/icon/free-icon-minimize-4889317.png</normaloff>:/icon/image/icon/free-icon-minimize-4889317.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>32</width>
+                     <height>32</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushUnwrap">
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="DownloadSoft.qrc">
+                     <normaloff>:/icon/image/icon/free-icon-expand-510829.png</normaloff>:/icon/image/icon/free-icon-expand-510829.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>25</width>
+                     <height>25</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushClose">
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="DownloadSoft.qrc">
+                     <normaloff>:/icon/image/icon/close.png</normaloff>:/icon/image/icon/close.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>32</width>
+                     <height>32</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QLabel" name="label_3">
+                <property name="geometry">
+                 <rect>
+                  <x>520</x>
+                  <y>10</y>
+                  <width>221</width>
+                  <height>71</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>-1</pointsize>
+                  <weight>87</weight>
+                  <bold>true</bold>
+                  <underline>false</underline>
+                  <strikeout>false</strikeout>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color:rgba(0,0,0,0);
+	color:white;
+
+	padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  font-weight: 700;
+
+</string>
+                </property>
+                <property name="text">
+                 <string>BackUp</string>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="Soft">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_3">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QFrame" name="frame_3">
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <widget class="QFrame" name="Profile">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>20</y>
+                     <width>1201</width>
+                     <height>61</height>
+                    </rect>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">*{
+    background-color: #161A1E;
+    border-radius: 15px; /* Установите значение по вашему усмотрению для достижения овальной формы */
+}
+</string>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <widget class="QPushButton" name="pushCreateProfile">
+                    <property name="geometry">
+                     <rect>
+                      <x>10</x>
+                      <y>10</y>
+                      <width>200</width>
+                      <height>40</height>
+                     </rect>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>200</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>91</width>
+                      <height>31</height>
+                     </size>
+                    </property>
+                    <property name="baseSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: rgb(38, 23, 255);
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+	font-weight: bold;
+    font-size: 14px; /* Установите размер шрифта */
+    padding: 10px 20px; /* Установите отступы */
+}
+
+QPushButton:hover {
+    color: rgb(168, 168, 168);
+    transition: background-color 0.3s ease;
+}
+</string>
+                    </property>
+                    <property name="text">
+                     <string>Сделать снимок</string>
+                    </property>
+                   </widget>
+                   <widget class="QPushButton" name="pushImportProfile">
+                    <property name="geometry">
+                     <rect>
+                      <x>230</x>
+                      <y>10</y>
+                      <width>200</width>
+                      <height>40</height>
+                     </rect>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>200</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>91</width>
+                      <height>31</height>
+                     </size>
+                    </property>
+                    <property name="baseSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: #161A1E;
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+    font-size: 14px; /* Установите размер шрифта */
+	font-weight: bold;
+    padding: 10px 20px; /* Установите отступы */
+    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */
+}
+
+QPushButton:hover {
+    background-color: #2C3236;
+    transition: background-color 0.3s ease;
+}
+</string>
+                    </property>
+                    <property name="text">
+                     <string>Импорт файла</string>
+                    </property>
+                   </widget>
+                   <widget class="QPushButton" name="pushUpdateProfile">
+                    <property name="geometry">
+                     <rect>
+                      <x>990</x>
+                      <y>10</y>
+                      <width>200</width>
+                      <height>40</height>
+                     </rect>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>200</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>91</width>
+                      <height>31</height>
+                     </size>
+                    </property>
+                    <property name="baseSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: #161A1E;
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+    font-size: 14px; /* Установите размер шрифта */
+	font-weight: bold;
+    padding: 10px 20px; /* Установите отступы */
+    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */
+}
+
+QPushButton:hover {
+    background-color: #2C3236;
+    transition: background-color 0.3s ease;
+}
+</string>
+                    </property>
+                    <property name="text">
+                     <string>Обновить</string>
+                    </property>
+                   </widget>
+                   <widget class="QPushButton" name="pushDelProfile">
+                    <property name="geometry">
+                     <rect>
+                      <x>770</x>
+                      <y>10</y>
+                      <width>200</width>
+                      <height>40</height>
+                     </rect>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>200</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>91</width>
+                      <height>31</height>
+                     </size>
+                    </property>
+                    <property name="baseSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: #161A1E;
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+    font-size: 14px; /* Установите размер шрифта */
+	font-weight: bold;
+    padding: 10px 20px; /* Установите отступы */
+    border: 1px solid white; /* Уменьшаем толщину обводки до 1 пикселя */
+}
+
+QPushButton:hover {
+    background-color: #2C3236;
+    transition: background-color 0.3s ease;
+}
+</string>
+                    </property>
+                    <property name="text">
+                     <string>Удалить</string>
+                    </property>
+                   </widget>
+                   <widget class="QPushButton" name="pushBackUp">
+                    <property name="geometry">
+                     <rect>
+                      <x>480</x>
+                      <y>10</y>
+                      <width>220</width>
+                      <height>40</height>
+                     </rect>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>220</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>91</width>
+                      <height>31</height>
+                     </size>
+                    </property>
+                    <property name="baseSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">/* styles.qss */
+
+QPushButton {
+    background-color: rgb(38, 23, 255);
+    border-radius: 15px;
+    color: white; /* Установите цвет текста */
+	font-weight: bold;
+    font-size: 14px; /* Установите размер шрифта */
+    padding: 10px 20px; /* Установите отступы */
+}
+
+QPushButton:hover {
+    color: rgb(168, 168, 168);
+    transition: background-color 0.3s ease;
+}
+</string>
+                    </property>
+                    <property name="text">
+                     <string>Резервное копирование</string>
+                    </property>
+                   </widget>
+                  </widget>
+                  <widget class="QLabel" name="label_local">
+                   <property name="geometry">
+                    <rect>
+                     <x>480</x>
+                     <y>110</y>
+                     <width>201</width>
+                     <height>71</height>
+                    </rect>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color:rgba(0,0,0,0);
+	color:white;
+
+	padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  font-weight: 700;
+
+</string>
+                   </property>
+                   <property name="text">
+                    <string>Локальный</string>
+                   </property>
+                  </widget>
+                  <widget class="QFrame" name="frame_BackUp">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>210</y>
+                     <width>1211</width>
+                     <height>71</height>
+                    </rect>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                  </widget>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="DownloadSoft.qrc"/>
+  <include location="menu.qrc"/>
+ </resources>
+ <connections/>
+</ui>

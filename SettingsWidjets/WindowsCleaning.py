@@ -82,7 +82,7 @@ class Ui_WindowsCleaning(object):
         self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 0))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.frame = QtWidgets.QFrame(parent=self.scrollAreaWidgetContents)
-        self.frame.setGeometry(QtCore.QRect(10, 20, 971, 551))
+        self.frame.setGeometry(QtCore.QRect(10, 60, 971, 511))
         self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame.setObjectName("frame")
@@ -741,6 +741,15 @@ class Ui_WindowsCleaning(object):
 "")
         self.labelTextClearDeliveryOptimizationFiles.setObjectName("labelTextClearDeliveryOptimizationFiles")
         self.horizontalLayout_6.addWidget(self.frame_5)
+        self.label = QtWidgets.QLabel(parent=self.scrollAreaWidgetContents)
+        self.label.setGeometry(QtCore.QRect(400, 20, 91, 21))
+        self.label.setStyleSheet("QLabel {\n"
+"    font-family: \'Arial\'; /* Замените на нужное семейство шрифтов */\n"
+"    font-size: 20px; /* Замените на нужный размер шрифта */\n"
+"    color: white; /* Замените на нужный цвет текста */\n"
+"    font-weight: bold; /* Для жирного текста */\n"
+"}")
+        self.label.setObjectName("label")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
         self.retranslateUi(WindowsCleaning)
@@ -767,6 +776,7 @@ class Ui_WindowsCleaning(object):
         self.label_clear_folder_download_2.setText(_translate("WindowsCleaning", "Очистка папки Download"))
         self.pushClearDeliveryOptimizationFiles.setText(_translate("WindowsCleaning", "Очистка"))
         self.labelTextClearDeliveryOptimizationFiles.setText(_translate("WindowsCleaning", "Файлы оптимизации доставки"))
+        self.label.setText(_translate("WindowsCleaning", "Очистка "))
 
 
 if __name__ == "__main__":

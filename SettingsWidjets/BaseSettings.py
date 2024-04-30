@@ -82,7 +82,7 @@ class Ui_BaseSettings(object):
         self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 670))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.frame = QtWidgets.QFrame(parent=self.scrollAreaWidgetContents)
-        self.frame.setGeometry(QtCore.QRect(10, 10, 941, 621))
+        self.frame.setGeometry(QtCore.QRect(10, 50, 941, 581))
         self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame.setObjectName("frame")
@@ -726,6 +726,15 @@ class Ui_BaseSettings(object):
         self.labelWindowsUAC.setText("")
         self.labelWindowsUAC.setObjectName("labelWindowsUAC")
         self.horizontalLayout_10.addWidget(self.frame_10)
+        self.label = QtWidgets.QLabel(parent=self.scrollAreaWidgetContents)
+        self.label.setGeometry(QtCore.QRect(370, 10, 201, 21))
+        self.label.setStyleSheet("QLabel {\n"
+"    font-family: \'Arial\'; /* Замените на нужное семейство шрифтов */\n"
+"    font-size: 20px; /* Замените на нужный размер шрифта */\n"
+"    color: white; /* Замените на нужный цвет текста */\n"
+"    font-weight: bold; /* Для жирного текста */\n"
+"}")
+        self.label.setObjectName("label")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
         self.retranslateUi(BaseSettings)
@@ -754,6 +763,7 @@ class Ui_BaseSettings(object):
         self.labelTextWindowsFirewall.setText(_translate("BaseSettings", "Брандмауэр Windows"))
         self.pushWindowsUAC.setText(_translate("BaseSettings", "Очистка"))
         self.labelTextUAC.setText(_translate("BaseSettings", "Контроль учетных записей (UAC)"))
+        self.label.setText(_translate("BaseSettings", "Базовые настройки"))
 
 
 if __name__ == "__main__":

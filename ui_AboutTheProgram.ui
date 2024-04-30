@@ -234,7 +234,7 @@ QPushButton:hover {
                 <string>SETTINGS</string>
                </property>
               </widget>
-              <widget class="QPushButton" name="pushActivate">
+              <widget class="QPushButton" name="pushBackUp">
                <property name="geometry">
                 <rect>
                  <x>20</x>
@@ -272,7 +272,7 @@ QPushButton:hover {
 </string>
                </property>
                <property name="text">
-                <string>ACTIVATE</string>
+                <string>BackUp</string>
                </property>
               </widget>
               <widget class="QWidget" name="widget_CircularProgressBar" native="true">

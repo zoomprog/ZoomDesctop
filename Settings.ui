@@ -207,8 +207,8 @@ qproperty-alignment: 'AlignCenter';</string>
          <widget class="QPushButton" name="pushButtonDefoltSettings">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>80</y>
+            <x>20</x>
+            <y>10</y>
             <width>200</width>
             <height>50</height>
            </rect>
@@ -240,8 +240,8 @@ qproperty-alignment: 'AlignCenter';</string>
          <widget class="QPushButton" name="pushButtonClear">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>140</y>
+            <x>20</x>
+            <y>70</y>
             <width>191</width>
             <height>50</height>
            </rect>
@@ -273,8 +273,8 @@ qproperty-alignment: 'AlignCenter';</string>
          <widget class="QPushButton" name="pushButtonServise">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>200</y>
+            <x>20</x>
+            <y>130</y>
             <width>191</width>
             <height>50</height>
            </rect>
@@ -306,8 +306,8 @@ qproperty-alignment: 'AlignCenter';</string>
          <widget class="QPushButton" name="pushButtonPowerSupply">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>260</y>
+            <x>20</x>
+            <y>190</y>
             <width>191</width>
             <height>50</height>
            </rect>
@@ -336,44 +336,11 @@ qproperty-alignment: 'AlignCenter';</string>
            <string>Электропитание</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="pushButtonAutoLoad">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>20</y>
-            <width>191</width>
-            <height>50</height>
-           </rect>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>200</width>
-            <height>50</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton#pushButtonAutoLoad{
-	color: rgb(255, 255, 255);
-	background-color: #161A1E;
-	border-radius:25;
-}</string>
-          </property>
-          <property name="text">
-           <string>Автозагрузки</string>
-          </property>
-         </widget>
          <widget class="QPushButton" name="pushButtonPrivacy">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>320</y>
+            <x>20</x>
+            <y>250</y>
             <width>191</width>
             <height>50</height>
            </rect>
@@ -405,8 +372,8 @@ qproperty-alignment: 'AlignCenter';</string>
          <widget class="QPushButton" name="pushButtonTasks">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>380</y>
+            <x>20</x>
+            <y>310</y>
             <width>191</width>
             <height>50</height>
            </rect>
@@ -433,6 +400,47 @@ qproperty-alignment: 'AlignCenter';</string>
           </property>
           <property name="text">
            <string>Задачи</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushBack">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>380</y>
+            <width>131</width>
+            <height>131</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Montserrat</family>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    background-color: #161A1E;
+    color: white;
+    border-radius: 65px; /* Уточним единицы измерения для радиуса */
+
+}
+
+QPushButton:hover {
+    color: rgba(115, 128, 142, 255);
+    border: 4px solid #00BFFF;
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Back</string>
           </property>
          </widget>
         </widget>

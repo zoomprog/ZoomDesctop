@@ -86,7 +86,7 @@ class Ui_Settings(object):
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_3.setObjectName("frame_3")
         self.pushButtonDefoltSettings = QtWidgets.QPushButton(parent=self.frame_3)
-        self.pushButtonDefoltSettings.setGeometry(QtCore.QRect(10, 80, 200, 50))
+        self.pushButtonDefoltSettings.setGeometry(QtCore.QRect(20, 10, 200, 50))
         self.pushButtonDefoltSettings.setMaximumSize(QtCore.QSize(200, 50))
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -100,7 +100,7 @@ class Ui_Settings(object):
 "}")
         self.pushButtonDefoltSettings.setObjectName("pushButtonDefoltSettings")
         self.pushButtonClear = QtWidgets.QPushButton(parent=self.frame_3)
-        self.pushButtonClear.setGeometry(QtCore.QRect(10, 140, 191, 50))
+        self.pushButtonClear.setGeometry(QtCore.QRect(20, 70, 191, 50))
         self.pushButtonClear.setMaximumSize(QtCore.QSize(200, 50))
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -114,7 +114,7 @@ class Ui_Settings(object):
 "}")
         self.pushButtonClear.setObjectName("pushButtonClear")
         self.pushButtonServise = QtWidgets.QPushButton(parent=self.frame_3)
-        self.pushButtonServise.setGeometry(QtCore.QRect(10, 200, 191, 50))
+        self.pushButtonServise.setGeometry(QtCore.QRect(20, 130, 191, 50))
         self.pushButtonServise.setMaximumSize(QtCore.QSize(200, 50))
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -128,7 +128,7 @@ class Ui_Settings(object):
 "}")
         self.pushButtonServise.setObjectName("pushButtonServise")
         self.pushButtonPowerSupply = QtWidgets.QPushButton(parent=self.frame_3)
-        self.pushButtonPowerSupply.setGeometry(QtCore.QRect(10, 260, 191, 50))
+        self.pushButtonPowerSupply.setGeometry(QtCore.QRect(20, 190, 191, 50))
         self.pushButtonPowerSupply.setMaximumSize(QtCore.QSize(200, 50))
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -141,22 +141,8 @@ class Ui_Settings(object):
 "    border-radius:25;\n"
 "}")
         self.pushButtonPowerSupply.setObjectName("pushButtonPowerSupply")
-        self.pushButtonAutoLoad = QtWidgets.QPushButton(parent=self.frame_3)
-        self.pushButtonAutoLoad.setGeometry(QtCore.QRect(10, 20, 191, 50))
-        self.pushButtonAutoLoad.setMaximumSize(QtCore.QSize(200, 50))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(True)
-        font.setWeight(75)
-        self.pushButtonAutoLoad.setFont(font)
-        self.pushButtonAutoLoad.setStyleSheet("QPushButton#pushButtonAutoLoad{\n"
-"    color: rgb(255, 255, 255);\n"
-"    background-color: #161A1E;\n"
-"    border-radius:25;\n"
-"}")
-        self.pushButtonAutoLoad.setObjectName("pushButtonAutoLoad")
         self.pushButtonPrivacy = QtWidgets.QPushButton(parent=self.frame_3)
-        self.pushButtonPrivacy.setGeometry(QtCore.QRect(10, 320, 191, 50))
+        self.pushButtonPrivacy.setGeometry(QtCore.QRect(20, 250, 191, 50))
         self.pushButtonPrivacy.setMaximumSize(QtCore.QSize(200, 50))
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -170,7 +156,7 @@ class Ui_Settings(object):
 "}")
         self.pushButtonPrivacy.setObjectName("pushButtonPrivacy")
         self.pushButtonTasks = QtWidgets.QPushButton(parent=self.frame_3)
-        self.pushButtonTasks.setGeometry(QtCore.QRect(10, 380, 191, 50))
+        self.pushButtonTasks.setGeometry(QtCore.QRect(20, 310, 191, 50))
         self.pushButtonTasks.setMaximumSize(QtCore.QSize(200, 50))
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -183,6 +169,28 @@ class Ui_Settings(object):
 "    border-radius:25;\n"
 "}")
         self.pushButtonTasks.setObjectName("pushButtonTasks")
+        self.pushBack = QtWidgets.QPushButton(parent=self.frame_3)
+        self.pushBack.setGeometry(QtCore.QRect(40, 380, 131, 131))
+        self.pushBack.setMinimumSize(QtCore.QSize(0, 0))
+        font = QtGui.QFont()
+        font.setFamily("Montserrat")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushBack.setFont(font)
+        self.pushBack.setStyleSheet("QPushButton {\n"
+"    background-color: #161A1E;\n"
+"    color: white;\n"
+"    border-radius: 65px; /* Уточним единицы измерения для радиуса */\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    color: rgba(115, 128, 142, 255);\n"
+"    border: 4px solid #00BFFF;\n"
+"}\n"
+"")
+        self.pushBack.setObjectName("pushBack")
         self.horizontalLayout_2.addWidget(self.frame_3)
         self.MainBody = QtWidgets.QFrame(parent=self.frame_4)
         self.MainBody.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
@@ -202,9 +210,9 @@ class Ui_Settings(object):
         self.pushButtonClear.setText(_translate("Settings", "Очистка"))
         self.pushButtonServise.setText(_translate("Settings", "Службы"))
         self.pushButtonPowerSupply.setText(_translate("Settings", "Электропитание"))
-        self.pushButtonAutoLoad.setText(_translate("Settings", "Автозагрузки"))
         self.pushButtonPrivacy.setText(_translate("Settings", "Приватность"))
         self.pushButtonTasks.setText(_translate("Settings", "Задачи"))
+        self.pushBack.setText(_translate("Settings", "Back"))
 
 
 if __name__ == "__main__":

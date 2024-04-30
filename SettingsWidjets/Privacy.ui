@@ -101,20 +101,20 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
        <x>0</x>
        <y>0</y>
        <width>955</width>
-       <height>3000</height>
+       <height>4000</height>
       </rect>
      </property>
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>3000</height>
+       <height>4000</height>
       </size>
      </property>
      <widget class="QFrame" name="frame">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>20</y>
+        <y>40</y>
         <width>971</width>
         <height>2971</height>
        </rect>
@@ -8774,6 +8774,27 @@ QLabel {
         </item>
        </layout>
       </widget>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>10</y>
+        <width>201</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+    font-family: 'Arial'; /* Замените на нужное семейство шрифтов */
+    font-size: 20px; /* Замените на нужный размер шрифта */
+    color: white; /* Замените на нужный цвет текста */
+    font-weight: bold; /* Для жирного текста */
+}</string>
+      </property>
+      <property name="text">
+       <string>Приватность</string>
+      </property>
      </widget>
     </widget>
    </widget>

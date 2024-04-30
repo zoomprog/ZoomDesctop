@@ -124,9 +124,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>20</y>
+        <y>60</y>
         <width>961</width>
-        <height>551</height>
+        <height>511</height>
        </rect>
       </property>
       <property name="frameShape">
@@ -632,6 +632,27 @@ QLabel {
         </property>
        </widget>
       </widget>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>20</y>
+        <width>201</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+    font-family: 'Arial'; /* Замените на нужное семейство шрифтов */
+    font-size: 20px; /* Замените на нужный размер шрифта */
+    color: white; /* Замените на нужный цвет текста */
+    font-weight: bold; /* Для жирного текста */
+}</string>
+      </property>
+      <property name="text">
+       <string>Электропитание</string>
+      </property>
      </widget>
     </widget>
    </widget>

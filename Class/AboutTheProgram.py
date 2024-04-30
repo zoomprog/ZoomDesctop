@@ -7,6 +7,7 @@ from ui_AboutTheProgram import Ui_AboutTheProgram
 from Functions.RemoveWindowsMenu import RemoveWindowsMenu
 import Class.download
 import Class.Settings
+import Class.BackUp
 from PyQt6.QtWidgets import QWidget, QDialog
 from PyQt6.QtGui import QMouseEvent
 from database.DB import db, coll, collLoggedIn
@@ -57,6 +58,7 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.pushExit.clicked.connect(self.PushBack)  #кнопка для выхода с аккаунта
         self.pushDownload.clicked.connect(self.download)
         self.pushSetting.clicked.connect(self.ButtonSettings)
+        self.pushBackUp.clicked.connect(self.ButtonBackUp)
         self.push_ClearMemorry.clicked.connect(self.ClearMemorry)
 
         #Достаем логин и email из бд для Profile
@@ -181,6 +183,11 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.ui.show()
         self.hide()
 
+    def ButtonBackUp(self):
+        self.ui = Class.BackUp.BackUp()
+        self.ui.show()
+        self.hide()
+
     def PushBack(self):
         self.settings.clear()
         self.frame_12.close()
@@ -214,8 +221,8 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.pushDownload.setText("SOFT")
         self.pushSetting.setFont(font)
         self.pushSetting.setText("SETTINGS")
-        self.pushActivate.setFont(font)
-        self.pushActivate.setText("ACTIVATE")
+        self.pushBackUp.setFont(font)
+        self.pushBackUp.setText("BackUP")
         self.pushButtonProfile.setFont(font)
         self.pushButtonProfile.setText("Profile")
 

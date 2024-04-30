@@ -82,7 +82,7 @@ class Ui_Energy(object):
         self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 200))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.frame = QtWidgets.QFrame(parent=self.scrollAreaWidgetContents)
-        self.frame.setGeometry(QtCore.QRect(10, 20, 961, 551))
+        self.frame.setGeometry(QtCore.QRect(10, 60, 961, 511))
         self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame.setObjectName("frame")
@@ -313,6 +313,15 @@ class Ui_Energy(object):
 "}\n"
 "")
         self.labelTextPow_PowerThrottling.setObjectName("labelTextPow_PowerThrottling")
+        self.label = QtWidgets.QLabel(parent=self.scrollAreaWidgetContents)
+        self.label.setGeometry(QtCore.QRect(400, 20, 201, 21))
+        self.label.setStyleSheet("QLabel {\n"
+"    font-family: \'Arial\'; /* Замените на нужное семейство шрифтов */\n"
+"    font-size: 20px; /* Замените на нужный размер шрифта */\n"
+"    color: white; /* Замените на нужный цвет текста */\n"
+"    font-weight: bold; /* Для жирного текста */\n"
+"}")
+        self.label.setObjectName("label")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
         self.retranslateUi(Energy)
@@ -326,6 +335,7 @@ class Ui_Energy(object):
         self.labelTextPow.setText(_translate("Energy", "Максимальная производительность электропитания"))
         self.labelTextHibernation.setText(_translate("Energy", "Гибернация"))
         self.labelTextPow_PowerThrottling.setText(_translate("Energy", "Power Throttling "))
+        self.label.setText(_translate("Energy", "Электропитание"))
 
 
 if __name__ == "__main__":

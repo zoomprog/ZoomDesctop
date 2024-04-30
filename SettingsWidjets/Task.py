@@ -82,7 +82,7 @@ class Ui_Task(object):
         self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 670))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.frame = QtWidgets.QFrame(parent=self.scrollAreaWidgetContents)
-        self.frame.setGeometry(QtCore.QRect(10, 10, 920, 626))
+        self.frame.setGeometry(QtCore.QRect(10, 55, 920, 581))
         self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame.setObjectName("frame")
@@ -854,6 +854,15 @@ class Ui_Task(object):
         self.labelWindowsXBOX.setText("")
         self.labelWindowsXBOX.setObjectName("labelWindowsXBOX")
         self.horizontalLayout_13.addWidget(self.frame_13)
+        self.label = QtWidgets.QLabel(parent=self.scrollAreaWidgetContents)
+        self.label.setGeometry(QtCore.QRect(420, 20, 81, 21))
+        self.label.setStyleSheet("QLabel {\n"
+"    font-family: \'Arial\'; /* Замените на нужное семейство шрифтов */\n"
+"    font-size: 20px; /* Замените на нужный размер шрифта */\n"
+"    color: white; /* Замените на нужный цвет текста */\n"
+"    font-weight: bold; /* Для жирного текста */\n"
+"}")
+        self.label.setObjectName("label")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
         self.retranslateUi(Task)
@@ -886,6 +895,7 @@ class Ui_Task(object):
         self.labelTextMicrosoftStore.setText(_translate("Task", "Microsoft Store"))
         self.pushWindowsXBOX.setText(_translate("Task", "Очистка"))
         self.labelTextXBOX.setText(_translate("Task", "Xbox"))
+        self.label.setText(_translate("Task", "Задачи"))
 
 
 if __name__ == "__main__":
