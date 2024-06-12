@@ -26,10 +26,6 @@ from Class.MainWindows import *
 from Functions.RemoveWindowsMenu import RemoveWindowsMenu
 
 
-
-
-
-
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     maindow = MainWindows()

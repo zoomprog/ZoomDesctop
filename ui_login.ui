@@ -166,7 +166,7 @@ border-radius:20px;
      <string notr="true">color:rgba(255,255,255,210)</string>
     </property>
     <property name="text">
-     <string>zoomApp</string>
+     <string>AppWise</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit">
@@ -233,7 +233,7 @@ pading-bottom:7px;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>14</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -256,146 +256,6 @@ pading-bottom:7px;</string>
     </property>
     <property name="text">
      <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushUrlDiscord">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>400</y>
-      <width>30</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <family>Social Media Circled</family>
-      <pointsize>15</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="login.qrc">
-      <normaloff>:/image/image/icon/free-icon-discord-2626288.png</normaloff>:/image/image/icon/free-icon-discord-2626288.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushUrlGitHub">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>400</y>
-      <width>30</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <family>Social Media Circled</family>
-      <pointsize>15</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="login.qrc">
-      <normaloff>:/image/image/icon/free-icon-github-733553 (1).png</normaloff>:/image/image/icon/free-icon-github-733553 (1).png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushUrlFacebook">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>400</y>
-      <width>30</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <family>Social Media Circled</family>
-      <pointsize>15</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="login.qrc">
-      <normaloff>:/image/image/icon/facebook_logo_icon_147291.png</normaloff>:/image/image/icon/facebook_logo_icon_147291.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushUrlYouTube">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>400</y>
-      <width>30</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <family>Social Media Circled</family>
-      <pointsize>15</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="login.qrc">
-      <normaloff>:/image/image/icon/1491580651-yumminkysocialmedia28_83061.png</normaloff>:/image/image/icon/1491580651-yumminkysocialmedia28_83061.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
     </property>
    </widget>
    <widget class="QPushButton" name="pushClose">
@@ -434,7 +294,7 @@ pading-bottom:7px;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>14</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>

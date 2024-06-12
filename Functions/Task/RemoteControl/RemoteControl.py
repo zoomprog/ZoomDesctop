@@ -3,15 +3,26 @@ import subprocess
 
 
 def SearchRemoteAssistanceTask():
-    command = 'schtasks /Query /TN "Microsoft\Windows\RemoteAssistance\RemoteAssistanceTask"'
+    command = r'schtasks /Query /TN "Microsoft\Windows\PushToInstall\LoginCheck"'
 
     try:
-        output = subprocess.check_output(command, shell=True, text=True, stderr=subprocess.STDOUT)
+        output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as e:
         return False
 
+    # Try decoding with multiple encodings
+    for encoding in ['utf-8', 'cp1252', 'latin1', 'iso-8859-1', 'ascii']:
+        try:
+            decoded_output = output.decode(encoding)
+            break
+        except UnicodeDecodeError:
+            continue
+    else:
+        print("Failed to decode output with available encodings.")
+        return False
+
     # Использование регулярного выражения для поиска строки с задачей и её статусом
-    match = re.search(r'RemoteAssistanceTask\s+.*\s+(Ready|Running|Disabled)', output)
+    match = re.search(r'LoginCheck\s+.*\s+(Ready|Running|Disabled)', decoded_output)
     if match:
         # Получение статуса задачи из найденной строки
         status = match.group(1)

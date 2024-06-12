@@ -13,6 +13,8 @@ import subprocess
 import glob as gb
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from Functions.RemoveWindowsMenu import RemoveWindowsMenu
 import Class.AboutTheProgram
 import win32gui
@@ -24,12 +26,12 @@ class Download(QDialog, Ui_Download):
         self.soft_main_windows = None
         self.softs = None
         self.abouttheprogram = None
-        self.nameUsers = None
         self.oldPos = None
         self.ui = Ui_Download
         self.setupUi(self)
         self.importmainclass = MainWindows
         RemoveWindowsMenu(self)
+        self.nameUsers = os.getlogin()
 
         self.id_Profile = id_Profile
         self.settings = settings
@@ -39,7 +41,7 @@ class Download(QDialog, Ui_Download):
         self.frame_4.show()
 
 
-        self.SearchSoftWindows()#поиск софта
+
         #кнопка установить софт
         self.pushDownloadSteam.clicked.connect(self.buttonSteamDownload)
         self.pushDownloadGoogle.clicked.connect(self.buttonGoogleDownload)
@@ -141,195 +143,7 @@ class Download(QDialog, Ui_Download):
         self.hide()
 
 
-
-
-    def SearchSoftWindows(self):
-        #Определение имени windows
-        self.nameUsers = os.getlogin()
-        self.softs = [
-            {"name": "GoogleChrome",
-             "path": f"C:/Program Files/Google/Chrome/Application/*exe",
-             "button": self.pushDownloadGoogle},
-            {"name": "YandexBrowser",
-             "path": f"C:/Users/{self.nameUsers}/AppData/Local/Yandex/YandexBrowser/Application/*exe",
-             "button": self.pushDownloadYandex},
-            {"name": "Opera GX",
-             "path": f"C:/Users/{self.nameUsers}/AppData/Local/Programs/Opera GX/launcher.exe",
-             "button": self.pushDownloadOpera},
-            {"name": "Whats App",
-             "path": f"C:/Program Files/WindowsApps/5319275A.WhatsAppDesktop*",
-             "button": self.pushDownloadWatsApp},
-            {"name": "Telegram",
-             "path": f"C:/Users/{self.nameUsers}/AppData/Roaming/Telegram Desktop/*.exe",
-             "button": self.pushDownloadTG},
-            {"name": "Discord",
-             "path": f"C:/Users/{self.nameUsers}/AppData/Local/Discord/*.exe",
-             "button": self.pushDownloadDS},
-            {"name": "Viber",
-             "path": f"C:/Users/{self.nameUsers}/AppData/Roaming/ViberPC",
-             "button": self.pushDownloadViber},
-            {"name": "TeamSpeak3",
-             "path": "C:\Program Files\TeamSpeak 3 Client\*exe",
-             "button": self.pushDownloadTS},
-            {"name": "Steam",
-             "path": "C:\Program Files (x86)\Steam\*exe",
-             "button": self.pushDownloadSteam},
-            {"name": "EpicGames",
-             "path": "C:\Program Files (x86)\Epic Games",
-             "button": self.pushDownloadEpicGames},
-            {"name": "Origin",
-             "path": "C:/Program Files/Electronic Arts/EA Desktop/EA Desktop/*exe",
-             "button": self.pushDownloadOrigin},
-            {"name": "Battle.net",
-             "path": "C:/Program Files (x86)/Battle.net/*exe",
-             "button": self.pushDownloadBattleNet},
-            {"name": "NVIDIA",
-             "path": "C:/Program Files/NVIDIA Corporation",
-             "button": self.pushDownloadNvidea},
-            {"name": "Ryzen",
-             "path": "C:/AMD/RyzenMasterExtract/MSIFiles/Packages/*exe",
-             "button": self.pushDownloadRyzen},
-            {"name": "Malwarebytes",
-             "path": "C:/Program Files/Malwarebytes/Anti-Malware/*exe",
-             "button": self.pushDownloadMalwarebytes},
-            {"name": "NORD32",
-             "path": "C:/Program Files/ESET/ESET Security/*exe",
-             "button": self.pushDownloadEset},
-            {"name": "Uplay",
-             "path": "C:/Program Files (x86)/Ubisoft/Ubisoft Game Launcher",
-             "button": self.pushDownloadUplay},
-            {"name": "Radeon",
-             "path": "директория Radeon драйверов",
-             "button": self.pushDownloadRadion}
-        ]
-        self.soft_main_windows = [
-            {
-                "name": 'Name              : Microsoft.BingWeather',
-                "command": "Get-AppxPackage Microsoft.BingWeather",
-                "button": self.pushDownloadWeather
-            },
-            {
-                "name": "Name              : Microsoft.XboxGamingOverlay",
-                "command": "Get-AppxPackage Microsoft.XboxGamingOverlay",
-                "button": self.pushDownloadXbox
-            },
-            {
-                "name": "Name              : Microsoft.WindowsSoundRecorder",
-                "command": "Get-AppxPackage Microsoft.WindowsSoundRecorder",
-                "button": self.pushDownloadVoiceRec
-            },
-            {
-                "name": "Name              : Microsoft.WindowsStore",
-                "command": "Get-AppxPackage Microsoft.WindowsStore",
-                "button": self.pushDownloadStore
-            },
-            {
-                "name": "Name              : Microsoft.Windows.Photos",
-                "command": "Get-AppxPackage Microsoft.Windows.Photos",
-                "button": self.pushDownloadPhoto
-            },
-            {
-                "name": "Name              : Microsoft.People",
-                "command": "Get-AppxPackage Microsoft.People",
-                "button": self.pushDownloadPeople
-            },
-            {
-                "name": "Name              : Microsoft.Office.OneNote",
-                "command": "Get-AppxPackage Microsoft.Office.OneNote",
-                "button": self.pushDownloadOneNote
-            },
-            {
-                "name": "Name              : Microsoft.BingNews",
-                "command": "Get-AppxPackage Microsoft.BingNews",
-                "button": self.pushDownloadNews
-            },
-            {
-                "name": "Name              : Microsoft.ZuneVideo",
-                "command": "Get-AppxPackage Microsoft.ZuneVideo",
-                "button": self.pushDownloadFilm
-            },
-            {
-                "name": "Name              : Microsoft.MicrosoftSolitaireCollection",
-                "command": "Get-AppxPackage Microsoft.MicrosoftSolitaireCollection",
-                "button": self.pushDownloadMSC
-            },
-            {
-                "name": "Name              : Microsoft.WindowsMaps",
-                "command": "Get-AppxPackage Microsoft.WindowsMaps",
-                "button": self.pushDownloadMap
-            },
-            {
-                "name": "Name              : Microsoft.ZuneMusic",
-                "command": "Get-AppxPackage Microsoft.ZuneMusic",
-                "button": self.pushDownloadGMusic
-            },
-            {
-                "name": "Name              : Microsoft.SkypeApp",
-                "command": "Get-AppxPackage Microsoft.SkypeApp",
-                "button": self.pushDownloadSkype
-            },
-            {
-                "name": "Name              : Microsoft.MicrosoftOfficeHub",
-                "command": "Get-AppxPackage Microsoft.MicrosoftOfficeHub",
-                "button": self.pushDownloadOffice
-            },
-            {
-                "name": "Name              : Microsoft.WindowsAlarms",
-                "command": "Get-AppxPackage Microsoft.WindowsAlarms",
-                "button": self.pushDownloadAlarmClock
-            },
-            {
-                "name": "Name              : Microsoft.WindowsAlarms",
-                "command": "Get-AppxPackage Microsoft.WindowsAlarms",
-                "button": self.pushDownloadAlarmClock
-            },
-            {
-                "name": "Name              : Microsoft.windowscommunicationsapps",
-                "command": "Get-AppxPackage Microsoft.windowscommunicationsapps",
-                "button": self.pushDownloadCalendarAndMail
-            },
-            {
-                "name": "Name              : Microsoft.WindowsCalculator",
-                "command": "Get-AppxPackage Microsoft.WindowsCalculator",
-                "button": self.pushDownloadCalc
-            },
-            {
-                "name": "Name              : Microsoft.3DBuilder",
-                "command": "Get-AppxPackage Microsoft.3DBuilder",
-                "button": self.pushDownload3dBuilder
-            },
-            {
-                "name": "Name              : Microsoft.WindowsCamera",
-                "command": "Get-AppxPackage *Microsoft.WindowsCamera*",
-                "button": self.pushDownloadCamera
-            },
-            {
-                "name": "Name              : Microsoft.WindowsAlarms",
-                "command": "Get-AppxPackage *Microsoft.WindowsAlarms*",
-                "button": self.pushDownloadAlarmClock
-            }
-        ]
-
-        for soft in self.soft_main_windows:
-            output = subprocess.run(["powershell", soft["command"]], capture_output=True, text=True)
-            if soft["name"] in output.stdout:
-                icon = QtGui.QIcon()
-                icon.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,QtGui.QIcon.State.Off)
-                soft["button"].setIcon(icon)
-
-
-        for soft in self.softs:
-            if gb.glob(soft["path"]):
-                icon1 = QtGui.QIcon()
-                icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal,QtGui.QIcon.State.Off)
-                soft["button"].setIcon(icon1)
-
-#Установка приложений
-
-
-
-
-    def DownloadAndLoadingSoft(self, url, xpath_site, file,  search, button):
+    def DownloadAndLoadingSoft(self, url, xpath_site, file):
         options = webdriver.ChromeOptions()
         prefs = {'safebrowsing.enabled': 'false'}
         options.add_experimental_option("prefs", prefs)
@@ -337,157 +151,129 @@ class Download(QDialog, Ui_Download):
         browser = webdriver.Chrome(options=options)
         browser.get(url)
 
-        xpath = xpath_site
-        browser.find_element(By.XPATH, xpath).click()
+        try:
+            # Wait for the element to be clickable
+            WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, xpath_site))).click()
 
-        file_path = file
-        # Не закрывайте браузер, пока файл в папке "Загрузки" не будет полностью загружен.
-        while not os.path.isfile(file_path):
-            time.sleep(1)
-        print("Файл загружен!")
-        browser.quit()
-        proces = subprocess.Popen(file, shell=True)
-        proces.wait()
-        if os.path.isdir(search):
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(":/icon/image/icon/icons8-галочка-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-            button.setIcon(icon1)
+            file_path = file
+            # Wait until the file is fully downloaded
+            while not os.path.isfile(file_path):
+                time.sleep(1)
+            print("Файл загружен!")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+        finally:
+            browser.quit()
+
+        # Check if the file exists before trying to execute it
+        if os.path.isfile(file):
+            try:
+                proces = subprocess.Popen(file, shell=True)
+                proces.wait()
+                print("Файл успешно запущен!")
+            except Exception as e:
+                print(f"Ошибка при запуске файла: {e}")
+        else:
+            print(f"Файл не найден: {file}")
 
 
     def buttonGoogleDownload(self):
         url = 'https://disk.yandex.ru/d/0i6-aA45JOFCuQ'
         xpath_site = '/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]'
         file = f"C:/Users/{self.nameUsers}/Downloads/ChromeSetup.exe"
-        search = f"C:/Program Files/Google/Chrome"
-        button = self.pushDownloadGoogle
-        xpath_coocki = "/html/body/div[1]/div/div/button"
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
 
     def buttonOperaDownload(self):
         url = "https://disk.yandex.ru/d/tVuYVDzpaDcSbg"
         xpath_site ="/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/OperaGXSetup.exe"
-        search = f"C:/Users/{self.nameUsers}/AppData/Local/Programs/Opera GX"
-        button = self.pushDownloadOpera
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
     def buttonYandexDownload(self):
         url = "https://disk.yandex.ru/d/XMr-W6g3C2ZOJQ"
         xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/Yandex.exe"
-        search = f"C:/Users/{self.nameUsers}/AppData/Local/Yandex/YandexBrowser"
-        button = self.pushDownloadYandex
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
 
     def buttonViberDownload(self):
         url = 'https://disk.yandex.ru/d/GanXehpAmS2AeA'
         xpath_site = '/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]'
         file = f"C:/Users/{self.nameUsers}/Downloads/ViberSetup.exe"
-        search = f"C:/Users/{self.nameUsers}/AppData/Roaming/ViberPC"
-        button = self.pushDownloadViber
-        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
 
     def buttonDSDownload(self):
         url = 'https://disk.yandex.ru/d/jc0ugd_7swQjRQ'
         xpath_site = '/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]'
         file = f"C:/Users/{self.nameUsers}/Downloads/DiscordSetup.exe"
-        search = f"C:/Users/{self.nameUsers}/AppData/Local/Discord"
-        button = self.pushDownloadDS
-        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
 
     def buttonTSDownload(self):
         url = 'https://disk.yandex.ru/d/_jvL082R196Jfw'
         xpath_site = '/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]'
         file = f"C:/Users/{self.nameUsers}/Downloads/TeamSpeak3-Client-win64-3.5.6.exe"
-        search = "C:/Program Files/TeamSpeak 3 Client"
-        button = self.pushDownloadTS
-        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
 
     def buttonTgDownload(self):
         url = 'https://disk.yandex.ru/d/rghCP0xnXDshxw'
         xpath_site = '/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]'
         file = f"C:/Users/{self.nameUsers}/Downloads/tsetup-x64.4.7.1.exe"
-        search = f"C:/Users/{self.nameUsers}/AppData/Roaming/Telegram Desktop"
-        button = self.pushDownloadTG
-        self.DownloadAndLoadingSoft(url, xpath_site, file,  search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
 
     def buttonSteamDownload(self):
         url = "https://disk.yandex.ru/d/uXZYf4SDu7vHGw"
         xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/SteamSetup.exe"
-        search = "C:/Program Files (x86)/Steam"
-        button = self.pushDownloadSteam
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
     def buttonEpicGamesDownload(self):
         url = "https://disk.yandex.ru/d/ixbNw_jU7bbyEg"
         xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/EpicInstaller-14.6.2.msi"
-        search = "C:/Program Files (x86)/Epic Games"
-        button = self.pushDownloadEpicGames
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
     def buttonOriginDownload(self):
         url = "https://disk.yandex.ru/d/mPDsJnYtL-bPHw"
         xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/EAappInstaller.exe"
-        search = "C:/Program Files/Electronic Arts/EA Desktop"
-        button = self.pushDownloadOrigin
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
     def buttonUplayDownload(self):
         url = "https://disk.yandex.ru/d/-pPkBQdgz6aQpg"
         xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/UbisoftConnectInstaller.exe"
-        search = "C:/Program Files (x86)/Ubisoft/Ubisoft Game Launcher"
-        button = self.pushDownloadUplay
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
     def buttonBattleNetDownload(self):
         url = "https://disk.yandex.ru/d/CIHyveUWjtaC2g"
         xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/Battle.net-Setup.exe"
-        search = "C:/Program Files (x86)/Battle.net"
-        button = self.pushDownloadBattleNet
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
     def buttonNVIDIADownload(self):
         url = "https://disk.yandex.ru/d/0HeyDs-WxlLMPA"
         xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/GeForce_Experience_v3.27.0.112.exe"
-        search = "C:/Program Files/NVIDIA Corporation"
-        button = self.pushDownloadNvidea
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
     def buttonIntelDowmload(self):
         url = "https://disk.yandex.ru/d/s1fBwbJhW-SvNg"
         xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/Intel-Driver-and-Support-Assistant-Installer.exe"
-        search = "C:\Program Files (x86)\Intel\Driver and Support Assistant"
-        button = self.pushDownloadIntel
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
     def buttonRyzenDownload(self):
         url = "https://disk.yandex.ru/d/UutTGYWf7eOpwA"
         xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/amd-ryzen-master.exe"
-        search = "C:/AMD/RyzenMasterExtract"
-        button = self.pushDownloadRyzen
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
     def buttonRadionDownload(self):
         url = "https://disk.yandex.ru/d/-1cXaKEtADNQbg"
         xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/amd-software-adrenalin-edition-23.4.1-minimalsetup-230405_web.exe"
-        search = "директория Radeon драйверов"
-        button = self.pushDownloadRadion
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
     def buttonEsetDownload(self):
         url = "https://disk.yandex.ru/d/Y1GKxluOyZ6jmQ"
         xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/eset_nod32_antivirus_live_installer.exe"
-        search = "C:/Program Files/ESET"
-        button = self.pushDownloadRadion
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
 
     def buttonMalwarebytesDownload(self):
         url = "https://disk.yandex.ru/d/gIzb4GP6nr4OrA"
         xpath_site = "/html/body/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/button[2]"
         file = f"C:/Users/{self.nameUsers}/Downloads/MBSetup-9B312069.exe"
-        search = "C:/Program Files/Malwarebytes"
-        button = self.pushDownloadRadion
-        self.DownloadAndLoadingSoft(url, xpath_site, file, search, button)
+        self.DownloadAndLoadingSoft(url, xpath_site, file)
 
     def DownloadAndLoading_WindowsSoft(self, productid, softs):
         webbrowser.open_new(productid)

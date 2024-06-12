@@ -42,26 +42,28 @@ def create_ait_agent_task():
 
 
 def check_ait_agent_task():
-    command = 'schtasks /Query /TN "Microsoft\Windows\Application Experience\AitAgent"'
-
-    try:
-        output = subprocess.check_output(command, shell=True, text=True, stderr=subprocess.STDOUT)
-    except subprocess.CalledProcessError as e:
-        create_ait_agent_task()
-        return False
-
-    # Использование регулярного выражения для поиска строки с задачей и её статусом
-    match = re.search(r'AitAgent\s+.*\s+(Ready|Running|Disabled)', output)
-    if match:
-        # Получение статуса задачи из найденной строки
-        status = match.group(1)
-        if status == "Disabled":
-            return 'Disabled'
-        else:
-            return 'Enabled'
-    else:
-        print("Задача не найдена.")
-        return False
+    pass
+    # command = r'schtasks /Query /TN "Microsoft\Windows\Application Experience\AitAgent"'
+    #
+    # try:
+    #     output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
+    #     output = output.decode('cp1251')  # Adjust the encoding as needed
+    # except subprocess.CalledProcessError as e:
+    #     create_ait_agent_task()
+    #     return False
+    #
+    # # Использование регулярного выражения для поиска строки с задачей и её статусом
+    # match = re.search(r'AitAgent\s+.*\s+(Ready|Running|Disabled)', output)
+    # if match:
+    #     # Получение статуса задачи из найденной строки
+    #     status = match.group(1)
+    #     if status == "Disabled":
+    #         return 'Disabled'
+    #     else:
+    #         return 'Enabled'
+    # else:
+    #     print("Задача не найдена.")
+    #     return False
 
 def enable_ait_agent_task():
     try:

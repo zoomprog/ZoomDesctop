@@ -1,7 +1,7 @@
+import sys
 from PyQt6.QtWidgets import QWidget, QApplication, QVBoxLayout
 from PyQt6.QtGui import QPainter, QPen, QFont, QColor
 from PyQt6.QtCore import Qt, QRectF
-import sys
 
 class CircularProgressBarCPU(QWidget):
     def __init__(self, parent=None):
@@ -42,7 +42,7 @@ class CircularProgressBarCPU(QWidget):
             pen.setColor(QColor(38, 160, 218))
         painter.setPen(pen)
 
-        painter.drawArc(rect, startAngle, spanAngle)
+        painter.drawArc(rect, startAngle, int(spanAngle))  # Convert spanAngle to int
 
         font = QFont()
         font.setFamily("Arial")

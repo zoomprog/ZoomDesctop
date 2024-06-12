@@ -48,8 +48,10 @@ def SearchDisableInventory():
 
 
 
+
+
 def ICDeviceSearch():
-    command = 'schtasks /Query /TN "\Microsoft\Windows\Device Information\Device"'
+    command = 'schtasks /Query /TN "\\Microsoft\\Windows\\Device Information\\Device"'
 
     try:
         output = subprocess.check_output(command, shell=True, text=True, stderr=subprocess.STDOUT)

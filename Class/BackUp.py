@@ -8,7 +8,7 @@ from ui_BackUp import Ui_BackUp
 from enum import Enum, auto
 import tkinter as tk
 from tkinter import filedialog
-
+import Class.AboutTheProgram
 
 
 
@@ -118,12 +118,13 @@ class SystemStatus(Enum):
 
 
 class BackUp(QDialog, Ui_BackUp):
-    def __init__(self):
+    def __init__(self, id_Profile, settings):
         super().__init__()
         self.setupUi(self)
         self.pushClose.clicked.connect(self.CloseWindow)
         self.RemoveWindowsMenu()
-
+        self.id_Profile = id_Profile
+        self.settings = settings
 
         self.PushButtonUpdateProfile()
         self.pushCreateProfile.clicked.connect(self.PushButtonCreateProfile)
@@ -131,6 +132,7 @@ class BackUp(QDialog, Ui_BackUp):
         self.pushDelProfile.clicked.connect(self.PushButtonDelProfile)
         self.pushImportProfile.clicked.connect(self.PushButtonImportProfile)
         self.pushBackUp.clicked.connect(self.PushButtonBackUp)
+        self.pushBackMenu.clicked.connect(self.TransitionAboutTheProgram)
 
     @staticmethod
     def PushButtonCreateProfile():
@@ -1167,6 +1169,11 @@ class BackUp(QDialog, Ui_BackUp):
             self.move(self.mapToGlobal(event.pos() - self.offset))
         else:
             self.offset = None
+
+    def TransitionAboutTheProgram(self):
+        self.ui = Class.AboutTheProgram.AboutTheProgram(self.id_Profile, self.settings)
+        self.ui.show()
+        self.hide()
 
 
 if __name__ == "__main__":

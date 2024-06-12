@@ -534,12 +534,13 @@ def updateWer():
 
 
 def updateActiveVoiceForCortan():
-    global Bar
-    result1 = SearchAgentActivationEnabled()
-    result2 = SearchLetAppsActivateWithVoice()
-    result3 = check_ProgramDataUpdater()
-    if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED:
-        Bar += 1
+    pass
+    # global Bar
+    # result1 = SearchAgentActivationEnabled()
+    # result2 = SearchLetAppsActivateWithVoice()
+    # result3 = check_ProgramDataUpdater()
+    # if result1 == STATUS_DISABLED and result2 == STATUS_DISABLED and result3 == STATUS_DISABLED:
+    #     Bar += 1
 
 
 def updateActiveVoiceForCortanBlockSystem():

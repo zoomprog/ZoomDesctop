@@ -1,44 +1,45 @@
 import winreg
 
-
 def CEIPSQMOn():
     try:
-        # Открыть ключ реестра с правами на запись
+        # Open the registry key with write permissions
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Policies\Microsoft\SQMClient\Windows", 0, winreg.KEY_WRITE)
-        # Удалить значение
+        # Delete the value
         winreg.DeleteValue(key, "CEIPEnable")
-        # Закрыть ключ
+        # Close the key
         winreg.CloseKey(key)
-        print("Значение успешно удалено.")
+        print("Value successfully deleted.")
     except FileNotFoundError:
-        print("Значение не найдено.")
+        print("Value not found.")
     except Exception as e:
-        print(f"Ошибка при удалении значения: {e}")
+        print(f"Error deleting value: {e}")
 
 def CEIPSQMOff():
     try:
-        # Открыть ключ реестра в режиме записи
+        # Open the registry key with write permissions
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Policies\Microsoft\SQMClient\Windows", 0, winreg.KEY_WRITE)
-        # Установить значение
+        # Set the value
         winreg.SetValueEx(key, "CEIPEnable", 0, winreg.REG_DWORD, 0)
-        # Закрыть ключ
+        # Close the key
         winreg.CloseKey(key)
+        print("Value successfully set.")
     except Exception as e:
-        print(f"Ошибка при установке значения: {e}")
+        print(f"Error setting value: {e}")
 
 def SearchCEIPSQM():
     try:
-        # Открыть ключ реестра в режиме чтения
+        # Open the registry key with read permissions
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Policies\Microsoft\SQMClient\Windows", 0, winreg.KEY_READ)
-        # Прочитать значение
+        # Read the value
         value, reg_type = winreg.QueryValueEx(key, "CEIPEnable")
-        # Закрыть ключ
+        # Close the key
         winreg.CloseKey(key)
         if value == 0:
             return 'Disabled'
         else:
             return 'Enabled'
     except FileNotFoundError:
-        print("Ключ реестра не найден.")
+        print("Registry key not found.")
     except Exception as e:
-        print(f"Ошибка при чтении значения: {e}")
+        print(f"Error reading value: {e}")
+

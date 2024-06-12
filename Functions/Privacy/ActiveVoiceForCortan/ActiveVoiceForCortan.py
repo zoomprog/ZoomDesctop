@@ -91,10 +91,11 @@ def SearchLetAppsActivateWithVoice():
         print(f"Ошибка при чтении значения: {e}")
 
 def check_ProgramDataUpdater():
-    command = 'schtasks /Query /TN "\Microsoft\Windows\Speech\SpeechModelDownloadTask"'
+    command = r'schtasks /Query /TN "\Microsoft\Windows\Speech\SpeechModelDownloadTask"'
 
     try:
-        output = subprocess.check_output(command, shell=True, text=True, stderr=subprocess.STDOUT)
+        output = subprocess.check_output(command, shell=True, text=True, stderr=subprocess.STDOUT, encoding='utf-8',
+                                         errors='ignore')
     except subprocess.CalledProcessError as e:
         return False
 

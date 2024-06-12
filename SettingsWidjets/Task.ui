@@ -111,13 +111,13 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
        <x>0</x>
        <y>0</y>
        <width>945</width>
-       <height>670</height>
+       <height>700</height>
       </rect>
      </property>
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>670</height>
+       <height>700</height>
       </size>
      </property>
      <widget class="QFrame" name="frame">
@@ -126,7 +126,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
         <x>10</x>
         <y>55</y>
         <width>920</width>
-        <height>581</height>
+        <height>621</height>
        </rect>
       </property>
       <property name="frameShape">

@@ -57,10 +57,6 @@ class MainWindows(QDialog, Ui_ImageDialog):
 
         # Кнопки
         self.pushClose.clicked.connect(self.CloseWindow)  # При нажатии на кнопку login перейти на новую страницу
-        self.pushUrlYouTube.clicked.connect(lambda: webbrowser.open('https://www.youtube.com/'))
-        self.pushUrlDiscord.clicked.connect(lambda: webbrowser.open('https://discord.gg/JWTcSq3Y'))
-        self.pushUrlFacebook.clicked.connect(lambda: webbrowser.open('https://www.facebook.com/rrarrkfacit'))
-        self.pushUrlGitHub.clicked.connect(lambda: webbrowser.open('https://github.com/'))
         self.status = self.label_4
         self.status.setStyleSheet('font-size:10px; color: red;text-align: center;')
         self.pushReg.clicked.connect(self.WindowReg)
@@ -134,7 +130,7 @@ class MainWindows(QDialog, Ui_ImageDialog):
         self.hide()
 
     def connect_signals_text(self):
-        self.label_3.setText("<html><head/><body><p align=\"center\"><span style=\" font-size:29pt; font-weight:600; color:#ffffff;\">zoomApp</span></p></body></html>")
+        self.label_3.setText("<html><head/><body><p align=\"center\"><span style=\" font-size:29pt; font-weight:600; color:#ffffff;\">AppWise</span></p></body></html>")
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)

@@ -23,7 +23,7 @@ class CircularProgressBar(QWidget):
         rect = QRectF(5, 5, 70, 70)
         startAngle = 90 * 16
         # Используем 76 в качестве делителя для расчета spanAngle
-        spanAngle = -360 * 16 * self.value / 76
+        spanAngle = int(-360 * 16 * self.value / 76)
 
         pen = QPen()
         pen.setWidth(10)
@@ -46,7 +46,6 @@ class CircularProgressBar(QWidget):
         font.setPointSize(12)
         painter.setFont(font)
         painter.setPen(QColor(255, 255, 255))
-
 
         textRect = QRectF(rect)
         painter.drawText(textRect, Qt.AlignmentFlag.AlignCenter, text)

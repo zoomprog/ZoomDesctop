@@ -184,7 +184,7 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.hide()
 
     def ButtonBackUp(self):
-        self.ui = Class.BackUp.BackUp()
+        self.ui = Class.BackUp.BackUp(self.id_Profile, self.settings)
         self.ui.show()
         self.hide()
 
@@ -209,7 +209,7 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
             self.offset = None
 
     def ButtonSettings(self):
-        self.ui = Class.Settings.Setings()
+        self.ui = Class.Settings.Setings(self.id_Profile, self.settings)
         self.ui.show()
         self.hide()
 
@@ -225,8 +225,6 @@ class AboutTheProgram(QDialog, Ui_AboutTheProgram):
         self.pushBackUp.setText("BackUP")
         self.pushButtonProfile.setFont(font)
         self.pushButtonProfile.setText("Profile")
-
     def ClearMemorry(self):
         clean_memory()
         self.widget_Memorry.update()
-

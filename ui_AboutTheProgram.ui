@@ -126,22 +126,6 @@
               <property name="frameShadow">
                <enum>QFrame::Raised</enum>
               </property>
-              <widget class="QLabel" name="logo_img">
-               <property name="geometry">
-                <rect>
-                 <x>50</x>
-                 <y>0</y>
-                 <width>64</width>
-                 <height>64</height>
-                </rect>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="pixmap">
-                <pixmap resource="menu.qrc">:/icon/image/icon/free-icon-letter-z-8061473 (1).png</pixmap>
-               </property>
-              </widget>
              </widget>
             </item>
             <item>
@@ -994,158 +978,6 @@ color:rgba(115,128,142,255);
                <property name="frameShadow">
                 <enum>QFrame::Raised</enum>
                </property>
-               <widget class="QPushButton" name="pushUrlDiscord">
-                <property name="geometry">
-                 <rect>
-                  <x>20</x>
-                  <y>70</y>
-                  <width>51</width>
-                  <height>51</height>
-                 </rect>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>60</width>
-                  <height>60</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>Social Media Circled</family>
-                  <pointsize>21</pointsize>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">border-radius:25;</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/icon/image/icon/free-icon-discord-2626288.png</normaloff>:/icon/image/icon/free-icon-discord-2626288.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>51</width>
-                  <height>51</height>
-                 </size>
-                </property>
-               </widget>
-               <widget class="QPushButton" name="pushUrlGitHub">
-                <property name="geometry">
-                 <rect>
-                  <x>80</x>
-                  <y>70</y>
-                  <width>51</width>
-                  <height>51</height>
-                 </rect>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>60</width>
-                  <height>60</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>Social Media Circled</family>
-                  <pointsize>21</pointsize>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">border-radius:25;</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/icon/image/icon/free-icon-github-733553 (1).png</normaloff>:/icon/image/icon/free-icon-github-733553 (1).png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>51</width>
-                  <height>51</height>
-                 </size>
-                </property>
-               </widget>
-               <widget class="QPushButton" name="pushUrlFacebook">
-                <property name="geometry">
-                 <rect>
-                  <x>140</x>
-                  <y>70</y>
-                  <width>51</width>
-                  <height>51</height>
-                 </rect>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>60</width>
-                  <height>60</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>Social Media Circled</family>
-                  <pointsize>21</pointsize>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">border-radius:25;</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/icon/image/icon/facebook_logo_icon_147291.png</normaloff>:/icon/image/icon/facebook_logo_icon_147291.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>51</width>
-                  <height>51</height>
-                 </size>
-                </property>
-               </widget>
-               <widget class="QPushButton" name="pushUrlYouTube">
-                <property name="geometry">
-                 <rect>
-                  <x>200</x>
-                  <y>70</y>
-                  <width>51</width>
-                  <height>51</height>
-                 </rect>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>60</width>
-                  <height>60</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>Social Media Circled</family>
-                  <pointsize>21</pointsize>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">border-radius:25;</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/icon/image/icon/1491580651-yumminkysocialmedia28_83061.png</normaloff>:/icon/image/icon/1491580651-yumminkysocialmedia28_83061.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>51</width>
-                  <height>51</height>
-                 </size>
-                </property>
-               </widget>
                <widget class="QPushButton" name="pushButtonProfile">
                 <property name="geometry">
                  <rect>
@@ -1326,54 +1158,6 @@ color:transparent;</string>
                  <string/>
                 </property>
                </widget>
-               <widget class="QPushButton" name="pushInf">
-                <property name="geometry">
-                 <rect>
-                  <x>280</x>
-                  <y>10</y>
-                  <width>50</width>
-                  <height>50</height>
-                 </rect>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>Montserrat</family>
-                  <pointsize>12</pointsize>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">
-QPushButton {
-background-color: #161A1E;
-color:white;
-border-radius:25;
-}
-QPushButton:hover {
-background-color:rgba(115,128,142,255);
-}</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset resource="menu.qrc">
-                  <normaloff>:/icon/image/icon/information.png</normaloff>:/icon/image/icon/information.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>50</width>
-                  <height>50</height>
-                 </size>
-                </property>
-               </widget>
                <widget class="QPushButton" name="pushButtonSubPrmium">
                 <property name="geometry">
                  <rect>
@@ -1401,8 +1185,8 @@ color:transparent;</string>
                <widget class="QPushButton" name="pushExit">
                 <property name="geometry">
                  <rect>
-                  <x>350</x>
-                  <y>60</y>
+                  <x>330</x>
+                  <y>30</y>
                   <width>100</width>
                   <height>61</height>
                  </rect>
@@ -1447,25 +1231,6 @@ color:rgba(115,128,142,255);
                   <width>30</width>
                   <height>30</height>
                  </size>
-                </property>
-               </widget>
-               <widget class="QLabel" name="label">
-                <property name="geometry">
-                 <rect>
-                  <x>350</x>
-                  <y>10</y>
-                  <width>91</width>
-                  <height>41</height>
-                 </rect>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-color: #161A1E;
-color:white;
-border-radius: 20px;
-</string>
-                </property>
-                <property name="text">
-                 <string>      alpfa 0.33</string>
                 </property>
                </widget>
               </widget>
@@ -1577,7 +1342,7 @@ border-radius: 20px;
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="menu.qrc">
+                 <iconset>
                   <normaloff>:/icon/image/icon/kisspng-computer-icons-user-profile-clip-art-person-icon-user-person-man-icon-5ab04a2bed2dd1.5439408315215027639715.png</normaloff>:/icon/image/icon/kisspng-computer-icons-user-profile-clip-art-person-icon-user-person-man-icon-5ab04a2bed2dd1.5439408315215027639715.png</iconset>
                 </property>
                 <property name="iconSize">

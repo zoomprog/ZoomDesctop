@@ -27,7 +27,7 @@ class CircularProgressMemorryBar(QWidget):
 
         rect = QRectF(5, 5, 70, 70)
         startAngle = 90 * 16
-        spanAngle = -360 * 16 * self.value / 100  # Расчет угла на основе процента использования
+        spanAngle = int(-360 * 16 * self.value / 100)  # Расчет угла на основе процента использования
 
         pen = QPen()
         pen.setWidth(10)
@@ -53,3 +53,4 @@ class CircularProgressMemorryBar(QWidget):
 
         textRect = QRectF(rect)
         painter.drawText(textRect, Qt.AlignmentFlag.AlignCenter, text)
+

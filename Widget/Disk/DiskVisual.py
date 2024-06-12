@@ -54,7 +54,7 @@ class DiskUsageWidget(QWidget):
         text = f"{self.used_gb:.2f} GB из {self.total_gb:.2f} GB"
         text_width = painter.fontMetrics().horizontalAdvance(text)
         center_point = self.width() / 2
-        painter.drawText(QRect(center_point - text_width / 2 - 20, 65, text_width, 20), Qt.AlignmentFlag.AlignCenter, text)
+        painter.drawText(QRect(int(center_point - text_width / 2 - 20), 65, int(text_width), 20), Qt.AlignmentFlag.AlignCenter, text)
 
     def drawBevelEffect(self, painter, rect):
         path = QPainterPath()
@@ -75,4 +75,3 @@ class DiskUsageWidget(QWidget):
         dark_path.addRoundedRect(dark_rectF, 9, 9)  # Использование QRectF с немного меньшим радиусом
         painter.setPen(QColor("#A0A0A0"))
         painter.drawPath(dark_path)
-

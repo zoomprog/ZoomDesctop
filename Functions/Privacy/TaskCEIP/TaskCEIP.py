@@ -82,26 +82,27 @@ def create_bthsqm_task():
 
 
 def check_BthSQM():
-    command = 'schtasks /Query /TN "\Microsoft\Windows\Customer Experience Improvement Program\BthSQM"'
-
-    try:
-        output = subprocess.check_output(command, shell=True, text=True, stderr=subprocess.STDOUT)
-    except subprocess.CalledProcessError as e:
-        create_bthsqm_task()
-        return False
-
-    # Использование регулярного выражения для поиска строки с задачей и её статусом
-    match = re.search(r'BthSQM\s+.*\s+(Ready|Running|Disabled)', output)
-    if match:
-        # Получение статуса задачи из найденной строки
-        status = match.group(1)
-        if status == "Disabled":
-            return 'Disabled'
-        else:
-            return 'Enabled'
-    else:
-        print("Задача не найдена.")
-        return False
+    pass
+    # command = 'schtasks /Query /TN "\Microsoft\Windows\Customer Experience Improvement Program\BthSQM"'
+    #
+    # try:
+    #     output = subprocess.check_output(command, shell=True, text=True, stderr=subprocess.STDOUT)
+    # except subprocess.CalledProcessError as e:
+    #     create_bthsqm_task()
+    #     return False
+    #
+    # # Использование регулярного выражения для поиска строки с задачей и её статусом
+    # match = re.search(r'BthSQM\s+.*\s+(Ready|Running|Disabled)', output)
+    # if match:
+    #     # Получение статуса задачи из найденной строки
+    #     status = match.group(1)
+    #     if status == "Disabled":
+    #         return 'Disabled'
+    #     else:
+    #         return 'Enabled'
+    # else:
+    #     print("Задача не найдена.")
+    #     return False
 
 
 def enable_BthSQM():
@@ -195,26 +196,27 @@ def create_kernel_ceip_task():
     print('Задача KernelCeipTask успешно создана.')
 
 def check_KernelCeipTask():
-    command = 'schtasks /Query /TN "\Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask"'
-
-    try:
-        output = subprocess.check_output(command, shell=True, text=True, stderr=subprocess.STDOUT)
-    except subprocess.CalledProcessError as e:
-        create_kernel_ceip_task()
-        return False
-
-    # Использование регулярного выражения для поиска строки с задачей и её статусом
-    match = re.search(r'KernelCeipTask\s+.*\s+(Ready|Running|Disabled)', output)
-    if match:
-        # Получение статуса задачи из найденной строки
-        status = match.group(1)
-        if status == "Disabled":
-            return 'Disabled'
-        else:
-            return 'Enabled'
-    else:
-        print("Задача не найдена.")
-        return False
+    pass
+    # command = 'schtasks /Query /TN "\Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask"'
+    #
+    # try:
+    #     output = subprocess.check_output(command, shell=True, text=True, stderr=subprocess.STDOUT)
+    # except subprocess.CalledProcessError as e:
+    #     create_kernel_ceip_task()
+    #     return False
+    #
+    # # Использование регулярного выражения для поиска строки с задачей и её статусом
+    # match = re.search(r'KernelCeipTask\s+.*\s+(Ready|Running|Disabled)', output)
+    # if match:
+    #     # Получение статуса задачи из найденной строки
+    #     status = match.group(1)
+    #     if status == "Disabled":
+    #         return 'Disabled'
+    #     else:
+    #         return 'Enabled'
+    # else:
+    #     print("Задача не найдена.")
+    #     return False
 
 def enable_KernelCeipTask():
     try:
@@ -269,26 +271,27 @@ def create_usbceip_task():
 
 
 def check_UsbCeip():
-    command = 'schtasks /Query /TN "\Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask"'
-
-    try:
-        output = subprocess.check_output(command, shell=True, text=True, stderr=subprocess.STDOUT)
-    except subprocess.CalledProcessError as e:
-        create_usbceip_task()
-        return False
-
-    # Использование регулярного выражения для поиска строки с задачей и её статусом
-    match = re.search(r'KernelCeipTask\s+.*\s+(Ready|Running|Disabled)', output)
-    if match:
-        # Получение статуса задачи из найденной строки
-        status = match.group(1)
-        if status == "Disabled":
-            return 'Disabled'
-        else:
-            return 'Enabled'
-    else:
-        print("Задача не найдена.")
-        return False
+    pass
+    # command = 'schtasks /Query /TN "\Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask"'
+    #
+    # try:
+    #     output = subprocess.check_output(command, shell=True, text=True, stderr=subprocess.STDOUT)
+    # except subprocess.CalledProcessError as e:
+    #     create_usbceip_task()
+    #     return False
+    #
+    # # Использование регулярного выражения для поиска строки с задачей и её статусом
+    # match = re.search(r'KernelCeipTask\s+.*\s+(Ready|Running|Disabled)', output)
+    # if match:
+    #     # Получение статуса задачи из найденной строки
+    #     status = match.group(1)
+    #     if status == "Disabled":
+    #         return 'Disabled'
+    #     else:
+    #         return 'Enabled'
+    # else:
+    #     print("Задача не найдена.")
+    #     return False
 
 def enable_UsbCeip():
     try:

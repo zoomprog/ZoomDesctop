@@ -3,6 +3,13 @@
     <file>image/photo/menu.png</file>
   </qresource>
   <qresource prefix="icon">
+    <file>image/icon/1491580651-yumminkysocialmedia28_83061.png</file>
+    <file>image/icon/facebook_logo_icon_147291.png</file>
+    <file>image/icon/Github_icon-icons.com_66788.png</file>
+    <file>image/icon/discord_101785.png</file>
+    <file>image/icon/Github-Logo-PNG-HD-Image.png</file>
+    <file>image/icon/github.png</file>
+    <file>image/icon/png-transparent-blue-animal-logo-github-icon-github-blue-world-social-media.png</file>
     <file>image/icon/kisspng-computer-icons-user-profile-clip-art-person-icon-user-person-man-icon-5ab04a2bed2dd1.5439408315215027639715.png</file>
     <file>image/icon/kisspng-computer-icons-user-profile-clip-art-person-icon-user-person-man-icon-5ab04a2bed2dd1.5439408315215027639715.jpg</file>
     <file>image/icon/png-transparent-computer-icons-customer-service-icon-design-user-business-blue-service-people.png</file>

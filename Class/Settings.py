@@ -26,13 +26,15 @@ import Class.AboutTheProgram
 
 
 class Setings(QDialog, Ui_Settings):
-    def __init__(self):
+    def __init__(self, id_Profile, settings):
         super().__init__()
         self.aa = None
         self.settings = Ui_Settings
         self.setupUi(self)
 
         RemoveWindowsMenu(self)
+        self.id_Profile = id_Profile
+        self.settings = settings
         self.current_menu = None  # Keep track of the currently open menu
         self.frame = QFrame(self)
         self.layout = QVBoxLayout(self.MainBody)
@@ -47,6 +49,7 @@ class Setings(QDialog, Ui_Settings):
         self.pushButtonServise.clicked.connect(self.Twics)
         self.pushButtonPrivacy.clicked.connect(self.Privacy)
         self.pushButtonTasks.clicked.connect(self.Tasks)
+        self.pushBack.clicked.connect(self.BackMenu)
 
     def DefoltSettings(self):
         self.update_menu(SettingsWidjets.Class.BaseSettings.BaseSet())
@@ -110,6 +113,10 @@ class Setings(QDialog, Ui_Settings):
         self.pushButtonTasks.setText("Задачи")
 
 
+    def BackMenu(self):
+        self.ui = Class.AboutTheProgram.AboutTheProgram(self.id_Profile, self.settings)
+        self.ui.show()
+        self.hide()
     @staticmethod
     def CloseWindow():
         sys.exit()
