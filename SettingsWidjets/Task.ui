@@ -109,7 +109,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
+       <y>-121</y>
        <width>945</width>
        <height>700</height>
       </rect>
@@ -250,7 +250,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTextTasksForAnalysis">
@@ -410,7 +410,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTextDiagnosticTasks">
@@ -570,7 +570,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTextNetPrecompilation">
@@ -730,7 +730,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTextAutoProxyDetection">
@@ -890,7 +890,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTextInstallingAndRemovingLanguages">
@@ -1050,7 +1050,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTextAutoPerformanceCheck">
@@ -1210,7 +1210,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTextMapsLocation">
@@ -1370,7 +1370,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTextRemoteControl">
@@ -1530,7 +1530,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTextMicrosoftSync">
@@ -1690,7 +1690,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTextCleaningTasks">
@@ -1850,7 +1850,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTextMicrosoftStore">
@@ -2010,7 +2010,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTextXBOX">

@@ -101,13 +101,13 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
        <x>0</x>
        <y>0</y>
        <width>955</width>
-       <height>4000</height>
+       <height>3000</height>
       </rect>
      </property>
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>4000</height>
+       <height>3000</height>
       </size>
      </property>
      <widget class="QFrame" name="frame">
@@ -246,7 +246,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTextTelemetria">
@@ -388,7 +388,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTelemetriaWebCome">
@@ -556,7 +556,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelClearTaskMCA">
@@ -724,7 +724,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelUpdateDateCEIP">
@@ -892,7 +892,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTaskApplicationImpactTelemetry">
@@ -1060,7 +1060,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelProductivityAppReminder">
@@ -1234,7 +1234,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelCEIPSQM">
@@ -1408,7 +1408,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTaskCEIP">
@@ -1582,7 +1582,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTelemetrApplicationImpact">
@@ -1756,7 +1756,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTelemetrNalogDate">
@@ -1924,7 +1924,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTelemetrLicense">
@@ -2098,7 +2098,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelWER">
@@ -2272,7 +2272,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelActiveVoiceForCortan">
@@ -2446,7 +2446,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelActiveVoiceForCortanBlockSystem">
@@ -2620,7 +2620,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelWindowsLocationProvider">
@@ -2794,7 +2794,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelWindowsSearchDateCollection">
@@ -2968,7 +2968,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelTargetedAdverisingAndMarketing">
@@ -3142,7 +3142,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelCloudSaving">
@@ -3316,7 +3316,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelCloudVoice">
@@ -3490,7 +3490,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelWindowsPrivacyConsentDisclaimer">
@@ -3664,7 +3664,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelWindowsFeedbackandDiagnostics">
@@ -3838,7 +3838,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelCollectTextMessagesandHandwritingInput">
@@ -4012,7 +4012,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelSensor">
@@ -4186,7 +4186,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelWiFiSense">
@@ -4360,7 +4360,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelHideMostUsedApps">
@@ -4534,7 +4534,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelInventoryCollector">
@@ -4708,7 +4708,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelSiteAccessToTheListOfLanguages">
@@ -4882,7 +4882,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelRecordingActions">
@@ -5056,7 +5056,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelFeedbackAsYouType">
@@ -5230,7 +5230,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelActivityFeed">
@@ -5404,7 +5404,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationAccessToLocation">
@@ -5578,7 +5578,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationAccessToAccountInformation">
@@ -5752,7 +5752,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationAccessToMotionData">
@@ -5926,7 +5926,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelAppAccessToPhone">
@@ -6100,7 +6100,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationAccessToTrustedDevices">
@@ -6274,7 +6274,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelAppAccessToDeviceSynchronization">
@@ -6448,7 +6448,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelSyncAppsWithWirelessDevices">
@@ -6622,7 +6622,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationsAccessDiagnosticInformationAboutOtherApplications">
@@ -6796,7 +6796,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationAccessToContacts">
@@ -6970,7 +6970,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationAccessToCalendar">
@@ -7144,7 +7144,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationAccessToCallLog">
@@ -7318,7 +7318,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationAccessToEmail">
@@ -7492,7 +7492,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationAccessToTasks">
@@ -7666,7 +7666,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationAccessToMessages">
@@ -7840,7 +7840,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationAccessToRadio">
@@ -8014,7 +8014,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelAppAccessToBluetoothDevices">
@@ -8188,7 +8188,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationAccessToTheDocumentsFolder">
@@ -8362,7 +8362,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationAccessToThePicturesFolder">
@@ -8536,7 +8536,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationAccessToTheVideosFolder">
@@ -8710,7 +8710,7 @@ QPushButton:hover {
 </string>
            </property>
            <property name="text">
-            <string>Очистка</string>
+            <string>Выбрать</string>
            </property>
           </widget>
           <widget class="QLabel" name="labelApplicationAccessToAnotherFileSystem">

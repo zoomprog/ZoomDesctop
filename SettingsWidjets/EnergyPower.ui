@@ -394,7 +394,7 @@ QPushButton:hover {
 </string>
         </property>
         <property name="text">
-         <string/>
+         <string>Выбрать</string>
         </property>
        </widget>
        <widget class="QLabel" name="labelTextPow">
@@ -498,7 +498,7 @@ QPushButton:hover {
 </string>
         </property>
         <property name="text">
-         <string/>
+         <string>Выбрать</string>
         </property>
        </widget>
        <widget class="QLabel" name="labelTextHibernation">
@@ -602,7 +602,7 @@ QPushButton:hover {
 </string>
         </property>
         <property name="text">
-         <string/>
+         <string>Выбрать</string>
         </property>
        </widget>
        <widget class="QLabel" name="labelTextPow_PowerThrottling">
